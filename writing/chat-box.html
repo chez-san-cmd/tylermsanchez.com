@@ -5,15 +5,15 @@
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;color-scheme:dark}}
 :root[data-theme="dark"]{--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;color-scheme:dark}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:19px;line-height:1.55;padding-block:0 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:20px;line-height:1.55;padding-block:0 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .col{max-width:640px;margin:0 auto}
 a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
-nav.top{font-family:var(--f-ui);font-size:15px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--rule);margin-bottom:36px}
+nav.top{font-family:var(--f-ui);font-size:16px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--rule);margin-bottom:36px}
 nav.top .me{font-weight:600;color:var(--fg);margin-right:auto}
 nav.top a[aria-current]{color:var(--fg);border-bottom:2px solid var(--accent)}
 .me-photo{display:block;width:150px;height:150px;border-radius:12px;object-fit:cover;margin:0 0 20px}
 h1{font-weight:500;font-size:36px;line-height:1.15;letter-spacing:-.01em;margin:0 0 14px;text-wrap:balance}
-h2{font-family:var(--f-ui);font-weight:600;font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:44px 0 12px}
+h2{font-family:var(--f-ui);font-weight:600;font-size:16px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:44px 0 12px}
 h3{font-weight:500;font-size:23px;margin:36px 0 8px;line-height:1.25;text-wrap:balance}
 p{margin:0 0 18px;max-width:66ch}
 .lede{font-size:22px;line-height:1.45;color:var(--fg)}
@@ -26,6 +26,8 @@ ul.list small{display:block;color:var(--muted);font-size:16px}
 ul.plain{margin:0 0 18px;padding-left:22px}ul.plain li{margin-bottom:6px}
 ul.other a{font-weight:600}
 ol{padding-left:22px}ol li{margin-bottom:10px}
+.toc{font-family:var(--f-ui);font-size:15px;display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 8px}.toc a::before{content:"↓ ";color:var(--muted)}
+.books{list-style:none;margin:0 0 28px;padding:0}.books li{margin:0 0 6px;font-size:18px}.books .au{color:var(--muted)}.books .star{font-size:14px;margin-left:4px}.count{font-weight:400;letter-spacing:0;text-transform:none}
 .meta{font-family:var(--f-ui);font-size:14px;color:var(--muted);margin:0 0 28px}
 article h3{margin-top:40px}
 blockquote{margin:0 0 18px;padding:0 0 0 18px;border-left:3px solid var(--rule);color:var(--fg)}
@@ -44,8 +46,8 @@ svg .edge.a{stroke:var(--muted)}svg .edge.y{stroke:var(--you);stroke-width:1.8}s
 .pending{font-family:var(--f-ui);font-size:13px;color:var(--you);margin:0 0 8px}
 footer{margin-top:64px;padding-top:18px;border-top:1px solid var(--rule);font-family:var(--f-ui);font-size:13.5px;color:var(--muted)}
 hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
-@media (max-width:480px){body{font-size:18px}h1{font-size:30px}ul.list li{grid-template-columns:1fr}ul.list .d{order:2}}
-</style></head><body><div class="col"><nav class="top"><a class="me" href="../index.html">Tyler Sanchez</a><a href="../writing/chat-box.html" aria-current="page">Writing</a><a href="../index.html#projects">Projects</a><a href="../how-i-work.html">How I work</a></nav>
+@media (max-width:480px){body{font-size:19px}h1{font-size:30px}ul.list li{grid-template-columns:1fr}ul.list .d{order:2}}
+</style></head><body><div class="col"><nav class="top"><a class="me" href="../index.html">Tyler Sanchez</a><a href="../writing/chat-box.html" aria-current="page">Writing</a><a href="../index.html#projects">Projects</a><a href="../how-i-work.html">How I work with AI</a></nav>
 <article>
 <h1>The assistant I wanted doesn't have a chat box</h1>
 <p class="meta">Draft · October 2026 · about 7 minutes</p>

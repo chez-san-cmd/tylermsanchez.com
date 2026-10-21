@@ -7,15 +7,15 @@ CSS = r"""
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;color-scheme:dark}}
 :root[data-theme="dark"]{--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;color-scheme:dark}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:19px;line-height:1.55;padding-block:0 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:20px;line-height:1.55;padding-block:0 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .col{max-width:640px;margin:0 auto}
 a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
-nav.top{font-family:var(--f-ui);font-size:15px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--rule);margin-bottom:36px}
+nav.top{font-family:var(--f-ui);font-size:16px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--rule);margin-bottom:36px}
 nav.top .me{font-weight:600;color:var(--fg);margin-right:auto}
 nav.top a[aria-current]{color:var(--fg);border-bottom:2px solid var(--accent)}
 .me-photo{display:block;width:150px;height:150px;border-radius:12px;object-fit:cover;margin:0 0 20px}
 h1{font-weight:500;font-size:36px;line-height:1.15;letter-spacing:-.01em;margin:0 0 14px;text-wrap:balance}
-h2{font-family:var(--f-ui);font-weight:600;font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:44px 0 12px}
+h2{font-family:var(--f-ui);font-weight:600;font-size:16px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:44px 0 12px}
 h3{font-weight:500;font-size:23px;margin:36px 0 8px;line-height:1.25;text-wrap:balance}
 p{margin:0 0 18px;max-width:66ch}
 .lede{font-size:22px;line-height:1.45;color:var(--fg)}
@@ -28,6 +28,8 @@ ul.list small{display:block;color:var(--muted);font-size:16px}
 ul.plain{margin:0 0 18px;padding-left:22px}ul.plain li{margin-bottom:6px}
 ul.other a{font-weight:600}
 ol{padding-left:22px}ol li{margin-bottom:10px}
+.toc{font-family:var(--f-ui);font-size:15px;display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 8px}.toc a::before{content:"↓ ";color:var(--muted)}
+.books{list-style:none;margin:0 0 28px;padding:0}.books li{margin:0 0 6px;font-size:18px}.books .au{color:var(--muted)}.books .star{font-size:14px;margin-left:4px}.count{font-weight:400;letter-spacing:0;text-transform:none}
 .meta{font-family:var(--f-ui);font-size:14px;color:var(--muted);margin:0 0 28px}
 article h3{margin-top:40px}
 blockquote{margin:0 0 18px;padding:0 0 0 18px;border-left:3px solid var(--rule);color:var(--fg)}
@@ -46,11 +48,11 @@ svg .edge.a{stroke:var(--muted)}svg .edge.y{stroke:var(--you);stroke-width:1.8}s
 .pending{font-family:var(--f-ui);font-size:13px;color:var(--you);margin:0 0 8px}
 footer{margin-top:64px;padding-top:18px;border-top:1px solid var(--rule);font-family:var(--f-ui);font-size:13.5px;color:var(--muted)}
 hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
-@media (max-width:480px){body{font-size:18px}h1{font-size:30px}ul.list li{grid-template-columns:1fr}ul.list .d{order:2}}
+@media (max-width:480px){body{font-size:19px}h1{font-size:30px}ul.list li{grid-template-columns:1fr}ul.list .d{order:2}}
 """
 FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap">'
 def nav(cur):
-    items=[("index.html","Home","home"),("writing/chat-box.html","Writing","writing"),("index.html#projects","Projects","projects"),("how-i-work.html","How I work","how")]
+    items=[("index.html","Home","home"),("writing/chat-box.html","Writing","writing"),("index.html#projects","Projects","projects"),("how-i-work.html","How I work with AI","how")]
     out=[]
     for href,label,key in items:
         if key=="home": continue
@@ -71,8 +73,8 @@ def page(cur, title, body, standalone=True):
 # ---------- Home ----------
 home = """
 <img class="me-photo" src="tyler.jpg" alt="Tyler Sanchez" width="150" height="150">
-<h1>I'm Tyler Sanchez, a product manager in Denver. I'm building an assistant that runs my life in the background and only interrupts me for decisions.</h1>
-<div class="contact"><a href="mailto:tylersanchez@gmail.com"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M3.5 5.5h17a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1h-17a1 1 0 0 1-1-1v-11a1 1 0 0 1 1-1z"/><path fill="none" stroke="currentColor" stroke-width="1.8" d="m3 7 9 6.5L21 7"/></svg>Email</a><a href="https://www.linkedin.com/in/tylersanchez" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="#0A66C2" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a><a href="https://github.com/" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="var(--fg)" d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3z"/></svg>GitHub</a></div>
+<h1>👋 Hi, I'm Tyler Sanchez, a Product Manager in Denver. I'm building an assistant that runs my life in the background and only interrupts me for decisions.</h1>
+<div class="contact"><a href="mailto:tylersanchez@gmail.com"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M3.5 5.5h17a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1h-17a1 1 0 0 1-1-1v-11a1 1 0 0 1 1-1z"/><path fill="none" stroke="currentColor" stroke-width="1.8" d="m3 7 9 6.5L21 7"/></svg>Email</a><a href="https://www.linkedin.com/in/tylersanchez" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="#0A66C2" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a><a href="https://github.com/chez-san-cmd" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="var(--fg)" d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3z"/></svg>GitHub</a></div>
 
 <h2>About</h2>
 <p>I spent the last decade as a PM, mostly at Instagram, where my team worked on how new connections turn into conversations. The part of the job I love is learning a space, forming a point of view, and inventing the product that follows from it.</p>
@@ -100,8 +102,8 @@ home = """
 
 <h2>Other stuff</h2>
 <ul class="plain other">
-  <li><a href="how-i-work.html">How I work</a>: the principles, the system diagrams, and the tools</li>
-  <li><a href="reading.html">Reading</a>: a short list of the books that shaped how I think about product, plus the full shelf</li>
+  <li><a href="how-i-work.html">How I work with AI</a>: the principles, the system diagrams, and the tools</li>
+  <li><a href="reading.html">Reading list</a>: everything I've read, by year, with the five-star books marked</li>
   <li><a href="years-in-review.html">Years in review</a>: public excerpts from the annual letter I write to friends and family</li>
 </ul>
 """
@@ -156,8 +158,9 @@ essay = """
 src = (pathlib.Path(__file__).resolve().parent/"how-i-work-diagrams.html").read_text()
 figs = re.findall(r"<h2>\d\. (.*?)</h2>\s*<p>(.*?)</p>\s*(<figure>.*?</figure>)", src, re.S)
 how = """
-<h1>How I work</h1>
+<h1>How I work with AI</h1>
 <p class="lede">An assistant that runs in the background is only as trustworthy as the rules it runs under. Here are the rules, then the system that enforces them, then the tools.</p>
+<nav class="toc" aria-label="On this page"><a href="#principles">Principles</a><a href="#system">The system</a><a href="#tools">Tools</a></nav>
 
 <h2 id="principles">Principles</h2>
 <ol>
@@ -168,7 +171,7 @@ how = """
 <li><b>It brings me decisions, not updates.</b> Recommendation first, evidence underneath, prep already done.</li>
 </ol>
 
-<h2>The system</h2>
+<h2 id="system">The system</h2>
 <div class="legend">
   <span><i style="border-color:var(--you)"></i> Me (decides, sends, buys)</span>
   <span><i style="border-color:var(--muted);border-style:dashed"></i> Scheduled Claude run</span>
@@ -179,7 +182,7 @@ how = """
 for title, para, fig in figs:
     how += f"<h3>{title}</h3><p>{para}</p>{fig}"
 how += """
-<h2>Tools</h2>
+<h2 id="tools">Tools</h2>
 <ul class="plain">
 <li><b>Claude</b> (Claude Code and its scheduled tasks) does the reading, drafting, scoring and filing. Every run starts from a written brief and ends with a log line.</li>
 <li><b>Notion</b> is the system of record: the attention queue, one Project Book per project, and the radar tables. If it isn't in Notion, the agent doesn't know it.</li>
@@ -189,20 +192,36 @@ how += """
 <li><b>A single HTML page</b> is the Command Center: no framework, reads Notion live, and has been changed about a hundred times.</li>
 </ul>
 """
-(S/"how-i-work.html").write_text(page("how-i-work.html","How I work",how))
+(S/"how-i-work.html").write_text(page("how-i-work.html","How I work with AI",how))
 
 # ---------- Reading ----------
+import json, email.utils, datetime
+books = json.loads((pathlib.Path(__file__).resolve().parent/"books.json").read_text())
+def _year(b):
+    for k in ("read_at","date_added"):
+        if b.get(k):
+            y = email.utils.parsedate_to_datetime(b[k]).year
+            if y >= 2016: return y
+            if k=="read_at": break
+    return "Earlier"
+groups = {}
+for b in books: groups.setdefault(_year(b), []).append(b)
+def _sortkey(b): return email.utils.parsedate_to_datetime(b["read_at"] or b["date_added"])
 reading = """
-<h1>Reading</h1>
-<p class="lede">A short list of the books that shaped how I think about product, people and time, one line each. The full shelf, with ratings, is on <a href="https://www.goodreads.com/user/show/16104684-tyler" target="_blank" rel="noopener">Goodreads</a>.</p>
-<p class="pending">Pending: Tyler picks 10 to 15 titles. The layout below shows the format.</p>
-<ul class="list">
-  <li><span class="d">2026</span><span><b>AGI Chronicles</b>, Kevin Roose<small>Most recently finished. One line on why it stuck.</small></span></li>
-  <li><span class="d">—</span><span><b>Title</b>, Author<small>One line on what it changed.</small></span></li>
-  <li><span class="d">—</span><span><b>Title</b>, Author<small>One line on what it changed.</small></span></li>
-</ul>
+<h1>Reading list</h1>
+<p class="lede">Everything I've read since I started keeping track, newest first, pulled from my <a href="https://www.goodreads.com/user/show/16104684-tyler" target="_blank" rel="noopener">Goodreads</a> shelf. A ⭐ marks a five-star book.</p>
 """
-(S/"reading.html").write_text(page("reading.html","Reading",reading))
+def _h(t): return t.replace("&","&amp;").replace("<","&lt;")
+for y in sorted(groups, key=lambda k: (k=="Earlier", -k if k!="Earlier" else 0)):
+    bs = sorted(groups[y], key=_sortkey, reverse=True)
+    label = f"{y} <span class=\"count\">· {len(bs)} book{'s' if len(bs)!=1 else ''}</span>" if y!="Earlier" else f"Earlier <span class=\"count\">· {len(bs)} books, read before I kept dates</span>"
+    reading += f'<h2 id="y{y}">{label}</h2>\n<ul class="books">\n'
+    for b in bs:
+        star = ' <span class="star" title="Five stars">⭐</span>' if b["rating"]=="5" else ""
+        reading += f'<li><a href="https://www.goodreads.com/book/show/{b["id"]}" target="_blank" rel="noopener">{_h(b["title"])}</a> <span class="au">({_h(b["author"])})</span>{star}</li>\n'
+    reading += "</ul>\n"
+reading += f'<p class="meta">Updated {datetime.date.today():%B %Y} from Goodreads. {len(books)} books.</p>'
+(S/"reading.html").write_text(page("reading.html","Reading list",reading))
 
 # ---------- Years in review ----------
 years = """

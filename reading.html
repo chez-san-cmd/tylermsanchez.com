@@ -1,19 +1,19 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Reading</title><meta name="claude:viewport-fit-sides" content="cover"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="icon" type="image/png" sizes="512x512" href="icon-512.png"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap"><style>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Reading list</title><meta name="claude:viewport-fit-sides" content="cover"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="icon" type="image/png" sizes="512x512" href="icon-512.png"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap"><style>
 /* Layout: one 640px column, left-aligned, nav as a single line of text. Quiet enough that the writing is the design. */
 :root{--bg:#F6F7F5;--fg:#15201E;--muted:#5F6E6A;--accent:#1F6F5F;--rule:#D9DEDB;--soft:#ECF0EE;--you:#B8336A;
   --f-body:"Newsreader","Iowan Old Style",Georgia,serif;--f-ui:"IBM Plex Sans",system-ui,-apple-system,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;color-scheme:dark}}
 :root[data-theme="dark"]{--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;color-scheme:dark}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:19px;line-height:1.55;padding-block:0 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:20px;line-height:1.55;padding-block:0 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .col{max-width:640px;margin:0 auto}
 a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
-nav.top{font-family:var(--f-ui);font-size:15px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--rule);margin-bottom:36px}
+nav.top{font-family:var(--f-ui);font-size:16px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--rule);margin-bottom:36px}
 nav.top .me{font-weight:600;color:var(--fg);margin-right:auto}
 nav.top a[aria-current]{color:var(--fg);border-bottom:2px solid var(--accent)}
 .me-photo{display:block;width:150px;height:150px;border-radius:12px;object-fit:cover;margin:0 0 20px}
 h1{font-weight:500;font-size:36px;line-height:1.15;letter-spacing:-.01em;margin:0 0 14px;text-wrap:balance}
-h2{font-family:var(--f-ui);font-weight:600;font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:44px 0 12px}
+h2{font-family:var(--f-ui);font-weight:600;font-size:16px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:44px 0 12px}
 h3{font-weight:500;font-size:23px;margin:36px 0 8px;line-height:1.25;text-wrap:balance}
 p{margin:0 0 18px;max-width:66ch}
 .lede{font-size:22px;line-height:1.45;color:var(--fg)}
@@ -26,6 +26,8 @@ ul.list small{display:block;color:var(--muted);font-size:16px}
 ul.plain{margin:0 0 18px;padding-left:22px}ul.plain li{margin-bottom:6px}
 ul.other a{font-weight:600}
 ol{padding-left:22px}ol li{margin-bottom:10px}
+.toc{font-family:var(--f-ui);font-size:15px;display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 8px}.toc a::before{content:"↓ ";color:var(--muted)}
+.books{list-style:none;margin:0 0 28px;padding:0}.books li{margin:0 0 6px;font-size:18px}.books .au{color:var(--muted)}.books .star{font-size:14px;margin-left:4px}.count{font-weight:400;letter-spacing:0;text-transform:none}
 .meta{font-family:var(--f-ui);font-size:14px;color:var(--muted);margin:0 0 28px}
 article h3{margin-top:40px}
 blockquote{margin:0 0 18px;padding:0 0 0 18px;border-left:3px solid var(--rule);color:var(--fg)}
@@ -44,14 +46,293 @@ svg .edge.a{stroke:var(--muted)}svg .edge.y{stroke:var(--you);stroke-width:1.8}s
 .pending{font-family:var(--f-ui);font-size:13px;color:var(--you);margin:0 0 8px}
 footer{margin-top:64px;padding-top:18px;border-top:1px solid var(--rule);font-family:var(--f-ui);font-size:13.5px;color:var(--muted)}
 hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
-@media (max-width:480px){body{font-size:18px}h1{font-size:30px}ul.list li{grid-template-columns:1fr}ul.list .d{order:2}}
-</style></head><body><div class="col"><nav class="top"><a class="me" href="index.html">Tyler Sanchez</a><a href="writing/chat-box.html">Writing</a><a href="index.html#projects">Projects</a><a href="how-i-work.html">How I work</a></nav>
-<h1>Reading</h1>
-<p class="lede">A short list of the books that shaped how I think about product, people and time, one line each. The full shelf, with ratings, is on <a href="https://www.goodreads.com/user/show/16104684-tyler" target="_blank" rel="noopener">Goodreads</a>.</p>
-<p class="pending">Pending: Tyler picks 10 to 15 titles. The layout below shows the format.</p>
-<ul class="list">
-  <li><span class="d">2026</span><span><b>AGI Chronicles</b>, Kevin Roose<small>Most recently finished. One line on why it stuck.</small></span></li>
-  <li><span class="d">—</span><span><b>Title</b>, Author<small>One line on what it changed.</small></span></li>
-  <li><span class="d">—</span><span><b>Title</b>, Author<small>One line on what it changed.</small></span></li>
+@media (max-width:480px){body{font-size:19px}h1{font-size:30px}ul.list li{grid-template-columns:1fr}ul.list .d{order:2}}
+</style></head><body><div class="col"><nav class="top"><a class="me" href="index.html">Tyler Sanchez</a><a href="writing/chat-box.html">Writing</a><a href="index.html#projects">Projects</a><a href="how-i-work.html">How I work with AI</a></nav>
+<h1>Reading list</h1>
+<p class="lede">Everything I've read since I started keeping track, newest first, pulled from my <a href="https://www.goodreads.com/user/show/16104684-tyler" target="_blank" rel="noopener">Goodreads</a> shelf. A ⭐ marks a five-star book.</p>
+<h2 id="y2026">2026 <span class="count">· 21 books</span></h2>
+<ul class="books">
+<li><a href="https://www.goodreads.com/book/show/245645193" target="_blank" rel="noopener">The AGI Chronicles: The Inside Story of the Race to Create an Artificial Superintelligence</a> <span class="au">(Kevin Roose)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/16690" target="_blank" rel="noopener">The Moon Is a Harsh Mistress</a> <span class="au">(Robert A. Heinlein)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/13554058" target="_blank" rel="noopener">The Wandering Earth</a> <span class="au">(Liu Cixin)</span></li>
+<li><a href="https://www.goodreads.com/book/show/3227063" target="_blank" rel="noopener">The Way of Shadows (Night Angel, #1)</a> <span class="au">(Brent Weeks)</span></li>
+<li><a href="https://www.goodreads.com/book/show/220160849" target="_blank" rel="noopener">Angel Down</a> <span class="au">(Daniel Kraus)</span></li>
+<li><a href="https://www.goodreads.com/book/show/13651" target="_blank" rel="noopener">The Dispossessed: An Ambiguous Utopia</a> <span class="au">(Ursula K. Le Guin)</span></li>
+<li><a href="https://www.goodreads.com/book/show/166997" target="_blank" rel="noopener">Stoner</a> <span class="au">(John  Williams)</span></li>
+<li><a href="https://www.goodreads.com/book/show/97412" target="_blank" rel="noopener">On the Shortness of Life: Life Is Long if You Know How to Use It (Penguin Great Ideas)</a> <span class="au">(Seneca)</span></li>
+<li><a href="https://www.goodreads.com/book/show/61153739" target="_blank" rel="noopener">Outlive: The Science &amp; Art of Longevity</a> <span class="au">(Peter Attia)</span></li>
+<li><a href="https://www.goodreads.com/book/show/33585392" target="_blank" rel="noopener">Dear Ijeawele, or A Feminist Manifesto in Fifteen Suggestions</a> <span class="au">(Chimamanda Ngozi Adichie)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/34066798" target="_blank" rel="noopener">A Gentleman in Moscow</a> <span class="au">(Amor Towles)</span></li>
+<li><a href="https://www.goodreads.com/book/show/48484" target="_blank" rel="noopener">Blindsight (Firefall, #1)</a> <span class="au">(Peter Watts)</span></li>
+<li><a href="https://www.goodreads.com/book/show/36739755" target="_blank" rel="noopener">Convenience Store Woman</a> <span class="au">(Sayaka Murata)</span></li>
+<li><a href="https://www.goodreads.com/book/show/238226942" target="_blank" rel="noopener">Yesteryear</a> <span class="au">(Caro Claire Burke)</span></li>
+<li><a href="https://www.goodreads.com/book/show/40642458" target="_blank" rel="noopener">The Second Mountain</a> <span class="au">(David  Brooks)</span></li>
+<li><a href="https://www.goodreads.com/book/show/54870256" target="_blank" rel="noopener">There Is No Antimemetics Division</a> <span class="au">(qntm)</span></li>
+<li><a href="https://www.goodreads.com/book/show/15730101" target="_blank" rel="noopener">The Call of Cthulhu</a> <span class="au">(H.P. Lovecraft)</span></li>
+<li><a href="https://www.goodreads.com/book/show/1971304" target="_blank" rel="noopener">City of Thieves</a> <span class="au">(David Benioff)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/14891" target="_blank" rel="noopener">A Tree Grows in Brooklyn</a> <span class="au">(Betty  Smith)</span></li>
+<li><a href="https://www.goodreads.com/book/show/37946419" target="_blank" rel="noopener">Sixteen Ways to Defend a Walled City (The Siege, #1)</a> <span class="au">(K.J. Parker)</span></li>
+<li><a href="https://www.goodreads.com/book/show/186074" target="_blank" rel="noopener">The Name of the Wind (The Kingkiller Chronicle, #1)</a> <span class="au">(Patrick Rothfuss)</span> <span class="star" title="Five stars">⭐</span></li>
 </ul>
-<footer>© 2026 Tyler Sanchez · Denver · tylersanchez@gmail.com</footer></div></body></html>
+<h2 id="y2025">2025 <span class="count">· 17 books</span></h2>
+<ul class="books">
+<li><a href="https://www.goodreads.com/book/show/223380" target="_blank" rel="noopener">Stories of Your Life and Others</a> <span class="au">(Ted Chiang)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/199348906" target="_blank" rel="noopener">Never Enough: From Barista to Billionaire</a> <span class="au">(Andrew  Wilkinson)</span></li>
+<li><a href="https://www.goodreads.com/book/show/11607" target="_blank" rel="noopener">The Running Man</a> <span class="au">(Richard  Bachman)</span></li>
+<li><a href="https://www.goodreads.com/book/show/52439531" target="_blank" rel="noopener">The Inheritance Games (The Inheritance Games, #1)</a> <span class="au">(Jennifer Lynn Barnes)</span></li>
+<li><a href="https://www.goodreads.com/book/show/63210216" target="_blank" rel="noopener">The Good Enough Job: Reclaiming Life from Work</a> <span class="au">(Simone Stolzoff)</span></li>
+<li><a href="https://www.goodreads.com/book/show/57933306" target="_blank" rel="noopener">Stolen Focus: Why You Can't Pay Attention— and How to Think Deeply Again</a> <span class="au">(Johann Hari)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/40864030" target="_blank" rel="noopener">A Prayer for the Crown-Shy (Monk &amp; Robot, #2)</a> <span class="au">(Becky Chambers)</span></li>
+<li><a href="https://www.goodreads.com/book/show/40864002" target="_blank" rel="noopener">A Psalm for the Wild-Built (Monk &amp; Robot, #1)</a> <span class="au">(Becky Chambers)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/150246211" target="_blank" rel="noopener">The Algebra of Wealth: A Simple Formula for Financial Security</a> <span class="au">(Scott Galloway)</span></li>
+<li><a href="https://www.goodreads.com/book/show/24453082" target="_blank" rel="noopener">Big Magic: Creative Living Beyond Fear</a> <span class="au">(Elizabeth Gilbert)</span></li>
+<li><a href="https://www.goodreads.com/book/show/5043" target="_blank" rel="noopener">The Pillars of the Earth (Kingsbridge, #1)</a> <span class="au">(Ken Follett)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/9014" target="_blank" rel="noopener">The Long Walk</a> <span class="au">(Richard  Bachman)</span></li>
+<li><a href="https://www.goodreads.com/book/show/30555488" target="_blank" rel="noopener">The Underground Railroad</a> <span class="au">(Colson Whitehead)</span></li>
+<li><a href="https://www.goodreads.com/book/show/42933" target="_blank" rel="noopener">Tai-Pan (Asian Saga, #2)</a> <span class="au">(James Clavell)</span></li>
+<li><a href="https://www.goodreads.com/book/show/72174599" target="_blank" rel="noopener">Lightbringer (Red Rising, 6)</a> <span class="au">(Pierce Brown)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/29226553" target="_blank" rel="noopener">Dark Age (Red Rising Saga, #5)</a> <span class="au">(Pierce Brown)</span></li>
+<li><a href="https://www.goodreads.com/book/show/9361589" target="_blank" rel="noopener">The Night Circus</a> <span class="au">(Erin Morgenstern)</span></li>
+</ul>
+<h2 id="y2024">2024 <span class="count">· 22 books</span></h2>
+<ul class="books">
+<li><a href="https://www.goodreads.com/book/show/53000876" target="_blank" rel="noopener">Contact</a> <span class="au">(Carl Sagan)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/205363955" target="_blank" rel="noopener">Meditations for Mortals: Four Weeks to Embrace Your Limitations and Make Time for What Counts</a> <span class="au">(Oliver Burkeman)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/49552" target="_blank" rel="noopener">The Stranger</a> <span class="au">(Albert Camus)</span></li>
+<li><a href="https://www.goodreads.com/book/show/35066358" target="_blank" rel="noopener">The First Fifteen Lives of Harry August</a> <span class="au">(Claire North)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/40612032" target="_blank" rel="noopener">The Lincoln Lawyer (The Lincoln Lawyer, #1; Harry Bosch Universe, #16)</a> <span class="au">(Michael Connelly)</span></li>
+<li><a href="https://www.goodreads.com/book/show/40603783" target="_blank" rel="noopener">The Defining Decade: Why Your Twenties Matter—And How to Make the Most of Them Now</a> <span class="au">(Meg Jay)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/8978488" target="_blank" rel="noopener">The Art of Non-Conformity: Set Your Own Rules, Live the Life You Want, and Change the World</a> <span class="au">(Chris Guillebeau)</span></li>
+<li><a href="https://www.goodreads.com/book/show/320" target="_blank" rel="noopener">One Hundred Years of Solitude</a> <span class="au">(Gabriel García Márquez)</span></li>
+<li><a href="https://www.goodreads.com/book/show/3153910" target="_blank" rel="noopener">The Art of Racing in the Rain</a> <span class="au">(Garth Stein)</span></li>
+<li><a href="https://www.goodreads.com/book/show/52578297" target="_blank" rel="noopener">The Midnight Library (The Midnight World, #1)</a> <span class="au">(Matt Haig)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/50202953" target="_blank" rel="noopener">Piranesi</a> <span class="au">(Susanna Clarke)</span></li>
+<li><a href="https://www.goodreads.com/book/show/58321103" target="_blank" rel="noopener">The Watchers (The Watchers, #1)</a> <span class="au">(A.M. Shine)</span></li>
+<li><a href="https://www.goodreads.com/book/show/17061" target="_blank" rel="noopener">Coraline</a> <span class="au">(Neil Gaiman)</span></li>
+<li><a href="https://www.goodreads.com/book/show/58437521" target="_blank" rel="noopener">The Candy House</a> <span class="au">(Jennifer Egan)</span></li>
+<li><a href="https://www.goodreads.com/book/show/59586621" target="_blank" rel="noopener">The 6:20 Man (The 6:20 Man, #1)</a> <span class="au">(David Baldacci)</span></li>
+<li><a href="https://www.goodreads.com/book/show/37542581" target="_blank" rel="noopener">The Spy and the Traitor: The Greatest Espionage Story of the Cold War</a> <span class="au">(Ben Macintyre)</span></li>
+<li><a href="https://www.goodreads.com/book/show/5129" target="_blank" rel="noopener">Brave New World</a> <span class="au">(Aldous Huxley)</span></li>
+<li><a href="https://www.goodreads.com/book/show/57281885" target="_blank" rel="noopener">American Gods (American Gods, #1)</a> <span class="au">(Neil Gaiman)</span></li>
+<li><a href="https://www.goodreads.com/book/show/60194162" target="_blank" rel="noopener">Demon Copperhead</a> <span class="au">(Barbara Kingsolver)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/60317128" target="_blank" rel="noopener">Demon Copperhead</a> <span class="au">(Barbara Kingsolver)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/90202302" target="_blank" rel="noopener">Iron Flame (The Empyrean, #2)</a> <span class="au">(Rebecca Yarros)</span></li>
+<li><a href="https://www.goodreads.com/book/show/63219094" target="_blank" rel="noopener">Fourth Wing (The Empyrean, #1)</a> <span class="au">(Rebecca Yarros)</span></li>
+</ul>
+<h2 id="y2023">2023 <span class="count">· 25 books</span></h2>
+<ul class="books">
+<li><a href="https://www.goodreads.com/book/show/35519109" target="_blank" rel="noopener">Exit Strategy (The Murderbot Diaries, #4)</a> <span class="au">(Martha Wells)</span></li>
+<li><a href="https://www.goodreads.com/book/show/18630" target="_blank" rel="noopener">The Player of Games (Culture, #2)</a> <span class="au">(Iain M. Banks)</span></li>
+<li><a href="https://www.goodreads.com/book/show/139069" target="_blank" rel="noopener">Endurance: Shackleton's Incredible Voyage</a> <span class="au">(Alfred Lansing)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/60151185" target="_blank" rel="noopener">The Pathless Path: Imagining a New Story For Work and Life (The Pathless Path Collection Book 1)</a> <span class="au">(Paul  Millerd)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/53205888" target="_blank" rel="noopener">Under the Whispering Door</a> <span class="au">(T.J. Klune)</span></li>
+<li><a href="https://www.goodreads.com/book/show/58687126" target="_blank" rel="noopener">Finding Me</a> <span class="au">(Viola Davis)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/29579" target="_blank" rel="noopener">Foundation (Foundation, #1)</a> <span class="au">(Isaac Asimov)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/13453029" target="_blank" rel="noopener">Wool Omnibus (Silo, #1)</a> <span class="au">(Hugh Howey)</span></li>
+<li><a href="https://www.goodreads.com/book/show/77565" target="_blank" rel="noopener">The Fall of Hyperion (Hyperion Cantos, #2)</a> <span class="au">(Dan Simmons)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/56754734" target="_blank" rel="noopener">Hunt the Stars (Starlight's Shadow, #1)</a> <span class="au">(Jessie Mihalik)</span></li>
+<li><a href="https://www.goodreads.com/book/show/39664" target="_blank" rel="noopener">Rita Hayworth and Shawshank Redemption</a> <span class="au">(Stephen  King)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/12262741" target="_blank" rel="noopener">Wild: From Lost to Found on the Pacific Crest Trail</a> <span class="au">(Cheryl Strayed)</span></li>
+<li><a href="https://www.goodreads.com/book/show/77566" target="_blank" rel="noopener">Hyperion (Hyperion Cantos, #1)</a> <span class="au">(Dan Simmons)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/52036" target="_blank" rel="noopener">Siddhartha</a> <span class="au">(Hermann Hesse)</span></li>
+<li><a href="https://www.goodreads.com/book/show/39802829" target="_blank" rel="noopener">Siddharth (Hindi) (Hindi Edition)</a> <span class="au">(Hermann Hesse)</span></li>
+<li><a href="https://www.goodreads.com/book/show/27485" target="_blank" rel="noopener">Mating in Captivity: Reconciling the Erotic and the Domestic</a> <span class="au">(Esther Perel)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/1898" target="_blank" rel="noopener">Into Thin Air: A Personal Account of the Mt. Everest Disaster</a> <span class="au">(Jon Krakauer)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/38359036" target="_blank" rel="noopener">The Tattooist of Auschwitz (The Tattooist of Auschwitz, #1)</a> <span class="au">(Heather   Morris)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/35519101" target="_blank" rel="noopener">Rogue Protocol (The Murderbot Diaries, #3)</a> <span class="au">(Martha Wells)</span></li>
+<li><a href="https://www.goodreads.com/book/show/59089704" target="_blank" rel="noopener">This Time Tomorrow</a> <span class="au">(Emma Straub)</span></li>
+<li><a href="https://www.goodreads.com/book/show/91950" target="_blank" rel="noopener">The Myth of Sisyphus</a> <span class="au">(Albert Camus)</span></li>
+<li><a href="https://www.goodreads.com/book/show/16158542" target="_blank" rel="noopener">The Boys in the Boat: Nine Americans and Their Epic Quest for Gold at the 1936 Berlin Olympics</a> <span class="au">(Daniel James Brown)</span></li>
+<li><a href="https://www.goodreads.com/book/show/52950915" target="_blank" rel="noopener">Die with Zero: Getting All You Can from Your Money and Your Life</a> <span class="au">(Bill  Perkins)</span></li>
+<li><a href="https://www.goodreads.com/book/show/30268522" target="_blank" rel="noopener">Why Not Me?</a> <span class="au">(Mindy Kaling)</span></li>
+<li><a href="https://www.goodreads.com/book/show/54493401" target="_blank" rel="noopener">Project Hail Mary</a> <span class="au">(Andy Weir)</span></li>
+</ul>
+<h2 id="y2022">2022 <span class="count">· 17 books</span></h2>
+<ul class="books">
+<li><a href="https://www.goodreads.com/book/show/8520610" target="_blank" rel="noopener">Quiet: The Power of Introverts in a World That Can't Stop Talking</a> <span class="au">(Susan Cain)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/53481723" target="_blank" rel="noopener">Drug Use for Grown-Ups: Chasing Liberty in the Land of Fear</a> <span class="au">(Carl L. Hart)</span></li>
+<li><a href="https://www.goodreads.com/book/show/13055592" target="_blank" rel="noopener">Redshirts</a> <span class="au">(John Scalzi)</span></li>
+<li><a href="https://www.goodreads.com/book/show/2165" target="_blank" rel="noopener">The Old Man and the Sea</a> <span class="au">(Ernest Hemingway)</span></li>
+<li><a href="https://www.goodreads.com/book/show/1768603" target="_blank" rel="noopener">The White Tiger</a> <span class="au">(Aravind Adiga)</span></li>
+<li><a href="https://www.goodreads.com/book/show/34" target="_blank" rel="noopener">The Fellowship of the Ring (The Lord of the Rings, #1)</a> <span class="au">(J.R.R. Tolkien)</span></li>
+<li><a href="https://www.goodreads.com/book/show/33600" target="_blank" rel="noopener">Shantaram</a> <span class="au">(Gregory David Roberts)</span></li>
+<li><a href="https://www.goodreads.com/book/show/36223860" target="_blank" rel="noopener">Artificial Condition (The Murderbot Diaries, #2)</a> <span class="au">(Martha Wells)</span></li>
+<li><a href="https://www.goodreads.com/book/show/39863447" target="_blank" rel="noopener">Loonshots: How to Nurture the Crazy Ideas That Win Wars, Cure Diseases, and Transform Industries</a> <span class="au">(Safi Bahcall)</span></li>
+<li><a href="https://www.goodreads.com/book/show/32758901" target="_blank" rel="noopener">All Systems Red (The Murderbot Diaries, #1)</a> <span class="au">(Martha Wells)</span></li>
+<li><a href="https://www.goodreads.com/book/show/54785515" target="_blank" rel="noopener">Four Thousand Weeks: Time Management for Mortals</a> <span class="au">(Oliver Burkeman)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/27833670" target="_blank" rel="noopener">Dark Matter</a> <span class="au">(Blake Crouch)</span></li>
+<li><a href="https://www.goodreads.com/book/show/45046527" target="_blank" rel="noopener">American Dirt</a> <span class="au">(Jeanine Cummins)</span></li>
+<li><a href="https://www.goodreads.com/book/show/22609522" target="_blank" rel="noopener">Red Notice: A True Story of High Finance, Murder, and One Man's Fight for Justice</a> <span class="au">(Bill Browder)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/29496076" target="_blank" rel="noopener">Killers of the Flower Moon: The Osage Murders and the Birth of the FBI</a> <span class="au">(David Grann)</span></li>
+<li><a href="https://www.goodreads.com/book/show/53799686" target="_blank" rel="noopener">Anxious People</a> <span class="au">(Fredrik Backman)</span></li>
+<li><a href="https://www.goodreads.com/book/show/1845" target="_blank" rel="noopener">Into the Wild</a> <span class="au">(Jon Krakauer)</span></li>
+</ul>
+<h2 id="y2021">2021 <span class="count">· 7 books</span></h2>
+<ul class="books">
+<li><a href="https://www.goodreads.com/book/show/44525305" target="_blank" rel="noopener">The Ride of a Lifetime: Lessons Learned from 15 Years as CEO of the Walt Disney Company</a> <span class="au">(Robert Iger)</span></li>
+<li><a href="https://www.goodreads.com/book/show/36613747" target="_blank" rel="noopener">How to Change Your Mind: The New Science of Psychedelics</a> <span class="au">(Michael Pollan)</span></li>
+<li><a href="https://www.goodreads.com/book/show/34466963" target="_blank" rel="noopener">Why We Sleep: Unlocking the Power of Sleep and Dreams</a> <span class="au">(Matthew Walker)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/40961427" target="_blank" rel="noopener">1984</a> <span class="au">(George Orwell)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/20988577" target="_blank" rel="noopener">The Happy Puppy Handbook: Your Definitive Guide to Puppy Care and Early Training</a> <span class="au">(Pippa Mattinson)</span></li>
+<li><a href="https://www.goodreads.com/book/show/4981" target="_blank" rel="noopener">Slaughterhouse-Five</a> <span class="au">(Kurt Vonnegut Jr.)</span></li>
+<li><a href="https://www.goodreads.com/book/show/48654575" target="_blank" rel="noopener">The Knife of Never Letting Go (Chaos Walking, #1)</a> <span class="au">(Patrick Ness)</span></li>
+</ul>
+<h2 id="y2020">2020 <span class="count">· 11 books</span></h2>
+<ul class="books">
+<li><a href="https://www.goodreads.com/book/show/23437156" target="_blank" rel="noopener">Six of Crows (Six of Crows, #1)</a> <span class="au">(Leigh Bardugo)</span></li>
+<li><a href="https://www.goodreads.com/book/show/36510196" target="_blank" rel="noopener">Old Man's War (Old Man's War, #1)</a> <span class="au">(John Scalzi)</span></li>
+<li><a href="https://www.goodreads.com/book/show/37570546" target="_blank" rel="noopener">Maybe You Should Talk to Someone</a> <span class="au">(Lori Gottlieb)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/38799469" target="_blank" rel="noopener">Bad Blood: Secrets and Lies in a Silicon Valley Startup</a> <span class="au">(John Carreyrou)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/25451264" target="_blank" rel="noopener">Death's End (Remembrance of Earth’s Past, #3)</a> <span class="au">(Liu Cixin)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/23168817" target="_blank" rel="noopener">The Dark Forest (Remembrance of Earth’s Past, #2)</a> <span class="au">(Liu Cixin)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/127455" target="_blank" rel="noopener">The Lies of Locke Lamora (Gentleman Bastard, #1)</a> <span class="au">(Scott Lynch)</span></li>
+<li><a href="https://www.goodreads.com/book/show/9827" target="_blank" rel="noopener">King Rat (Asian Saga, #4)</a> <span class="au">(James Clavell)</span></li>
+<li><a href="https://www.goodreads.com/book/show/23398625" target="_blank" rel="noopener">Kitchens of the Great Midwest</a> <span class="au">(J. Ryan Stradal)</span></li>
+<li><a href="https://www.goodreads.com/book/show/402093" target="_blank" rel="noopener">Shōgun (Asian Saga, #1)</a> <span class="au">(James Clavell)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/6" target="_blank" rel="noopener">Harry Potter and the Goblet of Fire (Harry Potter, #4)</a> <span class="au">(J.K. Rowling)</span> <span class="star" title="Five stars">⭐</span></li>
+</ul>
+<h2 id="y2019">2019 <span class="count">· 30 books</span></h2>
+<ul class="books">
+<li><a href="https://www.goodreads.com/book/show/35489136" target="_blank" rel="noopener">Belong: Find Your People, Create Community, and Live a More Connected Life</a> <span class="au">(Radha Agrawal)</span></li>
+<li><a href="https://www.goodreads.com/book/show/18077752" target="_blank" rel="noopener">Acceptance (Southern Reach, #3)</a> <span class="au">(Jeff Vandermeer)</span></li>
+<li><a href="https://www.goodreads.com/book/show/8855321" target="_blank" rel="noopener">Leviathan Wakes</a> <span class="au">(James S.A. Corey)</span></li>
+<li><a href="https://www.goodreads.com/book/show/16085481" target="_blank" rel="noopener">Crazy Rich Asians (Crazy Rich Asians, #1)</a> <span class="au">(Kevin Kwan)</span></li>
+<li><a href="https://www.goodreads.com/book/show/12331767" target="_blank" rel="noopener">High-Rise</a> <span class="au">(J.G. Ballard)</span></li>
+<li><a href="https://www.goodreads.com/book/show/18957" target="_blank" rel="noopener">The Corner: A Year in the Life of an Inner-City Neighborhood</a> <span class="au">(David Simon)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/40109421" target="_blank" rel="noopener">The Fifth Risk</a> <span class="au">(Michael   Lewis)</span></li>
+<li><a href="https://www.goodreads.com/book/show/68428" target="_blank" rel="noopener">Mistborn: The Final Empire (Mistborn, #1)</a> <span class="au">(Brandon Sanderson)</span></li>
+<li><a href="https://www.goodreads.com/book/show/5" target="_blank" rel="noopener">Harry Potter and the Prisoner of Azkaban (Harry Potter, #3)</a> <span class="au">(J.K. Rowling)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/7519640" target="_blank" rel="noopener">War</a> <span class="au">(Sebastian Junger)</span></li>
+<li><a href="https://www.goodreads.com/book/show/29780253" target="_blank" rel="noopener">Born a Crime: Stories from a South African Childhood</a> <span class="au">(Trevor Noah)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/3" target="_blank" rel="noopener">Harry Potter and the Sorcerer's Stone (Harry Potter, #1)</a> <span class="au">(J.K. Rowling)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/15881" target="_blank" rel="noopener">Harry Potter and the Chamber of Secrets (Harry Potter, #2)</a> <span class="au">(J.K. Rowling)</span></li>
+<li><a href="https://www.goodreads.com/book/show/7126" target="_blank" rel="noopener">The Count of Monte Cristo</a> <span class="au">(Alexandre Dumas)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/25541028" target="_blank" rel="noopener">Elon Musk: Tesla, SpaceX, and the Quest for a Fantastic Future</a> <span class="au">(Ashlee Vance)</span></li>
+<li><a href="https://www.goodreads.com/book/show/35133922" target="_blank" rel="noopener">Educated</a> <span class="au">(Tara Westover)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/20518872" target="_blank" rel="noopener">The Three-Body Problem (Remembrance of Earth’s Past, #1)</a> <span class="au">(Liu Cixin)</span></li>
+<li><a href="https://www.goodreads.com/book/show/26030703" target="_blank" rel="noopener">Disrupted: My Misadventure in the Start-Up Bubble</a> <span class="au">(Dan  Lyons)</span></li>
+<li><a href="https://www.goodreads.com/book/show/30901606" target="_blank" rel="noopener">The Moth Presents All These Wonders: True Stories About Facing the Unknown</a> <span class="au">(Catherine  Burns)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/106" target="_blank" rel="noopener">Dune Messiah (Dune, #2)</a> <span class="au">(Frank Herbert)</span></li>
+<li><a href="https://www.goodreads.com/book/show/1719211" target="_blank" rel="noopener">Is It Utopia Yet?: An Insider's View of Twin Oaks Community in Its Twenty-Sixth Year</a> <span class="au">(Kat Kinkade)</span></li>
+<li><a href="https://www.goodreads.com/book/show/33859095" target="_blank" rel="noopener">Angel: How to Invest in Technology Startups—Timeless Advice from an Angel Investor Who Turned $100,000 into $100,000,000</a> <span class="au">(Jason Calacanis)</span></li>
+<li><a href="https://www.goodreads.com/book/show/10133923" target="_blank" rel="noopener">The Skull</a> <span class="au">(Philip K. Dick)</span></li>
+<li><a href="https://www.goodreads.com/book/show/18077769" target="_blank" rel="noopener">Authority (Southern Reach, #2)</a> <span class="au">(Jeff Vandermeer)</span></li>
+<li><a href="https://www.goodreads.com/book/show/37533013" target="_blank" rel="noopener">Self-Knowledge</a> <span class="au">(The School of Life)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/29939161" target="_blank" rel="noopener">Radical Candor: Be a Kickass Boss Without Losing Your Humanity</a> <span class="au">(Kim Malone Scott)</span></li>
+<li><a href="https://www.goodreads.com/book/show/13496" target="_blank" rel="noopener">A Game of Thrones (A Song of Ice and Fire, #1)</a> <span class="au">(George R.R. Martin)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/9275658" target="_blank" rel="noopener">Legend (Legend, #1)</a> <span class="au">(Marie Lu)</span></li>
+<li><a href="https://www.goodreads.com/book/show/37976541" target="_blank" rel="noopener">Bad Blood: Secrets and Lies in a Silicon Valley Startup</a> <span class="au">(John Carreyrou)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/4948826" target="_blank" rel="noopener">Sum: Forty Tales from the Afterlives</a> <span class="au">(David Eagleman)</span></li>
+</ul>
+<h2 id="y2018">2018 <span class="count">· 30 books</span></h2>
+<ul class="books">
+<li><a href="https://www.goodreads.com/book/show/18050143" target="_blank" rel="noopener">Zero to One: Notes on Startups, or How to Build the Future</a> <span class="au">(Peter Thiel)</span></li>
+<li><a href="https://www.goodreads.com/book/show/18176747" target="_blank" rel="noopener">The Hard Thing About Hard Things: Building a Business When There Are No Easy Answers―Straight Talk on the Challenges of Entrepreneurship</a> <span class="au">(Ben Horowitz)</span></li>
+<li><a href="https://www.goodreads.com/book/show/40179007" target="_blank" rel="noopener">The Messy Middle: Finding Your Way Through the Hardest and Most Crucial Part of Any Bold Venture</a> <span class="au">(Scott Belsky)</span></li>
+<li><a href="https://www.goodreads.com/book/show/16256798" target="_blank" rel="noopener">The One Thing: The Surprisingly Simple Truth Behind Extraordinary Results</a> <span class="au">(Gary Keller)</span></li>
+<li><a href="https://www.goodreads.com/book/show/20507200" target="_blank" rel="noopener">How Should We Live?: Great Ideas from the Past for Everyday Life</a> <span class="au">(Roman Krznaric)</span></li>
+<li><a href="https://www.goodreads.com/book/show/25852784" target="_blank" rel="noopener">Evicted: Poverty and Profit in the American City</a> <span class="au">(Matthew Desmond)</span></li>
+<li><a href="https://www.goodreads.com/book/show/242472" target="_blank" rel="noopener">The Black Swan: The Impact of the Highly Improbable</a> <span class="au">(Nassim Nicholas Taleb)</span></li>
+<li><a href="https://www.goodreads.com/book/show/22529127" target="_blank" rel="noopener">Team of Teams: New Rules of Engagement for a Complex World</a> <span class="au">(Stanley McChrystal)</span></li>
+<li><a href="https://www.goodreads.com/book/show/8249361" target="_blank" rel="noopener">Retirementology: Rethinking the American Dream in a New Economy: Rethinking the American Dream in a New Economy</a> <span class="au">(Gregory Salsbury)</span></li>
+<li><a href="https://www.goodreads.com/book/show/4798028" target="_blank" rel="noopener">Enough: True Measures of Money, Business, and Life</a> <span class="au">(John C. Bogle)</span></li>
+<li><a href="https://www.goodreads.com/book/show/234225" target="_blank" rel="noopener">Dune (Dune, #1)</a> <span class="au">(Frank Herbert)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/40651883" target="_blank" rel="noopener">Snow Crash</a> <span class="au">(Neal Stephenson)</span></li>
+<li><a href="https://www.goodreads.com/book/show/38900866" target="_blank" rel="noopener">It Doesn't Have to Be Crazy at Work: A Practical Guide to Sustainable Productivity Through Calm Company Culture and Effective Leadership</a> <span class="au">(Jason Fried)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/34002132" target="_blank" rel="noopener">Oathbringer (The Stormlight Archive, #3)</a> <span class="au">(Brandon Sanderson)</span></li>
+<li><a href="https://www.goodreads.com/book/show/6480781" target="_blank" rel="noopener">Open</a> <span class="au">(Andre Agassi)</span></li>
+<li><a href="https://www.goodreads.com/book/show/33313" target="_blank" rel="noopener">Kitchen Confidential: Adventures in the Culinary Underbelly</a> <span class="au">(Anthony Bourdain)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/23878" target="_blank" rel="noopener">Chronicle of a Death Foretold</a> <span class="au">(Gabriel García Márquez)</span></li>
+<li><a href="https://www.goodreads.com/book/show/17332218" target="_blank" rel="noopener">Words of Radiance (The Stormlight Archive, #2)</a> <span class="au">(Brandon Sanderson)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/40940205" target="_blank" rel="noopener">Tribe: On Homecoming and Belonging</a> <span class="au">(Sebastian Junger)</span></li>
+<li><a href="https://www.goodreads.com/book/show/18007564" target="_blank" rel="noopener">The Martian</a> <span class="au">(Andy Weir)</span></li>
+<li><a href="https://www.goodreads.com/book/show/11797365" target="_blank" rel="noopener">Escape from Camp 14: One Man's Remarkable Odyssey from North Korea to Freedom in the West</a> <span class="au">(Blaine Harden)</span></li>
+<li><a href="https://www.goodreads.com/book/show/20910174" target="_blank" rel="noopener">Smartcuts: How Hackers, Innovators, and Icons Accelerate Success</a> <span class="au">(Shane Snow)</span></li>
+<li><a href="https://www.goodreads.com/book/show/7235533" target="_blank" rel="noopener">The Way of Kings (The Stormlight Archive, #1)</a> <span class="au">(Brandon Sanderson)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/8908" target="_blank" rel="noopener">World War Z: An Oral History of the Zombie War</a> <span class="au">(Max Brooks)</span></li>
+<li><a href="https://www.goodreads.com/book/show/16158522" target="_blank" rel="noopener">Eleven Rings: The Soul of Success</a> <span class="au">(Phil Jackson)</span></li>
+<li><a href="https://www.goodreads.com/book/show/381355" target="_blank" rel="noopener">The Bogleheads' Guide to Investing</a> <span class="au">(Taylor Larimore)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/33257757" target="_blank" rel="noopener">Iron Gold (Red Rising Saga, #4)</a> <span class="au">(Pierce Brown)</span></li>
+<li><a href="https://www.goodreads.com/book/show/6054800" target="_blank" rel="noopener">Status Anxiety</a> <span class="au">(Alain de Botton)</span></li>
+<li><a href="https://www.goodreads.com/book/show/23425" target="_blank" rel="noopener">Status Anxiety</a> <span class="au">(Alain de Botton)</span></li>
+<li><a href="https://www.goodreads.com/book/show/1215032" target="_blank" rel="noopener">The Wise Man's Fear (The Kingkiller Chronicle, #2)</a> <span class="au">(Patrick Rothfuss)</span> <span class="star" title="Five stars">⭐</span></li>
+</ul>
+<h2 id="y2017">2017 <span class="count">· 24 books</span></h2>
+<ul class="books">
+<li><a href="https://www.goodreads.com/book/show/7967" target="_blank" rel="noopener">Speaker for the Dead (Ender's Saga, #2)</a> <span class="au">(Orson Scott Card)</span></li>
+<li><a href="https://www.goodreads.com/book/show/22836957" target="_blank" rel="noopener">The Revenant</a> <span class="au">(Michael Punke)</span></li>
+<li><a href="https://www.goodreads.com/book/show/7959473" target="_blank" rel="noopener">American Assassin (Mitch Rapp, #1)</a> <span class="au">(Vince Flynn)</span></li>
+<li><a href="https://www.goodreads.com/book/show/33962388" target="_blank" rel="noopener">An Inconvenient Sequel: Truth to Power: Your Action Handbook to Learn the Science, Find Your Voice, and Help Solve the Climate Crisis</a> <span class="au">(Al Gore)</span></li>
+<li><a href="https://www.goodreads.com/book/show/17934530" target="_blank" rel="noopener">Annihilation (Southern Reach, #1)</a> <span class="au">(Jeff Vandermeer)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/6256822" target="_blank" rel="noopener">How a Second Grader Beats Wall Street: Golden Rules Any Investor Can Learn</a> <span class="au">(Allan S. Roth)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/4924862" target="_blank" rel="noopener">I Will Teach You to Be Rich</a> <span class="au">(Ramit Sethi)</span></li>
+<li><a href="https://www.goodreads.com/book/show/9534" target="_blank" rel="noopener">Shadow of the Hegemon (The Shadow Series, #2)</a> <span class="au">(Orson Scott Card)</span></li>
+<li><a href="https://www.goodreads.com/book/show/6743598" target="_blank" rel="noopener">The Elements of Investing</a> <span class="au">(Burton G. Malkiel)</span></li>
+<li><a href="https://www.goodreads.com/book/show/9532" target="_blank" rel="noopener">Ender's Shadow (The Shadow Series, #1)</a> <span class="au">(Orson Scott Card)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/23602561" target="_blank" rel="noopener">The Cartel (Power of the Dog, #2)</a> <span class="au">(Don Winslow)</span></li>
+<li><a href="https://www.goodreads.com/book/show/998" target="_blank" rel="noopener">The Millionaire Next Door: The Surprising Secrets of America's Wealthy</a> <span class="au">(Thomas J. Stanley)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/827" target="_blank" rel="noopener">The Diamond Age: Or, a Young Lady's Illustrated Primer</a> <span class="au">(Neal Stephenson)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/28257707" target="_blank" rel="noopener">The Subtle Art of Not Giving a F*ck: A Counterintuitive Approach to Living a Good Life</a> <span class="au">(Mark Manson)</span></li>
+<li><a href="https://www.goodreads.com/book/show/18966806" target="_blank" rel="noopener">Morning Star (Red Rising Saga, #3)</a> <span class="au">(Pierce Brown)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/14572354" target="_blank" rel="noopener">Banksy: You Are an Acceptable Level of Threat and if You Were Not You Would Know About It</a> <span class="au">(Patrick Potter)</span></li>
+<li><a href="https://www.goodreads.com/book/show/15839976" target="_blank" rel="noopener">Red Rising (Red Rising Saga, #1)</a> <span class="au">(Pierce Brown)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/18966819" target="_blank" rel="noopener">Golden Son (Red Rising Saga, #2)</a> <span class="au">(Pierce Brown)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/24429934" target="_blank" rel="noopener">The Einstein Prophecy</a> <span class="au">(Robert Masello)</span></li>
+<li><a href="https://www.goodreads.com/book/show/27161156" target="_blank" rel="noopener">Hillbilly Elegy: A Memoir of a Family and Culture in Crisis</a> <span class="au">(J.D. Vance)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/662" target="_blank" rel="noopener">Atlas Shrugged</a> <span class="au">(Ayn Rand)</span></li>
+<li><a href="https://www.goodreads.com/book/show/12609433" target="_blank" rel="noopener">The Power of Habit: Why We Do What We Do in Life and Business</a> <span class="au">(Charles Duhigg)</span></li>
+<li><a href="https://www.goodreads.com/book/show/17660462" target="_blank" rel="noopener">The Everything Store: Jeff Bezos and the Age of Amazon</a> <span class="au">(Brad Stone)</span></li>
+<li><a href="https://www.goodreads.com/book/show/25899336" target="_blank" rel="noopener">When Breath Becomes Air</a> <span class="au">(Paul Kalanithi)</span> <span class="star" title="Five stars">⭐</span></li>
+</ul>
+<h2 id="y2016">2016 <span class="count">· 14 books</span></h2>
+<ul class="books">
+<li><a href="https://www.goodreads.com/book/show/9969571" target="_blank" rel="noopener">Ready Player One (Ready Player One, #1)</a> <span class="au">(Ernest Cline)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/8045789" target="_blank" rel="noopener">Ender's Game (Ender's Saga, #1)</a> <span class="au">(Orson Scott Card)</span></li>
+<li><a href="https://www.goodreads.com/book/show/375802" target="_blank" rel="noopener">Ender’s Game (Ender's Saga, #1)</a> <span class="au">(Orson Scott Card)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/4030991" target="_blank" rel="noopener">Shoe Dog</a> <span class="au">(Phil Knight)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/40961543" target="_blank" rel="noopener">The Reluctant Fundamentalist</a> <span class="au">(Mohsin Hamid)</span></li>
+<li><a href="https://www.goodreads.com/book/show/5711242" target="_blank" rel="noopener">The Devil in the White City</a> <span class="au">(Erik Larson)</span></li>
+<li><a href="https://www.goodreads.com/book/show/6463967" target="_blank" rel="noopener">The Big Short: Inside the Doomsday Machine</a> <span class="au">(Michael   Lewis)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/70401" target="_blank" rel="noopener">On the Road</a> <span class="au">(Jack Kerouac)</span></li>
+<li><a href="https://www.goodreads.com/book/show/9975779" target="_blank" rel="noopener">Portrait of a Spy (Gabriel Allon, #11)</a> <span class="au">(Daniel Silva)</span></li>
+<li><a href="https://www.goodreads.com/book/show/10357575" target="_blank" rel="noopener">1Q84 (1Q84, #1-3)</a> <span class="au">(Haruki Murakami)</span></li>
+<li><a href="https://www.goodreads.com/book/show/18296144" target="_blank" rel="noopener">Things a Little Bird Told Me: Confessions of the Creative Mind</a> <span class="au">(Biz Stone)</span></li>
+<li><a href="https://www.goodreads.com/book/show/21996" target="_blank" rel="noopener">The Devil in the White City</a> <span class="au">(Erik Larson)</span></li>
+<li><a href="https://www.goodreads.com/book/show/9418327" target="_blank" rel="noopener">Bossypants</a> <span class="au">(Tina Fey)</span></li>
+<li><a href="https://www.goodreads.com/book/show/6900" target="_blank" rel="noopener">Tuesdays with Morrie: An Old Man, a Young Man, and Life's Greatest Lesson</a> <span class="au">(Mitch Albom)</span> <span class="star" title="Five stars">⭐</span></li>
+</ul>
+<h2 id="yEarlier">Earlier <span class="count">· 31 books, read before I kept dates</span></h2>
+<ul class="books">
+<li><a href="https://www.goodreads.com/book/show/629" target="_blank" rel="noopener">Zen and the Art of Motorcycle Maintenance: An Inquiry Into Values (Phaedrus, #1)</a> <span class="au">(Robert M. Pirsig)</span></li>
+<li><a href="https://www.goodreads.com/book/show/13132620" target="_blank" rel="noopener">American Icon: Alan Mulally and the Fight to Save Ford Motor Company</a> <span class="au">(Bryce G. Hoffman)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/18302455" target="_blank" rel="noopener">The Circle (The Circle, #1)</a> <span class="au">(Dave Eggers)</span></li>
+<li><a href="https://www.goodreads.com/book/show/92057" target="_blank" rel="noopener">The Autobiography of Malcolm X</a> <span class="au">(Malcolm X)</span></li>
+<li><a href="https://www.goodreads.com/book/show/2527900" target="_blank" rel="noopener">Nudge: Improving Decisions About Health, Wealth, and Happiness</a> <span class="au">(Richard H. Thaler)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/11878168" target="_blank" rel="noopener">Anything You Want</a> <span class="au">(Derek Sivers)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/685401" target="_blank" rel="noopener">Permission Marketing: Turning Strangers into Friends and Friends into Customers</a> <span class="au">(Seth Godin)</span></li>
+<li><a href="https://www.goodreads.com/book/show/154341" target="_blank" rel="noopener">Wikinomics: How Mass Collaboration Changes Everything</a> <span class="au">(Don Tapscott)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/6570502" target="_blank" rel="noopener">Switch: How to Change Things When Change Is Hard</a> <span class="au">(Chip Heath)</span></li>
+<li><a href="https://www.goodreads.com/book/show/99315" target="_blank" rel="noopener">A Whole New Mind: Why Right-Brainers Will Rule the Future</a> <span class="au">(Daniel H. Pink)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/9628743" target="_blank" rel="noopener">The Social Animal: The Hidden Sources of Love, Character, and Achievement</a> <span class="au">(David  Brooks)</span></li>
+<li><a href="https://www.goodreads.com/book/show/84699" target="_blank" rel="noopener">Never Eat Alone: And Other Secrets to Success, One Relationship at a Time</a> <span class="au">(Keith Ferrazzi)</span></li>
+<li><a href="https://www.goodreads.com/book/show/6516450" target="_blank" rel="noopener">What the Dog Saw and Other Adventures</a> <span class="au">(Malcolm Gladwell)</span></li>
+<li><a href="https://www.goodreads.com/book/show/2615" target="_blank" rel="noopener">The Innovator's Dilemma: The Revolutionary Book that Will Change the Way You Do Business</a> <span class="au">(Clayton M. Christensen)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/6828896" target="_blank" rel="noopener">Delivering Happiness: A Path to Profits, Passion, and Purpose</a> <span class="au">(Tony Hsieh)</span></li>
+<li><a href="https://www.goodreads.com/book/show/2467566" target="_blank" rel="noopener">The Long Tail: Why the Future of Business is Selling Less of More</a> <span class="au">(Chris Anderson)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/1911" target="_blank" rel="noopener">The World Is Flat: A Brief History of the Twenty-first Century</a> <span class="au">(Thomas L. Friedman)</span></li>
+<li><a href="https://www.goodreads.com/book/show/69242" target="_blank" rel="noopener">Made to Stick: Why Some Ideas Survive and Others Die</a> <span class="au">(Chip Heath)</span></li>
+<li><a href="https://www.goodreads.com/book/show/6346975" target="_blank" rel="noopener">Moonwalking with Einstein: The Art and Science of Remembering Everything</a> <span class="au">(Joshua Foer)</span></li>
+<li><a href="https://www.goodreads.com/book/show/81948" target="_blank" rel="noopener">The E-myth Revisited</a> <span class="au">(Michael E. Gerber)</span></li>
+<li><a href="https://www.goodreads.com/book/show/40102" target="_blank" rel="noopener">Blink: The Power of Thinking Without Thinking</a> <span class="au">(Malcolm Gladwell)</span></li>
+<li><a href="https://www.goodreads.com/book/show/6732019" target="_blank" rel="noopener">Rework</a> <span class="au">(Jason Fried)</span></li>
+<li><a href="https://www.goodreads.com/book/show/3228917" target="_blank" rel="noopener">Outliers: The Story of Success</a> <span class="au">(Malcolm Gladwell)</span></li>
+<li><a href="https://www.goodreads.com/book/show/36072" target="_blank" rel="noopener">The 7 Habits of Highly Effective People: Powerful Lessons in Personal Change</a> <span class="au">(Stephen R. Covey)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/1202" target="_blank" rel="noopener">Freakonomics: A Rogue Economist Explores the Hidden Side of Everything</a> <span class="au">(Steven D. Levitt)</span></li>
+<li><a href="https://www.goodreads.com/book/show/4865" target="_blank" rel="noopener">How to Win Friends &amp; Influence People</a> <span class="au">(Dale Carnegie)</span></li>
+<li><a href="https://www.goodreads.com/book/show/28815" target="_blank" rel="noopener">Influence: The Psychology of Persuasion</a> <span class="au">(Robert B. Cialdini)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/1713426" target="_blank" rel="noopener">Predictably Irrational: The Hidden Forces That Shape Our Decisions</a> <span class="au">(Dan Ariely)</span> <span class="star" title="Five stars">⭐</span></li>
+<li><a href="https://www.goodreads.com/book/show/2612" target="_blank" rel="noopener">The Tipping Point: How Little Things Can Make a Big Difference</a> <span class="au">(Malcolm Gladwell)</span></li>
+<li><a href="https://www.goodreads.com/book/show/76865" target="_blank" rel="noopener">Good to Great: Why Some Companies Make the Leap... and Others Don't</a> <span class="au">(Jim Collins)</span></li>
+<li><a href="https://www.goodreads.com/book/show/66855" target="_blank" rel="noopener">Revenge (aka The Stars’ Tennis Balls)</a> <span class="au">(Stephen Fry)</span></li>
+</ul>
+<p class="meta">Updated October 2026 from Goodreads. 249 books.</p><footer>© 2026 Tyler Sanchez · Denver · tylersanchez@gmail.com</footer></div></body></html>
