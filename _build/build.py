@@ -1,5 +1,5 @@
 import re, pathlib
-import os; S = pathlib.Path(os.environ.get("SITE_OUT", pathlib.Path(__file__).resolve().parent.parent)); S.mkdir(parents=True, exist_ok=True); (S/"writing").mkdir(exist_ok=True)
+import os; S = pathlib.Path(os.environ.get("SITE_OUT", pathlib.Path(__file__).resolve().parent.parent)); S.mkdir(parents=True, exist_ok=True); (S/"writing").mkdir(exist_ok=True); (S/"projects").mkdir(exist_ok=True)
 CSS = r"""
 /* Layout: one 640px column, left-aligned, nav as a single line of text. Quiet enough that the writing is the design. */
 :root{--bg:#F6F7F5;--fg:#15201E;--muted:#5F6E6A;--accent:#0F6E63;--ul:#8FC9BC;--rule:#D9DEDB;--soft:#ECF0EE;--you:#B8336A;
@@ -55,16 +55,16 @@ hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
 """
 FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap">'
 def nav(cur):
-    items=[("index.html","Home","home"),("writing/chat-box.html","Writing","writing"),("index.html#projects","AI Projects","projects"),("how-i-work.html","How I work with AI","how")]
+    items=[("index.html","Home","home"),("writing/chat-box.html","Writing","writing"),("projects.html","AI Projects","projects"),("how-i-work.html","How I work with AI","how")]
     out=[]
     for href,label,key in items:
         if key=="home": continue
-        if cur.startswith("writing/"): href = "../"+href if not href.startswith("http") else href
-        out.append(f'<a href="{href}"{" aria-current=\"page\"" if key==cur.split("/")[0].replace(".html","") or (key=="writing" and cur.startswith("writing/")) or (key=="how" and cur=="how-i-work.html") or (key=="years" and cur=="years-in-review.html") else ""}>{label}</a>')
-    home = "../index.html" if cur.startswith("writing/") else "index.html"
+        if cur.startswith("writing/") or cur.startswith("projects/"): href = "../"+href if not href.startswith("http") else href
+        out.append(f'<a href="{href}"{" aria-current=\"page\"" if key==cur.split("/")[0].replace(".html","") or (key=="writing" and cur.startswith("writing/")) or (key=="projects" and cur.startswith("projects/")) or (key=="how" and cur=="how-i-work.html") or (key=="years" and cur=="years-in-review.html") else ""}>{label}</a>')
+    home = "../index.html" if (cur.startswith("writing/") or cur.startswith("projects/")) else "index.html"
     return f'<nav class="top"><a class="me" href="{home}">Tyler Sanchez</a>{"".join(out)}</nav>'
 def page(cur, title, body, standalone=True):
-    icon = '../' if cur.startswith('writing/') else ''
+    icon = '../' if (cur.startswith('writing/') or cur.startswith('projects/')) else ''
     head = f'<title>{title}</title><meta name="claude:viewport-fit-sides" content="cover"><link rel="icon" type="image/png" sizes="32x32" href="{icon}favicon-32.png"><link rel="icon" type="image/png" sizes="512x512" href="{icon}icon-512.png"><link rel="apple-touch-icon" href="{icon}apple-touch-icon.png">{FONTS}<style>{CSS}</style>'
     if standalone:
         head = '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'+head+'</head><body>'
@@ -72,6 +72,31 @@ def page(cur, title, body, standalone=True):
     else:
         tail = ''
     return head + f'<div class="col">{nav(cur)}{body}<footer>© 2026 Tyler Sanchez · Denver · tylersanchez@gmail.com</footer></div>' + tail
+
+# ---------- Projects data ----------
+# status: live | building | on deck.  slug=None means no page yet.
+PROJECTS = [
+  dict(slug="command-center", name="Command Center", status="live",
+       blurb="One page for every open project in my life, with a strict attention hierarchy and a reply box that starts an agent run."),
+  dict(slug="job-radar", name="Job Radar", status="live",
+       blurb="Daily fetch of PM postings from ~20 companies, scored against a written rubric. Open source in November."),
+  dict(slug="concert-radar", name="Concert Radar", status="live",
+       blurb="Presale alerts for the artists I'd actually buy tickets for, code included."),
+  dict(slug="purchase-advisor", name="Purchase advisor", status="live",
+       blurb="Pressure-tests whether to buy at all, then finds the best real value. Never buys."),
+  dict(slug=None, name="What's for Dinner", status="building",
+       blurb="Easy weeknight dinners, planned around what's already in the fridge and what's on sale, with the grocery list done."),
+  dict(slug=None, name="HomeOS, Keep in Touch", status="on deck",
+       blurb="The same loop for the house and for the people I'm bad at keeping up with."),
+]
+def project_list(cur):
+    pre = "" if cur in ("index.html","projects.html") else "../"
+    out = ['<ul class="list">']
+    for p_ in PROJECTS:
+        title = f'<a href="{pre}projects/{p_["slug"]}.html">{p_["name"]}</a>' if p_["slug"] else f'<b>{p_["name"]}</b>'
+        out.append(f'  <li><span class="d">{p_["status"]}</span><span>{title}<small>{p_["blurb"]}</small></span></li>')
+    out.append('</ul>')
+    return "\n".join(out)
 
 # ---------- Home ----------
 home = """
@@ -96,13 +121,7 @@ home = """
 </ul>
 
 <h2 id="projects">AI Projects</h2>
-<ul class="list">
-  <li><span class="d">live</span><span><b>Command Center</b><small>One page for every open project in my life, with a strict attention hierarchy and a reply box that starts an agent run.</small></span></li>
-  <li><span class="d">live</span><span><b>Job Radar</b><small>Daily fetch of PM postings from ~20 companies, scored against a written rubric. Open source in November.</small></span></li>
-  <li><span class="d">live</span><span><b>Concert Radar</b><small>Presale alerts for the artists I'd actually buy tickets for, code included.</small></span></li>
-  <li><span class="d">live</span><span><b>Purchase advisor</b><small>Pressure-tests whether to buy at all, then finds the best real value. Never buys.</small></span></li>
-  <li><span class="d">next</span><span><b>HomeOS, Keep in Touch</b><small>The same loop for the house and for the people I'm bad at keeping up with.</small></span></li>
-</ul>
+"""+project_list("index.html")+"""
 
 <h2>Other stuff</h2>
 <ul class="plain other">
@@ -112,6 +131,38 @@ home = """
 </ul>
 """
 (S/"index.html").write_text(page("index.html","Tyler Sanchez",home,standalone=(os.environ.get("ARTIFACT_PREVIEW") is None)))
+
+# ---------- Projects index ----------
+projects_index = """
+<h1>AI Projects</h1>
+<p class="lede">The agents that run my life in the background, one page each: what it does, why it exists, how it's built, and what I learned. The rules they all run under are on <a href="how-i-work.html">How I work with AI</a>.</p>
+""" + project_list("projects.html")
+(S/"projects.html").write_text(page("projects.html","AI Projects",projects_index))
+
+def project_page(slug, name, status, lede, what, why, how_built, learned, status_text, fig=None, repo=None):
+    """Shared template: What · Why · How it's built · What I learned · Status."""
+    toc = '<nav class="toc" aria-label="On this page"><a href="#what">What it does</a><a href="#why">Why I built it</a><a href="#how">How it\'s built</a><a href="#learned">What I learned</a><a href="#status">Status</a></nav>'
+    repo_line = f'<p class="meta">The code, prompts and evals are on GitHub: <a href="{repo}" target="_blank" rel="noopener">{repo.replace("https://","")}</a>. The README has the implementation details this page leaves out.</p>' if repo else ''
+    body = f"""
+<p class="meta" style="margin-bottom:6px"><a href="../projects.html">AI Projects</a> · {status}</p>
+<h1>{name}</h1>
+<p class="lede">{lede}</p>
+{toc}
+<h2 id="what">What it does</h2>
+{what}
+<h2 id="why">Why I built it</h2>
+{why}
+<h2 id="how">How it's built</h2>
+{fig or ''}
+{how_built}
+{repo_line}
+<h2 id="learned">What I learned</h2>
+{learned}
+<h2 id="status">Status <span class="count">· October 2026</span></h2>
+{status_text}
+<p class="meta"><a href="../projects.html">← All projects</a></p>
+"""
+    (S/"projects"/f"{slug}.html").write_text(page(f"projects/{slug}.html", f"{name} · Tyler Sanchez", body))
 
 # ---------- Essay ----------
 essay = """
