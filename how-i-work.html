@@ -1,0 +1,333 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>How I work</title><meta name="claude:viewport-fit-sides" content="cover"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap"><style>
+/* Layout: one 640px column, left-aligned, nav as a single line of text. Quiet enough that the writing is the design. */
+:root{--bg:#F6F7F5;--fg:#15201E;--muted:#5F6E6A;--accent:#1F6F5F;--rule:#D9DEDB;--soft:#ECF0EE;--you:#B8336A;
+  --f-body:"Newsreader","Iowan Old Style",Georgia,serif;--f-ui:"IBM Plex Sans",system-ui,-apple-system,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:19px;line-height:1.55;padding-block:0 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.col{max-width:640px;margin:0 auto}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+nav.top{font-family:var(--f-ui);font-size:15px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;padding:22px 0 36px;border-bottom:1px solid var(--rule);margin-bottom:36px}
+nav.top .me{font-weight:600;color:var(--fg);margin-right:auto}
+nav.top a[aria-current]{color:var(--fg);border-bottom:2px solid var(--accent)}
+.preview{font-family:var(--f-ui);font-size:12.5px;color:var(--muted);background:var(--soft);border-radius:6px;padding:6px 10px;margin:0 0 20px;display:inline-block}
+h1{font-weight:500;font-size:36px;line-height:1.15;letter-spacing:-.01em;margin:0 0 14px;text-wrap:balance}
+h2{font-family:var(--f-ui);font-weight:600;font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:44px 0 12px}
+h3{font-weight:500;font-size:23px;margin:36px 0 8px;line-height:1.25;text-wrap:balance}
+p{margin:0 0 18px;max-width:66ch}
+.lede{font-size:22px;line-height:1.45;color:var(--fg)}
+.contact{font-family:var(--f-ui);font-size:15px;display:flex;flex-wrap:wrap;gap:6px 16px;margin:0 0 8px}
+.contact span{color:var(--muted)}
+ul.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+ul.list li{display:grid;grid-template-columns:72px 1fr;gap:14px;align-items:baseline}
+ul.list .d{font-family:var(--f-mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+ul.list small{display:block;color:var(--muted);font-size:16px}
+ul.plain{margin:0 0 18px;padding-left:22px}ul.plain li{margin-bottom:6px}
+ol{padding-left:22px}ol li{margin-bottom:10px}
+.meta{font-family:var(--f-ui);font-size:14px;color:var(--muted);margin:0 0 28px}
+article h3{margin-top:40px}
+blockquote{margin:0 0 18px;padding:0 0 0 18px;border-left:3px solid var(--rule);color:var(--fg)}
+blockquote ul{padding-left:20px}
+figure{margin:24px 0 8px;background:var(--soft);border:1px solid var(--rule);border-radius:10px;padding:14px;overflow-x:auto}
+figure svg{display:block;width:100%;height:auto;min-width:560px;color:var(--fg);font-family:var(--f-ui)}
+figcaption{margin-top:10px;font-family:var(--f-ui);font-size:14px;color:var(--muted)}
+svg text{font-size:12px;fill:currentColor}svg .t{font-size:13px;font-weight:600}svg .s,svg .lab{font-size:11px;fill:var(--muted)}
+svg .box{fill:var(--bg);stroke:currentColor;stroke-width:1.5}svg .store{fill:var(--bg);stroke:var(--accent);stroke-width:1.5}
+svg .agent{fill:var(--bg);stroke:var(--muted);stroke-width:1.5;stroke-dasharray:5 3}svg .you{fill:var(--bg);stroke:var(--you);stroke-width:2}
+svg .ext{fill:var(--soft);stroke:var(--rule);stroke-width:1}svg .edge{fill:none;stroke:currentColor;stroke-width:1.3}
+svg .edge.a{stroke:var(--muted)}svg .edge.y{stroke:var(--you);stroke-width:1.8}svg .edge.d{stroke-dasharray:4 3}svg .gate{fill:none;stroke:var(--you);stroke-width:1.2;stroke-dasharray:3 3}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-family:var(--f-ui);font-size:13px;color:var(--muted);margin:0 0 8px}
+.legend span{display:inline-flex;align-items:center;gap:6px}.legend i{display:inline-block;width:20px;height:11px;border-radius:3px;border:2px solid}
+.year{margin:0 0 36px}.year h3{margin-top:0}
+.pending{font-family:var(--f-ui);font-size:13px;color:var(--you);margin:0 0 8px}
+footer{margin-top:64px;padding-top:18px;border-top:1px solid var(--rule);font-family:var(--f-ui);font-size:13.5px;color:var(--muted)}
+hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
+@media (max-width:480px){body{font-size:18px}h1{font-size:30px}ul.list li{grid-template-columns:1fr}ul.list .d{order:2}}
+</style></head><body><div class="col"><nav class="top"><a class="me" href="index.html">Tyler Sanchez</a><a href="writing/chat-box.html">Writing</a><a href="index.html#projects">Projects</a><a href="how-i-work.html" aria-current="page">How I work</a><a href="reading.html">Reading</a><a href="years-in-review.html">Years in review</a></nav><span class="preview">Private preview · not yet at tylermsanchez.com · draft copy</span>
+<h1>How I work</h1>
+<p class="lede">An assistant that runs in the background is only as trustworthy as the rules it runs under. Here are the rules, then the system that enforces them, then the tools.</p>
+
+<h2 id="principles">Principles</h2>
+<ol>
+<li><b>It never sends anything to another person.</b> Drafts stay drafts until I send them.</li>
+<li><b>It never closes my decisions for me.</b> It recommends; I mark done, decline, approve.</li>
+<li><b>It never spends money.</b> It can comparison-shop and pressure-test a purchase. The card stays with me.</li>
+<li><b>It writes down what it learned.</b> Every project has a book: brief, decisions, open questions, session log. The delta between what it drafts and what I send is how it learns my voice.</li>
+<li><b>It brings me decisions, not updates.</b> Recommendation first, evidence underneath, prep already done.</li>
+</ol>
+
+<h2>The system</h2>
+<div class="legend">
+  <span><i style="border-color:var(--you)"></i> Me (decides, sends, buys)</span>
+  <span><i style="border-color:var(--muted);border-style:dashed"></i> Scheduled Claude run</span>
+  <span><i style="border-color:var(--accent)"></i> Notion, the system of record</span>
+  <span><i style="border-color:var(--rule);background:var(--soft)"></i> Outside service</span>
+</div>
+<h3>The loop</h3><p>Everything runs on one loop. Scheduled runs read the outside world and the Notion record, do the work an agent is allowed to do, and leave decisions in an attention queue. I read the queue from one page, answer in a line, and that answer starts the next run. Nothing leaves the system to another person unless I send it myself.</p><figure>
+<svg viewBox="0 0 900 400" role="img" aria-label="Tyler reads the Command Center page, which reads the Notion attention queue; his replies start a scheduled Claude run, which reads Gmail, Calendar, Drive, Spotify and GitHub and writes queue items, project books and radar tables back into Notion. Sending, buying and closing decisions stay with Tyler.">
+<defs>
+<marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
+<marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--agent)"/></marker>
+<marker id="ary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--you)"/></marker>
+</defs>
+<!-- Tyler -->
+<rect class="you" x="30" y="150" width="140" height="70" rx="8"/>
+<text class="t" x="100" y="180" text-anchor="middle">Tyler</text>
+<text class="s" x="100" y="198" text-anchor="middle">decides · sends · buys</text>
+<!-- Command Center page -->
+<rect class="box" x="260" y="40" width="200" height="64" rx="8"/>
+<text class="t" x="360" y="66" text-anchor="middle">Command Center page</text>
+<text class="s" x="360" y="84" text-anchor="middle">one screen, fixed places, 5-second read</text>
+<!-- Notion -->
+<rect class="store" x="260" y="190" width="200" height="130" rx="8"/>
+<text class="t" x="360" y="214" text-anchor="middle">Notion (system of record)</text>
+<text x="280" y="240">Attention Queue</text>
+<text class="s" x="280" y="256">Needs Tyler · Agent working · Blocked</text>
+<text x="280" y="280">Project Books (one per project)</text>
+<text x="280" y="304">Radar tables (jobs, concerts, shipping)</text>
+<!-- Claude runs -->
+<rect class="agent" x="580" y="130" width="220" height="90" rx="8"/>
+<text class="t" x="690" y="156" text-anchor="middle">Scheduled Claude runs</text>
+<text class="s" x="690" y="174" text-anchor="middle">7:53am · 3:53pm · daily radars</text>
+<text class="s" x="690" y="192" text-anchor="middle">plus any run a reply starts</text>
+<text class="s" x="690" y="208" text-anchor="middle">drafts, researches, files, recommends</text>
+<!-- outside services -->
+<g>
+<rect class="ext" x="560" y="330" width="80" height="34" rx="6"/><text x="600" y="351" text-anchor="middle">Gmail</text>
+<rect class="ext" x="646" y="330" width="80" height="34" rx="6"/><text x="686" y="351" text-anchor="middle">Calendar</text>
+<rect class="ext" x="732" y="330" width="80" height="34" rx="6"/><text x="772" y="351" text-anchor="middle">Drive</text>
+<rect class="ext" x="474" y="330" width="80" height="34" rx="6"/><text x="514" y="351" text-anchor="middle">Spotify</text>
+<rect class="ext" x="818" y="330" width="70" height="34" rx="6"/><text x="853" y="351" text-anchor="middle">GitHub</text>
+</g>
+<!-- edges -->
+<path class="edge y" d="M170 170 L260 80" marker-end="url(#ary)"/>
+<text class="lab" x="150" y="118">reads, replies in a line</text>
+<path class="edge" d="M330 104 L330 190" marker-end="url(#ar)" marker-start="url(#ar)"/>
+<text class="lab" x="338" y="140">queue every 15 min</text>
+<text class="lab" x="338" y="154">mark done, comment</text>
+<path class="edge y" d="M460 72 L690 72 L690 130" marker-end="url(#ary)"/>
+<text class="lab" x="480" y="64">"Send to Claude" starts a run now</text>
+<path class="edge a" d="M580 190 L460 230" marker-end="url(#ara)"/>
+<text class="lab" x="470" y="200">writes queue items, books, tables</text>
+<path class="edge a d" d="M460 280 L580 215" marker-end="url(#ara)"/>
+<text class="lab" x="478" y="270">reads the book first</text>
+<path class="edge a d" d="M690 330 L690 220" marker-end="url(#ara)"/>
+<text class="lab" x="698" y="290">read only</text>
+<path class="edge a d" d="M620 330 L640 220"/>
+<path class="edge a d" d="M760 330 L740 220"/>
+<path class="edge a d" d="M540 330 L600 220"/>
+<path class="edge a d" d="M840 330 L780 220"/>
+<!-- gate -->
+<rect class="gate" x="18" y="236" width="164" height="60" rx="8"/>
+<text class="s" x="100" y="258" text-anchor="middle" style="fill:var(--you)">Human gate</text>
+<text class="s" x="100" y="274" text-anchor="middle">drafts never sent · nothing bought</text>
+<text class="s" x="100" y="288" text-anchor="middle">decisions never closed for me</text>
+</svg>
+<figcaption>One loop: runs read outside services and the Notion record, write back into Notion, and surface decisions on one page. Replies from that page start the next run.</figcaption>
+</figure><h3>Project Books: how it remembers</h3><p>Every project, from a renovation to a job search to a dinner planner, gets one Notion page with the same four parts. A run reads the book before it does anything and appends a session log line when it is done. That is the whole memory model: no hidden state, and I can read the book instead of the transcript.</p><figure>
+<svg viewBox="0 0 900 330" role="img" aria-label="A Project Book page holds a brief, a decision log, open questions and a session log, with subpages for prep docs and story banks. A scheduled run reads the book at the start, works, and appends to the decision log and session log at the end; Tyler approves changes to the brief and closes open questions.">
+<defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
+<marker id="ara2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--agent)"/></marker>
+<marker id="ary2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--you)"/></marker></defs>
+<!-- Book -->
+<rect class="store" x="300" y="30" width="300" height="270" rx="10"/>
+<text class="t" x="450" y="56" text-anchor="middle">Project Book  ·  one page per project</text>
+<rect class="box" x="320" y="72" width="260" height="34" rx="6"/><text x="332" y="94">1. Brief</text><text class="s" x="568" y="94" text-anchor="end">goal, constraints, who</text>
+<rect class="box" x="320" y="114" width="260" height="34" rx="6"/><text x="332" y="136">2. Decision log</text><text class="s" x="568" y="136" text-anchor="end">dated, with the why</text>
+<rect class="box" x="320" y="156" width="260" height="34" rx="6"/><text x="332" y="178">3. Open questions</text><text class="s" x="568" y="178" text-anchor="end">numbered, owner named</text>
+<rect class="box" x="320" y="198" width="260" height="34" rx="6"/><text x="332" y="220">4. Session log</text><text class="s" x="568" y="220" text-anchor="end">one line per run</text>
+<text class="s" x="332" y="258">Subpages: prep docs, story bank, call notes,</text>
+<text class="s" x="332" y="274">drafts, data tables (linked, not pasted)</text>
+<!-- Run -->
+<rect class="agent" x="40" y="110" width="190" height="80" rx="8"/>
+<text class="t" x="135" y="140" text-anchor="middle">Scheduled run</text>
+<text class="s" x="135" y="158" text-anchor="middle">start: read 1-4 and the queue</text>
+<text class="s" x="135" y="174" text-anchor="middle">end: append to 2 and 4</text>
+<path class="edge a d" d="M300 100 L230 130" marker-end="url(#ara2)"/>
+<text class="lab" x="236" y="96">reads first</text>
+<path class="edge a" d="M230 170 L300 212" marker-end="url(#ara2)"/>
+<text class="lab" x="210" y="200">appends last</text>
+<!-- Tyler -->
+<rect class="you" x="680" y="110" width="180" height="80" rx="8"/>
+<text class="t" x="770" y="140" text-anchor="middle">Tyler</text>
+<text class="s" x="770" y="158" text-anchor="middle">approves changes to the brief</text>
+<text class="s" x="770" y="174" text-anchor="middle">answers open questions</text>
+<path class="edge y" d="M680 130 L600 90" marker-end="url(#ary2)"/>
+<path class="edge y" d="M680 170 L600 174" marker-end="url(#ary2)"/>
+<text class="lab" x="612" y="124">gated edits</text>
+<!-- Command Center -->
+<rect class="box" x="40" y="230" width="190" height="56" rx="8"/>
+<text class="t" x="135" y="253" text-anchor="middle">Command Center</text>
+<text class="s" x="135" y="271" text-anchor="middle">queue items link to their book</text>
+<path class="edge d" d="M230 258 L300 258" marker-end="url(#ar2)"/>
+</svg>
+<figcaption>Memory is a page, not a transcript: a run reads the book before it acts and appends to it when it finishes. Changes to the brief and answers to open questions are mine.</figcaption>
+</figure><h3>Job Radar: fetch, score against a written point of view, bring only the decisions</h3><p>Two jobs a day. GitHub Actions fetches every PM posting from about twenty company boards and commits the day's new ones. A Claude run then scores each posting against a rubric I wrote about what I actually want (latitude to make bets first, level second, problem space third), writes the ones worth a look to a Notion table with a one-line "why", and sends only 4s and 5s to the attention queue. My Interested / Not for me calls and notes feed the next revision of the rubric.</p><figure>
+<svg viewBox="0 0 900 360" role="img" aria-label="At 5:17am a GitHub Actions job fetches postings from Greenhouse, Lever, Ashby, Workday, Eightfold, Rippling and Shopify boards and commits a JSON file. At 6:52am a Claude run reads the rubric and Tyler's past calls, scores each posting one to five, writes scores of three and up to the Notion Job Radar table and scores of four and five to the attention queue, which the Command Center tile shows. Tyler marks Interested or Not for me, and those calls revise the rubric.">
+<defs><marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
+<marker id="ara3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--agent)"/></marker>
+<marker id="ary3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--you)"/></marker></defs>
+<!-- boards -->
+<rect class="ext" x="20" y="40" width="150" height="110" rx="8"/>
+<text class="t" x="95" y="62" text-anchor="middle">Company boards</text>
+<text class="s" x="95" y="80" text-anchor="middle">Greenhouse · Lever · Ashby</text>
+<text class="s" x="95" y="96" text-anchor="middle">Workday · Eightfold</text>
+<text class="s" x="95" y="112" text-anchor="middle">Rippling · Shopify</text>
+<text class="s" x="95" y="134" text-anchor="middle">~20 companies, one adapter each</text>
+<!-- GH Actions -->
+<rect class="box" x="230" y="50" width="170" height="90" rx="8"/>
+<text class="t" x="315" y="74" text-anchor="middle">GitHub Actions</text>
+<text class="s" x="315" y="92" text-anchor="middle">5:17am  fetch_jobs.py</text>
+<text class="s" x="315" y="108" text-anchor="middle">PM title regex, exclusions</text>
+<text class="s" x="315" y="124" text-anchor="middle">commits data/new/&lt;date&gt;.json</text>
+<path class="edge" d="M170 95 L230 95" marker-end="url(#ar3)"/>
+<text class="lab" x="176" y="86">fetch</text>
+<!-- scoring run -->
+<rect class="agent" x="460" y="40" width="200" height="110" rx="8"/>
+<text class="t" x="560" y="64" text-anchor="middle">Claude scoring run</text>
+<text class="s" x="560" y="82" text-anchor="middle">6:52am, reads RUBRIC.md</text>
+<text class="s" x="560" y="98" text-anchor="middle">latitude &gt; level &gt; problem space</text>
+<text class="s" x="560" y="114" text-anchor="middle">score 1-5 + one-line why</text>
+<text class="s" x="560" y="130" text-anchor="middle">level signal, workplace, pay band</text>
+<path class="edge a d" d="M400 95 L460 95" marker-end="url(#ara3)"/>
+<text class="lab" x="404" y="86">reads</text>
+<!-- rubric -->
+<rect class="box" x="480" y="190" width="160" height="50" rx="8"/>
+<text class="t" x="560" y="211" text-anchor="middle">RUBRIC.md</text>
+<text class="s" x="560" y="228" text-anchor="middle">a written point of view</text>
+<path class="edge d" d="M560 190 L560 150" marker-end="url(#ar3)"/>
+<!-- Notion table -->
+<rect class="store" x="720" y="40" width="160" height="60" rx="8"/>
+<text class="t" x="800" y="63" text-anchor="middle">Job Radar table</text>
+<text class="s" x="800" y="81" text-anchor="middle">score ≥ 3, with the why</text>
+<path class="edge a" d="M660 70 L720 70" marker-end="url(#ara3)"/>
+<!-- queue -->
+<rect class="store" x="720" y="120" width="160" height="60" rx="8"/>
+<text class="t" x="800" y="143" text-anchor="middle">Attention Queue</text>
+<text class="s" x="800" y="161" text-anchor="middle">only 4s and 5s</text>
+<path class="edge a" d="M660 120 L720 150" marker-end="url(#ara3)"/>
+<!-- Command Center tile -->
+<rect class="box" x="720" y="200" width="160" height="50" rx="8"/>
+<text class="t" x="800" y="221" text-anchor="middle">Command Center tile</text>
+<text class="s" x="800" y="238" text-anchor="middle">top 3, counts, newest</text>
+<path class="edge" d="M800 180 L800 200" marker-end="url(#ar3)"/>
+<!-- Tyler -->
+<rect class="you" x="720" y="280" width="160" height="60" rx="8"/>
+<text class="t" x="800" y="303" text-anchor="middle">Tyler</text>
+<text class="s" x="800" y="321" text-anchor="middle">Interested · Not for me · notes</text>
+<path class="edge y" d="M800 250 L800 280" marker-end="url(#ary3)"/>
+<!-- feedback -->
+<path class="edge y d" d="M720 320 L560 320 L560 240" marker-end="url(#ary3)"/>
+<text class="lab" x="580" y="312">his calls and notes revise the rubric</text>
+<text class="lab" x="20" y="200">Never automated: applying, replying to recruiters, marking a role Not for me.</text>
+</svg>
+<figcaption>Fetch on a schedule, score against a written rubric, surface only the top scores. The rubric, not the model, is where the quality comes from, and my calls are what revise it.</figcaption>
+</figure><h3>Concert presales: taste, listings, and the presale email</h3><p>The point is to know about a show during the presale, before general on-sale and the resale markup. Three inputs: what I actually listen to on Spotify, who is coming to Denver, and the venue and promoter newsletters I route straight to the archive in Gmail. A run matches them, keeps a tiered list of artists, and writes the presale window and code to a table. Tier 1 artists show on the Command Center with the code; Tier 2 is a weekly digest for discovery. I buy.</p><figure>
+<svg viewBox="0 0 900 340" role="img" aria-label="Spotify listening history, Bandsintown Denver listings and presale emails archived in Gmail feed a Concert Radar run that keeps a tiered artist list and writes shows with presale windows and codes to a Notion table. Tier 1 shows appear on the Command Center tile with the code; Tier 2 goes to a weekly digest. Tyler buys the tickets.">
+<defs><marker id="ar4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
+<marker id="ara4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--agent)"/></marker>
+<marker id="ary4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--you)"/></marker></defs>
+<!-- inputs -->
+<rect class="ext" x="20" y="30" width="190" height="60" rx="8"/>
+<text class="t" x="115" y="53" text-anchor="middle">Spotify</text>
+<text class="s" x="115" y="71" text-anchor="middle">top artists, library, radio seeds</text>
+<rect class="ext" x="20" y="120" width="190" height="60" rx="8"/>
+<text class="t" x="115" y="143" text-anchor="middle">Bandsintown</text>
+<text class="s" x="115" y="161" text-anchor="middle">who is coming to Denver</text>
+<rect class="ext" x="20" y="210" width="190" height="70" rx="8"/>
+<text class="t" x="115" y="233" text-anchor="middle">Gmail</text>
+<text class="s" x="115" y="251" text-anchor="middle">venue + promoter newsletters</text>
+<text class="s" x="115" y="267" text-anchor="middle">filtered to archive, never the inbox</text>
+<!-- run -->
+<rect class="agent" x="290" y="90" width="220" height="130" rx="8"/>
+<text class="t" x="400" y="114" text-anchor="middle">Concert Radar run</text>
+<text class="s" x="400" y="134" text-anchor="middle">match artists to listings</text>
+<text class="s" x="400" y="150" text-anchor="middle">find the presale window + code</text>
+<text class="s" x="400" y="166" text-anchor="middle">in the email</text>
+<text class="s" x="400" y="186" text-anchor="middle">Tier 1 = always alert</text>
+<text class="s" x="400" y="202" text-anchor="middle">Tier 2 = weekly discovery digest</text>
+<path class="edge a d" d="M210 60 L290 120" marker-end="url(#ara4)"/>
+<text class="lab" x="222" y="84">taste</text>
+<path class="edge a d" d="M210 150 L290 155" marker-end="url(#ara4)"/>
+<text class="lab" x="222" y="146">listings</text>
+<path class="edge a d" d="M210 240 L290 190" marker-end="url(#ara4)"/>
+<text class="lab" x="218" y="226">presale emails</text>
+<!-- table -->
+<rect class="store" x="590" y="40" width="190" height="70" rx="8"/>
+<text class="t" x="685" y="63" text-anchor="middle">Concert Radar table</text>
+<text class="s" x="685" y="81" text-anchor="middle">show, venue, presale start/end,</text>
+<text class="s" x="685" y="97" text-anchor="middle">general on-sale, code, tier</text>
+<path class="edge a" d="M510 120 L590 80" marker-end="url(#ara4)"/>
+<text class="lab" x="520" y="92">writes, retires when over</text>
+<!-- tile -->
+<rect class="box" x="590" y="150" width="190" height="60" rx="8"/>
+<text class="t" x="685" y="173" text-anchor="middle">Command Center tile</text>
+<text class="s" x="685" y="191" text-anchor="middle">Tier 1 only, code right on the row</text>
+<path class="edge" d="M685 110 L685 150" marker-end="url(#ar4)"/>
+<!-- digest -->
+<rect class="box" x="590" y="240" width="190" height="50" rx="8"/>
+<text class="t" x="685" y="261" text-anchor="middle">Weekly digest (Tier 2)</text>
+<text class="s" x="685" y="278" text-anchor="middle">artists I might like, in the queue</text>
+<path class="edge a" d="M510 190 L590 262" marker-end="url(#ara4)"/>
+<!-- Tyler -->
+<rect class="you" x="800" y="130" width="90" height="100" rx="8"/>
+<text class="t" x="845" y="170" text-anchor="middle">Tyler</text>
+<text class="s" x="845" y="188" text-anchor="middle">buys</text>
+<path class="edge y" d="M780 180 L800 180" marker-end="url(#ary4)"/>
+<text class="lab" x="20" y="320">The run never buys and never registers for a presale; it tells me when the window opens and what to type.</text>
+</svg>
+<figcaption>Three inputs, one match, one table. The tile shows only the artists I would always want to see, with the presale code, so the decision is a tap.</figcaption>
+</figure><h3>The learning loop: the delta between the draft and what I sent</h3><p>The agent never sends mail. It writes a draft in my voice and leaves it in Gmail; I edit and send. On the next run it compares what it drafted to what actually went out, and folds the difference into a writing-style file that every future draft reads. The same shape runs everywhere: Job Radar notes revise the rubric, project books carry decisions forward, and the Command Center queue records which recommendations I took.</p><figure>
+<svg viewBox="0 0 900 300" role="img" aria-label="A run drafts an email from the writing-style profile and saves it as a Gmail draft. Tyler edits and sends. The next run compares the sent message to the draft and updates the writing-style profile, which the next draft reads. The same correction loop runs from Tyler's Job Radar calls into the rubric and from his queue answers into project books.">
+<defs><marker id="ar5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
+<marker id="ara5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--agent)"/></marker>
+<marker id="ary5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--you)"/></marker></defs>
+<!-- style profile -->
+<rect class="box" x="40" y="40" width="200" height="70" rx="8"/>
+<text class="t" x="140" y="64" text-anchor="middle">Writing-style profile</text>
+<text class="s" x="140" y="82" text-anchor="middle">openings, tone markers, sign-offs,</text>
+<text class="s" x="140" y="98" text-anchor="middle">words to avoid, who to cc</text>
+<!-- run drafts -->
+<rect class="agent" x="330" y="40" width="190" height="70" rx="8"/>
+<text class="t" x="425" y="64" text-anchor="middle">Run drafts the email</text>
+<text class="s" x="425" y="82" text-anchor="middle">reads the profile, writes a</text>
+<text class="s" x="425" y="98" text-anchor="middle">Gmail draft, nothing more</text>
+<path class="edge a d" d="M240 75 L330 75" marker-end="url(#ara5)"/>
+<text class="lab" x="256" y="66">reads</text>
+<!-- gmail draft -->
+<rect class="ext" x="610" y="40" width="130" height="70" rx="8"/>
+<text class="t" x="675" y="64" text-anchor="middle">Gmail</text>
+<text class="s" x="675" y="82" text-anchor="middle">draft, unsent</text>
+<path class="edge a" d="M520 75 L610 75" marker-end="url(#ara5)"/>
+<text class="lab" x="540" y="66">saves</text>
+<!-- Tyler -->
+<rect class="you" x="610" y="170" width="130" height="70" rx="8"/>
+<text class="t" x="675" y="194" text-anchor="middle">Tyler</text>
+<text class="s" x="675" y="212" text-anchor="middle">edits, then sends</text>
+<text class="s" x="675" y="228" text-anchor="middle">from his own account</text>
+<path class="edge y" d="M675 110 L675 170" marker-end="url(#ary5)"/>
+<!-- diff -->
+<rect class="agent" x="330" y="170" width="190" height="70" rx="8"/>
+<text class="t" x="425" y="194" text-anchor="middle">Next run compares</text>
+<text class="s" x="425" y="212" text-anchor="middle">sent message vs. the draft</text>
+<text class="s" x="425" y="228" text-anchor="middle">what did he change, and why</text>
+<path class="edge a d" d="M610 205 L520 205" marker-end="url(#ara5)"/>
+<text class="lab" x="536" y="196">reads sent mail</text>
+<path class="edge a" d="M330 205 L140 205 L140 110" marker-end="url(#ara5)"/>
+<text class="lab" x="150" y="196">proposes an update; Tyler approves</text>
+<!-- same loop elsewhere -->
+<text class="lab" x="40" y="272">Same loop elsewhere:  Job Radar calls → rubric   ·   queue answers → project book decision log   ·   purchase questions → purchase advisor</text>
+</svg>
+<figcaption>The correction loop: draft, human edit, diff, profile update. The assistant gets better at sounding like me without ever sending as me.</figcaption>
+</figure>
+<h2>Tools</h2>
+<ul class="plain">
+<li><b>Claude</b> (Claude Code and its scheduled tasks) does the reading, drafting, scoring and filing. Every run starts from a written brief and ends with a log line.</li>
+<li><b>Notion</b> is the system of record: the attention queue, one Project Book per project, and the radar tables. If it isn't in Notion, the agent doesn't know it.</li>
+<li><b>GitHub Actions</b> runs the deterministic parts on a schedule, like the daily job fetch, and keeps the data as plain JSON in a repo.</li>
+<li><b>Gmail, Google Calendar and Drive</b> are read through connectors. Drafts are written to Gmail; nothing is sent from there by an agent.</li>
+<li><b>Spotify</b> supplies taste for the concert radar; venue newsletters supply the presale windows.</li>
+<li><b>A single HTML page</b> is the Command Center: no framework, reads Notion live, and has been changed about a hundred times.</li>
+</ul>
+<footer>© 2026 Tyler Sanchez · Denver · tylersanchez@gmail.com</footer></div></body></html>
