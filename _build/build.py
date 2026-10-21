@@ -51,11 +51,11 @@ svg .edge.a{stroke:var(--muted)}svg .edge.y{stroke:var(--you);stroke-width:1.8}s
 footer{margin-top:64px;padding-top:18px;border-top:1px solid var(--rule);font-family:var(--f-ui);font-size:13.5px;color:var(--muted)}
 dialog.lb{border:0;padding:16px;background:var(--bg);color:var(--fg);border-radius:12px;max-width:min(96vw,1400px);width:auto;cursor:zoom-out}dialog.lb::backdrop{background:rgba(0,0,0,.55)}dialog.lb svg{display:block;width:min(92vw,1360px);height:auto;color:var(--fg);font-family:var(--f-ui)}dialog.lb p{font-family:var(--f-ui);font-size:14px;color:var(--muted);margin:10px 0 0}
 hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
-@media (max-width:480px){body{font-size:19px}h1{font-size:30px}.sub{font-size:23px}ul.list li{grid-template-columns:1fr}ul.list .d{order:2}}
+@media (max-width:480px){nav.top{flex-wrap:nowrap;white-space:nowrap;gap:0 12px;font-size:15px}nav.top .me{margin-right:auto}body{font-size:19px}h1{font-size:30px}.sub{font-size:23px}ul.list li{grid-template-columns:1fr}ul.list .d{order:2}}
 """
 FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap">'
 def nav(cur):
-    items=[("index.html","Home","home"),("writing/chat-box.html","Writing","writing"),("projects.html","AI Projects","projects"),("how-i-work.html","How I work with AI","how")]
+    items=[("index.html","Home","home"),("writing/chat-box.html","Writing","writing"),("projects.html","Projects","projects"),("how-i-work.html","AI System","how")]
     out=[]
     for href,label,key in items:
         if key=="home": continue
