@@ -8,23 +8,23 @@
 body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:19px;line-height:1.55;padding-block:0 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .col{max-width:640px;margin:0 auto}
 a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
-nav.top{font-family:var(--f-ui);font-size:15px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;padding:22px 0 36px;border-bottom:1px solid var(--rule);margin-bottom:36px}
+nav.top{font-family:var(--f-ui);font-size:15px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--rule);margin-bottom:36px}
 nav.top .me{font-weight:600;color:var(--fg);margin-right:auto}
 nav.top a[aria-current]{color:var(--fg);border-bottom:2px solid var(--accent)}
-.preview{font-family:var(--f-ui);font-size:12.5px;color:var(--muted);background:var(--soft);border-radius:6px;padding:6px 10px;margin:0 0 20px;display:inline-block}
-.me-photo{display:block;width:112px;height:112px;border-radius:12px;object-fit:cover;margin:0 0 20px}
+.me-photo{display:block;width:150px;height:150px;border-radius:12px;object-fit:cover;margin:0 0 20px}
 h1{font-weight:500;font-size:36px;line-height:1.15;letter-spacing:-.01em;margin:0 0 14px;text-wrap:balance}
 h2{font-family:var(--f-ui);font-weight:600;font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:44px 0 12px}
 h3{font-weight:500;font-size:23px;margin:36px 0 8px;line-height:1.25;text-wrap:balance}
 p{margin:0 0 18px;max-width:66ch}
 .lede{font-size:22px;line-height:1.45;color:var(--fg)}
 .contact{font-family:var(--f-ui);font-size:15px;display:flex;flex-wrap:wrap;gap:6px 16px;margin:0 0 8px}
-.contact span{color:var(--muted)}
+.contact a{display:inline-flex;align-items:center;gap:6px}.contact .ic{width:16px;height:16px;flex:none}
 ul.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
 ul.list li{display:grid;grid-template-columns:72px 1fr;gap:14px;align-items:baseline}
 ul.list .d{font-family:var(--f-mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
 ul.list small{display:block;color:var(--muted);font-size:16px}
 ul.plain{margin:0 0 18px;padding-left:22px}ul.plain li{margin-bottom:6px}
+ul.other a{font-weight:600}
 ol{padding-left:22px}ol li{margin-bottom:10px}
 .meta{font-family:var(--f-ui);font-size:14px;color:var(--muted);margin:0 0 28px}
 article h3{margin-top:40px}
@@ -45,7 +45,7 @@ svg .edge.a{stroke:var(--muted)}svg .edge.y{stroke:var(--you);stroke-width:1.8}s
 footer{margin-top:64px;padding-top:18px;border-top:1px solid var(--rule);font-family:var(--f-ui);font-size:13.5px;color:var(--muted)}
 hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
 @media (max-width:480px){body{font-size:18px}h1{font-size:30px}ul.list li{grid-template-columns:1fr}ul.list .d{order:2}}
-</style></head><body><div class="col"><nav class="top"><a class="me" href="index.html">Tyler Sanchez</a><a href="writing/chat-box.html">Writing</a><a href="index.html#projects">Projects</a><a href="how-i-work.html">How I work</a><a href="reading.html">Reading</a><a href="years-in-review.html" aria-current="page">Years in review</a></nav><span class="preview">Private preview · not yet at tylermsanchez.com · draft copy</span>
+</style></head><body><div class="col"><nav class="top"><a class="me" href="index.html">Tyler Sanchez</a><a href="writing/chat-box.html">Writing</a><a href="index.html#projects">Projects</a><a href="how-i-work.html">How I work</a></nav>
 <h1>Years in review</h1>
 <p class="lede">Every December I write a long letter to friends and family with the same three sections: what went well, what could have gone better, and what I'm focusing on next year. The full letters stay with the people they're written for. These are short public excerpts.</p>
 <p class="pending">Pending your approval: these are Claude's default picks (2023-B, 2024-A, 2025-A). Swap any of them from the candidates page in Notion.</p>
