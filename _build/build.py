@@ -2,14 +2,15 @@ import re, pathlib
 import os; S = pathlib.Path(os.environ.get("SITE_OUT", pathlib.Path(__file__).resolve().parent.parent)); S.mkdir(parents=True, exist_ok=True); (S/"writing").mkdir(exist_ok=True)
 CSS = r"""
 /* Layout: one 640px column, left-aligned, nav as a single line of text. Quiet enough that the writing is the design. */
-:root{--bg:#F6F7F5;--fg:#15201E;--muted:#5F6E6A;--accent:#1F6F5F;--rule:#D9DEDB;--soft:#ECF0EE;--you:#B8336A;
+:root{--bg:#F6F7F5;--fg:#15201E;--muted:#5F6E6A;--accent:#0F6E63;--ul:#8FC9BC;--rule:#D9DEDB;--soft:#ECF0EE;--you:#B8336A;
   --f-body:"Newsreader","Iowan Old Style",Georgia,serif;--f-ui:"IBM Plex Sans",system-ui,-apple-system,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--ul:#2F6B5E;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--ul:#2F6B5E;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;color-scheme:dark}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:20px;line-height:1.55;padding-block:0 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .col{max-width:640px;margin:0 auto}
-a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+a{color:var(--accent);text-decoration:underline;text-decoration-color:var(--ul);text-decoration-thickness:1.5px;text-underline-offset:3px}a:hover{text-decoration-color:var(--accent)}
+nav.top a,.contact a,.toc a,ul.list a,.books a{text-decoration:none}nav.top a:hover,.contact a:hover,.toc a:hover,ul.list a:hover,.books a:hover{text-decoration:underline;text-decoration-color:var(--accent)}
 nav.top{font-family:var(--f-ui);font-size:16px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--rule);margin-bottom:36px}
 nav.top .me{font-weight:600;color:var(--fg);margin-right:auto}
 nav.top a[aria-current]{color:var(--fg);border-bottom:2px solid var(--accent)}
@@ -18,6 +19,7 @@ h1{font-weight:500;font-size:36px;line-height:1.15;letter-spacing:-.01em;margin:
 h2{font-family:var(--f-ui);font-weight:600;font-size:16px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:44px 0 12px}
 h3{font-weight:500;font-size:23px;margin:36px 0 8px;line-height:1.25;text-wrap:balance}
 p{margin:0 0 18px;max-width:66ch}
+.sub{font-size:28px;line-height:1.3;font-weight:400;letter-spacing:-.005em;margin:0 0 18px;text-wrap:balance}
 .lede{font-size:22px;line-height:1.45;color:var(--fg)}
 .contact{font-family:var(--f-ui);font-size:15px;display:flex;flex-wrap:wrap;gap:6px 16px;margin:0 0 8px}
 .contact a{display:inline-flex;align-items:center;gap:6px}.contact .ic{width:16px;height:16px;flex:none}
@@ -34,7 +36,7 @@ ol{padding-left:22px}ol li{margin-bottom:10px}
 article h3{margin-top:40px}
 blockquote{margin:0 0 18px;padding:0 0 0 18px;border-left:3px solid var(--rule);color:var(--fg)}
 blockquote ul{padding-left:20px}
-figure{margin:24px 0 8px;background:var(--soft);border:1px solid var(--rule);border-radius:10px;padding:14px;overflow-x:auto}
+figure{cursor:zoom-in;margin:24px 0 8px;background:var(--soft);border:1px solid var(--rule);border-radius:10px;padding:14px;overflow-x:auto}
 figure svg{display:block;width:100%;height:auto;min-width:560px;color:var(--fg);font-family:var(--f-ui)}
 figcaption{margin-top:10px;font-family:var(--f-ui);font-size:14px;color:var(--muted)}
 svg text{font-size:12px;fill:currentColor}svg .t{font-size:13px;font-weight:600}svg .s,svg .lab{font-size:11px;fill:var(--muted)}
@@ -47,8 +49,9 @@ svg .edge.a{stroke:var(--muted)}svg .edge.y{stroke:var(--you);stroke-width:1.8}s
 .year{margin:0 0 36px}.year h3{margin-top:0}
 .pending{font-family:var(--f-ui);font-size:13px;color:var(--you);margin:0 0 8px}
 footer{margin-top:64px;padding-top:18px;border-top:1px solid var(--rule);font-family:var(--f-ui);font-size:13.5px;color:var(--muted)}
+dialog.lb{border:0;padding:16px;background:var(--bg);color:var(--fg);border-radius:12px;max-width:min(96vw,1400px);width:auto;cursor:zoom-out}dialog.lb::backdrop{background:rgba(0,0,0,.55)}dialog.lb svg{display:block;width:min(92vw,1360px);height:auto;color:var(--fg);font-family:var(--f-ui)}dialog.lb p{font-family:var(--f-ui);font-size:14px;color:var(--muted);margin:10px 0 0}
 hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
-@media (max-width:480px){body{font-size:19px}h1{font-size:30px}ul.list li{grid-template-columns:1fr}ul.list .d{order:2}}
+@media (max-width:480px){body{font-size:19px}h1{font-size:30px}.sub{font-size:23px}ul.list li{grid-template-columns:1fr}ul.list .d{order:2}}
 """
 FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap">'
 def nav(cur):
@@ -73,7 +76,8 @@ def page(cur, title, body, standalone=True):
 # ---------- Home ----------
 home = """
 <img class="me-photo" src="tyler.jpg" alt="Tyler Sanchez" width="150" height="150">
-<h1>👋 Hi, I'm Tyler Sanchez, a Product Manager in Denver. I'm building an assistant that runs my life in the background and only interrupts me for decisions.</h1>
+<h1>👋 Hi, I'm Tyler, a Product Manager in Denver.</h1>
+<p class="sub">I'm building an assistant that runs my life in the background and only interrupts me for decisions.</p>
 <div class="contact"><a href="mailto:tylersanchez@gmail.com"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M3.5 5.5h17a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1h-17a1 1 0 0 1-1-1v-11a1 1 0 0 1 1-1z"/><path fill="none" stroke="currentColor" stroke-width="1.8" d="m3 7 9 6.5L21 7"/></svg>Email</a><a href="https://www.linkedin.com/in/tylersanchez" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="#0A66C2" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a><a href="https://github.com/chez-san-cmd" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="var(--fg)" d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3z"/></svg>GitHub</a></div>
 
 <h2>About</h2>
@@ -160,7 +164,7 @@ figs = re.findall(r"<h2>\d\. (.*?)</h2>\s*<p>(.*?)</p>\s*(<figure>.*?</figure>)"
 how = """
 <h1>How I work with AI</h1>
 <p class="lede">An assistant that runs in the background is only as trustworthy as the rules it runs under. Here are the rules, then the system that enforces them, then the tools.</p>
-<nav class="toc" aria-label="On this page"><a href="#principles">Principles</a><a href="#system">The system</a><a href="#tools">Tools</a></nav>
+<nav class="toc" aria-label="On this page"><a href="#principles">Principles</a><a href="#system">The System</a><a href="#tools">Tools</a></nav>
 
 <h2 id="principles">Principles</h2>
 <ol>
@@ -192,6 +196,14 @@ how += """
 <li><b>A single HTML page</b> is the Command Center: no framework, reads Notion live, and has been changed about a hundred times.</li>
 </ul>
 """
+how += """
+<dialog class="lb" id="lb"><div id="lb-body"></div><p>Click anywhere or press Esc to close.</p></dialog>
+<script>
+(function(){var d=document.getElementById('lb'),b=document.getElementById('lb-body');
+document.querySelectorAll('figure').forEach(function(f){f.setAttribute('title','Click to enlarge');f.addEventListener('click',function(){var s=f.querySelector('svg');if(!s)return;b.innerHTML='';b.appendChild(s.cloneNode(true));d.showModal();});});
+d.addEventListener('click',function(){d.close();});})();
+</script>
+"""
 (S/"how-i-work.html").write_text(page("how-i-work.html","How I work with AI",how))
 
 # ---------- Reading ----------
@@ -204,6 +216,16 @@ def _year(b):
             if y >= 2016: return y
             if k=="read_at": break
     return "Earlier"
+def _norm(t):
+    t = t.replace("\u2019","'").lower()
+    t = re.sub(r"\s*\(.*?\)\s*$", "", t)          # drop "(Series, #1)"
+    return t.split(":")[0].strip()
+_seen = {}
+for b in books:                                     # prefer the rated edition, then the one with a read date
+    k = _norm(b["title"])
+    if k not in _seen or (b["rating"]!="0" and _seen[k]["rating"]=="0") or (b["rating"]==_seen[k]["rating"] and b["read_at"] and not _seen[k]["read_at"]):
+        _seen[k] = b
+books = list(_seen.values())
 groups = {}
 for b in books: groups.setdefault(_year(b), []).append(b)
 def _sortkey(b): return email.utils.parsedate_to_datetime(b["read_at"] or b["date_added"])

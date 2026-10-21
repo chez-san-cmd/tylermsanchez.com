@@ -1,13 +1,14 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Reading list</title><meta name="claude:viewport-fit-sides" content="cover"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="icon" type="image/png" sizes="512x512" href="icon-512.png"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap"><style>
 /* Layout: one 640px column, left-aligned, nav as a single line of text. Quiet enough that the writing is the design. */
-:root{--bg:#F6F7F5;--fg:#15201E;--muted:#5F6E6A;--accent:#1F6F5F;--rule:#D9DEDB;--soft:#ECF0EE;--you:#B8336A;
+:root{--bg:#F6F7F5;--fg:#15201E;--muted:#5F6E6A;--accent:#0F6E63;--ul:#8FC9BC;--rule:#D9DEDB;--soft:#ECF0EE;--you:#B8336A;
   --f-body:"Newsreader","Iowan Old Style",Georgia,serif;--f-ui:"IBM Plex Sans",system-ui,-apple-system,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--ul:#2F6B5E;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--ul:#2F6B5E;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;color-scheme:dark}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:20px;line-height:1.55;padding-block:0 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .col{max-width:640px;margin:0 auto}
-a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+a{color:var(--accent);text-decoration:underline;text-decoration-color:var(--ul);text-decoration-thickness:1.5px;text-underline-offset:3px}a:hover{text-decoration-color:var(--accent)}
+nav.top a,.contact a,.toc a,ul.list a,.books a{text-decoration:none}nav.top a:hover,.contact a:hover,.toc a:hover,ul.list a:hover,.books a:hover{text-decoration:underline;text-decoration-color:var(--accent)}
 nav.top{font-family:var(--f-ui);font-size:16px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--rule);margin-bottom:36px}
 nav.top .me{font-weight:600;color:var(--fg);margin-right:auto}
 nav.top a[aria-current]{color:var(--fg);border-bottom:2px solid var(--accent)}
@@ -16,6 +17,7 @@ h1{font-weight:500;font-size:36px;line-height:1.15;letter-spacing:-.01em;margin:
 h2{font-family:var(--f-ui);font-weight:600;font-size:16px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:44px 0 12px}
 h3{font-weight:500;font-size:23px;margin:36px 0 8px;line-height:1.25;text-wrap:balance}
 p{margin:0 0 18px;max-width:66ch}
+.sub{font-size:28px;line-height:1.3;font-weight:400;letter-spacing:-.005em;margin:0 0 18px;text-wrap:balance}
 .lede{font-size:22px;line-height:1.45;color:var(--fg)}
 .contact{font-family:var(--f-ui);font-size:15px;display:flex;flex-wrap:wrap;gap:6px 16px;margin:0 0 8px}
 .contact a{display:inline-flex;align-items:center;gap:6px}.contact .ic{width:16px;height:16px;flex:none}
@@ -32,7 +34,7 @@ ol{padding-left:22px}ol li{margin-bottom:10px}
 article h3{margin-top:40px}
 blockquote{margin:0 0 18px;padding:0 0 0 18px;border-left:3px solid var(--rule);color:var(--fg)}
 blockquote ul{padding-left:20px}
-figure{margin:24px 0 8px;background:var(--soft);border:1px solid var(--rule);border-radius:10px;padding:14px;overflow-x:auto}
+figure{cursor:zoom-in;margin:24px 0 8px;background:var(--soft);border:1px solid var(--rule);border-radius:10px;padding:14px;overflow-x:auto}
 figure svg{display:block;width:100%;height:auto;min-width:560px;color:var(--fg);font-family:var(--f-ui)}
 figcaption{margin-top:10px;font-family:var(--f-ui);font-size:14px;color:var(--muted)}
 svg text{font-size:12px;fill:currentColor}svg .t{font-size:13px;font-weight:600}svg .s,svg .lab{font-size:11px;fill:var(--muted)}
@@ -45,8 +47,9 @@ svg .edge.a{stroke:var(--muted)}svg .edge.y{stroke:var(--you);stroke-width:1.8}s
 .year{margin:0 0 36px}.year h3{margin-top:0}
 .pending{font-family:var(--f-ui);font-size:13px;color:var(--you);margin:0 0 8px}
 footer{margin-top:64px;padding-top:18px;border-top:1px solid var(--rule);font-family:var(--f-ui);font-size:13.5px;color:var(--muted)}
+dialog.lb{border:0;padding:16px;background:var(--bg);color:var(--fg);border-radius:12px;max-width:min(96vw,1400px);width:auto;cursor:zoom-out}dialog.lb::backdrop{background:rgba(0,0,0,.55)}dialog.lb svg{display:block;width:min(92vw,1360px);height:auto;color:var(--fg);font-family:var(--f-ui)}dialog.lb p{font-family:var(--f-ui);font-size:14px;color:var(--muted);margin:10px 0 0}
 hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
-@media (max-width:480px){body{font-size:19px}h1{font-size:30px}ul.list li{grid-template-columns:1fr}ul.list .d{order:2}}
+@media (max-width:480px){body{font-size:19px}h1{font-size:30px}.sub{font-size:23px}ul.list li{grid-template-columns:1fr}ul.list .d{order:2}}
 </style></head><body><div class="col"><nav class="top"><a class="me" href="index.html">Tyler Sanchez</a><a href="writing/chat-box.html">Writing</a><a href="index.html#projects">Projects</a><a href="how-i-work.html">How I work with AI</a></nav>
 <h1>Reading list</h1>
 <p class="lede">Everything I've read since I started keeping track, newest first, pulled from my <a href="https://www.goodreads.com/user/show/16104684-tyler" target="_blank" rel="noopener">Goodreads</a> shelf. A ⭐ marks a five-star book.</p>
@@ -94,7 +97,7 @@ hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
 <li><a href="https://www.goodreads.com/book/show/29226553" target="_blank" rel="noopener">Dark Age (Red Rising Saga, #5)</a> <span class="au">(Pierce Brown)</span></li>
 <li><a href="https://www.goodreads.com/book/show/9361589" target="_blank" rel="noopener">The Night Circus</a> <span class="au">(Erin Morgenstern)</span></li>
 </ul>
-<h2 id="y2024">2024 <span class="count">· 22 books</span></h2>
+<h2 id="y2024">2024 <span class="count">· 21 books</span></h2>
 <ul class="books">
 <li><a href="https://www.goodreads.com/book/show/53000876" target="_blank" rel="noopener">Contact</a> <span class="au">(Carl Sagan)</span> <span class="star" title="Five stars">⭐</span></li>
 <li><a href="https://www.goodreads.com/book/show/205363955" target="_blank" rel="noopener">Meditations for Mortals: Four Weeks to Embrace Your Limitations and Make Time for What Counts</a> <span class="au">(Oliver Burkeman)</span> <span class="star" title="Five stars">⭐</span></li>
@@ -114,7 +117,6 @@ hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
 <li><a href="https://www.goodreads.com/book/show/37542581" target="_blank" rel="noopener">The Spy and the Traitor: The Greatest Espionage Story of the Cold War</a> <span class="au">(Ben Macintyre)</span></li>
 <li><a href="https://www.goodreads.com/book/show/5129" target="_blank" rel="noopener">Brave New World</a> <span class="au">(Aldous Huxley)</span></li>
 <li><a href="https://www.goodreads.com/book/show/57281885" target="_blank" rel="noopener">American Gods (American Gods, #1)</a> <span class="au">(Neil Gaiman)</span></li>
-<li><a href="https://www.goodreads.com/book/show/60194162" target="_blank" rel="noopener">Demon Copperhead</a> <span class="au">(Barbara Kingsolver)</span> <span class="star" title="Five stars">⭐</span></li>
 <li><a href="https://www.goodreads.com/book/show/60317128" target="_blank" rel="noopener">Demon Copperhead</a> <span class="au">(Barbara Kingsolver)</span> <span class="star" title="Five stars">⭐</span></li>
 <li><a href="https://www.goodreads.com/book/show/90202302" target="_blank" rel="noopener">Iron Flame (The Empyrean, #2)</a> <span class="au">(Rebecca Yarros)</span></li>
 <li><a href="https://www.goodreads.com/book/show/63219094" target="_blank" rel="noopener">Fourth Wing (The Empyrean, #1)</a> <span class="au">(Rebecca Yarros)</span></li>
@@ -177,12 +179,11 @@ hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
 <li><a href="https://www.goodreads.com/book/show/4981" target="_blank" rel="noopener">Slaughterhouse-Five</a> <span class="au">(Kurt Vonnegut Jr.)</span></li>
 <li><a href="https://www.goodreads.com/book/show/48654575" target="_blank" rel="noopener">The Knife of Never Letting Go (Chaos Walking, #1)</a> <span class="au">(Patrick Ness)</span></li>
 </ul>
-<h2 id="y2020">2020 <span class="count">· 11 books</span></h2>
+<h2 id="y2020">2020 <span class="count">· 10 books</span></h2>
 <ul class="books">
 <li><a href="https://www.goodreads.com/book/show/23437156" target="_blank" rel="noopener">Six of Crows (Six of Crows, #1)</a> <span class="au">(Leigh Bardugo)</span></li>
 <li><a href="https://www.goodreads.com/book/show/36510196" target="_blank" rel="noopener">Old Man's War (Old Man's War, #1)</a> <span class="au">(John Scalzi)</span></li>
 <li><a href="https://www.goodreads.com/book/show/37570546" target="_blank" rel="noopener">Maybe You Should Talk to Someone</a> <span class="au">(Lori Gottlieb)</span> <span class="star" title="Five stars">⭐</span></li>
-<li><a href="https://www.goodreads.com/book/show/38799469" target="_blank" rel="noopener">Bad Blood: Secrets and Lies in a Silicon Valley Startup</a> <span class="au">(John Carreyrou)</span> <span class="star" title="Five stars">⭐</span></li>
 <li><a href="https://www.goodreads.com/book/show/25451264" target="_blank" rel="noopener">Death's End (Remembrance of Earth’s Past, #3)</a> <span class="au">(Liu Cixin)</span> <span class="star" title="Five stars">⭐</span></li>
 <li><a href="https://www.goodreads.com/book/show/23168817" target="_blank" rel="noopener">The Dark Forest (Remembrance of Earth’s Past, #2)</a> <span class="au">(Liu Cixin)</span> <span class="star" title="Five stars">⭐</span></li>
 <li><a href="https://www.goodreads.com/book/show/127455" target="_blank" rel="noopener">The Lies of Locke Lamora (Gentleman Bastard, #1)</a> <span class="au">(Scott Lynch)</span></li>
@@ -224,7 +225,7 @@ hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
 <li><a href="https://www.goodreads.com/book/show/37976541" target="_blank" rel="noopener">Bad Blood: Secrets and Lies in a Silicon Valley Startup</a> <span class="au">(John Carreyrou)</span> <span class="star" title="Five stars">⭐</span></li>
 <li><a href="https://www.goodreads.com/book/show/4948826" target="_blank" rel="noopener">Sum: Forty Tales from the Afterlives</a> <span class="au">(David Eagleman)</span></li>
 </ul>
-<h2 id="y2018">2018 <span class="count">· 30 books</span></h2>
+<h2 id="y2018">2018 <span class="count">· 29 books</span></h2>
 <ul class="books">
 <li><a href="https://www.goodreads.com/book/show/18050143" target="_blank" rel="noopener">Zero to One: Notes on Startups, or How to Build the Future</a> <span class="au">(Peter Thiel)</span></li>
 <li><a href="https://www.goodreads.com/book/show/18176747" target="_blank" rel="noopener">The Hard Thing About Hard Things: Building a Business When There Are No Easy Answers―Straight Talk on the Challenges of Entrepreneurship</a> <span class="au">(Ben Horowitz)</span></li>
@@ -253,7 +254,6 @@ hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
 <li><a href="https://www.goodreads.com/book/show/16158522" target="_blank" rel="noopener">Eleven Rings: The Soul of Success</a> <span class="au">(Phil Jackson)</span></li>
 <li><a href="https://www.goodreads.com/book/show/381355" target="_blank" rel="noopener">The Bogleheads' Guide to Investing</a> <span class="au">(Taylor Larimore)</span> <span class="star" title="Five stars">⭐</span></li>
 <li><a href="https://www.goodreads.com/book/show/33257757" target="_blank" rel="noopener">Iron Gold (Red Rising Saga, #4)</a> <span class="au">(Pierce Brown)</span></li>
-<li><a href="https://www.goodreads.com/book/show/6054800" target="_blank" rel="noopener">Status Anxiety</a> <span class="au">(Alain de Botton)</span></li>
 <li><a href="https://www.goodreads.com/book/show/23425" target="_blank" rel="noopener">Status Anxiety</a> <span class="au">(Alain de Botton)</span></li>
 <li><a href="https://www.goodreads.com/book/show/1215032" target="_blank" rel="noopener">The Wise Man's Fear (The Kingkiller Chronicle, #2)</a> <span class="au">(Patrick Rothfuss)</span> <span class="star" title="Five stars">⭐</span></li>
 </ul>
@@ -284,10 +284,9 @@ hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
 <li><a href="https://www.goodreads.com/book/show/17660462" target="_blank" rel="noopener">The Everything Store: Jeff Bezos and the Age of Amazon</a> <span class="au">(Brad Stone)</span></li>
 <li><a href="https://www.goodreads.com/book/show/25899336" target="_blank" rel="noopener">When Breath Becomes Air</a> <span class="au">(Paul Kalanithi)</span> <span class="star" title="Five stars">⭐</span></li>
 </ul>
-<h2 id="y2016">2016 <span class="count">· 14 books</span></h2>
+<h2 id="y2016">2016 <span class="count">· 12 books</span></h2>
 <ul class="books">
 <li><a href="https://www.goodreads.com/book/show/9969571" target="_blank" rel="noopener">Ready Player One (Ready Player One, #1)</a> <span class="au">(Ernest Cline)</span> <span class="star" title="Five stars">⭐</span></li>
-<li><a href="https://www.goodreads.com/book/show/8045789" target="_blank" rel="noopener">Ender's Game (Ender's Saga, #1)</a> <span class="au">(Orson Scott Card)</span></li>
 <li><a href="https://www.goodreads.com/book/show/375802" target="_blank" rel="noopener">Ender’s Game (Ender's Saga, #1)</a> <span class="au">(Orson Scott Card)</span> <span class="star" title="Five stars">⭐</span></li>
 <li><a href="https://www.goodreads.com/book/show/4030991" target="_blank" rel="noopener">Shoe Dog</a> <span class="au">(Phil Knight)</span> <span class="star" title="Five stars">⭐</span></li>
 <li><a href="https://www.goodreads.com/book/show/40961543" target="_blank" rel="noopener">The Reluctant Fundamentalist</a> <span class="au">(Mohsin Hamid)</span></li>
@@ -297,7 +296,6 @@ hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
 <li><a href="https://www.goodreads.com/book/show/9975779" target="_blank" rel="noopener">Portrait of a Spy (Gabriel Allon, #11)</a> <span class="au">(Daniel Silva)</span></li>
 <li><a href="https://www.goodreads.com/book/show/10357575" target="_blank" rel="noopener">1Q84 (1Q84, #1-3)</a> <span class="au">(Haruki Murakami)</span></li>
 <li><a href="https://www.goodreads.com/book/show/18296144" target="_blank" rel="noopener">Things a Little Bird Told Me: Confessions of the Creative Mind</a> <span class="au">(Biz Stone)</span></li>
-<li><a href="https://www.goodreads.com/book/show/21996" target="_blank" rel="noopener">The Devil in the White City</a> <span class="au">(Erik Larson)</span></li>
 <li><a href="https://www.goodreads.com/book/show/9418327" target="_blank" rel="noopener">Bossypants</a> <span class="au">(Tina Fey)</span></li>
 <li><a href="https://www.goodreads.com/book/show/6900" target="_blank" rel="noopener">Tuesdays with Morrie: An Old Man, a Young Man, and Life's Greatest Lesson</a> <span class="au">(Mitch Albom)</span> <span class="star" title="Five stars">⭐</span></li>
 </ul>
@@ -335,4 +333,4 @@ hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
 <li><a href="https://www.goodreads.com/book/show/76865" target="_blank" rel="noopener">Good to Great: Why Some Companies Make the Leap... and Others Don't</a> <span class="au">(Jim Collins)</span></li>
 <li><a href="https://www.goodreads.com/book/show/66855" target="_blank" rel="noopener">Revenge (aka The Stars’ Tennis Balls)</a> <span class="au">(Stephen Fry)</span></li>
 </ul>
-<p class="meta">Updated October 2026 from Goodreads. 249 books.</p><footer>© 2026 Tyler Sanchez · Denver · tylersanchez@gmail.com</footer></div></body></html>
+<p class="meta">Updated October 2026 from Goodreads. 244 books.</p><footer>© 2026 Tyler Sanchez · Denver · tylersanchez@gmail.com</footer></div></body></html>
