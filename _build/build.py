@@ -55,7 +55,7 @@ hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
 """
 FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap">'
 def nav(cur):
-    items=[("index.html","Home","home"),("writing/chat-box.html","Writing","writing"),("index.html#projects","Projects","projects"),("how-i-work.html","How I work with AI","how")]
+    items=[("index.html","Home","home"),("writing/chat-box.html","Writing","writing"),("index.html#projects","AI Projects","projects"),("how-i-work.html","How I work with AI","how")]
     out=[]
     for href,label,key in items:
         if key=="home": continue
@@ -77,8 +77,8 @@ def page(cur, title, body, standalone=True):
 home = """
 <img class="me-photo" src="tyler.jpg" alt="Tyler Sanchez" width="150" height="150">
 <h1>👋 Hi, I'm Tyler, a Product Manager in Denver.</h1>
-<p class="sub">I'm building an assistant that runs my life in the background and only interrupts me for decisions.</p>
-<div class="contact"><a href="mailto:tylersanchez@gmail.com"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M3.5 5.5h17a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1h-17a1 1 0 0 1-1-1v-11a1 1 0 0 1 1-1z"/><path fill="none" stroke="currentColor" stroke-width="1.8" d="m3 7 9 6.5L21 7"/></svg>Email</a><a href="https://www.linkedin.com/in/tylersanchez" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="#0A66C2" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a><a href="https://github.com/chez-san-cmd" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="var(--fg)" d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3z"/></svg>GitHub</a></div>
+<p class="sub">I'm building an AI assistant that runs my life in the background and only interrupts me for decisions.</p>
+<div class="contact"><a href="mailto:tylersanchez@gmail.com"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M3.5 5.5h17a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1h-17a1 1 0 0 1-1-1v-11a1 1 0 0 1 1-1z"/><path fill="none" stroke="currentColor" stroke-width="1.8" d="m3 7 9 6.5L21 7"/></svg>Email</a><a href="https://www.linkedin.com/in/tylermsanchez" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="#0A66C2" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a><a href="https://github.com/chez-san-cmd" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="var(--fg)" d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3z"/></svg>GitHub</a></div>
 
 <h2>About</h2>
 <p>I spent the last decade as a PM, mostly at Instagram, where my team worked on how new connections turn into conversations. The part of the job I love is learning a space, forming a point of view, and inventing the product that follows from it.</p>
@@ -91,11 +91,11 @@ home = """
 <h2>Writing</h2>
 <ul class="list">
   <li><span class="d">Oct 2026</span><span><a href="writing/chat-box.html">The assistant I wanted doesn't have a chat box</a><small>Three months with an assistant that works while I sleep, and what it taught me about the shape of the thing.</small></span></li>
-  <li><span class="d">Soon</span><span>The assistant is already the front door<small>What happens to discovery when the assistant picks the gym.</small></span></li>
-  <li><span class="d">Soon</span><span>Fetch, score, bring only the decisions<small>Open-sourcing the Job Radar and the evals behind it.</small></span></li>
+  <li><span class="d">Coming soon</span><span>The assistant is already the front door<small>What happens to discovery when the assistant picks the gym.</small></span></li>
+  <li><span class="d">Coming soon</span><span>Fetch, score, bring only the decisions<small>Open-sourcing the Job Radar and the evals behind it.</small></span></li>
 </ul>
 
-<h2 id="projects">Projects</h2>
+<h2 id="projects">AI Projects</h2>
 <ul class="list">
   <li><span class="d">live</span><span><b>Command Center</b><small>One page for every open project in my life, with a strict attention hierarchy and a reply box that starts an agent run.</small></span></li>
   <li><span class="d">live</span><span><b>Job Radar</b><small>Daily fetch of PM postings from ~20 companies, scored against a written rubric. Open source in November.</small></span></li>
@@ -108,7 +108,7 @@ home = """
 <ul class="plain other">
   <li><a href="how-i-work.html">How I work with AI</a>: the principles, the system diagrams, and the tools</li>
   <li><a href="reading.html">Reading list</a>: everything I've read, by year, with the five-star books marked</li>
-  <li><a href="years-in-review.html">Years in review</a>: public excerpts from the annual letter I write to friends and family</li>
+  <li><a href="years-in-review.html">Year in review</a>: public excerpts from the annual letter I write to friends and family</li>
 </ul>
 """
 (S/"index.html").write_text(page("index.html","Tyler Sanchez",home,standalone=(os.environ.get("ARTIFACT_PREVIEW") is None)))
@@ -247,7 +247,7 @@ reading += f'<p class="meta">Updated {datetime.date.today():%B %Y} from Goodread
 
 # ---------- Years in review ----------
 years = """
-<h1>Years in review</h1>
+<h1>Year in review</h1>
 <p class="lede">Every December I write a long letter to friends and family with the same three sections: what went well, what could have gone better, and what I'm focusing on next year. The full letters stay with the people they're written for. These are short public excerpts.</p>
 <p class="pending">Pending your approval: these are Claude's default picks (2023-B, 2024-A, 2025-A). Swap any of them from the candidates page in Notion.</p>
 
@@ -274,5 +274,5 @@ years = """
 <p class="meta">The experiment mostly failed in 2024 (my fault; I didn't extend the invites) and came back in 2025 as "low friction connection."</p>
 </div>
 """
-(S/"years-in-review.html").write_text(page("years-in-review.html","Years in review",years))
+(S/"years-in-review.html").write_text(page("years-in-review.html","Year in review",years))
 print("ok", [p.name for p in S.rglob("*.html")], "figs:", len(figs))
