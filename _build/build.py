@@ -63,6 +63,13 @@ def nav(cur):
         out.append(f'<a href="{href}"{" aria-current=\"page\"" if key==cur.split("/")[0].replace(".html","") or (key=="writing" and cur.startswith("writing/")) or (key=="projects" and cur.startswith("projects/")) or (key=="how" and cur=="how-i-work.html") or (key=="years" and cur=="years-in-review.html") else ""}>{label}</a>')
     home = "../index.html" if (cur.startswith("writing/") or cur.startswith("projects/")) else "index.html"
     return f'<nav class="top"><a class="me" href="{home}">Tyler Sanchez</a>{"".join(out)}</nav>'
+LIGHTBOX = """<dialog class="lb" id="lb"><div id="lb-body"></div><p>Click anywhere or press Esc to close.</p></dialog>
+<script>
+(function(){var d=document.getElementById('lb'),b=document.getElementById('lb-body');
+document.querySelectorAll('figure').forEach(function(f){f.setAttribute('title','Click to enlarge');f.addEventListener('click',function(){var s=f.querySelector('svg');if(!s)return;b.innerHTML='';b.appendChild(s.cloneNode(true));d.showModal();});});
+d.addEventListener('click',function(){d.close();});})();
+</script>
+"""
 def page(cur, title, body, standalone=True):
     icon = '../' if (cur.startswith('writing/') or cur.startswith('projects/')) else ''
     head = f'<title>{title}</title><meta name="claude:viewport-fit-sides" content="cover"><link rel="icon" type="image/png" sizes="32x32" href="{icon}favicon-32.png"><link rel="icon" type="image/png" sizes="512x512" href="{icon}icon-512.png"><link rel="apple-touch-icon" href="{icon}apple-touch-icon.png">{FONTS}<style>{CSS}</style>'
@@ -71,7 +78,8 @@ def page(cur, title, body, standalone=True):
         tail = '</body></html>'
     else:
         tail = ''
-    return head + f'<div class="col">{nav(cur)}{body}<footer>© 2026 Tyler Sanchez · Denver · tylersanchez@gmail.com</footer></div>' + tail
+    lb = LIGHTBOX if '<figure' in body else ''
+    return head + f'<div class="col">{nav(cur)}{body}<footer>© 2026 Tyler Sanchez · Denver · tylersanchez@gmail.com</footer></div>{lb}' + tail
 
 # ---------- Projects data ----------
 # status: live | building | on deck.  slug=None means no page yet.
@@ -164,6 +172,40 @@ def project_page(slug, name, status, lede, what, why, how_built, learned, status
 """
     (S/"projects"/f"{slug}.html").write_text(page(f"projects/{slug}.html", f"{name} · Tyler Sanchez", body))
 
+src = (pathlib.Path(__file__).resolve().parent/"how-i-work-diagrams.html").read_text()
+figs = re.findall(r"<h2>\d\. (.*?)</h2>\s*<p>(.*?)</p>\s*(<figure>.*?</figure>)", src, re.S)
+
+# ---------- Project: Job Radar ----------
+JR_REPO = "https://github.com/chez-san-cmd/job-radar"
+project_page("job-radar", "Job Radar", "live",
+  lede="Every morning a script pulls every product-management posting from 23 companies I'd consider working for, and a Claude run scores each one against a rubric I wrote about what I actually want. I see only the ones worth a look.",
+  what="""
+<p>Two jobs a day. Around 5am Denver time a GitHub Action fetches the PM postings from each company's own job board and commits the day's new ones to a repo. At 6:52am a scheduled Claude task reads each new posting in full, scores it 1 to 5 against the rubric, and writes anything scoring 3 or above to a Notion table with a one-line "why" a recruiter could read. Anything that scores a 4 or 5 also lands in my attention queue the same day; everything else waits for a Sunday review item that lists the week.</p>
+<p>I mark each row <i>Interested</i> or <i>Not for me</i>, sometimes with a note. The notes get folded back into the rubric, so the scoring drifts toward my actual judgment rather than my first description of it. It has been running since October 5 and reads about a hundred postings a week so I don't have to.</p>
+""",
+  why="""
+<p>I'm planning a year away from full-time work, and the plan assumes the main levers for the next job are people and stories, not applications. But a rare ideal role can appear at any time, and I didn't want to spend an hour a week scanning career pages to catch it. The Radar is a passive net: it watches, I decide. It also turned out to be the cleanest small example of the shape I think most useful agents will take: fetch on a schedule, score against a written point of view, bring only the decisions to a human.</p>
+""",
+  fig=figs[2][2],
+  how_built="""
+<ul class="plain">
+<li><b>Fetch.</b> A private repo with one adapter per job-board platform: Greenhouse, Lever, Ashby, Rippling, Workday (Zillow), Eightfold (Netflix), and a scraper for Shopify, which publishes no feed. A GitHub Action runs the fetch daily and commits new postings as plain JSON, so the history is a git log. Why GitHub Actions: scheduled Claude runs can't open arbitrary websites without a per-URL approval nobody is there to give. Splitting deterministic fetching from judgment-heavy scoring solved that and made each half easier to test.</li>
+<li><b>Score.</b> A Claude scheduled task reads the day's file and <code>RUBRIC.md</code>. The rubric scores first on latitude to originate product bets, then level, then problem space. Later rules came straight from my notes on real postings: AI-native teams weigh heavily, "traffic cop" seats on shared surfaces cap at 3, fixed in-office days outside Denver cap at 3 but are still shown, and location is a flag rather than a filter. Director and head-of-product titles are scored on strategy ownership instead of being passed on title.</li>
+<li><b>Store and show.</b> One Notion database: role, company, fit, score, why, status, my notes, level signal, location, link. A saved view feeds a tile on my Command Center map and the Sunday review. Everything reads through saved views because Notion's row-query API has a workspace quota and views don't.</li>
+<li><b>Learn.</b> Daily runs also read the <i>Maybe</i> rows and my notes, and periodic re-scores check the passes for false negatives. So far, none.</li>
+</ul>
+""",
+  repo=JR_REPO,
+  learned="""
+<p><b>The hard part is not the model. It is the rubric.</b> The scoring got good the week I stopped describing jobs I'd like and started writing down what I was actually optimizing for, including the uncomfortable parts: pay floor, hours, how AI-native a team is. The model was fine from day one. My own clarity was the bottleneck.</p>
+<p><b>Flags beat filters.</b> My first instinct was to filter out roles in other cities. Keeping them visible as a capped score instead leaves room for the conversation I actually want to have, which is whether the role could be rescoped to remote.</p>
+<p><b>Some boards don't move.</b> Shopify's careers page is one evergreen posting, so the Radar will almost never show anything new there. For companies like that, a person on the inside matters more than a feed.</p>
+<p><b>Scheduling is the flaky part.</b> GitHub's cron has run hours late, so scoring sometimes ran before the day's fetch landed. The fix (start scoring when the fetch finishes, not at a fixed time) is the kind of plumbing that takes more of the week than any prompt.</p>
+""",
+  status_text=f"""
+<p>Live since October 5, 2026. Watching 23 companies. A cleaned-up public version, with the fetch adapters, a <code>RUBRIC.md</code> template and the evals I use to check the scoring, goes up on GitHub in mid-November with a Show HN post. Until then the repo is private; the link above will go live when it does.</p>
+""")
+
 # ---------- Essay ----------
 essay = """
 <article>
@@ -210,8 +252,6 @@ essay = """
 (S/"writing/chat-box.html").write_text(page("writing/chat-box.html","The assistant I wanted doesn't have a chat box",essay))
 
 # ---------- How I work ----------
-src = (pathlib.Path(__file__).resolve().parent/"how-i-work-diagrams.html").read_text()
-figs = re.findall(r"<h2>\d\. (.*?)</h2>\s*<p>(.*?)</p>\s*(<figure>.*?</figure>)", src, re.S)
 how = """
 <h1>How I work with AI</h1>
 <p class="lede">An assistant that runs in the background is only as trustworthy as the rules it runs under. Here are the rules, then the system that enforces them, then the tools.</p>
@@ -234,8 +274,11 @@ how = """
   <span><i style="border-color:var(--rule);background:var(--soft)"></i> Outside service</span>
 </div>
 """
-for title, para, fig in figs:
-    how += f"<h3>{title}</h3><p>{para}</p>{fig}"
+KEEP = {0, 1, 4}   # the loop, Project Books, the learning loop; 2 (Job Radar) and 3 (Concerts) live on their project pages
+for i, (title, para, fig) in enumerate(figs):
+    if i in KEEP: how += f"<h3>{title}</h3><p>{para}</p>{fig}"
+how += '<p class="meta">The per-project diagrams, for the <a href="projects/job-radar.html">Job Radar</a> and <a href="projects/concert-radar.html">Concert Radar</a>, are on their project pages.</p>'
+
 how += """
 <h2 id="tools">Tools</h2>
 <ul class="plain">
@@ -246,14 +289,6 @@ how += """
 <li><b>Spotify</b> supplies taste for the concert radar; venue newsletters supply the presale windows.</li>
 <li><b>A single HTML page</b> is the Command Center: no framework, reads Notion live, and has been changed about a hundred times.</li>
 </ul>
-"""
-how += """
-<dialog class="lb" id="lb"><div id="lb-body"></div><p>Click anywhere or press Esc to close.</p></dialog>
-<script>
-(function(){var d=document.getElementById('lb'),b=document.getElementById('lb-body');
-document.querySelectorAll('figure').forEach(function(f){f.setAttribute('title','Click to enlarge');f.addEventListener('click',function(){var s=f.querySelector('svg');if(!s)return;b.innerHTML='';b.appendChild(s.cloneNode(true));d.showModal();});});
-d.addEventListener('click',function(){d.close();});})();
-</script>
 """
 (S/"how-i-work.html").write_text(page("how-i-work.html","How I work with AI",how))
 

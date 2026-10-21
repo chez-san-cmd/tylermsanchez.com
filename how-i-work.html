@@ -170,121 +170,6 @@ hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
 <path class="edge d" d="M230 258 L300 258" marker-end="url(#ar2)"/>
 </svg>
 <figcaption>Memory is a page, not a transcript: a run reads the book before it acts and appends to it when it finishes. Changes to the brief and answers to open questions are mine.</figcaption>
-</figure><h3>Job Radar: fetch, score against a written point of view, bring only the decisions</h3><p>Two jobs a day. GitHub Actions fetches every PM posting from about twenty company boards and commits the day's new ones. A Claude run then scores each posting against a rubric I wrote about what I actually want (latitude to make bets first, level second, problem space third), writes the ones worth a look to a Notion table with a one-line "why", and sends only 4s and 5s to the attention queue. My Interested / Not for me calls and notes feed the next revision of the rubric.</p><figure>
-<svg viewBox="0 0 900 360" role="img" aria-label="At 5:17am a GitHub Actions job fetches postings from Greenhouse, Lever, Ashby, Workday, Eightfold, Rippling and Shopify boards and commits a JSON file. At 6:52am a Claude run reads the rubric and Tyler's past calls, scores each posting one to five, writes scores of three and up to the Notion Job Radar table and scores of four and five to the attention queue, which the Command Center tile shows. Tyler marks Interested or Not for me, and those calls revise the rubric.">
-<defs><marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
-<marker id="ara3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--agent)"/></marker>
-<marker id="ary3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--you)"/></marker></defs>
-<!-- boards -->
-<rect class="ext" x="20" y="40" width="150" height="110" rx="8"/>
-<text class="t" x="95" y="62" text-anchor="middle">Company boards</text>
-<text class="s" x="95" y="80" text-anchor="middle">Greenhouse · Lever · Ashby</text>
-<text class="s" x="95" y="96" text-anchor="middle">Workday · Eightfold</text>
-<text class="s" x="95" y="112" text-anchor="middle">Rippling · Shopify</text>
-<text class="s" x="95" y="134" text-anchor="middle">~20 companies, one adapter each</text>
-<!-- GH Actions -->
-<rect class="box" x="230" y="50" width="170" height="90" rx="8"/>
-<text class="t" x="315" y="74" text-anchor="middle">GitHub Actions</text>
-<text class="s" x="315" y="92" text-anchor="middle">5:17am  fetch_jobs.py</text>
-<text class="s" x="315" y="108" text-anchor="middle">PM title regex, exclusions</text>
-<text class="s" x="315" y="124" text-anchor="middle">commits data/new/&lt;date&gt;.json</text>
-<path class="edge" d="M170 95 L230 95" marker-end="url(#ar3)"/>
-<text class="lab" x="176" y="86">fetch</text>
-<!-- scoring run -->
-<rect class="agent" x="460" y="40" width="200" height="110" rx="8"/>
-<text class="t" x="560" y="64" text-anchor="middle">Claude scoring run</text>
-<text class="s" x="560" y="82" text-anchor="middle">6:52am, reads RUBRIC.md</text>
-<text class="s" x="560" y="98" text-anchor="middle">latitude &gt; level &gt; problem space</text>
-<text class="s" x="560" y="114" text-anchor="middle">score 1-5 + one-line why</text>
-<text class="s" x="560" y="130" text-anchor="middle">level signal, workplace, pay band</text>
-<path class="edge a d" d="M400 95 L460 95" marker-end="url(#ara3)"/>
-<text class="lab" x="404" y="86">reads</text>
-<!-- rubric -->
-<rect class="box" x="480" y="190" width="160" height="50" rx="8"/>
-<text class="t" x="560" y="211" text-anchor="middle">RUBRIC.md</text>
-<text class="s" x="560" y="228" text-anchor="middle">a written point of view</text>
-<path class="edge d" d="M560 190 L560 150" marker-end="url(#ar3)"/>
-<!-- Notion table -->
-<rect class="store" x="720" y="40" width="160" height="60" rx="8"/>
-<text class="t" x="800" y="63" text-anchor="middle">Job Radar table</text>
-<text class="s" x="800" y="81" text-anchor="middle">score ≥ 3, with the why</text>
-<path class="edge a" d="M660 70 L720 70" marker-end="url(#ara3)"/>
-<!-- queue -->
-<rect class="store" x="720" y="120" width="160" height="60" rx="8"/>
-<text class="t" x="800" y="143" text-anchor="middle">Attention Queue</text>
-<text class="s" x="800" y="161" text-anchor="middle">only 4s and 5s</text>
-<path class="edge a" d="M660 120 L720 150" marker-end="url(#ara3)"/>
-<!-- Command Center tile -->
-<rect class="box" x="720" y="200" width="160" height="50" rx="8"/>
-<text class="t" x="800" y="221" text-anchor="middle">Command Center tile</text>
-<text class="s" x="800" y="238" text-anchor="middle">top 3, counts, newest</text>
-<path class="edge" d="M800 180 L800 200" marker-end="url(#ar3)"/>
-<!-- Tyler -->
-<rect class="you" x="720" y="280" width="160" height="60" rx="8"/>
-<text class="t" x="800" y="303" text-anchor="middle">Tyler</text>
-<text class="s" x="800" y="321" text-anchor="middle">Interested · Not for me · notes</text>
-<path class="edge y" d="M800 250 L800 280" marker-end="url(#ary3)"/>
-<!-- feedback -->
-<path class="edge y d" d="M720 320 L560 320 L560 240" marker-end="url(#ary3)"/>
-<text class="lab" x="580" y="312">his calls and notes revise the rubric</text>
-<text class="lab" x="20" y="200">Never automated: applying, replying to recruiters, marking a role Not for me.</text>
-</svg>
-<figcaption>Fetch on a schedule, score against a written rubric, surface only the top scores. The rubric, not the model, is where the quality comes from, and my calls are what revise it.</figcaption>
-</figure><h3>Concert presales: taste, listings, and the presale email</h3><p>The point is to know about a show during the presale, before general on-sale and the resale markup. Three inputs: what I actually listen to on Spotify, who is coming to Denver, and the venue and promoter newsletters I route straight to the archive in Gmail. A run matches them, keeps a tiered list of artists, and writes the presale window and code to a table. Tier 1 artists show on the Command Center with the code; Tier 2 is a weekly digest for discovery. I buy.</p><figure>
-<svg viewBox="0 0 900 340" role="img" aria-label="Spotify listening history, Bandsintown Denver listings and presale emails archived in Gmail feed a Concert Radar run that keeps a tiered artist list and writes shows with presale windows and codes to a Notion table. Tier 1 shows appear on the Command Center tile with the code; Tier 2 goes to a weekly digest. Tyler buys the tickets.">
-<defs><marker id="ar4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
-<marker id="ara4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--agent)"/></marker>
-<marker id="ary4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--you)"/></marker></defs>
-<!-- inputs -->
-<rect class="ext" x="20" y="30" width="190" height="60" rx="8"/>
-<text class="t" x="115" y="53" text-anchor="middle">Spotify</text>
-<text class="s" x="115" y="71" text-anchor="middle">top artists, library, radio seeds</text>
-<rect class="ext" x="20" y="120" width="190" height="60" rx="8"/>
-<text class="t" x="115" y="143" text-anchor="middle">Bandsintown</text>
-<text class="s" x="115" y="161" text-anchor="middle">who is coming to Denver</text>
-<rect class="ext" x="20" y="210" width="190" height="70" rx="8"/>
-<text class="t" x="115" y="233" text-anchor="middle">Gmail</text>
-<text class="s" x="115" y="251" text-anchor="middle">venue + promoter newsletters</text>
-<text class="s" x="115" y="267" text-anchor="middle">filtered to archive, never the inbox</text>
-<!-- run -->
-<rect class="agent" x="290" y="90" width="220" height="130" rx="8"/>
-<text class="t" x="400" y="114" text-anchor="middle">Concert Radar run</text>
-<text class="s" x="400" y="134" text-anchor="middle">match artists to listings</text>
-<text class="s" x="400" y="150" text-anchor="middle">find the presale window + code</text>
-<text class="s" x="400" y="166" text-anchor="middle">in the email</text>
-<text class="s" x="400" y="186" text-anchor="middle">Tier 1 = always alert</text>
-<text class="s" x="400" y="202" text-anchor="middle">Tier 2 = weekly discovery digest</text>
-<path class="edge a d" d="M210 60 L290 120" marker-end="url(#ara4)"/>
-<text class="lab" x="222" y="84">taste</text>
-<path class="edge a d" d="M210 150 L290 155" marker-end="url(#ara4)"/>
-<text class="lab" x="222" y="146">listings</text>
-<path class="edge a d" d="M210 240 L290 190" marker-end="url(#ara4)"/>
-<text class="lab" x="218" y="226">presale emails</text>
-<!-- table -->
-<rect class="store" x="590" y="40" width="190" height="70" rx="8"/>
-<text class="t" x="685" y="63" text-anchor="middle">Concert Radar table</text>
-<text class="s" x="685" y="81" text-anchor="middle">show, venue, presale start/end,</text>
-<text class="s" x="685" y="97" text-anchor="middle">general on-sale, code, tier</text>
-<path class="edge a" d="M510 120 L590 80" marker-end="url(#ara4)"/>
-<text class="lab" x="520" y="92">writes, retires when over</text>
-<!-- tile -->
-<rect class="box" x="590" y="150" width="190" height="60" rx="8"/>
-<text class="t" x="685" y="173" text-anchor="middle">Command Center tile</text>
-<text class="s" x="685" y="191" text-anchor="middle">Tier 1 only, code right on the row</text>
-<path class="edge" d="M685 110 L685 150" marker-end="url(#ar4)"/>
-<!-- digest -->
-<rect class="box" x="590" y="240" width="190" height="50" rx="8"/>
-<text class="t" x="685" y="261" text-anchor="middle">Weekly digest (Tier 2)</text>
-<text class="s" x="685" y="278" text-anchor="middle">artists I might like, in the queue</text>
-<path class="edge a" d="M510 190 L590 262" marker-end="url(#ara4)"/>
-<!-- Tyler -->
-<rect class="you" x="800" y="130" width="90" height="100" rx="8"/>
-<text class="t" x="845" y="170" text-anchor="middle">Tyler</text>
-<text class="s" x="845" y="188" text-anchor="middle">buys</text>
-<path class="edge y" d="M780 180 L800 180" marker-end="url(#ary4)"/>
-<text class="lab" x="20" y="320">The run never buys and never registers for a presale; it tells me when the window opens and what to type.</text>
-</svg>
-<figcaption>Three inputs, one match, one table. The tile shows only the artists I would always want to see, with the presale code, so the decision is a tap.</figcaption>
 </figure><h3>The learning loop: the delta between the draft and what I sent</h3><p>The agent never sends mail. It writes a draft in my voice and leaves it in Gmail; I edit and send. On the next run it compares what it drafted to what actually went out, and folds the difference into a writing-style file that every future draft reads. The same shape runs everywhere: Job Radar notes revise the rubric, project books carry decisions forward, and the Command Center queue records which recommendations I took.</p><figure>
 <svg viewBox="0 0 900 300" role="img" aria-label="A run drafts an email from the writing-style profile and saves it as a Gmail draft. Tyler edits and sends. The next run compares the sent message to the draft and updates the writing-style profile, which the next draft reads. The same correction loop runs from Tyler's Job Radar calls into the rubric and from his queue answers into project books.">
 <defs><marker id="ar5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
@@ -327,7 +212,7 @@ hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
 <text class="lab" x="40" y="272">Same loop elsewhere:  Job Radar calls → rubric   ·   queue answers → project book decision log   ·   purchase questions → purchase advisor</text>
 </svg>
 <figcaption>The correction loop: draft, human edit, diff, profile update. The assistant gets better at sounding like me without ever sending as me.</figcaption>
-</figure>
+</figure><p class="meta">The per-project diagrams, for the <a href="projects/job-radar.html">Job Radar</a> and <a href="projects/concert-radar.html">Concert Radar</a>, are on their project pages.</p>
 <h2 id="tools">Tools</h2>
 <ul class="plain">
 <li><b>Claude</b> (Claude Code and its scheduled tasks) does the reading, drafting, scoring and filing. Every run starts from a written brief and ends with a log line.</li>
@@ -337,11 +222,10 @@ hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
 <li><b>Spotify</b> supplies taste for the concert radar; venue newsletters supply the presale windows.</li>
 <li><b>A single HTML page</b> is the Command Center: no framework, reads Notion live, and has been changed about a hundred times.</li>
 </ul>
-
-<dialog class="lb" id="lb"><div id="lb-body"></div><p>Click anywhere or press Esc to close.</p></dialog>
+<footer>© 2026 Tyler Sanchez · Denver · tylersanchez@gmail.com</footer></div><dialog class="lb" id="lb"><div id="lb-body"></div><p>Click anywhere or press Esc to close.</p></dialog>
 <script>
 (function(){var d=document.getElementById('lb'),b=document.getElementById('lb-body');
 document.querySelectorAll('figure').forEach(function(f){f.setAttribute('title','Click to enlarge');f.addEventListener('click',function(){var s=f.querySelector('svg');if(!s)return;b.innerHTML='';b.appendChild(s.cloneNode(true));d.showModal();});});
 d.addEventListener('click',function(){d.close();});})();
 </script>
-<footer>© 2026 Tyler Sanchez · Denver · tylersanchez@gmail.com</footer></div></body></html>
+</body></html>

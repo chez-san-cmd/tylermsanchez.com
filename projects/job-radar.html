@@ -1,0 +1,156 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Job Radar · Tyler Sanchez</title><meta name="claude:viewport-fit-sides" content="cover"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png"><link rel="icon" type="image/png" sizes="512x512" href="../icon-512.png"><link rel="apple-touch-icon" href="../apple-touch-icon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap"><style>
+/* Layout: one 640px column, left-aligned, nav as a single line of text. Quiet enough that the writing is the design. */
+:root{--bg:#F6F7F5;--fg:#15201E;--muted:#5F6E6A;--accent:#0F6E63;--ul:#8FC9BC;--rule:#D9DEDB;--soft:#ECF0EE;--you:#B8336A;
+  --f-body:"Newsreader","Iowan Old Style",Georgia,serif;--f-ui:"IBM Plex Sans",system-ui,-apple-system,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--ul:#2F6B5E;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--ul:#2F6B5E;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:20px;line-height:1.55;padding-block:0 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.col{max-width:640px;margin:0 auto}
+a{color:var(--accent);text-decoration:underline;text-decoration-color:var(--ul);text-decoration-thickness:1.5px;text-underline-offset:3px}a:hover{text-decoration-color:var(--accent)}
+nav.top a,.contact a,.toc a,ul.list a,.books a{text-decoration:none}nav.top a:hover,.contact a:hover,.toc a:hover,ul.list a:hover,.books a:hover{text-decoration:underline;text-decoration-color:var(--accent)}
+nav.top{font-family:var(--f-ui);font-size:16px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--rule);margin-bottom:36px}
+nav.top .me{font-weight:600;color:var(--fg);margin-right:auto}
+nav.top a[aria-current]{color:var(--fg);border-bottom:2px solid var(--accent)}
+.me-photo{display:block;width:150px;height:150px;border-radius:12px;object-fit:cover;margin:0 0 20px}
+h1{font-weight:500;font-size:36px;line-height:1.15;letter-spacing:-.01em;margin:0 0 14px;text-wrap:balance}
+h2{font-family:var(--f-ui);font-weight:600;font-size:16px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:44px 0 12px}
+h3{font-weight:500;font-size:23px;margin:36px 0 8px;line-height:1.25;text-wrap:balance}
+p{margin:0 0 18px;max-width:66ch}
+.sub{font-size:28px;line-height:1.3;font-weight:400;letter-spacing:-.005em;margin:0 0 18px;text-wrap:balance}
+.lede{font-size:22px;line-height:1.45;color:var(--fg)}
+.contact{font-family:var(--f-ui);font-size:15px;display:flex;flex-wrap:wrap;gap:6px 16px;margin:0 0 8px}
+.contact a{display:inline-flex;align-items:center;gap:6px}.contact .ic{width:16px;height:16px;flex:none}
+ul.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+ul.list li{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:baseline}
+ul.list .d{font-family:var(--f-mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+ul.list small{display:block;color:var(--muted);font-size:16px}
+ul.plain{margin:0 0 18px;padding-left:22px}ul.plain li{margin-bottom:6px}
+ul.other a{font-weight:600}
+ol{padding-left:22px}ol li{margin-bottom:10px}
+.toc{font-family:var(--f-ui);font-size:15px;display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 8px}.toc a::before{content:"↓ ";color:var(--muted)}
+.books{list-style:none;margin:0 0 28px;padding:0}.books li{margin:0 0 6px;font-size:18px}.books .au{color:var(--muted)}.books .star{font-size:14px;margin-left:4px}.count{font-weight:400;letter-spacing:0;text-transform:none}
+.meta{font-family:var(--f-ui);font-size:14px;color:var(--muted);margin:0 0 28px}
+article h3{margin-top:40px}
+blockquote{margin:0 0 18px;padding:0 0 0 18px;border-left:3px solid var(--rule);color:var(--fg)}
+blockquote ul{padding-left:20px}
+figure{cursor:zoom-in;margin:24px 0 8px;background:var(--soft);border:1px solid var(--rule);border-radius:10px;padding:14px;overflow-x:auto}
+figure svg{display:block;width:100%;height:auto;min-width:560px;color:var(--fg);font-family:var(--f-ui)}
+figcaption{margin-top:10px;font-family:var(--f-ui);font-size:14px;color:var(--muted)}
+svg text{font-size:12px;fill:currentColor}svg .t{font-size:13px;font-weight:600}svg .s,svg .lab{font-size:11px;fill:var(--muted)}
+svg .box{fill:var(--bg);stroke:currentColor;stroke-width:1.5}svg .store{fill:var(--bg);stroke:var(--accent);stroke-width:1.5}
+svg .agent{fill:var(--bg);stroke:var(--muted);stroke-width:1.5;stroke-dasharray:5 3}svg .you{fill:var(--bg);stroke:var(--you);stroke-width:2}
+svg .ext{fill:var(--soft);stroke:var(--rule);stroke-width:1}svg .edge{fill:none;stroke:currentColor;stroke-width:1.3}
+svg .edge.a{stroke:var(--muted)}svg .edge.y{stroke:var(--you);stroke-width:1.8}svg .edge.d{stroke-dasharray:4 3}svg .gate{fill:none;stroke:var(--you);stroke-width:1.2;stroke-dasharray:3 3}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-family:var(--f-ui);font-size:13px;color:var(--muted);margin:0 0 8px}
+.legend span{display:inline-flex;align-items:center;gap:6px}.legend i{display:inline-block;width:20px;height:11px;border-radius:3px;border:2px solid}
+.year{margin:0 0 36px}.year h3{margin-top:0}
+.pending{font-family:var(--f-ui);font-size:13px;color:var(--you);margin:0 0 8px}
+footer{margin-top:64px;padding-top:18px;border-top:1px solid var(--rule);font-family:var(--f-ui);font-size:13.5px;color:var(--muted)}
+dialog.lb{border:0;padding:16px;background:var(--bg);color:var(--fg);border-radius:12px;max-width:min(96vw,1400px);width:auto;cursor:zoom-out}dialog.lb::backdrop{background:rgba(0,0,0,.55)}dialog.lb svg{display:block;width:min(92vw,1360px);height:auto;color:var(--fg);font-family:var(--f-ui)}dialog.lb p{font-family:var(--f-ui);font-size:14px;color:var(--muted);margin:10px 0 0}
+hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
+@media (max-width:480px){nav.top{flex-wrap:nowrap;white-space:nowrap;gap:0 12px;font-size:15px}nav.top .me{margin-right:auto}body{font-size:19px}h1{font-size:30px}.sub{font-size:23px}ul.list li{grid-template-columns:1fr}ul.list .d{order:2}}
+</style></head><body><div class="col"><nav class="top"><a class="me" href="../index.html">Tyler Sanchez</a><a href="../writing/chat-box.html">Writing</a><a href="../projects.html" aria-current="page">Projects</a><a href="../how-i-work.html">AI System</a></nav>
+<p class="meta" style="margin-bottom:6px"><a href="../projects.html">AI Projects</a> · live</p>
+<h1>Job Radar</h1>
+<p class="lede">Every morning a script pulls every product-management posting from 23 companies I'd consider working for, and a Claude run scores each one against a rubric I wrote about what I actually want. I see only the ones worth a look.</p>
+<nav class="toc" aria-label="On this page"><a href="#what">What it does</a><a href="#why">Why I built it</a><a href="#how">How it's built</a><a href="#learned">What I learned</a><a href="#status">Status</a></nav>
+<h2 id="what">What it does</h2>
+
+<p>Two jobs a day. Around 5am Denver time a GitHub Action fetches the PM postings from each company's own job board and commits the day's new ones to a repo. At 6:52am a scheduled Claude task reads each new posting in full, scores it 1 to 5 against the rubric, and writes anything scoring 3 or above to a Notion table with a one-line "why" a recruiter could read. Anything that scores a 4 or 5 also lands in my attention queue the same day; everything else waits for a Sunday review item that lists the week.</p>
+<p>I mark each row <i>Interested</i> or <i>Not for me</i>, sometimes with a note. The notes get folded back into the rubric, so the scoring drifts toward my actual judgment rather than my first description of it. It has been running since October 5 and reads about a hundred postings a week so I don't have to.</p>
+
+<h2 id="why">Why I built it</h2>
+
+<p>I'm planning a year away from full-time work, and the plan assumes the main levers for the next job are people and stories, not applications. But a rare ideal role can appear at any time, and I didn't want to spend an hour a week scanning career pages to catch it. The Radar is a passive net: it watches, I decide. It also turned out to be the cleanest small example of the shape I think most useful agents will take: fetch on a schedule, score against a written point of view, bring only the decisions to a human.</p>
+
+<h2 id="how">How it's built</h2>
+<figure>
+<svg viewBox="0 0 900 360" role="img" aria-label="At 5:17am a GitHub Actions job fetches postings from Greenhouse, Lever, Ashby, Workday, Eightfold, Rippling and Shopify boards and commits a JSON file. At 6:52am a Claude run reads the rubric and Tyler's past calls, scores each posting one to five, writes scores of three and up to the Notion Job Radar table and scores of four and five to the attention queue, which the Command Center tile shows. Tyler marks Interested or Not for me, and those calls revise the rubric.">
+<defs><marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
+<marker id="ara3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--agent)"/></marker>
+<marker id="ary3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--you)"/></marker></defs>
+<!-- boards -->
+<rect class="ext" x="20" y="40" width="150" height="110" rx="8"/>
+<text class="t" x="95" y="62" text-anchor="middle">Company boards</text>
+<text class="s" x="95" y="80" text-anchor="middle">Greenhouse · Lever · Ashby</text>
+<text class="s" x="95" y="96" text-anchor="middle">Workday · Eightfold</text>
+<text class="s" x="95" y="112" text-anchor="middle">Rippling · Shopify</text>
+<text class="s" x="95" y="134" text-anchor="middle">~20 companies, one adapter each</text>
+<!-- GH Actions -->
+<rect class="box" x="230" y="50" width="170" height="90" rx="8"/>
+<text class="t" x="315" y="74" text-anchor="middle">GitHub Actions</text>
+<text class="s" x="315" y="92" text-anchor="middle">5:17am  fetch_jobs.py</text>
+<text class="s" x="315" y="108" text-anchor="middle">PM title regex, exclusions</text>
+<text class="s" x="315" y="124" text-anchor="middle">commits data/new/&lt;date&gt;.json</text>
+<path class="edge" d="M170 95 L230 95" marker-end="url(#ar3)"/>
+<text class="lab" x="176" y="86">fetch</text>
+<!-- scoring run -->
+<rect class="agent" x="460" y="40" width="200" height="110" rx="8"/>
+<text class="t" x="560" y="64" text-anchor="middle">Claude scoring run</text>
+<text class="s" x="560" y="82" text-anchor="middle">6:52am, reads RUBRIC.md</text>
+<text class="s" x="560" y="98" text-anchor="middle">latitude &gt; level &gt; problem space</text>
+<text class="s" x="560" y="114" text-anchor="middle">score 1-5 + one-line why</text>
+<text class="s" x="560" y="130" text-anchor="middle">level signal, workplace, pay band</text>
+<path class="edge a d" d="M400 95 L460 95" marker-end="url(#ara3)"/>
+<text class="lab" x="404" y="86">reads</text>
+<!-- rubric -->
+<rect class="box" x="480" y="190" width="160" height="50" rx="8"/>
+<text class="t" x="560" y="211" text-anchor="middle">RUBRIC.md</text>
+<text class="s" x="560" y="228" text-anchor="middle">a written point of view</text>
+<path class="edge d" d="M560 190 L560 150" marker-end="url(#ar3)"/>
+<!-- Notion table -->
+<rect class="store" x="720" y="40" width="160" height="60" rx="8"/>
+<text class="t" x="800" y="63" text-anchor="middle">Job Radar table</text>
+<text class="s" x="800" y="81" text-anchor="middle">score ≥ 3, with the why</text>
+<path class="edge a" d="M660 70 L720 70" marker-end="url(#ara3)"/>
+<!-- queue -->
+<rect class="store" x="720" y="120" width="160" height="60" rx="8"/>
+<text class="t" x="800" y="143" text-anchor="middle">Attention Queue</text>
+<text class="s" x="800" y="161" text-anchor="middle">only 4s and 5s</text>
+<path class="edge a" d="M660 120 L720 150" marker-end="url(#ara3)"/>
+<!-- Command Center tile -->
+<rect class="box" x="720" y="200" width="160" height="50" rx="8"/>
+<text class="t" x="800" y="221" text-anchor="middle">Command Center tile</text>
+<text class="s" x="800" y="238" text-anchor="middle">top 3, counts, newest</text>
+<path class="edge" d="M800 180 L800 200" marker-end="url(#ar3)"/>
+<!-- Tyler -->
+<rect class="you" x="720" y="280" width="160" height="60" rx="8"/>
+<text class="t" x="800" y="303" text-anchor="middle">Tyler</text>
+<text class="s" x="800" y="321" text-anchor="middle">Interested · Not for me · notes</text>
+<path class="edge y" d="M800 250 L800 280" marker-end="url(#ary3)"/>
+<!-- feedback -->
+<path class="edge y d" d="M720 320 L560 320 L560 240" marker-end="url(#ary3)"/>
+<text class="lab" x="580" y="312">his calls and notes revise the rubric</text>
+<text class="lab" x="20" y="200">Never automated: applying, replying to recruiters, marking a role Not for me.</text>
+</svg>
+<figcaption>Fetch on a schedule, score against a written rubric, surface only the top scores. The rubric, not the model, is where the quality comes from, and my calls are what revise it.</figcaption>
+</figure>
+
+<ul class="plain">
+<li><b>Fetch.</b> A private repo with one adapter per job-board platform: Greenhouse, Lever, Ashby, Rippling, Workday (Zillow), Eightfold (Netflix), and a scraper for Shopify, which publishes no feed. A GitHub Action runs the fetch daily and commits new postings as plain JSON, so the history is a git log. Why GitHub Actions: scheduled Claude runs can't open arbitrary websites without a per-URL approval nobody is there to give. Splitting deterministic fetching from judgment-heavy scoring solved that and made each half easier to test.</li>
+<li><b>Score.</b> A Claude scheduled task reads the day's file and <code>RUBRIC.md</code>. The rubric scores first on latitude to originate product bets, then level, then problem space. Later rules came straight from my notes on real postings: AI-native teams weigh heavily, "traffic cop" seats on shared surfaces cap at 3, fixed in-office days outside Denver cap at 3 but are still shown, and location is a flag rather than a filter. Director and head-of-product titles are scored on strategy ownership instead of being passed on title.</li>
+<li><b>Store and show.</b> One Notion database: role, company, fit, score, why, status, my notes, level signal, location, link. A saved view feeds a tile on my Command Center map and the Sunday review. Everything reads through saved views because Notion's row-query API has a workspace quota and views don't.</li>
+<li><b>Learn.</b> Daily runs also read the <i>Maybe</i> rows and my notes, and periodic re-scores check the passes for false negatives. So far, none.</li>
+</ul>
+
+<p class="meta">The code, prompts and evals are on GitHub: <a href="https://github.com/chez-san-cmd/job-radar" target="_blank" rel="noopener">github.com/chez-san-cmd/job-radar</a>. The README has the implementation details this page leaves out.</p>
+<h2 id="learned">What I learned</h2>
+
+<p><b>The hard part is not the model. It is the rubric.</b> The scoring got good the week I stopped describing jobs I'd like and started writing down what I was actually optimizing for, including the uncomfortable parts: pay floor, hours, how AI-native a team is. The model was fine from day one. My own clarity was the bottleneck.</p>
+<p><b>Flags beat filters.</b> My first instinct was to filter out roles in other cities. Keeping them visible as a capped score instead leaves room for the conversation I actually want to have, which is whether the role could be rescoped to remote.</p>
+<p><b>Some boards don't move.</b> Shopify's careers page is one evergreen posting, so the Radar will almost never show anything new there. For companies like that, a person on the inside matters more than a feed.</p>
+<p><b>Scheduling is the flaky part.</b> GitHub's cron has run hours late, so scoring sometimes ran before the day's fetch landed. The fix (start scoring when the fetch finishes, not at a fixed time) is the kind of plumbing that takes more of the week than any prompt.</p>
+
+<h2 id="status">Status <span class="count">· October 2026</span></h2>
+
+<p>Live since October 5, 2026. Watching 23 companies. A cleaned-up public version, with the fetch adapters, a <code>RUBRIC.md</code> template and the evals I use to check the scoring, goes up on GitHub in mid-November with a Show HN post. Until then the repo is private; the link above will go live when it does.</p>
+
+<p class="meta"><a href="../projects.html">← All projects</a></p>
+<footer>© 2026 Tyler Sanchez · Denver · tylersanchez@gmail.com</footer></div><dialog class="lb" id="lb"><div id="lb-body"></div><p>Click anywhere or press Esc to close.</p></dialog>
+<script>
+(function(){var d=document.getElementById('lb'),b=document.getElementById('lb-body');
+document.querySelectorAll('figure').forEach(function(f){f.setAttribute('title','Click to enlarge');f.addEventListener('click',function(){var s=f.querySelector('svg');if(!s)return;b.innerHTML='';b.appendChild(s.cloneNode(true));d.showModal();});});
+d.addEventListener('click',function(){d.close();});})();
+</script>
+</body></html>
