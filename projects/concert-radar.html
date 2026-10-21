@@ -1,0 +1,151 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Concert Radar · Tyler Sanchez</title><meta name="claude:viewport-fit-sides" content="cover"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png"><link rel="icon" type="image/png" sizes="512x512" href="../icon-512.png"><link rel="apple-touch-icon" href="../apple-touch-icon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap"><style>
+/* Layout: one 640px column, left-aligned, nav as a single line of text. Quiet enough that the writing is the design. */
+:root{--bg:#F6F7F5;--fg:#15201E;--muted:#5F6E6A;--accent:#0F6E63;--ul:#8FC9BC;--rule:#D9DEDB;--soft:#ECF0EE;--you:#B8336A;
+  --f-body:"Newsreader","Iowan Old Style",Georgia,serif;--f-ui:"IBM Plex Sans",system-ui,-apple-system,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--ul:#2F6B5E;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--ul:#2F6B5E;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:20px;line-height:1.55;padding-block:0 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.col{max-width:640px;margin:0 auto}
+a{color:var(--accent);text-decoration:underline;text-decoration-color:var(--ul);text-decoration-thickness:1.5px;text-underline-offset:3px}a:hover{text-decoration-color:var(--accent)}
+nav.top a,.contact a,.toc a,ul.list a,.books a{text-decoration:none}nav.top a:hover,.contact a:hover,.toc a:hover,ul.list a:hover,.books a:hover{text-decoration:underline;text-decoration-color:var(--accent)}
+nav.top{font-family:var(--f-ui);font-size:16px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--rule);margin-bottom:36px}
+nav.top .me{font-weight:600;color:var(--fg);margin-right:auto}
+nav.top a[aria-current]{color:var(--fg);border-bottom:2px solid var(--accent)}
+.me-photo{display:block;width:150px;height:150px;border-radius:12px;object-fit:cover;margin:0 0 20px}
+h1{font-weight:500;font-size:36px;line-height:1.15;letter-spacing:-.01em;margin:0 0 14px;text-wrap:balance}
+h2{font-family:var(--f-ui);font-weight:600;font-size:16px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:44px 0 12px}
+h3{font-weight:500;font-size:23px;margin:36px 0 8px;line-height:1.25;text-wrap:balance}
+p{margin:0 0 18px;max-width:66ch}
+.sub{font-size:28px;line-height:1.3;font-weight:400;letter-spacing:-.005em;margin:0 0 18px;text-wrap:balance}
+.lede{font-size:22px;line-height:1.45;color:var(--fg)}
+.contact{font-family:var(--f-ui);font-size:15px;display:flex;flex-wrap:wrap;gap:6px 16px;margin:0 0 8px}
+.contact a{display:inline-flex;align-items:center;gap:6px}.contact .ic{width:16px;height:16px;flex:none}
+ul.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+ul.list li{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:baseline}
+ul.list .d{font-family:var(--f-mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+ul.list small{display:block;color:var(--muted);font-size:16px}
+ul.plain{margin:0 0 18px;padding-left:22px}ul.plain li{margin-bottom:6px}
+ul.other a{font-weight:600}
+ol{padding-left:22px}ol li{margin-bottom:10px}
+.toc{font-family:var(--f-ui);font-size:15px;display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 8px}.toc a::before{content:"↓ ";color:var(--muted)}
+.books{list-style:none;margin:0 0 28px;padding:0}.books li{margin:0 0 6px;font-size:18px}.books .au{color:var(--muted)}.books .star{font-size:14px;margin-left:4px}.count{font-weight:400;letter-spacing:0;text-transform:none}
+.meta{font-family:var(--f-ui);font-size:14px;color:var(--muted);margin:0 0 28px}
+article h3{margin-top:40px}
+blockquote{margin:0 0 18px;padding:0 0 0 18px;border-left:3px solid var(--rule);color:var(--fg)}
+blockquote ul{padding-left:20px}
+figure{cursor:zoom-in;margin:24px 0 8px;background:var(--soft);border:1px solid var(--rule);border-radius:10px;padding:14px;overflow-x:auto}
+figure svg{display:block;width:100%;height:auto;min-width:560px;color:var(--fg);font-family:var(--f-ui)}
+figcaption{margin-top:10px;font-family:var(--f-ui);font-size:14px;color:var(--muted)}
+svg text{font-size:12px;fill:currentColor}svg .t{font-size:13px;font-weight:600}svg .s,svg .lab{font-size:11px;fill:var(--muted)}
+svg .box{fill:var(--bg);stroke:currentColor;stroke-width:1.5}svg .store{fill:var(--bg);stroke:var(--accent);stroke-width:1.5}
+svg .agent{fill:var(--bg);stroke:var(--muted);stroke-width:1.5;stroke-dasharray:5 3}svg .you{fill:var(--bg);stroke:var(--you);stroke-width:2}
+svg .ext{fill:var(--soft);stroke:var(--rule);stroke-width:1}svg .edge{fill:none;stroke:currentColor;stroke-width:1.3}
+svg .edge.a{stroke:var(--muted)}svg .edge.y{stroke:var(--you);stroke-width:1.8}svg .edge.d{stroke-dasharray:4 3}svg .gate{fill:none;stroke:var(--you);stroke-width:1.2;stroke-dasharray:3 3}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-family:var(--f-ui);font-size:13px;color:var(--muted);margin:0 0 8px}
+.legend span{display:inline-flex;align-items:center;gap:6px}.legend i{display:inline-block;width:20px;height:11px;border-radius:3px;border:2px solid}
+.year{margin:0 0 36px}.year h3{margin-top:0}
+.pending{font-family:var(--f-ui);font-size:13px;color:var(--you);margin:0 0 8px}
+footer{margin-top:64px;padding-top:18px;border-top:1px solid var(--rule);font-family:var(--f-ui);font-size:13.5px;color:var(--muted)}
+dialog.lb{border:0;padding:16px;background:var(--bg);color:var(--fg);border-radius:12px;max-width:min(96vw,1400px);width:auto;cursor:zoom-out}dialog.lb::backdrop{background:rgba(0,0,0,.55)}dialog.lb svg{display:block;width:min(92vw,1360px);height:auto;color:var(--fg);font-family:var(--f-ui)}dialog.lb p{font-family:var(--f-ui);font-size:14px;color:var(--muted);margin:10px 0 0}
+hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
+@media (max-width:480px){nav.top{flex-wrap:nowrap;white-space:nowrap;gap:0 12px;font-size:15px}nav.top .me{margin-right:auto}body{font-size:19px}h1{font-size:30px}.sub{font-size:23px}ul.list li{grid-template-columns:1fr}ul.list .d{order:2}}
+</style></head><body><div class="col"><nav class="top"><a class="me" href="../index.html">Tyler Sanchez</a><a href="../writing/chat-box.html">Writing</a><a href="../projects.html" aria-current="page">Projects</a><a href="../how-i-work.html">AI System</a></nav>
+<p class="meta" style="margin-bottom:6px"><a href="../projects.html">AI Projects</a> · live</p>
+<h1>Concert Radar</h1>
+<p class="lede">Presale alerts for Denver shows by artists I'd actually buy tickets for, early enough that popular shows don't push me to the resale market. Claude finds and flags; I buy every ticket myself.</p>
+<nav class="toc" aria-label="On this page"><a href="#what">What it does</a><a href="#why">Why I built it</a><a href="#how">How it's built</a><a href="#learned">What I learned</a><a href="#status">Status</a></nav>
+<h2 id="what">What it does</h2>
+
+<p>Two tiers. <b>Tier 1</b> is the artists I know I like: everyone I've bought tickets for, saved on Spotify, or play the most. A match sends a push to my phone right away and, if the presale is still ahead, puts a fifteen-minute hold on my calendar at presale start. <b>Tier 2</b> is discovery: artists Claude thinks I might like, or similar to what I already listen to, collected quietly into a Thursday-morning digest while that day's presales are still open. Each pick comes with one sentence on what the artist sounds like and a Spotify link, because my knowledge of newer artists has lapsed over the past decade.</p>
+<p>Two scheduled runs a week, Tuesday and Thursday morning, each searching six days back through the venue and promoter newsletters already landing in my Gmail: AEG's Thursday "New Shows" list, Live Nation venues, the Paramount, the Botanic Gardens, Seated, Spotify's concert emails, and since mid-October Bandsintown. Matches become rows in a Notion table with the presale window, the type (artist, venue, registration, card), the password if there is one, the ticket link, and any calendar conflict on the show date. Tier 1 presales also get a tile on my Command Center.</p>
+
+<h2 id="why">Why I built it</h2>
+
+<p>I already got the main feed. The gaps were filtering, timing, and coverage outside AEG. The real lesson was timing: Hans Zimmer at Ball Arena needed a registration a week before the presale, and the code arrived the day before. For the highest-demand shows, the alert that matters is the announcement-day one, not the presale-day one. By the time a show hits the Thursday list, an earlier artist or venue presale may already have run.</p>
+
+<h2 id="how">How it's built</h2>
+<figure>
+<svg viewBox="0 0 900 340" role="img" aria-label="Spotify listening history, Bandsintown Denver listings and presale emails archived in Gmail feed a Concert Radar run that keeps a tiered artist list and writes shows with presale windows and codes to a Notion table. Tier 1 shows appear on the Command Center tile with the code; Tier 2 goes to a weekly digest. Tyler buys the tickets.">
+<defs><marker id="ar4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
+<marker id="ara4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--agent)"/></marker>
+<marker id="ary4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--you)"/></marker></defs>
+<!-- inputs -->
+<rect class="ext" x="20" y="30" width="190" height="60" rx="8"/>
+<text class="t" x="115" y="53" text-anchor="middle">Spotify</text>
+<text class="s" x="115" y="71" text-anchor="middle">top artists, library, radio seeds</text>
+<rect class="ext" x="20" y="120" width="190" height="60" rx="8"/>
+<text class="t" x="115" y="143" text-anchor="middle">Bandsintown</text>
+<text class="s" x="115" y="161" text-anchor="middle">who is coming to Denver</text>
+<rect class="ext" x="20" y="210" width="190" height="70" rx="8"/>
+<text class="t" x="115" y="233" text-anchor="middle">Gmail</text>
+<text class="s" x="115" y="251" text-anchor="middle">venue + promoter newsletters</text>
+<text class="s" x="115" y="267" text-anchor="middle">filtered to archive, never the inbox</text>
+<!-- run -->
+<rect class="agent" x="290" y="90" width="220" height="130" rx="8"/>
+<text class="t" x="400" y="114" text-anchor="middle">Concert Radar run</text>
+<text class="s" x="400" y="134" text-anchor="middle">match artists to listings</text>
+<text class="s" x="400" y="150" text-anchor="middle">find the presale window + code</text>
+<text class="s" x="400" y="166" text-anchor="middle">in the email</text>
+<text class="s" x="400" y="186" text-anchor="middle">Tier 1 = always alert</text>
+<text class="s" x="400" y="202" text-anchor="middle">Tier 2 = weekly discovery digest</text>
+<path class="edge a d" d="M210 60 L290 120" marker-end="url(#ara4)"/>
+<text class="lab" x="222" y="84">taste</text>
+<path class="edge a d" d="M210 150 L290 155" marker-end="url(#ara4)"/>
+<text class="lab" x="222" y="146">listings</text>
+<path class="edge a d" d="M210 240 L290 190" marker-end="url(#ara4)"/>
+<text class="lab" x="218" y="226">presale emails</text>
+<!-- table -->
+<rect class="store" x="590" y="40" width="190" height="70" rx="8"/>
+<text class="t" x="685" y="63" text-anchor="middle">Concert Radar table</text>
+<text class="s" x="685" y="81" text-anchor="middle">show, venue, presale start/end,</text>
+<text class="s" x="685" y="97" text-anchor="middle">general on-sale, code, tier</text>
+<path class="edge a" d="M510 120 L590 80" marker-end="url(#ara4)"/>
+<text class="lab" x="520" y="92">writes, retires when over</text>
+<!-- tile -->
+<rect class="box" x="590" y="150" width="190" height="60" rx="8"/>
+<text class="t" x="685" y="173" text-anchor="middle">Command Center tile</text>
+<text class="s" x="685" y="191" text-anchor="middle">Tier 1 only, code right on the row</text>
+<path class="edge" d="M685 110 L685 150" marker-end="url(#ar4)"/>
+<!-- digest -->
+<rect class="box" x="590" y="240" width="190" height="50" rx="8"/>
+<text class="t" x="685" y="261" text-anchor="middle">Weekly digest (Tier 2)</text>
+<text class="s" x="685" y="278" text-anchor="middle">artists I might like, in the queue</text>
+<path class="edge a" d="M510 190 L590 262" marker-end="url(#ara4)"/>
+<!-- Tyler -->
+<rect class="you" x="800" y="130" width="90" height="100" rx="8"/>
+<text class="t" x="845" y="170" text-anchor="middle">Tyler</text>
+<text class="s" x="845" y="188" text-anchor="middle">buys</text>
+<path class="edge y" d="M780 180 L800 180" marker-end="url(#ary4)"/>
+<text class="lab" x="20" y="320">The run never buys and never registers for a presale; it tells me when the window opens and what to type.</text>
+</svg>
+<figcaption>Three inputs, one match, one table. The tile shows only the artists I would always want to see, with the presale code, so the decision is a tap.</figcaption>
+</figure>
+
+<ul class="plain">
+<li><b>Taste List.</b> A Notion table of artists with a tier (Tier 1, Tier 2, or Skip), the evidence for the tier, and notes. 34 artists at launch, 23 in Tier 1, seeded from Spotify's most-played and saved lists, two years of ticket orders in Gmail, and Spotify's own concert recommendations. The runs read it fresh every time, and Tier 2 rows are Claude's guesses: I move one to Tier 1 or Skip to teach it.</li>
+<li><b>Two Claude scheduled tasks</b> that share one instruction set and re-read a "Run rules" section of the project's Notion book every run, so changing the behavior means editing a paragraph, not a prompt in code. The rules cover radius (Fort Collins to Colorado Springs plus the mountain venues for Tier 1, metro Denver for Tier 2), the eight-pick weekly cap on Tier 2, support acts counting as Tier 2, and a rule that every time is written as an absolute ("closes Thu Oct 15, 10pm"), never "tonight."</li>
+<li><b>Connectors.</b> Gmail for the newsletters (a filter archives them so they skip my inbox, and the Radar push becomes the signal), Spotify for taste and links, Google Calendar for conflict checks and holds, Notion for the record.</li>
+<li><b>Boundaries.</b> The runs never buy, register, or join a queue, and they never write to the Attention Queue: this is the one fun project allowed to send phone alerts directly, because presale windows last hours.</li>
+</ul>
+<p class="meta">The code is the two task prompts plus the Notion schemas. A standalone version isn't on the roadmap yet; if it lands, it'll be on <a href="https://github.com/chez-san-cmd" target="_blank" rel="noopener">GitHub</a>.</p>
+
+
+<h2 id="learned">What I learned</h2>
+
+<p><b>The weekly email is the last window, not the first.</b> Leon Bridges at Red Rocks showed up in the AEG list as "Now – Thu 10pm," which means an earlier presale had already run, and by the time I read the digest on Monday, general on-sale had started. Announcement-day coverage needs the artist-level feeds (Bandsintown, Spotify), not the venue roundups.</p>
+<p><b>Twice a week is a real trade-off.</b> Moving from daily to Tuesday and Thursday cut noise, but a presale announced late Thursday and closed by Tuesday is missed.</p>
+<p><b>Say the day.</b> After the Leon Bridges miss, every digest line carries an absolute date and time. "Tonight" in an email I read three days later means nothing.</p>
+
+<h2 id="status">Status <span class="count">· October 2026</span></h2>
+
+<p>Live since October 9, 2026. First digest went out October 15 with six discovery picks; no Tier 1 match yet. On the list: finish the Bandsintown and Seated setups, add artist mailing lists for the Tier 1 acts, and test whether a scheduled run can reach Ticketmaster's Discovery API, which returns named presale windows directly.</p>
+
+<p class="meta"><a href="../projects.html">← All projects</a></p>
+<footer>© 2026 Tyler Sanchez · Denver · tylersanchez@gmail.com</footer></div><dialog class="lb" id="lb"><div id="lb-body"></div><p>Click anywhere or press Esc to close.</p></dialog>
+<script>
+(function(){var d=document.getElementById('lb'),b=document.getElementById('lb-body');
+document.querySelectorAll('figure').forEach(function(f){f.setAttribute('title','Click to enlarge');f.addEventListener('click',function(){var s=f.querySelector('svg');if(!s)return;b.innerHTML='';b.appendChild(s.cloneNode(true));d.showModal();});});
+d.addEventListener('click',function(){d.close();});})();
+</script>
+</body></html>

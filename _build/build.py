@@ -206,6 +206,203 @@ project_page("job-radar", "Job Radar", "live",
 <p>Live since October 5, 2026. Watching 23 companies. A cleaned-up public version, with the fetch adapters, a <code>RUBRIC.md</code> template and the evals I use to check the scoring, goes up on GitHub in mid-November with a Show HN post. Until then the repo is private; the link above will go live when it does.</p>
 """)
 
+
+# ---------- Project: Command Center ----------
+CC_FIG = """<figure>
+<svg viewBox="0 0 900 420" role="img" aria-label="Tyler reads one Command Center page laid out like a site plan: one tile per project, one marker per item that needs him, a reply box on each. The page reads the Notion Attention Queue through a saved view every 15 minutes. Twice a day, and whenever Tyler replies from the page, a scheduled Claude run checks Gmail and the to-do list, reads the project's book, works up to four queued items, and writes one queue item per decision with the prep and a recommendation attached.">
+<defs>
+<marker id="ar6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
+<marker id="ara6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--muted)"/></marker>
+<marker id="ary6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--you)"/></marker>
+</defs>
+<!-- Tyler -->
+<rect class="you" x="20" y="60" width="180" height="64" rx="8"/>
+<text class="t" x="110" y="86" text-anchor="middle">Tyler</text>
+<text class="s" x="110" y="104" text-anchor="middle">5-second read · one-line reply</text>
+<!-- The page -->
+<rect class="box" x="230" y="30" width="330" height="190" rx="8"/>
+<text class="t" x="395" y="54" text-anchor="middle">Command Center page (one HTML file)</text>
+<rect class="box" x="246" y="68" width="84" height="46" rx="5"/><text class="s" x="288" y="88" text-anchor="middle">Albion</text><circle cx="320" cy="76" r="5" style="fill:var(--you)"/>
+<rect class="box" x="338" y="68" width="84" height="46" rx="5"/><text class="s" x="380" y="88" text-anchor="middle">Return to Work</text><circle cx="412" cy="76" r="5" style="fill:var(--you)"/>
+<rect class="box" x="430" y="68" width="84" height="46" rx="5"/><text class="s" x="472" y="88" text-anchor="middle">Health Plan</text>
+<rect class="box" x="246" y="122" width="84" height="46" rx="5"/><text class="s" x="288" y="142" text-anchor="middle">Estate</text>
+<rect class="box" x="338" y="122" width="84" height="46" rx="5"/><text class="s" x="380" y="142" text-anchor="middle">Job Radar</text>
+<rect class="ext" x="430" y="122" width="84" height="46" rx="5"/><text class="s" x="472" y="142" text-anchor="middle">Fun yard</text>
+<text class="s" x="246" y="190">tile per project · marker per item · reply box per card</text>
+<text class="s" x="246" y="206">🚨 hard deadline inside 3 days · ⚪ soft dates slip, never red</text>
+<!-- Notion -->
+<rect class="store" x="230" y="270" width="330" height="120" rx="8"/>
+<text class="t" x="395" y="294" text-anchor="middle">Notion · Attention Queue</text>
+<text x="246" y="318">Item · Project · Ask (Decide / Approve / Context / Do)</text>
+<text x="246" y="338">Status · Deadline (Hard / Soft) · Due · Urgency</text>
+<text x="246" y="358">Prepared · Recommendation · Link</text>
+<text class="s" x="246" y="378">+ one Project Book per project</text>
+<!-- Claude run -->
+<rect class="agent" x="620" y="150" width="250" height="110" rx="8"/>
+<text class="t" x="745" y="176" text-anchor="middle">Queue run (scheduled Claude)</text>
+<text class="s" x="745" y="194" text-anchor="middle">7:53am · 3:53pm · or when a reply arrives</text>
+<text class="s" x="745" y="212" text-anchor="middle">1 check inbox  2 read the book</text>
+<text class="s" x="745" y="228" text-anchor="middle">3 work ≤4 items to the human-only step</text>
+<text class="s" x="745" y="244" text-anchor="middle">4 write one queue item per decision</text>
+<!-- outside -->
+<rect class="ext" x="620" y="330" width="76" height="34" rx="6"/><text x="658" y="351" text-anchor="middle">Gmail</text>
+<rect class="ext" x="704" y="330" width="76" height="34" rx="6"/><text x="742" y="351" text-anchor="middle">Calendar</text>
+<rect class="ext" x="788" y="330" width="82" height="34" rx="6"/><text x="829" y="351" text-anchor="middle">To-Do list</text>
+<!-- edges -->
+<path class="edge y" d="M200 92 L230 92" marker-end="url(#ary6)"/>
+<path class="edge" d="M395 220 L395 270" marker-end="url(#ar6)" marker-start="url(#ar6)"/>
+<text class="lab" x="405" y="250">saved view, every 15 min</text>
+<path class="edge y" d="M560 100 L745 100 L745 150" marker-end="url(#ary6)"/>
+<text class="lab" x="572" y="92">reply box → starts a run now</text>
+<path class="edge a" d="M620 240 L560 290" marker-end="url(#ara6)"/>
+<text class="lab" x="600" y="282">writes items + recommendation</text>
+<path class="edge a d" d="M560 350 L620 258" marker-end="url(#ara6)"/>
+<text class="lab" x="570" y="372">reads the book first</text>
+<path class="edge a d" d="M745 330 L745 260" marker-end="url(#ara6)"/>
+<path class="edge a d" d="M658 330 L690 260"/><path class="edge a d" d="M829 330 L800 260"/>
+<text class="lab" x="752" y="300">read; drafts only</text>
+<!-- gate -->
+<rect class="gate" x="12" y="150" width="196" height="60" rx="8"/>
+<text class="s" x="110" y="172" text-anchor="middle" style="fill:var(--you)">Human gate</text>
+<text class="s" x="110" y="188" text-anchor="middle">nothing sent · nothing bought</text>
+<text class="s" x="110" y="202" text-anchor="middle">to-dos never checked off for me</text>
+</svg>
+<figcaption>A site plan, not a feed: fixed tiles, one marker per open item, and a reply box that starts the next run. The queue is a Notion table; the page is one HTML file that reads it.</figcaption>
+</figure>"""
+project_page("command-center", "Command Center", "live",
+  lede="One page that shows every open project in my life as a tile in a fixed place, with one marker per item that needs me. Agents do the work; I approve, decide, and supply context. If I look at it for five seconds I should know whether anything is on fire and whether anything is mine.",
+  what="""
+<p>Underneath the page is one Notion table, the Attention Queue: one row per thing waiting on me, across every project. Each row says which project it belongs to, what kind of answer it needs (<i>Decide</i>, <i>Approve</i>, <i>Context</i>, or <i>Do</i>), whether the deadline is hard or soft, what the agent already prepared, and what it recommends. Every agent run in my life ends by writing to this table.</p>
+<p>Twice a day, at 7:53am and 3:53pm, a scheduled Claude run works the queue: it checks my inbox for replies before trusting the queue, sweeps my to-do list for anything tagged for it, reads the relevant Project Book, takes up to four items as far as an agent is allowed to, and sends me a short phone summary. The page itself refreshes from Notion every fifteen minutes. Each item card has a reply box; sending a line saves it as a comment on the item and starts a run immediately, so I get an answer in minutes rather than at the next scheduled run. A "Mark done" checkbox writes back to Notion. That's the whole interface.</p>
+""",
+  why="""
+<p>Every AI assistant I'd used asked me to start. I open a window, remember what I needed, type it, read the answer. What I was missing was the colleague who notices the presale opens Thursday at 10, who already read the forty-message thread with the architect, who says "you have two decisions today and I prepped both." That colleague holds the initiative and hands it back only where my judgment is required.</p>
+<p>The parts of my life it helps with don't change much from year to year: health, money, the house, work, the people I care about. Fixed categories want a fixed place on the screen, not a scrolling conversation. So the page is laid out like a site plan. I'm a visual person, and I wanted to see progress and what needs me across every project at once.</p>
+""",
+  fig=CC_FIG,
+  how_built="""
+<ul class="plain">
+<li><b>The record is Notion.</b> An Attention Queue database plus one Project Book page per project (brief, decision log, open questions, session log). Notion is the system of record because it's the one tool both I and the agents can read and edit, and it works on my phone. If it isn't in Notion, the agent doesn't know it.</li>
+<li><b>The page is one HTML file.</b> No framework. It reads the queue through the Notion connector and draws projects as plots and items as markers. It reads a saved view rather than querying rows, because Notion's row queries have a workspace quota that the first version exhausted in a day; views don't.</li>
+<li><b>The attention hierarchy is a formula.</b> Every item has a Hard or Soft deadline and a due date; a Notion formula turns that into an urgency. Hard items go 🚨 Critical inside three days, 🔴 Urgent at four to seven, 🟠 Coming up at eight to fourteen, 🟢 Calm beyond. Soft items never turn red; past due they show ⚪ Slipped and the next run proposes a new date instead of nagging. When anything is Critical, the phone summary leads with it even if nothing else changed. Fun projects live in their own yard with no dates, no colors, and no alerts.</li>
+<li><b>Runs follow a written protocol.</b> Inbox before queue. Read the book before acting. Stop at the human-only step: deciding, signing, sending in my name, moving money, conversations with family. Write one queue item per decision with a recommendation at the top and the prep underneath. Drafts are written in my voice from a saved style profile, and when I edit a draft before sending, the run compares the two and offers to update the profile. Every run ends by logging what it learned to the book; changes to decisions or preferences are gated behind one item I answer with "go."</li>
+<li><b>Two rules I'd keep if I threw everything else out.</b> The one-minute rule: if an item takes me longer than a minute to act on, the agent didn't finish its prep, and it goes back. And batching: a few items per project per day, never a stream of pings.</li>
+</ul>
+<p class="meta">There's no public repo for the Command Center because the page is wired to my own Notion workspace and holds personal data. The pieces that generalize, the loop and the Project Books memory model, are on <a href="../how-i-work.html">How I work with AI</a>, and a longer write-up is coming in late November.</p>
+""",
+  learned="""
+<p><b>It's agile the way the manifesto meant it.</b> The page has had something like a hundred changes since the end of September, and the pattern is always the same: I use it for a few days, something feels off, I describe the change, it ships in minutes. Filters. Sorting. A checkbox. Replying inline. A rule that every recommendation leads with the answer. No single change was the breakthrough; a thousand small tweaks were. For most of my career, iterating a hundred times in a few weeks was something we said we did. This is the first time it has been literally true.</p>
+<p><b>Product taste is the scarce input.</b> Building is cheap now, so the hours go to deciding what should exist, where it lives on the screen, and what the agent may touch. I've spent far more time on what the morning page looks like than on any script behind it, and I think that ratio is right.</p>
+<p><b>Check the inbox before trusting the queue.</b> The very first run worked a queue that was already behind my email. Every run now starts with Gmail.</p>
+<p><b>Gating stops drift.</b> Early on, the agent's recommendations kept getting logged as my decisions. Now anything that changes a decision, a preference or a brief waits behind a single approval item. Memory is a page I can read, not a transcript I have to scroll, and I want to be the one who edits it.</p>
+""",
+  status_text="""
+<p>Running daily since September 30, 2026; the page is on roughly its twelfth version. Open threads: triaging text messages (the SMS backup misses RCS), signed-in browsing for scheduled runs, and simplifying the Status × Ask schema. A full write-up of the layout, the attention hierarchy and the reply loop is planned for late November.</p>
+""")
+
+# ---------- Project: Concert Radar ----------
+project_page("concert-radar", "Concert Radar", "live",
+  lede="Presale alerts for Denver shows by artists I'd actually buy tickets for, early enough that popular shows don't push me to the resale market. Claude finds and flags; I buy every ticket myself.",
+  what="""
+<p>Two tiers. <b>Tier 1</b> is the artists I know I like: everyone I've bought tickets for, saved on Spotify, or play the most. A match sends a push to my phone right away and, if the presale is still ahead, puts a fifteen-minute hold on my calendar at presale start. <b>Tier 2</b> is discovery: artists Claude thinks I might like, or similar to what I already listen to, collected quietly into a Thursday-morning digest while that day's presales are still open. Each pick comes with one sentence on what the artist sounds like and a Spotify link, because my knowledge of newer artists has lapsed over the past decade.</p>
+<p>Two scheduled runs a week, Tuesday and Thursday morning, each searching six days back through the venue and promoter newsletters already landing in my Gmail: AEG's Thursday "New Shows" list, Live Nation venues, the Paramount, the Botanic Gardens, Seated, Spotify's concert emails, and since mid-October Bandsintown. Matches become rows in a Notion table with the presale window, the type (artist, venue, registration, card), the password if there is one, the ticket link, and any calendar conflict on the show date. Tier 1 presales also get a tile on my Command Center.</p>
+""",
+  why="""
+<p>I already got the main feed. The gaps were filtering, timing, and coverage outside AEG. The real lesson was timing: Hans Zimmer at Ball Arena needed a registration a week before the presale, and the code arrived the day before. For the highest-demand shows, the alert that matters is the announcement-day one, not the presale-day one. By the time a show hits the Thursday list, an earlier artist or venue presale may already have run.</p>
+""",
+  fig=figs[3][2],
+  how_built="""
+<ul class="plain">
+<li><b>Taste List.</b> A Notion table of artists with a tier (Tier 1, Tier 2, or Skip), the evidence for the tier, and notes. 34 artists at launch, 23 in Tier 1, seeded from Spotify's most-played and saved lists, two years of ticket orders in Gmail, and Spotify's own concert recommendations. The runs read it fresh every time, and Tier 2 rows are Claude's guesses: I move one to Tier 1 or Skip to teach it.</li>
+<li><b>Two Claude scheduled tasks</b> that share one instruction set and re-read a "Run rules" section of the project's Notion book every run, so changing the behavior means editing a paragraph, not a prompt in code. The rules cover radius (Fort Collins to Colorado Springs plus the mountain venues for Tier 1, metro Denver for Tier 2), the eight-pick weekly cap on Tier 2, support acts counting as Tier 2, and a rule that every time is written as an absolute ("closes Thu Oct 15, 10pm"), never "tonight."</li>
+<li><b>Connectors.</b> Gmail for the newsletters (a filter archives them so they skip my inbox, and the Radar push becomes the signal), Spotify for taste and links, Google Calendar for conflict checks and holds, Notion for the record.</li>
+<li><b>Boundaries.</b> The runs never buy, register, or join a queue, and they never write to the Attention Queue: this is the one fun project allowed to send phone alerts directly, because presale windows last hours.</li>
+</ul>
+<p class="meta">The code is the two task prompts plus the Notion schemas. A standalone version isn't on the roadmap yet; if it lands, it'll be on <a href="https://github.com/chez-san-cmd" target="_blank" rel="noopener">GitHub</a>.</p>
+""",
+  learned="""
+<p><b>The weekly email is the last window, not the first.</b> Leon Bridges at Red Rocks showed up in the AEG list as "Now – Thu 10pm," which means an earlier presale had already run, and by the time I read the digest on Monday, general on-sale had started. Announcement-day coverage needs the artist-level feeds (Bandsintown, Spotify), not the venue roundups.</p>
+<p><b>Twice a week is a real trade-off.</b> Moving from daily to Tuesday and Thursday cut noise, but a presale announced late Thursday and closed by Tuesday is missed.</p>
+<p><b>Say the day.</b> After the Leon Bridges miss, every digest line carries an absolute date and time. "Tonight" in an email I read three days later means nothing.</p>
+""",
+  status_text="""
+<p>Live since October 9, 2026. First digest went out October 15 with six discovery picks; no Tier 1 match yet. On the list: finish the Bandsintown and Seated setups, add artist mailing lists for the Tier 1 acts, and test whether a scheduled run can reach Ticketmaster's Discovery API, which returns named presale windows directly.</p>
+""")
+
+# ---------- Project: Purchase advisor ----------
+PA_FIG = """<figure>
+<svg viewBox="0 0 900 320" role="img" aria-label="Flow: Tyler asks about a purchase. For anything over $250 a premise check asks whether it is needed, why now, and what happens if he waits; it can end in 'wait' or 'don't buy'. Otherwise the skill defines value as lifetime usefulness over total cost of ownership, researches three tiers from independent long-term testing and owner reports, and recommends: verdict first, top pick and runner-up, target price, what would change the call, and rationalization flags. Tyler buys.">
+<defs>
+<marker id="ar7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
+<marker id="ary7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--you)"/></marker>
+</defs>
+<rect class="gate" x="12" y="16" width="250" height="44" rx="8"/>
+<text class="s" x="137" y="34" text-anchor="middle" style="fill:var(--you)">Advisory only</text>
+<text class="s" x="137" y="50" text-anchor="middle">never adds to cart, pays, or checks out</text>
+<rect class="you" x="20" y="110" width="110" height="60" rx="8"/>
+<text class="t" x="75" y="136" text-anchor="middle">Tyler</text>
+<text class="s" x="75" y="154" text-anchor="middle">"should I buy…"</text>
+<rect class="agent" x="160" y="90" width="190" height="100" rx="8"/>
+<text class="t" x="255" y="114" text-anchor="middle">1 Premise check</text>
+<text class="s" x="255" y="132" text-anchor="middle">anything over $250</text>
+<text class="s" x="255" y="150" text-anchor="middle">needed? why now?</text>
+<text class="s" x="255" y="166" text-anchor="middle">what if I wait or do nothing?</text>
+<rect class="agent" x="380" y="90" width="170" height="100" rx="8"/>
+<text class="t" x="465" y="114" text-anchor="middle">2 Define value</text>
+<text class="s" x="465" y="134" text-anchor="middle">lifetime usefulness</text>
+<text class="s" x="465" y="150" text-anchor="middle">÷ total cost of ownership</text>
+<text class="s" x="465" y="168" text-anchor="middle">price · upkeep · time · resale</text>
+<rect class="agent" x="580" y="90" width="170" height="100" rx="8"/>
+<text class="t" x="665" y="114" text-anchor="middle">3 Research</text>
+<text class="s" x="665" y="134" text-anchor="middle">value pick · sweet spot</text>
+<text class="s" x="665" y="148" text-anchor="middle">· buy-it-once</text>
+<text class="s" x="665" y="166" text-anchor="middle">long-term tests, owner reports,</text>
+<text class="s" x="665" y="180" text-anchor="middle">price history, refurb</text>
+<rect class="box" x="770" y="70" width="120" height="140" rx="8"/>
+<text class="t" x="830" y="94" text-anchor="middle">4 Recommend</text>
+<text class="s" x="830" y="114" text-anchor="middle">verdict first</text>
+<text class="s" x="830" y="130" text-anchor="middle">pick + runner-up</text>
+<text class="s" x="830" y="146" text-anchor="middle">target price</text>
+<text class="s" x="830" y="162" text-anchor="middle">what changes the call</text>
+<text class="s" x="830" y="178" text-anchor="middle">rationalization flags</text>
+<text class="s" x="830" y="198" text-anchor="middle">links only</text>
+<path class="edge y" d="M130 140 L160 140" marker-end="url(#ary7)"/>
+<path class="edge" d="M350 140 L380 140" marker-end="url(#ar7)"/>
+<path class="edge" d="M550 140 L580 140" marker-end="url(#ar7)"/>
+<path class="edge" d="M750 140 L770 140" marker-end="url(#ar7)"/>
+<path class="edge d" d="M255 190 L255 240 L130 240" marker-end="url(#ar7)"/>
+<text class="lab" x="262" y="236">exit early: "wait" or "don't buy"</text>
+<path class="edge y" d="M830 210 L830 270 L130 270" marker-end="url(#ary7)"/>
+<text class="lab" x="440" y="290">I click buy, or I don't · the skill never touches a cart</text>
+</svg>
+<figcaption>Four steps, and the first one can end the conversation. The output is a verdict and links; the card stays in my wallet.</figcaption>
+</figure>"""
+project_page("purchase-advisor", "Purchase advisor", "live",
+  lede="A Claude skill that pressure-tests whether to buy at all, then finds the best real value and recommends. Advisory only: it never buys. I make every purchase myself.",
+  what="""
+<p>It's a skill rather than a scheduled agent, so it applies anywhere in Claude the moment I'm considering a purchase. For anything over $250 it starts with a premise check: is this needed, why now, and what happens if I wait or do nothing. It revisits those questions when the conversation starts building momentum toward a specific option, and says plainly if the path no longer makes sense. Under $250 it's a one-line sanity check.</p>
+<p>If the premise holds, it defines value as lifetime usefulness divided by total cost of ownership (price, consumables, maintenance, time, resale), researches three tiers (a value pick, a sweet spot, and a buy-it-once option) from independent long-term testing and owner reports, checks price history, refurbished and used options, model cycles and warranty, and then recommends. The recommendation leads with the verdict: buy, wait, or don't. Then the top pick and runner-up, a target price, what would change the call, and any rationalizations it caught me making. It gives me links. I click buy, or I don't.</p>
+""",
+  why="""
+<p>Purchases come up ad hoc, and most of the work of a good one is deciding whether to make it at all. I wanted the research without the momentum: a second opinion that's allowed to say "wait," built into the tool I was already going to ask. And it had to be structurally incapable of spending money, because the useful version of an assistant is one I can trust with more each month, and that trust starts with the card staying in my wallet.</p>
+""",
+  fig=PA_FIG,
+  how_built="""
+<ul class="plain">
+<li><b>One skill file.</b> The whole thing is a written procedure Claude loads when a purchase comes up: the four steps above, the $250 threshold, and the output format. There is no code, no schedule, and no database. The decision log for it lives in a Notion Project Book like every other project.</li>
+<li><b>A written point of view on value.</b> Worth paying more for: durability and repairability, things used daily, kid safety, and anything that saves future decisions. Not worth paying for: brand premium, features I won't use, newest-model status. These are first guesses; the skill is told to tune them from my calls.</li>
+<li><b>The format is the product.</b> Verdict first, evidence underneath, which is the same pyramid-principle rule every recommendation in my system follows. A brief I can act on in thirty seconds beats a comparison table I have to read.</li>
+</ul>
+<p class="meta">Skill files are plain Markdown. If I publish mine, it'll be on <a href="https://github.com/chez-san-cmd" target="_blank" rel="noopener">GitHub</a>.</p>
+""",
+  learned="""
+<p><b>The premise check does most of the work.</b> Of the briefs it has produced so far, the useful ones were less about which model and more about whether, and when. A rotating car seat before a second child: yes, and here's the one. LinkedIn Premium during a job search: here's exactly what you'd lose by cancelling, and whether that matters this month.</p>
+<p><b>Rules you write for an agent are rules for yourself.</b> Writing down where I'll happily overspend and where I refuse to turned out to be the hard part, and it's still open. The skill can't be more honest about value than I am.</p>
+""",
+  status_text="""
+<p>In use since October 6, 2026. Open questions I owe it: where I'm happy to overspend (running, skiing, scuba, kitchen gear?), where I refuse to pay for the top end, and whether used and refurbished should be the default or only for some categories. A related question in the Concert Radar book: whether a pair of tickets over $250 should trigger the same premise check.</p>
+""")
+
 # ---------- Essay ----------
 essay = """
 <article>

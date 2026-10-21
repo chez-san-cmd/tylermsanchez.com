@@ -1,0 +1,140 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Purchase advisor · Tyler Sanchez</title><meta name="claude:viewport-fit-sides" content="cover"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png"><link rel="icon" type="image/png" sizes="512x512" href="../icon-512.png"><link rel="apple-touch-icon" href="../apple-touch-icon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap"><style>
+/* Layout: one 640px column, left-aligned, nav as a single line of text. Quiet enough that the writing is the design. */
+:root{--bg:#F6F7F5;--fg:#15201E;--muted:#5F6E6A;--accent:#0F6E63;--ul:#8FC9BC;--rule:#D9DEDB;--soft:#ECF0EE;--you:#B8336A;
+  --f-body:"Newsreader","Iowan Old Style",Georgia,serif;--f-ui:"IBM Plex Sans",system-ui,-apple-system,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--ul:#2F6B5E;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--ul:#2F6B5E;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:20px;line-height:1.55;padding-block:0 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.col{max-width:640px;margin:0 auto}
+a{color:var(--accent);text-decoration:underline;text-decoration-color:var(--ul);text-decoration-thickness:1.5px;text-underline-offset:3px}a:hover{text-decoration-color:var(--accent)}
+nav.top a,.contact a,.toc a,ul.list a,.books a{text-decoration:none}nav.top a:hover,.contact a:hover,.toc a:hover,ul.list a:hover,.books a:hover{text-decoration:underline;text-decoration-color:var(--accent)}
+nav.top{font-family:var(--f-ui);font-size:16px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--rule);margin-bottom:36px}
+nav.top .me{font-weight:600;color:var(--fg);margin-right:auto}
+nav.top a[aria-current]{color:var(--fg);border-bottom:2px solid var(--accent)}
+.me-photo{display:block;width:150px;height:150px;border-radius:12px;object-fit:cover;margin:0 0 20px}
+h1{font-weight:500;font-size:36px;line-height:1.15;letter-spacing:-.01em;margin:0 0 14px;text-wrap:balance}
+h2{font-family:var(--f-ui);font-weight:600;font-size:16px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:44px 0 12px}
+h3{font-weight:500;font-size:23px;margin:36px 0 8px;line-height:1.25;text-wrap:balance}
+p{margin:0 0 18px;max-width:66ch}
+.sub{font-size:28px;line-height:1.3;font-weight:400;letter-spacing:-.005em;margin:0 0 18px;text-wrap:balance}
+.lede{font-size:22px;line-height:1.45;color:var(--fg)}
+.contact{font-family:var(--f-ui);font-size:15px;display:flex;flex-wrap:wrap;gap:6px 16px;margin:0 0 8px}
+.contact a{display:inline-flex;align-items:center;gap:6px}.contact .ic{width:16px;height:16px;flex:none}
+ul.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+ul.list li{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:baseline}
+ul.list .d{font-family:var(--f-mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+ul.list small{display:block;color:var(--muted);font-size:16px}
+ul.plain{margin:0 0 18px;padding-left:22px}ul.plain li{margin-bottom:6px}
+ul.other a{font-weight:600}
+ol{padding-left:22px}ol li{margin-bottom:10px}
+.toc{font-family:var(--f-ui);font-size:15px;display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 8px}.toc a::before{content:"↓ ";color:var(--muted)}
+.books{list-style:none;margin:0 0 28px;padding:0}.books li{margin:0 0 6px;font-size:18px}.books .au{color:var(--muted)}.books .star{font-size:14px;margin-left:4px}.count{font-weight:400;letter-spacing:0;text-transform:none}
+.meta{font-family:var(--f-ui);font-size:14px;color:var(--muted);margin:0 0 28px}
+article h3{margin-top:40px}
+blockquote{margin:0 0 18px;padding:0 0 0 18px;border-left:3px solid var(--rule);color:var(--fg)}
+blockquote ul{padding-left:20px}
+figure{cursor:zoom-in;margin:24px 0 8px;background:var(--soft);border:1px solid var(--rule);border-radius:10px;padding:14px;overflow-x:auto}
+figure svg{display:block;width:100%;height:auto;min-width:560px;color:var(--fg);font-family:var(--f-ui)}
+figcaption{margin-top:10px;font-family:var(--f-ui);font-size:14px;color:var(--muted)}
+svg text{font-size:12px;fill:currentColor}svg .t{font-size:13px;font-weight:600}svg .s,svg .lab{font-size:11px;fill:var(--muted)}
+svg .box{fill:var(--bg);stroke:currentColor;stroke-width:1.5}svg .store{fill:var(--bg);stroke:var(--accent);stroke-width:1.5}
+svg .agent{fill:var(--bg);stroke:var(--muted);stroke-width:1.5;stroke-dasharray:5 3}svg .you{fill:var(--bg);stroke:var(--you);stroke-width:2}
+svg .ext{fill:var(--soft);stroke:var(--rule);stroke-width:1}svg .edge{fill:none;stroke:currentColor;stroke-width:1.3}
+svg .edge.a{stroke:var(--muted)}svg .edge.y{stroke:var(--you);stroke-width:1.8}svg .edge.d{stroke-dasharray:4 3}svg .gate{fill:none;stroke:var(--you);stroke-width:1.2;stroke-dasharray:3 3}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-family:var(--f-ui);font-size:13px;color:var(--muted);margin:0 0 8px}
+.legend span{display:inline-flex;align-items:center;gap:6px}.legend i{display:inline-block;width:20px;height:11px;border-radius:3px;border:2px solid}
+.year{margin:0 0 36px}.year h3{margin-top:0}
+.pending{font-family:var(--f-ui);font-size:13px;color:var(--you);margin:0 0 8px}
+footer{margin-top:64px;padding-top:18px;border-top:1px solid var(--rule);font-family:var(--f-ui);font-size:13.5px;color:var(--muted)}
+dialog.lb{border:0;padding:16px;background:var(--bg);color:var(--fg);border-radius:12px;max-width:min(96vw,1400px);width:auto;cursor:zoom-out}dialog.lb::backdrop{background:rgba(0,0,0,.55)}dialog.lb svg{display:block;width:min(92vw,1360px);height:auto;color:var(--fg);font-family:var(--f-ui)}dialog.lb p{font-family:var(--f-ui);font-size:14px;color:var(--muted);margin:10px 0 0}
+hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
+@media (max-width:480px){nav.top{flex-wrap:nowrap;white-space:nowrap;gap:0 12px;font-size:15px}nav.top .me{margin-right:auto}body{font-size:19px}h1{font-size:30px}.sub{font-size:23px}ul.list li{grid-template-columns:1fr}ul.list .d{order:2}}
+</style></head><body><div class="col"><nav class="top"><a class="me" href="../index.html">Tyler Sanchez</a><a href="../writing/chat-box.html">Writing</a><a href="../projects.html" aria-current="page">Projects</a><a href="../how-i-work.html">AI System</a></nav>
+<p class="meta" style="margin-bottom:6px"><a href="../projects.html">AI Projects</a> · live</p>
+<h1>Purchase advisor</h1>
+<p class="lede">A Claude skill that pressure-tests whether to buy at all, then finds the best real value and recommends. Advisory only: it never buys. I make every purchase myself.</p>
+<nav class="toc" aria-label="On this page"><a href="#what">What it does</a><a href="#why">Why I built it</a><a href="#how">How it's built</a><a href="#learned">What I learned</a><a href="#status">Status</a></nav>
+<h2 id="what">What it does</h2>
+
+<p>It's a skill rather than a scheduled agent, so it applies anywhere in Claude the moment I'm considering a purchase. For anything over $250 it starts with a premise check: is this needed, why now, and what happens if I wait or do nothing. It revisits those questions when the conversation starts building momentum toward a specific option, and says plainly if the path no longer makes sense. Under $250 it's a one-line sanity check.</p>
+<p>If the premise holds, it defines value as lifetime usefulness divided by total cost of ownership (price, consumables, maintenance, time, resale), researches three tiers (a value pick, a sweet spot, and a buy-it-once option) from independent long-term testing and owner reports, checks price history, refurbished and used options, model cycles and warranty, and then recommends. The recommendation leads with the verdict: buy, wait, or don't. Then the top pick and runner-up, a target price, what would change the call, and any rationalizations it caught me making. It gives me links. I click buy, or I don't.</p>
+
+<h2 id="why">Why I built it</h2>
+
+<p>Purchases come up ad hoc, and most of the work of a good one is deciding whether to make it at all. I wanted the research without the momentum: a second opinion that's allowed to say "wait," built into the tool I was already going to ask. And it had to be structurally incapable of spending money, because the useful version of an assistant is one I can trust with more each month, and that trust starts with the card staying in my wallet.</p>
+
+<h2 id="how">How it's built</h2>
+<figure>
+<svg viewBox="0 0 900 320" role="img" aria-label="Flow: Tyler asks about a purchase. For anything over $250 a premise check asks whether it is needed, why now, and what happens if he waits; it can end in 'wait' or 'don't buy'. Otherwise the skill defines value as lifetime usefulness over total cost of ownership, researches three tiers from independent long-term testing and owner reports, and recommends: verdict first, top pick and runner-up, target price, what would change the call, and rationalization flags. Tyler buys.">
+<defs>
+<marker id="ar7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
+<marker id="ary7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--you)"/></marker>
+</defs>
+<rect class="gate" x="12" y="16" width="250" height="44" rx="8"/>
+<text class="s" x="137" y="34" text-anchor="middle" style="fill:var(--you)">Advisory only</text>
+<text class="s" x="137" y="50" text-anchor="middle">never adds to cart, pays, or checks out</text>
+<rect class="you" x="20" y="110" width="110" height="60" rx="8"/>
+<text class="t" x="75" y="136" text-anchor="middle">Tyler</text>
+<text class="s" x="75" y="154" text-anchor="middle">"should I buy…"</text>
+<rect class="agent" x="160" y="90" width="190" height="100" rx="8"/>
+<text class="t" x="255" y="114" text-anchor="middle">1 Premise check</text>
+<text class="s" x="255" y="132" text-anchor="middle">anything over $250</text>
+<text class="s" x="255" y="150" text-anchor="middle">needed? why now?</text>
+<text class="s" x="255" y="166" text-anchor="middle">what if I wait or do nothing?</text>
+<rect class="agent" x="380" y="90" width="170" height="100" rx="8"/>
+<text class="t" x="465" y="114" text-anchor="middle">2 Define value</text>
+<text class="s" x="465" y="134" text-anchor="middle">lifetime usefulness</text>
+<text class="s" x="465" y="150" text-anchor="middle">÷ total cost of ownership</text>
+<text class="s" x="465" y="168" text-anchor="middle">price · upkeep · time · resale</text>
+<rect class="agent" x="580" y="90" width="170" height="100" rx="8"/>
+<text class="t" x="665" y="114" text-anchor="middle">3 Research</text>
+<text class="s" x="665" y="134" text-anchor="middle">value pick · sweet spot</text>
+<text class="s" x="665" y="148" text-anchor="middle">· buy-it-once</text>
+<text class="s" x="665" y="166" text-anchor="middle">long-term tests, owner reports,</text>
+<text class="s" x="665" y="180" text-anchor="middle">price history, refurb</text>
+<rect class="box" x="770" y="70" width="120" height="140" rx="8"/>
+<text class="t" x="830" y="94" text-anchor="middle">4 Recommend</text>
+<text class="s" x="830" y="114" text-anchor="middle">verdict first</text>
+<text class="s" x="830" y="130" text-anchor="middle">pick + runner-up</text>
+<text class="s" x="830" y="146" text-anchor="middle">target price</text>
+<text class="s" x="830" y="162" text-anchor="middle">what changes the call</text>
+<text class="s" x="830" y="178" text-anchor="middle">rationalization flags</text>
+<text class="s" x="830" y="198" text-anchor="middle">links only</text>
+<path class="edge y" d="M130 140 L160 140" marker-end="url(#ary7)"/>
+<path class="edge" d="M350 140 L380 140" marker-end="url(#ar7)"/>
+<path class="edge" d="M550 140 L580 140" marker-end="url(#ar7)"/>
+<path class="edge" d="M750 140 L770 140" marker-end="url(#ar7)"/>
+<path class="edge d" d="M255 190 L255 240 L130 240" marker-end="url(#ar7)"/>
+<text class="lab" x="262" y="236">exit early: "wait" or "don't buy"</text>
+<path class="edge y" d="M830 210 L830 270 L130 270" marker-end="url(#ary7)"/>
+<text class="lab" x="440" y="290">I click buy, or I don't · the skill never touches a cart</text>
+</svg>
+<figcaption>Four steps, and the first one can end the conversation. The output is a verdict and links; the card stays in my wallet.</figcaption>
+</figure>
+
+<ul class="plain">
+<li><b>One skill file.</b> The whole thing is a written procedure Claude loads when a purchase comes up: the four steps above, the $250 threshold, and the output format. There is no code, no schedule, and no database. The decision log for it lives in a Notion Project Book like every other project.</li>
+<li><b>A written point of view on value.</b> Worth paying more for: durability and repairability, things used daily, kid safety, and anything that saves future decisions. Not worth paying for: brand premium, features I won't use, newest-model status. These are first guesses; the skill is told to tune them from my calls.</li>
+<li><b>The format is the product.</b> Verdict first, evidence underneath, which is the same pyramid-principle rule every recommendation in my system follows. A brief I can act on in thirty seconds beats a comparison table I have to read.</li>
+</ul>
+<p class="meta">Skill files are plain Markdown. If I publish mine, it'll be on <a href="https://github.com/chez-san-cmd" target="_blank" rel="noopener">GitHub</a>.</p>
+
+
+<h2 id="learned">What I learned</h2>
+
+<p><b>The premise check does most of the work.</b> Of the briefs it has produced so far, the useful ones were less about which model and more about whether, and when. A rotating car seat before a second child: yes, and here's the one. LinkedIn Premium during a job search: here's exactly what you'd lose by cancelling, and whether that matters this month.</p>
+<p><b>Rules you write for an agent are rules for yourself.</b> Writing down where I'll happily overspend and where I refuse to turned out to be the hard part, and it's still open. The skill can't be more honest about value than I am.</p>
+
+<h2 id="status">Status <span class="count">· October 2026</span></h2>
+
+<p>In use since October 6, 2026. Open questions I owe it: where I'm happy to overspend (running, skiing, scuba, kitchen gear?), where I refuse to pay for the top end, and whether used and refurbished should be the default or only for some categories. A related question in the Concert Radar book: whether a pair of tickets over $250 should trigger the same premise check.</p>
+
+<p class="meta"><a href="../projects.html">← All projects</a></p>
+<footer>© 2026 Tyler Sanchez · Denver · tylersanchez@gmail.com</footer></div><dialog class="lb" id="lb"><div id="lb-body"></div><p>Click anywhere or press Esc to close.</p></dialog>
+<script>
+(function(){var d=document.getElementById('lb'),b=document.getElementById('lb-body');
+document.querySelectorAll('figure').forEach(function(f){f.setAttribute('title','Click to enlarge');f.addEventListener('click',function(){var s=f.querySelector('svg');if(!s)return;b.innerHTML='';b.appendChild(s.cloneNode(true));d.showModal();});});
+d.addEventListener('click',function(){d.close();});})();
+</script>
+</body></html>
