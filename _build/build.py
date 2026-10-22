@@ -136,7 +136,6 @@ home = """
 <ul class="plain other">
   <li><a href="how-i-work.html">How I work with AI</a>: the principles, the system diagrams, and the tools</li>
   <li><a href="reading.html">Reading list</a>: everything I've read, by year, with the five-star books marked</li>
-  <li><a href="years-in-review.html">Year in review</a>: public excerpts from the annual letter I write to friends and family</li>
 </ul>
 """
 (S/"index.html").write_text(page("index.html","Tyler Sanchez",home,standalone=(os.environ.get("ARTIFACT_PREVIEW") is None)))
@@ -558,5 +557,7 @@ years = """
 <p class="meta">The experiment mostly failed in 2024 (my fault; I didn't extend the invites) and came back in 2025 as "low friction connection."</p>
 </div>
 """
-(S/"years-in-review.html").write_text(page("years-in-review.html","Year in review",years))
+# Parked for v1 (Tyler, 2026-10-22): not linked and not built. Flip PUBLISH_YEARS to bring it back.
+PUBLISH_YEARS = False
+if PUBLISH_YEARS: (S/"years-in-review.html").write_text(page("years-in-review.html","Year in review",years))
 print("ok", [p.name for p in S.rglob("*.html")], "figs:", len(figs))
