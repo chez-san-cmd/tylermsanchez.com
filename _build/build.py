@@ -27,7 +27,7 @@ ul.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;ga
 ul.list li{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:baseline}
 ul.list .d{font-family:var(--f-mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
 ul.list small{display:block;color:var(--muted);font-size:19px;line-height:1.45;margin-top:2px}
-ul.list li>span:last-child>a,ul.list li>span:last-child>b{font-size:22px;font-weight:600;line-height:1.3}ul.list li>span:last-child>a{text-decoration:underline;text-decoration-color:var(--ul);text-decoration-thickness:1.5px;text-underline-offset:3px}ul.list li>span:last-child>a:hover{text-decoration-color:var(--accent)}
+ul.list li>span:last-child>a,ul.list li>span:last-child>b{font-size:22px;font-weight:400;line-height:1.3;color:var(--fg)}ul.list li>span:last-child>a{text-decoration:underline;text-decoration-color:var(--ul);text-decoration-thickness:1.5px;text-underline-offset:3px}ul.list li>span:last-child>a:hover{text-decoration-color:var(--accent)}
 ul.plain{margin:0 0 18px;padding-left:22px}ul.plain li{margin-bottom:6px}
 ul.other a{font-weight:600}
 ol{padding-left:22px}ol li{margin-bottom:10px}
