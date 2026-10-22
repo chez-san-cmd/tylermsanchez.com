@@ -95,8 +95,6 @@ PROJECTS = [
        blurb="Pressure-tests whether to buy at all, then finds the best real value. Never buys."),
   dict(slug=None, name="What's for Dinner", status="building",
        blurb="Easy weeknight dinners, planned around what's already in the fridge and what's on sale, with the grocery list done."),
-  dict(slug=None, name="HomeOS, Keep in Touch", status="on deck",
-       blurb="The same loop for the house and for the people I'm bad at keeping up with."),
 ]
 def project_list(cur):
     pre = "" if cur in ("index.html","projects.html") else "../"
