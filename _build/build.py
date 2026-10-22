@@ -33,6 +33,8 @@ ul.other a{font-weight:600}
 ol{padding-left:22px}ol li{margin-bottom:10px}
 .toc{font-family:var(--f-ui);font-size:15px;display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 8px}.toc a::before{content:"↓ ";color:var(--muted)}
 .books{list-style:none;margin:0 0 28px;padding:0}.books li{margin:0 0 6px;font-size:18px}.books .au{color:var(--muted)}.books .star{font-size:14px;margin-left:4px}.count{font-weight:400;letter-spacing:0;text-transform:none}
+.example{background:var(--soft);border-left:3px solid var(--accent);border-radius:8px;padding:14px 18px;margin:0 0 22px}.example .k{font-family:var(--f-ui);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}.example p{margin:0 0 10px;font-size:18px}.example p:last-child{margin:0}
+.shots{margin:0 0 22px}.shots figure{cursor:zoom-in}.shots img{display:block;width:100%;height:auto;border-radius:6px}
 .meta{font-family:var(--f-ui);font-size:14px;color:var(--muted);margin:0 0 28px}
 article h3{margin-top:40px}
 blockquote{margin:0 0 18px;padding:0 0 0 18px;border-left:3px solid var(--rule);color:var(--fg)}
@@ -67,13 +69,16 @@ def nav(cur):
 LIGHTBOX = """<dialog class="lb" id="lb"><div id="lb-body"></div><p>Click anywhere or press Esc to close.</p></dialog>
 <script>
 (function(){var d=document.getElementById('lb'),b=document.getElementById('lb-body');
-document.querySelectorAll('figure').forEach(function(f){f.setAttribute('title','Click to enlarge');f.addEventListener('click',function(){var s=f.querySelector('svg');if(!s)return;b.innerHTML='';b.appendChild(s.cloneNode(true));d.showModal();});});
+document.querySelectorAll('figure').forEach(function(f){f.setAttribute('title','Click to enlarge');f.addEventListener('click',function(){var s=f.querySelector('svg,img');if(!s)return;b.innerHTML='';var c=s.cloneNode(true);if(c.tagName==='IMG'){c.removeAttribute('width');c.removeAttribute('height');c.style.cssText='display:block;width:min(92vw,1600px);height:auto';}b.appendChild(c);d.showModal();});});
 d.addEventListener('click',function(){d.close();});})();
 </script>
 """
-def page(cur, title, body, standalone=True):
+def page(cur, title, body, standalone=True, desc=""):
     icon = '../' if (cur.startswith('writing/') or cur.startswith('projects/')) else ''
-    head = f'<title>{title}</title><meta name="claude:viewport-fit-sides" content="cover"><link rel="icon" type="image/png" sizes="32x32" href="{icon}favicon-32.png"><link rel="icon" type="image/png" sizes="512x512" href="{icon}icon-512.png"><link rel="apple-touch-icon" href="{icon}apple-touch-icon.png">{FONTS}<style>{CSS}</style>'
+    url = "https://tylermsanchez.com/" + ("" if cur=="index.html" else cur)
+    d = (desc or "Tyler Sanchez, a product manager in Denver, building an AI assistant that runs his life in the background and only interrupts him for decisions.").replace('"','&quot;')
+    og = f'<meta name="description" content="{d}"><link rel="canonical" href="{url}"><meta property="og:type" content="{"article" if cur.startswith("writing/") else "website"}"><meta property="og:title" content="{title.replace(chr(34),"&quot;")}"><meta property="og:description" content="{d}"><meta property="og:url" content="{url}"><meta property="og:image" content="https://tylermsanchez.com/tyler.jpg"><meta property="og:site_name" content="Tyler Sanchez"><meta name="twitter:card" content="summary">'
+    head = f'<title>{title}</title>{og}<meta name="claude:viewport-fit-sides" content="cover"><link rel="icon" type="image/png" sizes="32x32" href="{icon}favicon-32.png"><link rel="icon" type="image/png" sizes="512x512" href="{icon}icon-512.png"><link rel="apple-touch-icon" href="{icon}apple-touch-icon.png">{FONTS}<style>{CSS}</style>'
     if standalone:
         head = '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'+head+'</head><body>'
         tail = '</body></html>'
@@ -88,12 +93,12 @@ def page(cur, title, body, standalone=True):
 # "What's for Dinner"), here and everywhere they appear in copy. check_project_names() at the
 # bottom of this file fails the build if a name is not title case or appears in lowercase.
 PROJECTS = [
-  dict(slug="command-center", name="Command Center", status="live",
+  dict(slug="assistant-dashboard", name="Assistant Dashboard", status="live",
        blurb="One page for every open project in my life, with a strict attention hierarchy and a reply box that starts an agent run."),
   dict(slug="job-radar", name="Job Radar", status="live",
-       blurb="Daily fetch of PM postings from ~20 companies, scored against a written rubric. Open source in November."),
+       blurb="Daily fetch of PM postings from 23 companies, scored against a written rubric. Open source in November."),
   dict(slug="concert-radar", name="Concert Radar", status="live",
-       blurb="Presale alerts for the artists I'd actually buy tickets for, code included."),
+       blurb="Presale alerts for the artists I'd actually buy tickets for, early enough to beat the resale market."),
   dict(slug="purchase-advisor", name="Purchase Advisor", status="live",
        blurb="Pressure-tests whether to buy at all, then finds the best real value. Never buys."),
   dict(slug=None, name="What's for Dinner", status="building",
@@ -112,7 +117,7 @@ def project_list(cur):
 home = """
 <img class="me-photo" src="tyler.jpg" alt="Tyler Sanchez" width="150" height="150">
 <h1>👋 Hi, I'm Tyler, a Product Manager in Denver.</h1>
-<p class="sub">I'm building an AI assistant that runs my life in the background and only interrupts me for decisions.</p>
+<p class="sub">I'm building an AI assistant that runs my life in the background and only interrupts me for decisions. <a href="projects/assistant-dashboard.html">See it in action →</a></p>
 <div class="contact"><a href="mailto:tylersanchez@gmail.com"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M3.5 5.5h17a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1h-17a1 1 0 0 1-1-1v-11a1 1 0 0 1 1-1z"/><path fill="none" stroke="currentColor" stroke-width="1.8" d="m3 7 9 6.5L21 7"/></svg>Email</a><a href="https://www.linkedin.com/in/tylermsanchez" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="#0A66C2" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a><a href="https://github.com/chez-san-cmd" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="var(--fg)" d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3z"/></svg>GitHub</a></div>
 
 <h2>About</h2>
@@ -122,13 +127,12 @@ home = """
 <p>Outside of work: 🍽️ cooking, 📚 <a href="reading.html">reading</a>, ⚽ soccer, 🤖 ai, 🥾 hiking, 🎸 live music, 👨‍👧 dad things.</p>
 
 <h2>Now <span style="text-transform:none;letter-spacing:0;font-weight:400">· October 2026</span></h2>
-<p>Building in public through mid-December. This site, a first essay on the shape of a proactive assistant, and an open-source version of the Job Radar with the rubric and evals that make it work. Also talking to a few teams about short product-strategy engagements.</p>
+<p>Building a proactive personal assistant and sharing the product decisions behind it. Next up: publishing the Job Radar's code, scoring rubric and evals.</p>
+<p>I'm also talking with teams about PM roles and short product-strategy engagements, particularly where AI is changing what the product can do. If that's your team, <a href="mailto:tylersanchez@gmail.com">I'd love to compare notes</a>.</p>
 
 <h2>Writing</h2>
 <ul class="list">
-  <li><span class="d">Oct 2026</span><span><a href="writing/chat-box.html">The assistant I wanted doesn't have a chat box</a><small>Three months with an assistant that works while I sleep, and what it taught me about the shape of the thing.</small></span></li>
-  <li><span class="d">Coming soon</span><span><b>The assistant is already the front door</b><small>What happens to discovery when the assistant picks the gym.</small></span></li>
-  <li><span class="d">Coming soon</span><span><b>Fetch, score, bring only the decisions</b><small>Open-sourcing the Job Radar and the evals behind it.</small></span></li>
+  <li><span class="d">Oct 2026</span><span><a href="writing/chat-box.html">The assistant I wanted doesn't have a chat box</a><small>A month with an assistant that works while I sleep, and what it taught me about the shape of the thing.</small></span></li>
 </ul>
 
 <h2 id="projects">AI Projects</h2>
@@ -136,27 +140,31 @@ home = """
 
 <h2>Other stuff</h2>
 <ul class="plain other">
-  <li><a href="how-i-work.html">How I work with AI</a>: the principles, the system diagrams, and the tools</li>
+  <li><a href="how-i-work.html">AI System</a>: the principles, the system diagrams, and the tools</li>
   <li><a href="reading.html">Reading list</a>: everything I've read, by year, with the five-star books marked</li>
 </ul>
 """
-(S/"index.html").write_text(page("index.html","Tyler Sanchez",home,standalone=(os.environ.get("ARTIFACT_PREVIEW") is None)))
+(S/"index.html").write_text(page("index.html","Tyler Sanchez",home,standalone=(os.environ.get("ARTIFACT_PREVIEW") is None), desc="Product manager in Denver, 14 years across Google, Tripadvisor, Brightwheel and Instagram. Now building a proactive AI assistant with a human in the loop, and writing about what it teaches me."))
 
 # ---------- Projects index ----------
 projects_index = """
 <h1>AI Projects</h1>
-<p class="lede">The agents that run my life in the background, one page each: what it does, why it exists, how it's built, and what I learned. The rules they all run under are on <a href="how-i-work.html">How I work with AI</a>.</p>
+<p class="lede">The agents that run my life in the background, one page each: what it does, why it exists, how it's built, and what I learned. The rules they all run under are on <a href="how-i-work.html">AI System</a>.</p>
 """ + project_list("projects.html")
-(S/"projects.html").write_text(page("projects.html","AI Projects",projects_index))
+(S/"projects.html").write_text(page("projects.html","AI Projects",projects_index, desc="The agents that run my life in the background: an Assistant Dashboard, a Job Radar, a Concert Radar and a Purchase Advisor. What each does, why, how it's built, what I learned."))
 
-def project_page(slug, name, status, lede, what, why, how_built, learned, status_text, fig=None, repo=None):
+def project_page(slug, name, status, lede, what, why, how_built, learned, status_text, fig=None, repo=None, repo_private=False, example=None, desc="", shots=""):
     """Shared template: What · Why · How it's built · What I learned · Status."""
     toc = '<nav class="toc" aria-label="On this page"><a href="#what">What it does</a><a href="#why">Why I built it</a><a href="#how">How it\'s built</a><a href="#learned">What I learned</a><a href="#status">Status</a></nav>'
-    repo_line = f'<p class="meta">The code, prompts and evals are on GitHub: <a href="{repo}" target="_blank" rel="noopener">{repo.replace("https://","")}</a>. The README has the implementation details this page leaves out.</p>' if repo else ''
+    repo_line = (f'<p class="meta">The code, prompts and evals are on GitHub: <a href="{repo}" target="_blank" rel="noopener">{repo.replace("https://","")}</a>. The README has the implementation details this page leaves out.</p>' if repo and not repo_private
+                 else f'<p class="meta">A public repo with the fetch adapters, the rubric template and the scoring evals goes up on GitHub in mid-November, at <code>{repo.replace("https://","")}</code>. The README there will carry the implementation details this page leaves out.</p>' if repo else '')
+    ex = f'<aside class="example"><p class="k">What happened → what I changed</p>{example}</aside>' if example else ''
     body = f"""
 <p class="meta" style="margin-bottom:6px"><a href="../projects.html">AI Projects</a> · {status}</p>
 <h1>{name}</h1>
 <p class="lede">{lede}</p>
+{shots}
+{ex}
 {toc}
 <h2 id="what">What it does</h2>
 {what}
@@ -172,7 +180,7 @@ def project_page(slug, name, status, lede, what, why, how_built, learned, status
 {status_text}
 <p class="meta"><a href="../projects.html">← All projects</a></p>
 """
-    (S/"projects"/f"{slug}.html").write_text(page(f"projects/{slug}.html", f"{name} · Tyler Sanchez", body))
+    (S/"projects"/f"{slug}.html").write_text(page(f"projects/{slug}.html", f"{name} · Tyler Sanchez", body, desc=desc or lede))
 
 src = (pathlib.Path(__file__).resolve().parent/"how-i-work-diagrams.html").read_text()
 figs = re.findall(r"<h2>\d\. (.*?)</h2>\s*<p>(.*?)</p>\s*(<figure>.*?</figure>)", src, re.S)
@@ -180,24 +188,26 @@ figs = re.findall(r"<h2>\d\. (.*?)</h2>\s*<p>(.*?)</p>\s*(<figure>.*?</figure>)"
 # ---------- Project: Job Radar ----------
 JR_REPO = "https://github.com/chez-san-cmd/job-radar"
 project_page("job-radar", "Job Radar", "live",
+  example="""<p><b>What happened.</b> The first week, the scorer rated roles against a description of jobs I'd <i>like</i>, and it rated almost everything a 3. Useful to nobody.</p>
+<p><b>What I changed.</b> I rewrote the rubric around what I was actually optimizing for, in weight order: latitude to originate product bets, then level, then problem space, plus the uncomfortable constraints (pay floor, hours, how AI-native the team is). The same model went from noise to a shortlist I act on. The model was never the problem; my clarity was.</p>""",
   lede="Every morning a script pulls every product-management posting from 23 companies I'd consider working for, and a Claude run scores each one against a rubric I wrote about what I actually want. I see only the ones worth a look.",
   what="""
 <p>Two jobs a day. Around 5am Denver time a GitHub Action fetches the PM postings from each company's own job board and commits the day's new ones to a repo. At 6:52am a scheduled Claude task reads each new posting in full, scores it 1 to 5 against the rubric, and writes anything scoring 3 or above to a Notion table with a one-line "why" a recruiter could read. Anything that scores a 4 or 5 also lands in my attention queue the same day; everything else waits for a Sunday review item that lists the week.</p>
 <p>I mark each row <i>Interested</i> or <i>Not for me</i>, sometimes with a note. The notes get folded back into the rubric, so the scoring drifts toward my actual judgment rather than my first description of it. It has been running since October 5 and reads about a hundred postings a week so I don't have to.</p>
 """,
   why="""
-<p>I'm planning a year away from full-time work, and the plan assumes the main levers for the next job are people and stories, not applications. But a rare ideal role can appear at any time, and I didn't want to spend an hour a week scanning career pages to catch it. The Radar is a passive net: it watches, I decide. It also turned out to be the cleanest small example of the shape I think most useful agents will take: fetch on a schedule, score against a written point of view, bring only the decisions to a human.</p>
+<p>I'm between roles and in no hurry, and the plan assumes the main levers for the next job are people and stories, not applications. But a rare ideal role can appear at any time, and I didn't want to spend an hour a week scanning career pages to catch it. The Radar is a passive net: it watches, I decide. It also turned out to be the cleanest small example of the shape I think most useful agents will take: fetch on a schedule, score against a written point of view, bring only the decisions to a human.</p>
 """,
   fig=figs[2][2],
   how_built="""
 <ul class="plain">
 <li><b>Fetch.</b> A private repo with one adapter per job-board platform: Greenhouse, Lever, Ashby, Rippling, Workday (Zillow), Eightfold (Netflix), and a scraper for Shopify, which publishes no feed. A GitHub Action runs the fetch daily and commits new postings as plain JSON, so the history is a git log. Why GitHub Actions: scheduled Claude runs can't open arbitrary websites without a per-URL approval nobody is there to give. Splitting deterministic fetching from judgment-heavy scoring solved that and made each half easier to test.</li>
 <li><b>Score.</b> A Claude scheduled task reads the day's file and <code>RUBRIC.md</code>. The rubric scores first on latitude to originate product bets, then level, then problem space. Later rules came straight from my notes on real postings: AI-native teams weigh heavily, "traffic cop" seats on shared surfaces cap at 3, fixed in-office days outside Denver cap at 3 but are still shown, and location is a flag rather than a filter. Director and head-of-product titles are scored on strategy ownership instead of being passed on title.</li>
-<li><b>Store and show.</b> One Notion database: role, company, fit, score, why, status, my notes, level signal, location, link. A saved view feeds a tile on my Command Center map and the Sunday review. Everything reads through saved views because Notion's row-query API has a workspace quota and views don't.</li>
+<li><b>Store and show.</b> One Notion database: role, company, fit, score, why, status, my notes, level signal, location, link. A saved view feeds a tile on my Assistant Dashboard map and the Sunday review. Everything reads through saved views because Notion's row-query API has a workspace quota and views don't.</li>
 <li><b>Learn.</b> Daily runs also read the <i>Maybe</i> rows and my notes, and periodic re-scores check the passes for false negatives. So far, none.</li>
 </ul>
 """,
-  repo=JR_REPO,
+  repo=JR_REPO, repo_private=True,
   learned="""
 <p><b>The hard part is not the model. It is the rubric.</b> The scoring got good the week I stopped describing jobs I'd like and started writing down what I was actually optimizing for, including the uncomfortable parts: pay floor, hours, how AI-native a team is. The model was fine from day one. My own clarity was the bottleneck.</p>
 <p><b>Flags beat filters.</b> My first instinct was to filter out roles in other cities. Keeping them visible as a capped score instead leaves room for the conversation I actually want to have, which is whether the role could be rescoped to remote.</p>
@@ -205,13 +215,19 @@ project_page("job-radar", "Job Radar", "live",
 <p><b>Scheduling is the flaky part.</b> GitHub's cron has run hours late, so scoring sometimes ran before the day's fetch landed. The fix (start scoring when the fetch finishes, not at a fixed time) is the kind of plumbing that takes more of the week than any prompt.</p>
 """,
   status_text=f"""
-<p>Live since October 5, 2026. Watching 23 companies. A cleaned-up public version, with the fetch adapters, a <code>RUBRIC.md</code> template and the evals I use to check the scoring, goes up on GitHub in mid-November with a Show HN post. Until then the repo is private; the link above will go live when it does.</p>
+<p>Live since October 5, 2026. Watching 23 companies. A cleaned-up public version, with the fetch adapters, a <code>RUBRIC.md</code> template and the evals I use to check the scoring, goes up on GitHub in mid-November with a Show HN post.</p>
 """)
 
 
-# ---------- Project: Command Center ----------
+# ---------- Project: Assistant Dashboard ----------
+DASH_SHOTS = """<div class="shots">
+<figure><img src="../img/dashboard-overview.jpg" alt="The Assistant Dashboard: filters for this week / next week / all, a status row, a box to send a new request to Claude, the Job Radar tile with three strong-fit roles, and a row of project tiles (Albion, Return to Work, Raja trip, Estate Planning) each showing what is waiting on me." width="1600" height="865" loading="lazy">
+<figcaption>Above the fold on a weekday afternoon. Each tile is a project; each marker is one item waiting on me.</figcaption></figure>
+<figure><img src="../img/dashboard-item.jpg" alt="One item opened: book a Tokyo restaurant when reservations open, with the agent's recommendation and what it already prepared (price, closures, cancellation terms), links to the Notion page and the work, and a reply box. Below it the list view begins, mixing the dinner booking with a health to-do." width="1600" height="915" loading="lazy">
+<figcaption>One item, opened: the recommendation first, the prep underneath, a reply box that starts the next run. The list below mixes a dinner booking in Tokyo with bringing blood-test results to a health chat, which is the point: one queue for everything.</figcaption></figure>
+</div>"""
 CC_FIG = """<figure>
-<svg viewBox="0 0 900 420" role="img" aria-label="Tyler reads one Command Center page laid out like a site plan: one tile per project, one marker per item that needs him, a reply box on each. The page reads the Notion Attention Queue through a saved view every 15 minutes. Twice a day, and whenever Tyler replies from the page, a scheduled Claude run checks Gmail and the to-do list, reads the project's book, works up to four queued items, and writes one queue item per decision with the prep and a recommendation attached.">
+<svg viewBox="0 0 900 420" role="img" aria-label="Tyler reads one dashboard page laid out like a site plan: one tile per project, one marker per item that needs him, a reply box on each. The page reads the Notion Attention Queue through a saved view every 15 minutes. Twice a day, and whenever Tyler replies from the page, a scheduled Claude run checks Gmail and the to-do list, reads the project's book, works up to four queued items, and writes one queue item per decision with the prep and a recommendation attached.">
 <defs>
 <marker id="ar6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
 <marker id="ara6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--muted)"/></marker>
@@ -223,7 +239,7 @@ CC_FIG = """<figure>
 <text class="s" x="110" y="104" text-anchor="middle">5-second read · one-line reply</text>
 <!-- The page -->
 <rect class="box" x="230" y="30" width="330" height="190" rx="8"/>
-<text class="t" x="395" y="54" text-anchor="middle">Command Center page (one HTML file)</text>
+<text class="t" x="395" y="54" text-anchor="middle">Assistant Dashboard (one HTML file)</text>
 <rect class="box" x="246" y="68" width="84" height="46" rx="5"/><text class="s" x="288" y="88" text-anchor="middle">Albion</text><circle cx="320" cy="76" r="5" style="fill:var(--you)"/>
 <rect class="box" x="338" y="68" width="84" height="46" rx="5"/><text class="s" x="380" y="88" text-anchor="middle">Return to Work</text><circle cx="412" cy="76" r="5" style="fill:var(--you)"/>
 <rect class="box" x="430" y="68" width="84" height="46" rx="5"/><text class="s" x="472" y="88" text-anchor="middle">Health Plan</text>
@@ -271,7 +287,10 @@ CC_FIG = """<figure>
 </svg>
 <figcaption>A site plan, not a feed: fixed tiles, one marker per open item, and a reply box that starts the next run. The queue is a Notion table; the page is one HTML file that reads it.</figcaption>
 </figure>"""
-project_page("command-center", "Command Center", "live",
+project_page("assistant-dashboard", "Assistant Dashboard", "live",
+  shots=DASH_SHOTS,
+  example="""<p><b>What happened.</b> Every item on the page turned red the moment it was overdue, including self-imposed targets like "pick an estate attorney." After a week I'd learned to ignore red, which defeats the point of red.</p>
+<p><b>What I changed.</b> Every deadline is now typed Hard or Soft. Only Hard ones (something breaks or costs money if missed) can go red, and only inside three days. Soft ones never turn red; past due they show as "slipped" and the next run proposes a new date instead of nagging. Red means something again.</p>""",
   lede="One page that shows every open project in my life as a tile in a fixed place, with one marker per item that needs me. Agents do the work; I approve, decide, and supply context. If I look at it for five seconds I should know whether anything is on fire and whether anything is mine.",
   what="""
 <p>Underneath the page is one Notion table, the Attention Queue: one row per thing waiting on me, across every project. Each row says which project it belongs to, what kind of answer it needs (<i>Decide</i>, <i>Approve</i>, <i>Context</i>, or <i>Do</i>), whether the deadline is hard or soft, what the agent already prepared, and what it recommends. Every agent run in my life ends by writing to this table.</p>
@@ -290,7 +309,7 @@ project_page("command-center", "Command Center", "live",
 <li><b>Runs follow a written protocol.</b> Inbox before queue. Read the book before acting. Stop at the human-only step: deciding, signing, sending in my name, moving money, conversations with family. Write one queue item per decision with a recommendation at the top and the prep underneath. Drafts are written in my voice from a saved style profile, and when I edit a draft before sending, the run compares the two and offers to update the profile. Every run ends by logging what it learned to the book; changes to decisions or preferences are gated behind one item I answer with "go."</li>
 <li><b>Two rules I'd keep if I threw everything else out.</b> The one-minute rule: if an item takes me longer than a minute to act on, the agent didn't finish its prep, and it goes back. And batching: a few items per project per day, never a stream of pings.</li>
 </ul>
-<p class="meta">There's no public repo for the Command Center because the page is wired to my own Notion workspace and holds personal data. The pieces that generalize, the loop and the Project Books memory model, are on <a href="../how-i-work.html">How I work with AI</a>, and a longer write-up is coming in late November.</p>
+<p class="meta">There's no public repo for the Assistant Dashboard because the page is wired to my own Notion workspace and holds personal data. The pieces that generalize, the loop and the Project Books memory model, are on <a href="../how-i-work.html">AI System</a>, and a longer write-up is coming in late November.</p>
 """,
   learned="""
 <p><b>It's agile the way the manifesto meant it.</b> The page has had something like a hundred changes since the end of September, and the pattern is always the same: I use it for a few days, something feels off, I describe the change, it ships in minutes. Filters. Sorting. A checkbox. Replying inline. A rule that every recommendation leads with the answer. No single change was the breakthrough; a thousand small tweaks were. For most of my career, iterating a hundred times in a few weeks was something we said we did. This is the first time it has been literally true.</p>
@@ -302,12 +321,16 @@ project_page("command-center", "Command Center", "live",
 <p>Running daily since September 30, 2026; the page is on roughly its twelfth version. Open threads: triaging text messages (the SMS backup misses RCS), signed-in browsing for scheduled runs, and simplifying the Status × Ask schema. A full write-up of the layout, the attention hierarchy and the reply loop is planned for late November.</p>
 """)
 
+(S/"projects"/"command-center.html").write_text('<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=assistant-dashboard.html"><link rel="canonical" href="https://tylermsanchez.com/projects/assistant-dashboard.html"><title>Moved</title><p>Moved to <a href="assistant-dashboard.html">Assistant Dashboard</a>.</p>')
+
 # ---------- Project: Concert Radar ----------
 project_page("concert-radar", "Concert Radar", "live",
+  example="""<p><b>What happened.</b> Leon Bridges at Red Rocks showed up in the Thursday digest as "presale now through Thursday 10pm." By the time I read it on Monday, general on-sale had started. The weekly venue email turned out to be the <i>last</i> presale window, not the first.</p>
+<p><b>What I changed.</b> Announcement-day coverage now comes from artist-level feeds (Bandsintown, Spotify) rather than venue roundups, and every digest line carries an absolute date and time. "Tonight" means nothing in an email I read three days later.</p>""",
   lede="Presale alerts for Denver shows by artists I'd actually buy tickets for, early enough that popular shows don't push me to the resale market. Claude finds and flags; I buy every ticket myself.",
   what="""
 <p>Two tiers. <b>Tier 1</b> is the artists I know I like: everyone I've bought tickets for, saved on Spotify, or play the most. A match sends a push to my phone right away and, if the presale is still ahead, puts a fifteen-minute hold on my calendar at presale start. <b>Tier 2</b> is discovery: artists Claude thinks I might like, or similar to what I already listen to, collected quietly into a Thursday-morning digest while that day's presales are still open. Each pick comes with one sentence on what the artist sounds like and a Spotify link, because my knowledge of newer artists has lapsed over the past decade.</p>
-<p>Two scheduled runs a week, Tuesday and Thursday morning, each searching six days back through the venue and promoter newsletters already landing in my Gmail: AEG's Thursday "New Shows" list, Live Nation venues, the Paramount, the Botanic Gardens, Seated, Spotify's concert emails, and since mid-October Bandsintown. Matches become rows in a Notion table with the presale window, the type (artist, venue, registration, card), the password if there is one, the ticket link, and any calendar conflict on the show date. Tier 1 presales also get a tile on my Command Center.</p>
+<p>Two scheduled runs a week, Tuesday and Thursday morning, each searching six days back through the venue and promoter newsletters already landing in my Gmail: AEG's Thursday "New Shows" list, Live Nation venues, the Paramount, the Botanic Gardens, Seated, Spotify's concert emails, and since mid-October Bandsintown. Matches become rows in a Notion table with the presale window, the type (artist, venue, registration, card), the password if there is one, the ticket link, and any calendar conflict on the show date. Tier 1 presales also get a tile on my Assistant Dashboard.</p>
 """,
   why="""
 <p>I already got the main feed. The gaps were filtering, timing, and coverage outside AEG. The real lesson was timing: Hans Zimmer at Ball Arena needed a registration a week before the presale, and the code arrived the day before. For the highest-demand shows, the alert that matters is the announcement-day one, not the presale-day one. By the time a show hits the Thursday list, an earlier artist or venue presale may already have run.</p>
@@ -380,13 +403,15 @@ PA_FIG = """<figure>
 <figcaption>Four steps, and the first one can end the conversation. The output is a verdict and links; the card stays in my wallet.</figcaption>
 </figure>"""
 project_page("purchase-advisor", "Purchase Advisor", "live",
+  example="""<p><b>What happened.</b> I asked it to compare rotating car seats and it dutifully compared rotating car seats. Good brief, wrong question: whether we needed one at all before the second baby was the real decision, and nobody had asked it.</p>
+<p><b>What I changed.</b> Anything over $250 now starts with a premise check (needed? why now? what if I wait?) before any research, and the skill is told to raise those questions again whenever the conversation builds momentum toward a specific model. Sometimes the right output is "wait."</p>""",
   lede="A Claude skill that pressure-tests whether to buy at all, then finds the best real value and recommends. Advisory only: it never buys. I make every purchase myself.",
   what="""
 <p>It's a skill rather than a scheduled agent, so it applies anywhere in Claude the moment I'm considering a purchase. For anything over $250 it starts with a premise check: is this needed, why now, and what happens if I wait or do nothing. It revisits those questions when the conversation starts building momentum toward a specific option, and says plainly if the path no longer makes sense. Under $250 it's a one-line sanity check.</p>
 <p>If the premise holds, it defines value as lifetime usefulness divided by total cost of ownership (price, consumables, maintenance, time, resale), researches three tiers (a value pick, a sweet spot, and a buy-it-once option) from independent long-term testing and owner reports, checks price history, refurbished and used options, model cycles and warranty, and then recommends. The recommendation leads with the verdict: buy, wait, or don't. Then the top pick and runner-up, a target price, what would change the call, and any rationalizations it caught me making. It gives me links. I click buy, or I don't.</p>
 """,
   why="""
-<p>Purchases come up ad hoc, and most of the work of a good one is deciding whether to make it at all. I wanted the research without the momentum: a second opinion that's allowed to say "wait," built into the tool I was already going to ask. And it had to be structurally incapable of spending money, because the useful version of an assistant is one I can trust with more each month, and that trust starts with the card staying in my wallet.</p>
+<p>Purchases come up ad hoc, and most of the work of a good one is deciding whether to make it at all. I wanted the research without the momentum: a second opinion that's allowed to say "wait," built into the tool I was already going to ask. And it had to be unable to spend money, because the useful version of an assistant is one I can trust with more each month, and that trust starts with the card staying in my wallet. (Unable in two senses: the skill is instructed to stop at a recommendation, and nothing in my Claude setup has a payment or checkout tool to call.)</p>
 """,
   fig=PA_FIG,
   how_built="""
@@ -409,8 +434,8 @@ project_page("purchase-advisor", "Purchase Advisor", "live",
 essay = """
 <article>
 <h1>The assistant I wanted doesn't have a chat box</h1>
-<p class="meta">Draft · October 2026 · about 7 minutes</p>
-<p class="lede">For the last three months I have had an assistant that works while I'm asleep. It isn't a person and it isn't an app I open. It is a handful of scheduled jobs that read my email, my calendar, a few job boards and a Notion workspace, and every morning it leaves me a short list: here are the three things only you can decide, here is what I already did about everything else. It is a personal assistant that gets a little more access each month, as trust builds.</p>
+<p class="meta">October 22, 2026 · about 7 minutes</p>
+<p class="lede">For the last month I have had an assistant that works while I'm asleep. It isn't a person and it isn't an app I open. It is a handful of scheduled jobs that read my email, my calendar, a few job boards and a Notion workspace, and every morning it leaves me a short list: here are the three things only you can decide, here is what I already did about everything else. It is a personal assistant that gets a little more access each month, as trust builds.</p>
 <p>I built it because I was between jobs and had the time, but the longer I run it the less it feels like a side project and the more it feels like the actual product. So this is the first of a few posts about what it is, how it works, and what I think it says about where AI assistants are going.</p>
 
 <h3>The chat box is the wrong shape</h3>
@@ -420,16 +445,16 @@ essay = """
 
 <h3>What it actually does</h3>
 <p>Here is the current set, in the order I built it.</p>
-<p><b>The Command Center.</b> A single page that shows every open project in my life as a tile in a fixed place, like a site plan, with one marker per item that needs something. The rule for the visual hierarchy is strict: a hard deadline, like a payment due, inside three days is the loudest thing on the page; things waiting on me glow softly; items the agents are working on recede; soft deadlines never turn red; fun projects, like the Purchase Advisor I'm building, live in their own quiet corner. If I only look at it for five seconds I should know whether anything is on fire and whether anything is mine.</p>
+<p><b>The Assistant Dashboard.</b> A single page that shows every open project in my life as a tile in a fixed place, like a site plan, with one marker per item that needs something. The rule for the visual hierarchy is strict: a hard deadline, like a payment due, inside three days is the loudest thing on the page; things waiting on me glow softly; items the agents are working on recede; soft deadlines never turn red; fun projects, like the Purchase Advisor I'm building, live in their own quiet corner. If I only look at it for five seconds I should know whether anything is on fire and whether anything is mine.</p>
 <p><b>The attention queue behind it.</b> Every item on the page answers two questions: is this on me or on the agent, and if it's on me, what kind of answer does it need. The agent can move an item into my column with a recommendation at the top and whatever it already prepared underneath. I can reply to any item right from the page, so the loop is: it prepares, I decide in one line, it carries on.</p>
 <p><b>Project Books.</b> Every project, from a kitchen renovation to the job search to a dinner planner, gets one Notion page with the same four parts: a brief, a decision log, open questions, and a session log. An agent reads the book before it does anything and writes a line in the log when it finishes. This is also how I talk to it. Instead of returning to one ever-growing chat thread that eventually forgets its own beginning, I open a fresh conversation, point it at the book, and it has the latest context in a few seconds. Memory as a page you can read beats memory as a transcript you have to scroll.</p>
-<p><b>Job Radar.</b> A script pulls every product management posting from about twenty companies I think are doing interesting work, every morning. A second job reads each posting against a rubric I wrote about what I actually want from the next role (room to originate bets weighs most, then level, then problem space), scores it 1 to 5, and writes anything worth a look into a table with a one-line "why" a recruiter could read. Anything that scores a 4 or 5 lands in my attention queue. I mark each one Interested or Not for me, sometimes with a note, and the rubric gets revised from my calls. It has been running since September and reads about a hundred postings a week so I don't have to. Every so often I review the roles it passed on, looking for false negatives. So far, none.</p>
+<p><b>Job Radar.</b> A script pulls every product management posting from 23 companies I think are doing interesting work, every morning. A second job reads each posting against a rubric I wrote about what I actually want from the next role (room to originate bets weighs most, then level, then problem space), scores it 1 to 5, and writes anything worth a look into a table with a one-line "why" a recruiter could read. Anything that scores a 4 or 5 lands in my attention queue. I mark each one Interested or Not for me, sometimes with a note, and the rubric gets revised from my calls. It has been running since early October and reads about a hundred postings a week so I don't have to. In the first week I had it re-score the full set to look for false negatives; that pass moved a few roles between Strong and Maybe and found nothing it had wrongly passed on. I'll keep checking.</p>
 <p><b>Smaller ones.</b> A morning brief. A weekly sweep of what fell through the cracks. The renovation paperwork: proposals, permit timelines, the vendor email that needs a reply. Concert presales for artists I'd buy tickets for, with the presale code sitting right on the tile. Not everything has to be useful.</p>
 
 <h3>The rules it runs under</h3>
 <p>The part I'm proudest of is not any one agent. It is the small set of rules they all obey, which is what makes me increasingly willing to let them run unattended:</p>
 <ol>
-<li><b>It never sends anything to another person.</b> It drafts the email, in my voice, and leaves it for me. I have had it draft a decline to a recruiter, a note to our architect, a message to our daycare. I read and send every one myself. This is the rule that makes everything else safe, because the blast radius is limited to a bad draft.</li>
+<li><b>It never sends anything to another person.</b> It drafts the email, in my voice, and leaves it for me. I have had it draft a decline to a recruiter, a note to our architect, a message to our daycare. I read and send every one myself. This is the rule that bounds the damage: the agents still write to my Notion workspace and leave drafts in Gmail, and I review both, but nothing reaches another person unless I send it.</li>
 <li><b>It never closes my decisions for me.</b> It makes recommendations. It cannot mark a job "Not for me" or tick something off my to-do list.</li>
 <li><b>It never spends money.</b> It can pressure-test a purchase or comparison shop for the best price. The card stays in my wallet.</li>
 <li><b>It writes down what it learned.</b> Each project has its book. And it watches the delta between the emails it drafts and the ones I actually send, so it sounds more like me over time. This might be the most useful feature of all.</li>
@@ -438,25 +463,25 @@ essay = """
 <p>Those rules are the actual product. The scripts are replaceable.</p>
 
 <h3>What surprised me</h3>
-<p><b>The hard part is not the model. It is the rubric.</b> The scoring job got good the week I stopped describing jobs I'd like and started writing down what I was actually optimizing for, including the uncomfortable parts: pay floor, hours, how AI-native a team is. The model was fine from day one. My own clarity was the bottleneck. I suspect this is true of every "AI agent" anyone is building right now.</p>
-<p><b>It is agile the way the manifesto meant it.</b> The Command Center has had something like a hundred changes since I started, and there are a hundred more I want. The pattern is always the same: I use it for a few days, something feels off, I describe the change, it ships in minutes, I use it for a few more days. Filters. Sorting. A checkbox to mark things done. Replying inline instead of switching apps. A rule that every recommendation leads with the answer and puts the evidence underneath, which is Barbara Minto's pyramid principle applied to a to-do list. No single change was the breakthrough. A thousand small tweaks were. For most of my career, getting a product in front of a user and iterating a hundred times in a few weeks was the thing we said we did. This is the first time it has been literally true.</p>
+<p><b>The hard part is not the model. It is the rubric.</b> The scoring job got good the week I stopped describing jobs I'd like and started writing down what I was actually optimizing for, including the uncomfortable parts: pay floor, hours, how AI-native a team is. The model was fine from day one. My own clarity was the bottleneck.</p>
+<p><b>It is agile the way the manifesto meant it.</b> The Assistant Dashboard has had something like a hundred changes since I started, and there are a hundred more I want. The pattern is always the same: I use it for a few days, something feels off, I describe the change, it ships in minutes, I use it for a few more days. Filters. Sorting. A checkbox to mark things done. Replying inline instead of switching apps. A rule that every recommendation leads with the answer and puts the evidence underneath, which is Barbara Minto's pyramid principle applied to a to-do list. No single change was the breakthrough. A hundred small ones were. For most of my career, getting a product in front of a user and iterating a hundred times in a few weeks was the thing we said we did. This is the first time it has been literally true.</p>
 <p><b>Product taste is the scarce input.</b> Because building is cheap now, the time goes to deciding what should exist, where it should live on the screen, and what the agent should be allowed to touch. I have spent far more hours on what the morning page looks like than on any script behind it, and I think that ratio is right. The agent is only as good as the judgment about what to show me and when.</p>
 
 <h3>Where this goes</h3>
 <p>The obvious next version is one that runs the same loop for health, money, the house and the people I'm bad at keeping up with. I'm building those next and will write them up as they land. The Job Radar scaffold goes up on GitHub in a couple of weeks with the rubric and the evals I use to check the scoring, because the interesting part is not my code but the shape: fetch, score against a written point of view, bring only the decisions to a human.</p>
-<p>There's a second thing I noticed along the way, about what happens to discovery when the assistant is the one choosing the gym, and it deserves its own post. Soon.</p>
-<p>If you're building something in this shape, or run a team that should be, I'd like to compare notes. Email is at the top of the page.</p>
+<p>If you're building something in this shape, or run a team that should be, I'd like to compare notes: <a href="mailto:tylersanchez@gmail.com">tylersanchez@gmail.com</a>.</p>
 </article>
 """
-(S/"writing/chat-box.html").write_text(page("writing/chat-box.html","The assistant I wanted doesn't have a chat box",essay))
+(S/"writing/chat-box.html").write_text(page("writing/chat-box.html","The assistant I wanted doesn't have a chat box",essay, desc="A month with an assistant that works while I sleep: why the chat box is the wrong shape, the five rules mine runs under, and what surprised me."))
 
 # ---------- How I work ----------
 how = """
-<h1>How I work with AI</h1>
-<p class="lede">An assistant that runs in the background is only as trustworthy as the rules it runs under. Here are the rules, then the system that enforces them, then the tools.</p>
+<h1>AI System</h1>
+<p class="lede">An assistant that runs in the background is only as trustworthy as the rules it runs under. Here are the rules, then the system that carries them out, then the tools.</p>
 <nav class="toc" aria-label="On this page"><a href="#principles">Principles</a><a href="#system">The System</a><a href="#tools">Tools</a></nav>
 
 <h2 id="principles">Principles</h2>
+<p>One honest note before the list. Two of these are hard boundaries: no agent in this system has a tool that can send email or move money, so rules 1 and 3 hold even if an instruction is garbled. The rest are written instructions that every run reads before it starts, checked by me after the fact through the session log. Instructions are not enforcement, and I treat them that way: the agents write to Notion and leave drafts in Gmail, and I review both.</p>
 <ol>
 <li><b>It never sends anything to another person.</b> Drafts stay drafts until I send them.</li>
 <li><b>It never closes my decisions for me.</b> It recommends; I mark done, decline, approve.</li>
@@ -486,10 +511,10 @@ how += """
 <li><b>GitHub Actions</b> runs the deterministic parts on a schedule, like the daily job fetch, and keeps the data as plain JSON in a repo.</li>
 <li><b>Gmail, Google Calendar and Drive</b> are read through connectors. Drafts are written to Gmail; nothing is sent from there by an agent.</li>
 <li><b>Spotify</b> supplies taste for the Concert Radar; venue newsletters supply the presale windows.</li>
-<li><b>A single HTML page</b> is the Command Center: no framework, reads Notion live, and has been changed about a hundred times.</li>
+<li><b>A single HTML page</b> is the Assistant Dashboard: no framework, reads Notion live, and has been changed about a hundred times.</li>
 </ul>
 """
-(S/"how-i-work.html").write_text(page("how-i-work.html","How I work with AI",how))
+(S/"how-i-work.html").write_text(page("how-i-work.html","AI System",how, desc="The rules my AI assistant runs under, the system that carries them out, and the tools: five principles, three diagrams, one human in the loop."))
 
 # ---------- Reading ----------
 import json, email.utils, datetime
@@ -528,7 +553,7 @@ for y in sorted(groups, key=lambda k: (k=="Earlier", -k if k!="Earlier" else 0))
         reading += f'<li><a href="https://www.goodreads.com/book/show/{b["id"]}" target="_blank" rel="noopener">{_h(b["title"])}</a> <span class="au">({_h(b["author"])})</span>{star}</li>\n'
     reading += "</ul>\n"
 reading += f'<p class="meta">Updated {datetime.date.today():%B %Y} from Goodreads. {len(books)} books.</p>'
-(S/"reading.html").write_text(page("reading.html","Reading list",reading))
+(S/"reading.html").write_text(page("reading.html","Reading list",reading, desc="Everything I've read since I started keeping track, by year, with the five-star books marked."))
 
 # ---------- Years in review ----------
 years = """

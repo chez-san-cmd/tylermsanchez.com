@@ -57,7 +57,7 @@ svg .gate{fill:none;stroke:var(--you);stroke-width:1.2;stroke-dasharray:3 3}
 <h2>1. The loop</h2>
 <p>Everything runs on one loop. Scheduled runs read the outside world and the Notion record, do the work an agent is allowed to do, and leave decisions in an attention queue. I read the queue from one page, answer in a line, and that answer starts the next run. Nothing leaves the system to another person unless I send it myself.</p>
 <figure>
-<svg viewBox="0 0 900 400" role="img" aria-label="Tyler reads the Command Center page, which reads the Notion attention queue; his replies start a scheduled Claude run, which reads Gmail, Calendar, Drive, Spotify and GitHub and writes queue items, project books and radar tables back into Notion. Sending, buying and closing decisions stay with Tyler.">
+<svg viewBox="0 0 900 400" role="img" aria-label="Tyler reads the Assistant Dashboard, which reads the Notion attention queue; his replies start a scheduled Claude run, which reads Gmail, Calendar, Drive, Spotify and GitHub and writes queue items, project books and radar tables back into Notion. Sending, buying and closing decisions stay with Tyler.">
 <defs>
 <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
 <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--agent)"/></marker>
@@ -67,9 +67,9 @@ svg .gate{fill:none;stroke:var(--you);stroke-width:1.2;stroke-dasharray:3 3}
 <rect class="you" x="30" y="150" width="140" height="70" rx="8"/>
 <text class="t" x="100" y="180" text-anchor="middle">Tyler</text>
 <text class="s" x="100" y="198" text-anchor="middle">decides · sends · buys</text>
-<!-- Command Center page -->
+<!-- Assistant Dashboard -->
 <rect class="box" x="260" y="40" width="200" height="64" rx="8"/>
-<text class="t" x="360" y="66" text-anchor="middle">Command Center page</text>
+<text class="t" x="360" y="66" text-anchor="middle">Assistant Dashboard</text>
 <text class="s" x="360" y="84" text-anchor="middle">one screen, fixed places, 5-second read</text>
 <!-- Notion -->
 <rect class="store" x="260" y="190" width="200" height="130" rx="8"/>
@@ -152,9 +152,9 @@ svg .gate{fill:none;stroke:var(--you);stroke-width:1.2;stroke-dasharray:3 3}
 <path class="edge y" d="M680 130 L600 90" marker-end="url(#ary2)"/>
 <path class="edge y" d="M680 170 L600 174" marker-end="url(#ary2)"/>
 <text class="lab" x="612" y="124">gated edits</text>
-<!-- Command Center -->
+<!-- Assistant Dashboard -->
 <rect class="box" x="40" y="230" width="190" height="56" rx="8"/>
-<text class="t" x="135" y="253" text-anchor="middle">Command Center</text>
+<text class="t" x="135" y="253" text-anchor="middle">Assistant Dashboard</text>
 <text class="s" x="135" y="271" text-anchor="middle">queue items link to their book</text>
 <path class="edge d" d="M230 258 L300 258" marker-end="url(#ar2)"/>
 </svg>
@@ -164,7 +164,7 @@ svg .gate{fill:none;stroke:var(--you);stroke-width:1.2;stroke-dasharray:3 3}
 <h2>3. Job Radar: fetch, score against a written point of view, bring only the decisions</h2>
 <p>Two jobs a day. GitHub Actions fetches every PM posting from about twenty company boards and commits the day's new ones. A Claude run then scores each posting against a rubric I wrote about what I actually want (latitude to make bets first, level second, problem space third), writes the ones worth a look to a Notion table with a one-line "why", and sends only 4s and 5s to the attention queue. My Interested / Not for me calls and notes feed the next revision of the rubric.</p>
 <figure>
-<svg viewBox="0 0 900 360" role="img" aria-label="At 5:17am a GitHub Actions job fetches postings from Greenhouse, Lever, Ashby, Workday, Eightfold, Rippling and Shopify boards and commits a JSON file. At 6:52am a Claude run reads the rubric and Tyler's past calls, scores each posting one to five, writes scores of three and up to the Notion Job Radar table and scores of four and five to the attention queue, which the Command Center tile shows. Tyler marks Interested or Not for me, and those calls revise the rubric.">
+<svg viewBox="0 0 900 360" role="img" aria-label="At 5:17am a GitHub Actions job fetches postings from Greenhouse, Lever, Ashby, Workday, Eightfold, Rippling and Shopify boards and commits a JSON file. At 6:52am a Claude run reads the rubric and Tyler's past calls, scores each posting one to five, writes scores of three and up to the Notion Job Radar table and scores of four and five to the attention queue, which the Dashboard tile shows. Tyler marks Interested or Not for me, and those calls revise the rubric.">
 <defs><marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
 <marker id="ara3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--agent)"/></marker>
 <marker id="ary3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--you)"/></marker></defs>
@@ -207,9 +207,9 @@ svg .gate{fill:none;stroke:var(--you);stroke-width:1.2;stroke-dasharray:3 3}
 <text class="t" x="800" y="143" text-anchor="middle">Attention Queue</text>
 <text class="s" x="800" y="161" text-anchor="middle">only 4s and 5s</text>
 <path class="edge a" d="M660 120 L720 150" marker-end="url(#ara3)"/>
-<!-- Command Center tile -->
+<!-- Dashboard tile -->
 <rect class="box" x="720" y="200" width="160" height="50" rx="8"/>
-<text class="t" x="800" y="221" text-anchor="middle">Command Center tile</text>
+<text class="t" x="800" y="221" text-anchor="middle">Dashboard tile</text>
 <text class="s" x="800" y="238" text-anchor="middle">top 3, counts, newest</text>
 <path class="edge" d="M800 180 L800 200" marker-end="url(#ar3)"/>
 <!-- Tyler -->
@@ -226,9 +226,9 @@ svg .gate{fill:none;stroke:var(--you);stroke-width:1.2;stroke-dasharray:3 3}
 </figure>
 
 <h2>4. Concert presales: taste, listings, and the presale email</h2>
-<p>The point is to know about a show during the presale, before general on-sale and the resale markup. Three inputs: what I actually listen to on Spotify, who is coming to Denver, and the venue and promoter newsletters I route straight to the archive in Gmail. A run matches them, keeps a tiered list of artists, and writes the presale window and code to a table. Tier 1 artists show on the Command Center with the code; Tier 2 is a weekly digest for discovery. I buy.</p>
+<p>The point is to know about a show during the presale, before general on-sale and the resale markup. Three inputs: what I actually listen to on Spotify, who is coming to Denver, and the venue and promoter newsletters I route straight to the archive in Gmail. A run matches them, keeps a tiered list of artists, and writes the presale window and code to a table. Tier 1 artists show on the Assistant Dashboard with the code; Tier 2 is a weekly digest for discovery. I buy.</p>
 <figure>
-<svg viewBox="0 0 900 340" role="img" aria-label="Spotify listening history, Bandsintown Denver listings and presale emails archived in Gmail feed a Concert Radar run that keeps a tiered artist list and writes shows with presale windows and codes to a Notion table. Tier 1 shows appear on the Command Center tile with the code; Tier 2 goes to a weekly digest. Tyler buys the tickets.">
+<svg viewBox="0 0 900 340" role="img" aria-label="Spotify listening history, Bandsintown Denver listings and presale emails archived in Gmail feed a Concert Radar run that keeps a tiered artist list and writes shows with presale windows and codes to a Notion table. Tier 1 shows appear on the Dashboard tile with the code; Tier 2 goes to a weekly digest. Tyler buys the tickets.">
 <defs><marker id="ar4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
 <marker id="ara4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--agent)"/></marker>
 <marker id="ary4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--you)"/></marker></defs>
@@ -266,7 +266,7 @@ svg .gate{fill:none;stroke:var(--you);stroke-width:1.2;stroke-dasharray:3 3}
 <text class="lab" x="520" y="92">writes, retires when over</text>
 <!-- tile -->
 <rect class="box" x="590" y="150" width="190" height="60" rx="8"/>
-<text class="t" x="685" y="173" text-anchor="middle">Command Center tile</text>
+<text class="t" x="685" y="173" text-anchor="middle">Dashboard tile</text>
 <text class="s" x="685" y="191" text-anchor="middle">Tier 1 only, code right on the row</text>
 <path class="edge" d="M685 110 L685 150" marker-end="url(#ar4)"/>
 <!-- digest -->
@@ -285,7 +285,7 @@ svg .gate{fill:none;stroke:var(--you);stroke-width:1.2;stroke-dasharray:3 3}
 </figure>
 
 <h2>5. The learning loop: the delta between the draft and what I sent</h2>
-<p>The agent never sends mail. It writes a draft in my voice and leaves it in Gmail; I edit and send. On the next run it compares what it drafted to what actually went out, and folds the difference into a writing-style file that every future draft reads. The same shape runs everywhere: Job Radar notes revise the rubric, project books carry decisions forward, and the Command Center queue records which recommendations I took.</p>
+<p>The agent never sends mail. It writes a draft in my voice and leaves it in Gmail; I edit and send. On the next run it compares what it drafted to what actually went out, and folds the difference into a writing-style file that every future draft reads. The same shape runs everywhere: Job Radar notes revise the rubric, project books carry decisions forward, and the Assistant Dashboard queue records which recommendations I took.</p>
 <figure>
 <svg viewBox="0 0 900 300" role="img" aria-label="A run drafts an email from the writing-style profile and saves it as a Gmail draft. Tyler edits and sends. The next run compares the sent message to the draft and updates the writing-style profile, which the next draft reads. The same correction loop runs from Tyler's Job Radar calls into the rubric and from his queue answers into project books.">
 <defs><marker id="ar5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
@@ -331,7 +331,7 @@ svg .gate{fill:none;stroke:var(--you);stroke-width:1.2;stroke-dasharray:3 3}
 </figure>
 
 <h2>Notes for Tyler</h2>
-<div class="note"><b>Check me on three facts</b> before these go on the site: whether Bandsintown is the listings source you actually use (the Concert Radar book says newsletters plus Spotify taste; I drew Bandsintown because you named it); the exact run times you want shown (I used 7:53am and 3:53pm for the Command Center and 5:17am / 6:52am for Job Radar); and whether the writing-style update is something you approve each time or something the run does on its own. The diagrams say "Tyler approves."</div>
+<div class="note"><b>Check me on three facts</b> before these go on the site: whether Bandsintown is the listings source you actually use (the Concert Radar book says newsletters plus Spotify taste; I drew Bandsintown because you named it); the exact run times you want shown (I used 7:53am and 3:53pm for the Assistant Dashboard and 5:17am / 6:52am for Job Radar); and whether the writing-style update is something you approve each time or something the run does on its own. The diagrams say "Tyler approves."</div>
 <ul>
 <li>These are hand-drawn SVGs with no dependencies, so they drop into the static site as-is and follow light and dark mode.</li>
 <li>If "How I work" becomes one page, the order above is the order I'd use: the loop, memory, then the two radars as worked examples, then the learning loop as the closer.</li>
