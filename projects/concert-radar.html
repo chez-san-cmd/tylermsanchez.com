@@ -59,7 +59,7 @@ hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
 <p class="lede">Presale alerts for Denver shows by artists I'd actually buy tickets for, early enough that popular shows don't push me to the resale market. Claude finds and flags; I buy every ticket myself.</p>
 
 <aside class="example"><p class="k">What happened → what I changed</p><p><b>What happened.</b> Leon Bridges at Red Rocks showed up in the Thursday digest as "presale now through Thursday 10pm." By the time I read it on Monday, general on-sale had started. The weekly venue email turned out to be the <i>last</i> presale window, not the first.</p>
-<p><b>What I changed.</b> Announcement-day coverage now comes from artist-level feeds (Bandsintown, Spotify) rather than venue roundups, and every digest line carries an absolute date and time. "Tonight" means nothing in an email I read three days later.</p></aside>
+<p><b>What I changed.</b> Every digest line now carries an absolute date and time; "tonight" means nothing in an email I read three days later. And I've started adding artist-level feeds: a Bandsintown account is in and being tuned, Seated and the Tier 1 artists' own mailing lists are next. Until those are complete, the Thursday email is still the main Tier 2 source and I'll keep missing some early presales.</p></aside>
 <nav class="toc" aria-label="On this page"><a href="#what">What it does</a><a href="#why">Why I built it</a><a href="#how">How it's built</a><a href="#learned">What I learned</a><a href="#status">Status</a></nav>
 <h2 id="what">What it does</h2>
 
@@ -132,16 +132,16 @@ hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
 <li><b>Taste List.</b> A Notion table of artists with a tier (Tier 1, Tier 2, or Skip), the evidence for the tier, and notes. 34 artists at launch, 23 in Tier 1, seeded from Spotify's most-played and saved lists, two years of ticket orders in Gmail, and Spotify's own concert recommendations. The runs read it fresh every time, and Tier 2 rows are Claude's guesses: I move one to Tier 1 or Skip to teach it.</li>
 <li><b>Two Claude scheduled tasks</b> that share one instruction set and re-read a "Run rules" section of the project's Notion book every run, so changing the behavior means editing a paragraph, not a prompt in code. The rules cover radius (Fort Collins to Colorado Springs plus the mountain venues for Tier 1, metro Denver for Tier 2), the eight-pick weekly cap on Tier 2, support acts counting as Tier 2, and a rule that every time is written as an absolute ("closes Thu Oct 15, 10pm"), never "tonight."</li>
 <li><b>Connectors.</b> Gmail for the newsletters (a filter archives them so they skip my inbox, and the Radar push becomes the signal), Spotify for taste and links, Google Calendar for conflict checks and holds, Notion for the record.</li>
-<li><b>Boundaries.</b> The runs never buy, register, or join a queue, and they never write to the Attention Queue: this is the one fun project allowed to send phone alerts directly, because presale windows last hours.</li>
+<li><b>Boundaries.</b> The runs are instructed never to buy, register, or join a queue, and never to write to the Attention Queue: this is the one fun project allowed to send phone alerts directly, because presale windows last hours.</li>
 </ul>
 <p class="meta">The code is the two task prompts plus the Notion schemas. A standalone version isn't on the roadmap yet; if it lands, it'll be on <a href="https://github.com/chez-san-cmd" target="_blank" rel="noopener">GitHub</a>.</p>
 
 
 <h2 id="learned">What I learned</h2>
 
-<p><b>The weekly email is the last window, not the first.</b> Leon Bridges at Red Rocks showed up in the AEG list as "Now – Thu 10pm," which means an earlier presale had already run, and by the time I read the digest on Monday, general on-sale had started. Announcement-day coverage needs the artist-level feeds (Bandsintown, Spotify), not the venue roundups.</p>
-<p><b>Twice a week is a real trade-off.</b> Moving from daily to Tuesday and Thursday cut noise, but a presale announced late Thursday and closed by Tuesday is missed.</p>
-<p><b>Say the day.</b> After the Leon Bridges miss, every digest line carries an absolute date and time. "Tonight" in an email I read three days later means nothing.</p>
+<p><b>Registration is the real deadline.</b> For the biggest shows the presale needs a registration that closes days earlier, and the code arrives the day before. So the alert that matters is the one on announcement day, which no venue roundup gives you. That reframed the project from "watch presales" to "watch announcements."</p>
+<p><b>Twice a week is a real trade-off.</b> Moving from daily to Tuesday and Thursday cut noise, but a presale announced late Thursday and closed by Tuesday is missed. I took that trade knowingly; most of what I'd buy sells slower than that.</p>
+<p><b>A seed list is a guess.</b> Spotify's connector returns a handful of artists per query, so the Taste List started partial, and the Tier 2 picks are Claude's inferences about what I'd like. Moving one to Tier 1 or Skip is the whole training interface, and it's enough.</p>
 
 <h2 id="status">Status <span class="count">· October 2026</span></h2>
 
