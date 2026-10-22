@@ -84,6 +84,9 @@ def page(cur, title, body, standalone=True):
 
 # ---------- Projects data ----------
 # status: live | building | on deck.  slug=None means no page yet.
+# STYLE RULE: project names are proper nouns. Every word is capitalized ("Purchase Advisor",
+# "What's for Dinner"), here and everywhere they appear in copy. check_project_names() at the
+# bottom of this file fails the build if a name is not title case or appears in lowercase.
 PROJECTS = [
   dict(slug="command-center", name="Command Center", status="live",
        blurb="One page for every open project in my life, with a strict attention hierarchy and a reply box that starts an agent run."),
@@ -91,7 +94,7 @@ PROJECTS = [
        blurb="Daily fetch of PM postings from ~20 companies, scored against a written rubric. Open source in November."),
   dict(slug="concert-radar", name="Concert Radar", status="live",
        blurb="Presale alerts for the artists I'd actually buy tickets for, code included."),
-  dict(slug="purchase-advisor", name="Purchase advisor", status="live",
+  dict(slug="purchase-advisor", name="Purchase Advisor", status="live",
        blurb="Pressure-tests whether to buy at all, then finds the best real value. Never buys."),
   dict(slug=None, name="What's for Dinner", status="building",
        blurb="Easy weeknight dinners, planned around what's already in the fridge and what's on sale, with the grocery list done."),
@@ -327,7 +330,7 @@ project_page("concert-radar", "Concert Radar", "live",
 <p>Live since October 9, 2026. First digest went out October 15 with six discovery picks; no Tier 1 match yet. On the list: finish the Bandsintown and Seated setups, add artist mailing lists for the Tier 1 acts, and test whether a scheduled run can reach Ticketmaster's Discovery API, which returns named presale windows directly.</p>
 """)
 
-# ---------- Project: Purchase advisor ----------
+# ---------- Project: Purchase Advisor ----------
 PA_FIG = """<figure>
 <svg viewBox="0 0 900 320" role="img" aria-label="Flow: Tyler asks about a purchase. For anything over $250 a premise check asks whether it is needed, why now, and what happens if he waits; it can end in 'wait' or 'don't buy'. Otherwise the skill defines value as lifetime usefulness over total cost of ownership, researches three tiers from independent long-term testing and owner reports, and recommends: verdict first, top pick and runner-up, target price, what would change the call, and rationalization flags. Tyler buys.">
 <defs>
@@ -375,7 +378,7 @@ PA_FIG = """<figure>
 </svg>
 <figcaption>Four steps, and the first one can end the conversation. The output is a verdict and links; the card stays in my wallet.</figcaption>
 </figure>"""
-project_page("purchase-advisor", "Purchase advisor", "live",
+project_page("purchase-advisor", "Purchase Advisor", "live",
   lede="A Claude skill that pressure-tests whether to buy at all, then finds the best real value and recommends. Advisory only: it never buys. I make every purchase myself.",
   what="""
 <p>It's a skill rather than a scheduled agent, so it applies anywhere in Claude the moment I'm considering a purchase. For anything over $250 it starts with a premise check: is this needed, why now, and what happens if I wait or do nothing. It revisits those questions when the conversation starts building momentum toward a specific option, and says plainly if the path no longer makes sense. Under $250 it's a one-line sanity check.</p>
@@ -416,7 +419,7 @@ essay = """
 
 <h3>What it actually does</h3>
 <p>Here is the current set, in the order I built it.</p>
-<p><b>The Command Center.</b> A single page that shows every open project in my life as a tile in a fixed place, like a site plan, with one marker per item that needs something. The rule for the visual hierarchy is strict: a hard deadline, like a payment due, inside three days is the loudest thing on the page; things waiting on me glow softly; items the agents are working on recede; soft deadlines never turn red; fun projects, like a purchase advisor I'm building, live in their own quiet corner. If I only look at it for five seconds I should know whether anything is on fire and whether anything is mine.</p>
+<p><b>The Command Center.</b> A single page that shows every open project in my life as a tile in a fixed place, like a site plan, with one marker per item that needs something. The rule for the visual hierarchy is strict: a hard deadline, like a payment due, inside three days is the loudest thing on the page; things waiting on me glow softly; items the agents are working on recede; soft deadlines never turn red; fun projects, like the Purchase Advisor I'm building, live in their own quiet corner. If I only look at it for five seconds I should know whether anything is on fire and whether anything is mine.</p>
 <p><b>The attention queue behind it.</b> Every item on the page answers two questions: is this on me or on the agent, and if it's on me, what kind of answer does it need. The agent can move an item into my column with a recommendation at the top and whatever it already prepared underneath. I can reply to any item right from the page, so the loop is: it prepares, I decide in one line, it carries on.</p>
 <p><b>Project Books.</b> Every project, from a kitchen renovation to the job search to a dinner planner, gets one Notion page with the same four parts: a brief, a decision log, open questions, and a session log. An agent reads the book before it does anything and writes a line in the log when it finishes. This is also how I talk to it. Instead of returning to one ever-growing chat thread that eventually forgets its own beginning, I open a fresh conversation, point it at the book, and it has the latest context in a few seconds. Memory as a page you can read beats memory as a transcript you have to scroll.</p>
 <p><b>Job Radar.</b> A script pulls every product management posting from about twenty companies I think are doing interesting work, every morning. A second job reads each posting against a rubric I wrote about what I actually want from the next role (room to originate bets weighs most, then level, then problem space), scores it 1 to 5, and writes anything worth a look into a table with a one-line "why" a recruiter could read. Anything that scores a 4 or 5 lands in my attention queue. I mark each one Interested or Not for me, sometimes with a note, and the rubric gets revised from my calls. It has been running since September and reads about a hundred postings a week so I don't have to. Every so often I review the roles it passed on, looking for false negatives. So far, none.</p>
@@ -481,7 +484,7 @@ how += """
 <li><b>Notion</b> is the system of record: the attention queue, one Project Book per project, and the radar tables. If it isn't in Notion, the agent doesn't know it.</li>
 <li><b>GitHub Actions</b> runs the deterministic parts on a schedule, like the daily job fetch, and keeps the data as plain JSON in a repo.</li>
 <li><b>Gmail, Google Calendar and Drive</b> are read through connectors. Drafts are written to Gmail; nothing is sent from there by an agent.</li>
-<li><b>Spotify</b> supplies taste for the concert radar; venue newsletters supply the presale windows.</li>
+<li><b>Spotify</b> supplies taste for the Concert Radar; venue newsletters supply the presale windows.</li>
 <li><b>A single HTML page</b> is the Command Center: no framework, reads Notion live, and has been changed about a hundred times.</li>
 </ul>
 """
@@ -558,4 +561,23 @@ years = """
 # Parked for v1 (Tyler, 2026-10-22): not linked and not built. Flip PUBLISH_YEARS to bring it back.
 PUBLISH_YEARS = False
 if PUBLISH_YEARS: (S/"years-in-review.html").write_text(page("years-in-review.html","Year in review",years))
+# ---------- Style check: project names ----------
+def check_project_names():
+    small = {"a","an","and","as","at","for","in","of","on","or","the","to"}
+    errs = []
+    for p_ in PROJECTS:
+        for i, w in enumerate(re.split(r"[ ,]+", p_["name"])):
+            if w and (i == 0 or w.lower() not in small) and not w[0].isupper():
+                errs.append(f'PROJECTS name not title case: {p_["name"]!r}')
+    names = [p_["name"] for p_ in PROJECTS]
+    for f in S.rglob("*.html"):
+        if "_build" in f.parts: continue
+        text = re.sub(r"<[^>]+>", " ", f.read_text())
+        for n in names:
+            for m in re.finditer(re.escape(n), text, re.I):
+                if m.group(0) != n:
+                    errs.append(f"{f.relative_to(S)}: {m.group(0)!r} should be {n!r}")
+    if errs:
+        raise SystemExit("Project-name style check failed:\n  " + "\n  ".join(errs))
+check_project_names()
 print("ok", [p.name for p in S.rglob("*.html")], "figs:", len(figs))
