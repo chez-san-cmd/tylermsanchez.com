@@ -89,8 +89,8 @@ def page(cur, title, body, standalone=True, desc=""):
 
 # ---------- Projects data ----------
 # status: live | building | on deck.  slug=None means no page yet.
-# STYLE RULE: no em dashes (—) anywhere on the site; the build fails if one appears. Use a comma, colon,
-# period or parentheses. (Tyler, 2026-10-22.)
+# STYLE RULE: no em dashes (—) in site copy; the build fails if one appears. Use a comma, colon,
+# period or parentheses. Exception: book titles quoted from publishers on the reading list. (Tyler, 2026-10-22.)
 # STYLE RULE: project names are proper nouns. Every word is capitalized ("Purchase Advisor",
 # "What's for Dinner"), here and everywhere they appear in copy. check_project_names() at the
 # bottom of this file fails the build if a name is not title case or appears in lowercase.
@@ -547,7 +547,7 @@ reading = """
 <h1>Reading list</h1>
 <p class="lede">Everything I've read since I started keeping track, newest first, pulled from my <a href="https://www.goodreads.com/user/show/16104684-tyler" target="_blank" rel="noopener">Goodreads</a> shelf. A ⭐ marks a five-star book.</p>
 """
-def _h(t): return re.sub(r"\s*\u2014\s*", ", ", t).replace("&","&amp;").replace("<","&lt;")   # publishers love em dashes; the site does not
+def _h(t): return t.replace("&","&amp;").replace("<","&lt;")
 for y in sorted(groups, key=lambda k: (k=="Earlier", -k if k!="Earlier" else 0)):
     bs = sorted(groups[y], key=_sortkey, reverse=True)
     label = f"{y} <span class=\"count\">· {len(bs)} book{'s' if len(bs)!=1 else ''}</span>" if y!="Earlier" else f"Earlier <span class=\"count\">· {len(bs)} books, read before I kept dates</span>"
@@ -618,7 +618,7 @@ def check_no_em_dashes():
     for f in S.rglob("*.html"):
         if "_build" in f.parts: continue
         for i, line in enumerate(f.read_text().split("\n"), 1):
-            if "\u2014" in line:
+            if "\u2014" in line and not (f.name == "reading.html" and 'class="books"' in open(f).read() and "goodreads.com/book" in line):   # publishers' book titles are quoted as-is
                 errs.append(f"{f.relative_to(S)}:{i}: em dash in {line.strip()[:80]!r}")
     if errs:
         raise SystemExit("Em-dash check failed (use a comma, colon, period or parentheses instead):\n  " + "\n  ".join(errs))
