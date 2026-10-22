@@ -10,7 +10,7 @@ CSS = r"""
 body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:20px;line-height:1.55;padding-block:0 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .col{max-width:640px;margin:0 auto}
 a{color:var(--accent);text-decoration:underline;text-decoration-color:var(--ul);text-decoration-thickness:1.5px;text-underline-offset:3px}a:hover{text-decoration-color:var(--accent)}
-nav.top a,.contact a,.toc a,ul.list a,.books a{text-decoration:none}nav.top a:hover,.contact a:hover,.toc a:hover,ul.list a:hover,.books a:hover{text-decoration:underline;text-decoration-color:var(--accent)}
+nav.top a,.contact a,.toc a,.books a{text-decoration:none}nav.top a:hover,.contact a:hover,.toc a:hover,.books a:hover{text-decoration:underline;text-decoration-color:var(--accent)}
 nav.top{font-family:var(--f-ui);font-size:16px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--rule);margin-bottom:36px}
 nav.top .me{font-weight:600;color:var(--fg);margin-right:auto}
 nav.top a[aria-current]{color:var(--fg);border-bottom:2px solid var(--accent)}
@@ -26,7 +26,8 @@ p{margin:0 0 18px;max-width:66ch}
 ul.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
 ul.list li{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:baseline}
 ul.list .d{font-family:var(--f-mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
-ul.list small{display:block;color:var(--muted);font-size:16px}
+ul.list small{display:block;color:var(--muted);font-size:19px;line-height:1.45;margin-top:2px}
+ul.list li>span:last-child>a,ul.list li>span:last-child>b{font-size:22px;font-weight:600;line-height:1.3}ul.list li>span:last-child>a{text-decoration:underline;text-decoration-color:var(--ul);text-decoration-thickness:1.5px;text-underline-offset:3px}ul.list li>span:last-child>a:hover{text-decoration-color:var(--accent)}
 ul.plain{margin:0 0 18px;padding-left:22px}ul.plain li{margin-bottom:6px}
 ul.other a{font-weight:600}
 ol{padding-left:22px}ol li{margin-bottom:10px}
@@ -124,8 +125,8 @@ home = """
 <h2>Writing</h2>
 <ul class="list">
   <li><span class="d">Oct 2026</span><span><a href="writing/chat-box.html">The assistant I wanted doesn't have a chat box</a><small>Three months with an assistant that works while I sleep, and what it taught me about the shape of the thing.</small></span></li>
-  <li><span class="d">Coming soon</span><span>The assistant is already the front door<small>What happens to discovery when the assistant picks the gym.</small></span></li>
-  <li><span class="d">Coming soon</span><span>Fetch, score, bring only the decisions<small>Open-sourcing the Job Radar and the evals behind it.</small></span></li>
+  <li><span class="d">Coming soon</span><span><b>The assistant is already the front door</b><small>What happens to discovery when the assistant picks the gym.</small></span></li>
+  <li><span class="d">Coming soon</span><span><b>Fetch, score, bring only the decisions</b><small>Open-sourcing the Job Radar and the evals behind it.</small></span></li>
 </ul>
 
 <h2 id="projects">AI Projects</h2>
