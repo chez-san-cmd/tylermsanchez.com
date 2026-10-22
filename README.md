@@ -4,7 +4,7 @@ Tyler Sanchez's personal site. Plain HTML, no build step, hosted on GitHub Pages
 
 - `index.html` home
 - `writing/` essays
-- `how-i-work.html` principles, system diagrams, tools
+- `ai-system.html` principles, system diagrams, tools (`how-i-work.html` redirects)
 - `projects.html` and `projects/` one page per project
 - `reading.html` (Year in review is parked for v1; `PUBLISH_YEARS` in build.py)
 

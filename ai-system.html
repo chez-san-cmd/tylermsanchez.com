@@ -1,0 +1,235 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>AI System</title><meta name="description" content="The rules my AI assistant runs under, the system that carries them out, and the tools: five principles, three diagrams, one human in the loop."><link rel="canonical" href="https://tylermsanchez.com/ai-system.html"><meta property="og:type" content="website"><meta property="og:title" content="AI System"><meta property="og:description" content="The rules my AI assistant runs under, the system that carries them out, and the tools: five principles, three diagrams, one human in the loop."><meta property="og:url" content="https://tylermsanchez.com/ai-system.html"><meta property="og:image" content="https://tylermsanchez.com/tyler.jpg"><meta property="og:site_name" content="Tyler Sanchez"><meta name="twitter:card" content="summary"><meta name="claude:viewport-fit-sides" content="cover"><link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png"><link rel="icon" type="image/png" sizes="512x512" href="icon-512.png"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap"><style>
+/* Layout: one 640px column, left-aligned, nav as a single line of text. Quiet enough that the writing is the design. */
+:root{--bg:#F6F7F5;--fg:#15201E;--muted:#5F6E6A;--accent:#0F6E63;--ul:#8FC9BC;--rule:#D9DEDB;--soft:#ECF0EE;--you:#B8336A;
+  --f-body:"Newsreader","Iowan Old Style",Georgia,serif;--f-ui:"IBM Plex Sans",system-ui,-apple-system,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--ul:#2F6B5E;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--ul:#2F6B5E;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:20px;line-height:1.55;padding-block:0 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.col{max-width:640px;margin:0 auto}
+a{color:var(--accent);text-decoration:underline;text-decoration-color:var(--ul);text-decoration-thickness:1.5px;text-underline-offset:3px}a:hover{text-decoration-color:var(--accent)}
+nav.top a,.contact a,.toc a,.books a{text-decoration:none}nav.top a:hover,.contact a:hover,.toc a:hover,.books a:hover{text-decoration:underline;text-decoration-color:var(--accent)}
+nav.top{font-family:var(--f-ui);font-size:16px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--rule);margin-bottom:36px}
+nav.top .me{font-weight:600;color:var(--fg);margin-right:auto}
+nav.top a[aria-current]{color:var(--fg);border-bottom:2px solid var(--accent)}
+.me-photo{display:block;width:150px;height:150px;border-radius:12px;object-fit:cover;margin:0 0 20px}
+h1{font-weight:500;font-size:36px;line-height:1.15;letter-spacing:-.01em;margin:0 0 14px;text-wrap:balance}
+h2{font-family:var(--f-ui);font-weight:600;font-size:16px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:44px 0 12px}
+h3{font-weight:500;font-size:23px;margin:36px 0 8px;line-height:1.25;text-wrap:balance}
+p{margin:0 0 18px;max-width:66ch}
+.sub{font-size:28px;line-height:1.3;font-weight:400;letter-spacing:-.005em;margin:0 0 18px;text-wrap:balance}
+.lede{font-size:22px;line-height:1.45;color:var(--fg)}
+.contact{font-family:var(--f-ui);font-size:15px;display:flex;flex-wrap:wrap;gap:6px 16px;margin:0 0 8px}
+.contact a{display:inline-flex;align-items:center;gap:6px}.contact .ic{width:16px;height:16px;flex:none}
+ul.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+ul.list li{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:baseline}
+ul.list .d{font-family:var(--f-mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+ul.list small{display:block;color:var(--muted);font-size:19px;line-height:1.45;margin-top:2px}
+ul.list li>span:last-child>a,ul.list li>span:last-child>b{font-size:22px;font-weight:400;line-height:1.3;color:var(--fg)}ul.list li>span:last-child>a{text-decoration:underline;text-decoration-color:var(--ul);text-decoration-thickness:1.5px;text-underline-offset:3px}ul.list li>span:last-child>a:hover{text-decoration-color:var(--accent)}
+ul.plain{margin:0 0 18px;padding-left:22px}ul.plain li{margin-bottom:6px}
+ul.other a{font-weight:600}
+ol{padding-left:22px}ol li{margin-bottom:10px}
+.toc{font-family:var(--f-ui);font-size:15px;display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 8px}.toc a::before{content:"↓ ";color:var(--muted)}
+.books{list-style:none;margin:0 0 28px;padding:0}.books li{margin:0 0 6px;font-size:18px}.books .au{color:var(--muted)}.books .star{font-size:14px;margin-left:4px}.count{font-weight:400;letter-spacing:0;text-transform:none}
+.example{background:var(--soft);border-left:3px solid var(--accent);border-radius:8px;padding:14px 18px;margin:0 0 22px}.example .k{font-family:var(--f-ui);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}.example p{margin:0 0 10px;font-size:18px}.example p:last-child{margin:0}
+.shots{margin:0 0 22px}.shots figure{cursor:zoom-in}.shots img{display:block;width:100%;height:auto;border-radius:6px}
+.meta{font-family:var(--f-ui);font-size:14px;color:var(--muted);margin:0 0 28px}
+article h3{margin-top:40px}
+blockquote{margin:0 0 18px;padding:0 0 0 18px;border-left:3px solid var(--rule);color:var(--fg)}
+blockquote ul{padding-left:20px}
+figure{cursor:zoom-in;margin:24px 0 8px;background:var(--soft);border:1px solid var(--rule);border-radius:10px;padding:14px;overflow-x:auto}
+figure svg{display:block;width:100%;height:auto;min-width:560px;color:var(--fg);font-family:var(--f-ui)}
+figcaption{margin-top:10px;font-family:var(--f-ui);font-size:14px;color:var(--muted)}
+svg text{font-size:12px;fill:currentColor}svg .t{font-size:13px;font-weight:600}svg .s,svg .lab{font-size:11px;fill:var(--muted)}
+svg .box{fill:var(--bg);stroke:currentColor;stroke-width:1.5}svg .store{fill:var(--bg);stroke:var(--accent);stroke-width:1.5}
+svg .agent{fill:var(--bg);stroke:var(--muted);stroke-width:1.5;stroke-dasharray:5 3}svg .you{fill:var(--bg);stroke:var(--you);stroke-width:2}
+svg .ext{fill:var(--soft);stroke:var(--rule);stroke-width:1}svg .edge{fill:none;stroke:currentColor;stroke-width:1.3}
+svg .edge.a{stroke:var(--muted)}svg .edge.y{stroke:var(--you);stroke-width:1.8}svg .edge.d{stroke-dasharray:4 3}svg .gate{fill:none;stroke:var(--you);stroke-width:1.2;stroke-dasharray:3 3}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-family:var(--f-ui);font-size:13px;color:var(--muted);margin:0 0 8px}
+.legend span{display:inline-flex;align-items:center;gap:6px}.legend i{display:inline-block;width:20px;height:11px;border-radius:3px;border:2px solid}
+.year{margin:0 0 36px}.year h3{margin-top:0}
+.pending{font-family:var(--f-ui);font-size:13px;color:var(--you);margin:0 0 8px}
+footer{margin-top:64px;padding-top:18px;border-top:1px solid var(--rule);font-family:var(--f-ui);font-size:13.5px;color:var(--muted)}
+dialog.lb{border:0;padding:16px;background:var(--bg);color:var(--fg);border-radius:12px;max-width:min(96vw,1400px);width:auto;cursor:zoom-out}dialog.lb::backdrop{background:rgba(0,0,0,.55)}dialog.lb svg{display:block;width:min(92vw,1360px);height:auto;color:var(--fg);font-family:var(--f-ui)}dialog.lb p{font-family:var(--f-ui);font-size:14px;color:var(--muted);margin:10px 0 0}
+hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
+@media (max-width:480px){nav.top{flex-wrap:nowrap;white-space:nowrap;gap:0 12px;font-size:15px}nav.top .me{margin-right:auto}body{font-size:19px}h1{font-size:30px}.sub{font-size:23px}ul.list li{grid-template-columns:1fr}ul.list .d{order:2}}
+</style></head><body><div class="col"><nav class="top"><a class="me" href="index.html">Tyler Sanchez</a><a href="writing/chat-box.html">Writing</a><a href="projects.html">Projects</a><a href="ai-system.html" aria-current="page">AI System</a></nav>
+<h1>AI System</h1>
+<p class="lede">An assistant that runs in the background is only as trustworthy as the rules it runs under. Here are the rules, then the system that carries them out, then the tools.</p>
+<nav class="toc" aria-label="On this page"><a href="#principles">Principles</a><a href="#system">The System</a><a href="#tools">Tools</a></nav>
+
+<h2 id="principles">Principles</h2>
+<p>One honest note before the list. These are instructions, not technical locks. The agents run with connectors that could send an email or drive a browser; what stops them is a written rule every run reads before it starts, a design that routes output to places I review (Gmail drafts, Notion pages, a queue item with a recommendation), and a session log I read after the fact. No card or password is stored anywhere an agent can reach, which is the closest thing to a hard limit in the system. I'd like real permission boundaries, and I'll say so when I have them.</p>
+<ol>
+<li><b>It never sends anything to another person.</b> Drafts stay drafts until I send them.</li>
+<li><b>It never closes my decisions for me.</b> It recommends; I mark done, decline, approve.</li>
+<li><b>It never spends money.</b> It can comparison-shop and pressure-test a purchase. The card stays with me.</li>
+<li><b>It writes down what it learned.</b> Every project has a book: brief, decisions, open questions, session log. The delta between what it drafts and what I send is how it learns my voice.</li>
+<li><b>It brings me decisions, not updates.</b> Recommendation first, evidence underneath, prep already done.</li>
+</ol>
+
+<h2 id="system">The system</h2>
+<div class="legend">
+  <span><i style="border-color:var(--you)"></i> Me (decides, sends, buys)</span>
+  <span><i style="border-color:var(--muted);border-style:dashed"></i> Scheduled Claude run</span>
+  <span><i style="border-color:var(--accent)"></i> Notion, the system of record</span>
+  <span><i style="border-color:var(--rule);background:var(--soft)"></i> Outside service</span>
+</div>
+<h3>The loop</h3><p>Everything runs on one loop. Scheduled runs read the outside world and the Notion record, do the work an agent is allowed to do, and leave decisions in an attention queue. I read the queue from one page, answer in a line, and that answer starts the next run. Nothing leaves the system to another person unless I send it myself.</p><figure>
+<svg viewBox="0 0 900 400" role="img" aria-label="Tyler reads the Assistant Dashboard, which reads the Notion attention queue; his replies start a scheduled Claude run, which reads Gmail, Calendar, Drive, Spotify and GitHub and writes queue items, project books and radar tables back into Notion. Sending, buying and closing decisions stay with Tyler.">
+<defs>
+<marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
+<marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--agent)"/></marker>
+<marker id="ary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--you)"/></marker>
+</defs>
+<!-- Tyler -->
+<rect class="you" x="30" y="150" width="140" height="70" rx="8"/>
+<text class="t" x="100" y="180" text-anchor="middle">Tyler</text>
+<text class="s" x="100" y="198" text-anchor="middle">decides · sends · buys</text>
+<!-- Assistant Dashboard -->
+<rect class="box" x="260" y="40" width="200" height="64" rx="8"/>
+<text class="t" x="360" y="66" text-anchor="middle">Assistant Dashboard</text>
+<text class="s" x="360" y="84" text-anchor="middle">one screen, fixed places, 5-second read</text>
+<!-- Notion -->
+<rect class="store" x="260" y="190" width="200" height="130" rx="8"/>
+<text class="t" x="360" y="214" text-anchor="middle">Notion (system of record)</text>
+<text x="280" y="240">Attention Queue</text>
+<text class="s" x="280" y="256">Needs Tyler · Agent working · Blocked</text>
+<text x="280" y="280">Project Books (one per project)</text>
+<text x="280" y="304">Radar tables (jobs, concerts, shipping)</text>
+<!-- Claude runs -->
+<rect class="agent" x="580" y="130" width="220" height="90" rx="8"/>
+<text class="t" x="690" y="156" text-anchor="middle">Scheduled Claude runs</text>
+<text class="s" x="690" y="174" text-anchor="middle">7:53am · 3:53pm · daily radars</text>
+<text class="s" x="690" y="192" text-anchor="middle">plus any run a reply starts</text>
+<text class="s" x="690" y="208" text-anchor="middle">drafts, researches, files, recommends</text>
+<!-- outside services -->
+<g>
+<rect class="ext" x="560" y="330" width="80" height="34" rx="6"/><text x="600" y="351" text-anchor="middle">Gmail</text>
+<rect class="ext" x="646" y="330" width="80" height="34" rx="6"/><text x="686" y="351" text-anchor="middle">Calendar</text>
+<rect class="ext" x="732" y="330" width="80" height="34" rx="6"/><text x="772" y="351" text-anchor="middle">Drive</text>
+<rect class="ext" x="474" y="330" width="80" height="34" rx="6"/><text x="514" y="351" text-anchor="middle">Spotify</text>
+<rect class="ext" x="818" y="330" width="70" height="34" rx="6"/><text x="853" y="351" text-anchor="middle">GitHub</text>
+</g>
+<!-- edges -->
+<path class="edge y" d="M170 170 L260 80" marker-end="url(#ary)"/>
+<text class="lab" x="150" y="118">reads, replies in a line</text>
+<path class="edge" d="M330 104 L330 190" marker-end="url(#ar)" marker-start="url(#ar)"/>
+<text class="lab" x="338" y="140">queue every 15 min</text>
+<text class="lab" x="338" y="154">mark done, comment</text>
+<path class="edge y" d="M460 72 L690 72 L690 130" marker-end="url(#ary)"/>
+<text class="lab" x="480" y="64">"Send to Claude" starts a run now</text>
+<path class="edge a" d="M580 190 L460 230" marker-end="url(#ara)"/>
+<text class="lab" x="470" y="200">writes queue items, books, tables</text>
+<path class="edge a d" d="M460 280 L580 215" marker-end="url(#ara)"/>
+<text class="lab" x="478" y="270">reads the book first</text>
+<path class="edge a d" d="M690 330 L690 220" marker-end="url(#ara)"/>
+<text class="lab" x="698" y="290">read only</text>
+<path class="edge a d" d="M620 330 L640 220"/>
+<path class="edge a d" d="M760 330 L740 220"/>
+<path class="edge a d" d="M540 330 L600 220"/>
+<path class="edge a d" d="M840 330 L780 220"/>
+<!-- gate -->
+<rect class="gate" x="18" y="236" width="164" height="60" rx="8"/>
+<text class="s" x="100" y="258" text-anchor="middle" style="fill:var(--you)">Human gate</text>
+<text class="s" x="100" y="274" text-anchor="middle">drafts never sent · nothing bought</text>
+<text class="s" x="100" y="288" text-anchor="middle">decisions never closed for me</text>
+</svg>
+<figcaption>One loop: runs read outside services and the Notion record, write back into Notion, and surface decisions on one page. Replies from that page start the next run.</figcaption>
+</figure><h3>Project Books: how it remembers</h3><p>Every project, from a renovation to a job search to a dinner planner, gets one Notion page with the same four parts. A run reads the book before it does anything and appends a session log line when it is done. That is the whole memory model: no hidden state, and I can read the book instead of the transcript.</p><figure>
+<svg viewBox="0 0 900 330" role="img" aria-label="A Project Book page holds a brief, a decision log, open questions and a session log, with subpages for prep docs and story banks. A scheduled run reads the book at the start, works, and appends to the decision log and session log at the end; Tyler approves changes to the brief and closes open questions.">
+<defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
+<marker id="ara2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--agent)"/></marker>
+<marker id="ary2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--you)"/></marker></defs>
+<!-- Book -->
+<rect class="store" x="300" y="30" width="300" height="270" rx="10"/>
+<text class="t" x="450" y="56" text-anchor="middle">Project Book  ·  one page per project</text>
+<rect class="box" x="320" y="72" width="260" height="34" rx="6"/><text x="332" y="94">1. Brief</text><text class="s" x="568" y="94" text-anchor="end">goal, constraints, who</text>
+<rect class="box" x="320" y="114" width="260" height="34" rx="6"/><text x="332" y="136">2. Decision log</text><text class="s" x="568" y="136" text-anchor="end">dated, with the why</text>
+<rect class="box" x="320" y="156" width="260" height="34" rx="6"/><text x="332" y="178">3. Open questions</text><text class="s" x="568" y="178" text-anchor="end">numbered, owner named</text>
+<rect class="box" x="320" y="198" width="260" height="34" rx="6"/><text x="332" y="220">4. Session log</text><text class="s" x="568" y="220" text-anchor="end">one line per run</text>
+<text class="s" x="332" y="258">Subpages: prep docs, story bank, call notes,</text>
+<text class="s" x="332" y="274">drafts, data tables (linked, not pasted)</text>
+<!-- Run -->
+<rect class="agent" x="40" y="110" width="190" height="80" rx="8"/>
+<text class="t" x="135" y="140" text-anchor="middle">Scheduled run</text>
+<text class="s" x="135" y="158" text-anchor="middle">start: read 1-4 and the queue</text>
+<text class="s" x="135" y="174" text-anchor="middle">end: append to 2 and 4</text>
+<path class="edge a d" d="M300 100 L230 130" marker-end="url(#ara2)"/>
+<text class="lab" x="236" y="96">reads first</text>
+<path class="edge a" d="M230 170 L300 212" marker-end="url(#ara2)"/>
+<text class="lab" x="210" y="200">appends last</text>
+<!-- Tyler -->
+<rect class="you" x="680" y="110" width="180" height="80" rx="8"/>
+<text class="t" x="770" y="140" text-anchor="middle">Tyler</text>
+<text class="s" x="770" y="158" text-anchor="middle">approves changes to the brief</text>
+<text class="s" x="770" y="174" text-anchor="middle">answers open questions</text>
+<path class="edge y" d="M680 130 L600 90" marker-end="url(#ary2)"/>
+<path class="edge y" d="M680 170 L600 174" marker-end="url(#ary2)"/>
+<text class="lab" x="612" y="124">gated edits</text>
+<!-- Assistant Dashboard -->
+<rect class="box" x="40" y="230" width="190" height="56" rx="8"/>
+<text class="t" x="135" y="253" text-anchor="middle">Assistant Dashboard</text>
+<text class="s" x="135" y="271" text-anchor="middle">queue items link to their book</text>
+<path class="edge d" d="M230 258 L300 258" marker-end="url(#ar2)"/>
+</svg>
+<figcaption>Memory is a page, not a transcript: a run reads the book before it acts and appends to it when it finishes. Changes to the brief and answers to open questions are mine.</figcaption>
+</figure><h3>The learning loop: the delta between the draft and what I sent</h3><p>The agent never sends mail. It writes a draft in my voice and leaves it in Gmail; I edit and send. On the next run it compares what it drafted to what actually went out, and folds the difference into a writing-style file that every future draft reads. The same shape runs everywhere: Job Radar notes revise the rubric, project books carry decisions forward, and the Assistant Dashboard queue records which recommendations I took.</p><figure>
+<svg viewBox="0 0 900 300" role="img" aria-label="A run drafts an email from the writing-style profile and saves it as a Gmail draft. Tyler edits and sends. The next run compares the sent message to the draft and updates the writing-style profile, which the next draft reads. The same correction loop runs from Tyler's Job Radar calls into the rubric and from his queue answers into project books.">
+<defs><marker id="ar5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
+<marker id="ara5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--agent)"/></marker>
+<marker id="ary5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--you)"/></marker></defs>
+<!-- style profile -->
+<rect class="box" x="40" y="40" width="200" height="70" rx="8"/>
+<text class="t" x="140" y="64" text-anchor="middle">Writing-style profile</text>
+<text class="s" x="140" y="82" text-anchor="middle">openings, tone markers, sign-offs,</text>
+<text class="s" x="140" y="98" text-anchor="middle">words to avoid, who to cc</text>
+<!-- run drafts -->
+<rect class="agent" x="330" y="40" width="190" height="70" rx="8"/>
+<text class="t" x="425" y="64" text-anchor="middle">Run drafts the email</text>
+<text class="s" x="425" y="82" text-anchor="middle">reads the profile, writes a</text>
+<text class="s" x="425" y="98" text-anchor="middle">Gmail draft, nothing more</text>
+<path class="edge a d" d="M240 75 L330 75" marker-end="url(#ara5)"/>
+<text class="lab" x="256" y="66">reads</text>
+<!-- gmail draft -->
+<rect class="ext" x="610" y="40" width="130" height="70" rx="8"/>
+<text class="t" x="675" y="64" text-anchor="middle">Gmail</text>
+<text class="s" x="675" y="82" text-anchor="middle">draft, unsent</text>
+<path class="edge a" d="M520 75 L610 75" marker-end="url(#ara5)"/>
+<text class="lab" x="540" y="66">saves</text>
+<!-- Tyler -->
+<rect class="you" x="610" y="170" width="130" height="70" rx="8"/>
+<text class="t" x="675" y="194" text-anchor="middle">Tyler</text>
+<text class="s" x="675" y="212" text-anchor="middle">edits, then sends</text>
+<text class="s" x="675" y="228" text-anchor="middle">from his own account</text>
+<path class="edge y" d="M675 110 L675 170" marker-end="url(#ary5)"/>
+<!-- diff -->
+<rect class="agent" x="330" y="170" width="190" height="70" rx="8"/>
+<text class="t" x="425" y="194" text-anchor="middle">Next run compares</text>
+<text class="s" x="425" y="212" text-anchor="middle">sent message vs. the draft</text>
+<text class="s" x="425" y="228" text-anchor="middle">what did he change, and why</text>
+<path class="edge a d" d="M610 205 L520 205" marker-end="url(#ara5)"/>
+<text class="lab" x="536" y="196">reads sent mail</text>
+<path class="edge a" d="M330 205 L140 205 L140 110" marker-end="url(#ara5)"/>
+<text class="lab" x="150" y="196">proposes an update; Tyler approves</text>
+<!-- same loop elsewhere -->
+<text class="lab" x="40" y="272">Same loop elsewhere:  Job Radar calls → rubric   ·   queue answers → Project Book decision log   ·   purchase questions → Purchase Advisor</text>
+</svg>
+<figcaption>The correction loop: draft, human edit, diff, profile update. The assistant gets better at sounding like me without ever sending as me.</figcaption>
+</figure><p class="meta">The per-project diagrams, for the <a href="projects/job-radar.html">Job Radar</a> and <a href="projects/concert-radar.html">Concert Radar</a>, are on their project pages.</p>
+<h2 id="tools">Tools</h2>
+<ul class="plain">
+<li><b>Claude</b> (Claude Code and its scheduled tasks) does the reading, drafting, scoring and filing. Every run starts from a written brief and ends with a log line.</li>
+<li><b>Notion</b> is the system of record: the attention queue, one Project Book per project, and the radar tables. If it isn't in Notion, the agent doesn't know it.</li>
+<li><b>GitHub Actions</b> runs the deterministic parts on a schedule, like the daily job fetch, and keeps the data as plain JSON in a repo.</li>
+<li><b>Gmail, Google Calendar and Drive</b> are read through connectors. Drafts are written to Gmail; nothing is sent from there by an agent.</li>
+<li><b>Spotify</b> supplies taste for the Concert Radar; venue newsletters supply the presale windows.</li>
+<li><b>A single HTML page</b> is the Assistant Dashboard: no framework, reads Notion live, and has been changed about a hundred times.</li>
+</ul>
+<footer>© 2026 Tyler Sanchez · Denver · tylersanchez@gmail.com</footer></div><dialog class="lb" id="lb"><div id="lb-body"></div><p>Click anywhere or press Esc to close.</p></dialog>
+<script>
+(function(){var d=document.getElementById('lb'),b=document.getElementById('lb-body');
+document.querySelectorAll('figure').forEach(function(f){f.setAttribute('title','Click to enlarge');f.addEventListener('click',function(){var s=f.querySelector('svg,img');if(!s)return;b.innerHTML='';var c=s.cloneNode(true);if(c.tagName==='IMG'){c.removeAttribute('width');c.removeAttribute('height');c.style.cssText='display:block;width:min(92vw,1600px);height:auto';}b.appendChild(c);d.showModal();});});
+d.addEventListener('click',function(){d.close();});})();
+</script>
+</body></html>

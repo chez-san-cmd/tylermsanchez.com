@@ -58,12 +58,12 @@ hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
 """
 FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap">'
 def nav(cur):
-    items=[("index.html","Home","home"),("writing/chat-box.html","Writing","writing"),("projects.html","Projects","projects"),("how-i-work.html","AI System","how")]
+    items=[("index.html","Home","home"),("writing/chat-box.html","Writing","writing"),("projects.html","Projects","projects"),("ai-system.html","AI System","how")]
     out=[]
     for href,label,key in items:
         if key=="home": continue
         if cur.startswith("writing/") or cur.startswith("projects/"): href = "../"+href if not href.startswith("http") else href
-        out.append(f'<a href="{href}"{" aria-current=\"page\"" if key==cur.split("/")[0].replace(".html","") or (key=="writing" and cur.startswith("writing/")) or (key=="projects" and cur.startswith("projects/")) or (key=="how" and cur=="how-i-work.html") or (key=="years" and cur=="years-in-review.html") else ""}>{label}</a>')
+        out.append(f'<a href="{href}"{" aria-current=\"page\"" if key==cur.split("/")[0].replace(".html","") or (key=="writing" and cur.startswith("writing/")) or (key=="projects" and cur.startswith("projects/")) or (key=="how" and cur=="ai-system.html") or (key=="years" and cur=="years-in-review.html") else ""}>{label}</a>')
     home = "../index.html" if (cur.startswith("writing/") or cur.startswith("projects/")) else "index.html"
     return f'<nav class="top"><a class="me" href="{home}">Tyler Sanchez</a>{"".join(out)}</nav>'
 LIGHTBOX = """<dialog class="lb" id="lb"><div id="lb-body"></div><p>Click anywhere or press Esc to close.</p></dialog>
@@ -96,13 +96,13 @@ PROJECTS = [
   dict(slug="assistant-dashboard", name="Assistant Dashboard", status="live",
        blurb="One page for every open project in my life, with a strict attention hierarchy and a reply box that starts an agent run."),
   dict(slug="job-radar", name="Job Radar", status="live",
-       blurb="Daily fetch of PM postings from 23 companies, scored against a written rubric. Open source in November."),
+       blurb="Daily fetch of PM postings from 23 companies, scored against a written rubric of what I'm looking for next."),
   dict(slug="concert-radar", name="Concert Radar", status="live",
        blurb="Presale alerts for the artists I'd actually buy tickets for, early enough to beat the resale market."),
   dict(slug="purchase-advisor", name="Purchase Advisor", status="live",
        blurb="Pressure-tests whether to buy at all, then finds the best real value. Never buys."),
   dict(slug=None, name="What's for Dinner", status="building",
-       blurb="Easy weeknight dinners, planned around what's already in the fridge and what's on sale, with the grocery list done."),
+       blurb="Easy weeknight dinners, planned around what's already in the fridge and designed to meet our health goals."),
 ]
 def project_list(cur):
     pre = "" if cur in ("index.html","projects.html") else "../"
@@ -121,26 +121,25 @@ home = """
 <div class="contact"><a href="mailto:tylersanchez@gmail.com"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M3.5 5.5h17a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1h-17a1 1 0 0 1-1-1v-11a1 1 0 0 1 1-1z"/><path fill="none" stroke="currentColor" stroke-width="1.8" d="m3 7 9 6.5L21 7"/></svg>Email</a><a href="https://www.linkedin.com/in/tylermsanchez" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="#0A66C2" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a><a href="https://github.com/chez-san-cmd" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="var(--fg)" d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3z"/></svg>GitHub</a></div>
 
 <h2>About</h2>
-<p>I’ve spent 14 years in technology across Google, Tripadvisor, Brightwheel, and Meta, most recently as a Staff Product Manager at Instagram. There, I helped make group chats a pillar of the messaging strategy, brought six partner teams behind it, and shipped Location Sharing and Disappearing Messages.</p>
-<p>I love learning a new space (the data, the research, the market), forming a point of view about what should exist, and turning that conviction into something people can use.</p>
-<p>Now I’m building a proactive AI personal assistant, with a dashboard where I delegate work, follow its progress, and make decisions. Behind it, agents read my inbox, draft replies, research jobs, watch for concert presales, and manage our home renovation paperwork. I’m pushing the limits of what it can take on and refining how we work together. This site documents what I build and learn along the way.</p>
+<p>I’ve spent 14 years in technology across Google, Tripadvisor, Brightwheel, and Meta, most recently as a Staff Product Manager at Instagram, working on messaging, the part of the app its own head has credited, along with Reels and recommendations, with almost all of Instagram’s growth. I made the case that group chats should be one of the three pillars of the messaging strategy and brought six partner teams along to build it. Separately, I took over two launches that had stalled, Disappearing Messages and Location Sharing, and got both shipped.</p>
+<p>I love learning a new space (the data, the users, the market), forming a point of view about what should exist, and turning that conviction into something people can use.</p>
+<p>Now I’m building a proactive AI personal assistant, with a dashboard where I delegate work, follow progress, and make decisions. Behind it, agents read my inbox, draft replies, research jobs, watch for concert presales, and manage our home renovation paperwork. I’m pushing the limits of what it can take on and refining how we work together. This site documents what I build and learn along the way.</p>
 <p>Outside of work: 🍽️ cooking, 📚 <a href="reading.html">reading</a>, ⚽ soccer, 🤖 ai, 🥾 hiking, 🎸 live music, 👨‍👧 dad things.</p>
 
 <h2>Now <span style="text-transform:none;letter-spacing:0;font-weight:400">· October 2026</span></h2>
 <p>Building a proactive personal assistant and sharing the product decisions behind it. Next up: publishing the Job Radar's code, scoring rubric and evals.</p>
-<p>I'm also talking with teams about PM roles and short product-strategy engagements, particularly where AI is changing what the product can do. If that's your team, <a href="mailto:tylersanchez@gmail.com">I'd love to compare notes</a>.</p>
+<p>I'm also talking with a few teams about PM roles and short product-strategy engagements, particularly where AI is changing what the product can do. If that's your team, <a href="mailto:tylersanchez@gmail.com">I'd love to compare notes</a>.</p>
 
 <h2>Writing</h2>
 <ul class="list">
-  <li><span class="d">Oct 2026</span><span><a href="writing/chat-box.html">The assistant I wanted doesn't have a chat box</a><small>A month with an assistant that works while I sleep, and what it taught me about the shape of the thing.</small></span></li>
+  <li><span class="d">Oct 2026</span><span><a href="writing/chat-box.html">The assistant I wanted doesn't have a chat box</a><small>A month with an assistant that works while I sleep, and why the chat box is the wrong shape.</small></span></li>
 </ul>
 
-<h2 id="projects">AI Projects</h2>
+<h2 id="projects">Projects</h2>
 """+project_list("index.html")+"""
 
 <h2>Other stuff</h2>
 <ul class="plain other">
-  <li><a href="how-i-work.html">AI System</a>: the principles, the system diagrams, and the tools</li>
   <li><a href="reading.html">Reading list</a>: everything I've read, by year, with the five-star books marked</li>
 </ul>
 """
@@ -148,10 +147,10 @@ home = """
 
 # ---------- Projects index ----------
 projects_index = """
-<h1>AI Projects</h1>
-<p class="lede">The agents that run my life in the background, one page each: what it does, why it exists, how it's built, and what I learned. The rules they all run under are on <a href="how-i-work.html">AI System</a>.</p>
+<h1>Projects</h1>
+<p class="lede">The agents that run my life in the background, one page each: what it does, why it exists, how it's built, and what I learned. The rules they all run under are on <a href="ai-system.html">AI System</a>.</p>
 """ + project_list("projects.html")
-(S/"projects.html").write_text(page("projects.html","AI Projects",projects_index, desc="The agents that run my life in the background: an Assistant Dashboard, a Job Radar, a Concert Radar and a Purchase Advisor. What each does, why, how it's built, what I learned."))
+(S/"projects.html").write_text(page("projects.html","Projects",projects_index, desc="The agents that run my life in the background: an Assistant Dashboard, a Job Radar, a Concert Radar and a Purchase Advisor. What each does, why, how it's built, what I learned."))
 
 def project_page(slug, name, status, lede, what, why, how_built, learned, status_text, fig=None, repo=None, repo_private=False, example=None, desc="", shots=""):
     """Shared template: What · Why · How it's built · What I learned · Status."""
@@ -160,7 +159,7 @@ def project_page(slug, name, status, lede, what, why, how_built, learned, status
                  else f'<p class="meta">A public repo with the fetch adapters, the rubric template and the scoring evals goes up on GitHub in mid-November, at <code>{repo.replace("https://","")}</code>. The README there will carry the implementation details this page leaves out.</p>' if repo else '')
     ex = f'<aside class="example"><p class="k">What happened → what I changed</p>{example}</aside>' if example else ''
     body = f"""
-<p class="meta" style="margin-bottom:6px"><a href="../projects.html">AI Projects</a> · {status}</p>
+<p class="meta" style="margin-bottom:6px"><a href="../projects.html">Projects</a> · {status}</p>
 <h1>{name}</h1>
 <p class="lede">{lede}</p>
 {shots}
@@ -311,7 +310,7 @@ project_page("assistant-dashboard", "Assistant Dashboard", "live",
 <li><b>Runs follow a written protocol.</b> Inbox before queue. Read the book before acting. Stop at the human-only step: deciding, signing, sending in my name, moving money, conversations with family. Write one queue item per decision with a recommendation at the top and the prep underneath. Drafts are written in my voice from a saved style profile, and when I edit a draft before sending, the run compares the two and offers to update the profile. Every run ends by logging what it learned to the book; changes to decisions or preferences are gated behind one item I answer with "go."</li>
 <li><b>Two rules I'd keep if I threw everything else out.</b> The one-minute rule: if an item takes me longer than a minute to act on, the agent didn't finish its prep, and it goes back. And batching: a few items per project per day, never a stream of pings.</li>
 </ul>
-<p class="meta">There's no public repo for the Assistant Dashboard because the page is wired to my own Notion workspace and holds personal data. The pieces that generalize, the loop and the Project Books memory model, are on <a href="../how-i-work.html">AI System</a>, and a longer write-up is coming in late November.</p>
+<p class="meta">There's no public repo for the Assistant Dashboard because the page is wired to my own Notion workspace and holds personal data. The pieces that generalize, the loop and the Project Books memory model, are on <a href="../ai-system.html">AI System</a>, and a longer write-up is coming in late November.</p>
 """,
   learned="""
 <p><b>It's agile the way the manifesto meant it.</b> The page has had something like a hundred changes since the end of September, and the pattern is always the same: I use it for a few days, something feels off, I describe the change, it ships in minutes. Filters. Sorting. A checkbox. Replying inline. A rule that every recommendation leads with the answer. No single change was the breakthrough; a hundred small ones were. For most of my career, iterating a hundred times in a few weeks was something we said we did. This is the first time it has been literally true.</p>
@@ -516,7 +515,8 @@ how += """
 <li><b>A single HTML page</b> is the Assistant Dashboard: no framework, reads Notion live, and has been changed about a hundred times.</li>
 </ul>
 """
-(S/"how-i-work.html").write_text(page("how-i-work.html","AI System",how, desc="The rules my AI assistant runs under, the system that carries them out, and the tools: five principles, three diagrams, one human in the loop."))
+(S/"how-i-work.html").write_text('<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=ai-system.html"><link rel="canonical" href="https://tylermsanchez.com/ai-system.html"><title>Moved</title><p>Moved to <a href="ai-system.html">AI System</a>.</p>')
+(S/"ai-system.html").write_text(page("ai-system.html","AI System",how, desc="The rules my AI assistant runs under, the system that carries them out, and the tools: five principles, three diagrams, one human in the loop."))
 
 # ---------- Reading ----------
 import json, email.utils, datetime
