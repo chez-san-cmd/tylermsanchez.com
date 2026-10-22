@@ -89,6 +89,8 @@ def page(cur, title, body, standalone=True, desc=""):
 
 # ---------- Projects data ----------
 # status: live | building | on deck.  slug=None means no page yet.
+# STYLE RULE: no em dashes (—) anywhere on the site; the build fails if one appears. Use a comma, colon,
+# period or parentheses. (Tyler, 2026-10-22.)
 # STYLE RULE: project names are proper nouns. Every word is capitalized ("Purchase Advisor",
 # "What's for Dinner"), here and everywhere they appear in copy. check_project_names() at the
 # bottom of this file fails the build if a name is not title case or appears in lowercase.
@@ -121,7 +123,7 @@ home = """
 <div class="contact"><a href="mailto:tylersanchez@gmail.com"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" d="M3.5 5.5h17a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1h-17a1 1 0 0 1-1-1v-11a1 1 0 0 1 1-1z"/><path fill="none" stroke="currentColor" stroke-width="1.8" d="m3 7 9 6.5L21 7"/></svg>Email</a><a href="https://www.linkedin.com/in/tylermsanchez" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="#0A66C2" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a><a href="https://github.com/chez-san-cmd" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path fill="var(--fg)" d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3z"/></svg>GitHub</a></div>
 
 <h2>About</h2>
-<p>I’ve spent 14 years in technology across Google, Tripadvisor, Brightwheel, and Meta, most recently as a Staff Product Manager at Instagram. For five years, I helped shape Instagram’s evolution into a place where people connect through what they share. I set direction and led growth across group chats, sharing, and new connections—helping turn the things people watch into conversations and the people they follow into friends.</p>
+<p>I’ve spent 14 years in technology across Google, Tripadvisor, Brightwheel, and Meta, most recently as a Staff Product Manager at Instagram. For five years, I helped shape Instagram’s evolution into a place where people connect through what they share. I set direction and led growth across group chats, sharing, and new connections, helping turn the things people watch into conversations and the people they follow into friends.</p>
 <p>I love learning a new space (the data, the users, the market), forming a point of view about what should exist, and turning that conviction into something people can use.</p>
 <p>Now I’m building a proactive AI personal assistant, with a dashboard where I delegate work, follow progress, and make decisions. Behind it, agents read my inbox, draft replies, research jobs, watch for concert presales, and manage our home renovation paperwork. I’m pushing the limits of what it can take on and refining how we work together. This site documents what I build and learn along the way.</p>
 <p>Outside of work: 🍽️ cooking, 📚 <a href="reading.html">reading</a>, ⚽ soccer, 🤖 ai, 🥾 hiking, 🎸 live music, 👨‍👧 dad things.</p>
@@ -545,14 +547,15 @@ reading = """
 <h1>Reading list</h1>
 <p class="lede">Everything I've read since I started keeping track, newest first, pulled from my <a href="https://www.goodreads.com/user/show/16104684-tyler" target="_blank" rel="noopener">Goodreads</a> shelf. A ⭐ marks a five-star book.</p>
 """
-def _h(t): return t.replace("&","&amp;").replace("<","&lt;")
+def _h(t): return re.sub(r"\s*\u2014\s*", ", ", t).replace("&","&amp;").replace("<","&lt;")   # publishers love em dashes; the site does not
 for y in sorted(groups, key=lambda k: (k=="Earlier", -k if k!="Earlier" else 0)):
     bs = sorted(groups[y], key=_sortkey, reverse=True)
     label = f"{y} <span class=\"count\">· {len(bs)} book{'s' if len(bs)!=1 else ''}</span>" if y!="Earlier" else f"Earlier <span class=\"count\">· {len(bs)} books, read before I kept dates</span>"
     reading += f'<h2 id="y{y}">{label}</h2>\n<ul class="books">\n'
     for b in bs:
         star = ' <span class="star" title="Five stars">⭐</span>' if b["rating"]=="5" else ""
-        reading += f'<li><a href="https://www.goodreads.com/book/show/{b["id"]}" target="_blank" rel="noopener">{_h(b["title"])}</a> <span class="au">({_h(b["author"])})</span>{star}</li>\n'
+        short = b["title"].split(":")[0].strip()          # drop publishers' subtitles; full title on hover
+        reading += f'<li><a href="https://www.goodreads.com/book/show/{b["id"]}" target="_blank" rel="noopener" title="{_h(b["title"]).replace(chr(34),"&quot;")}">{_h(short)}</a> <span class="au">({_h(b["author"])})</span>{star}</li>\n'
     reading += "</ul>\n"
 reading += f'<p class="meta">Updated {datetime.date.today():%B %Y} from Goodreads. {len(books)} books.</p>'
 (S/"reading.html").write_text(page("reading.html","Reading list",reading, desc="Everything I've read since I started keeping track, by year, with the five-star books marked."))
@@ -608,4 +611,16 @@ def check_project_names():
     if errs:
         raise SystemExit("Project-name style check failed:\n  " + "\n  ".join(errs))
 check_project_names()
+
+# ---------- Style check: no em dashes (Tyler, 2026-10-22) ----------
+def check_no_em_dashes():
+    errs = []
+    for f in S.rglob("*.html"):
+        if "_build" in f.parts: continue
+        for i, line in enumerate(f.read_text().split("\n"), 1):
+            if "\u2014" in line:
+                errs.append(f"{f.relative_to(S)}:{i}: em dash in {line.strip()[:80]!r}")
+    if errs:
+        raise SystemExit("Em-dash check failed (use a comma, colon, period or parentheses instead):\n  " + "\n  ".join(errs))
+check_no_em_dashes()
 print("ok", [p.name for p in S.rglob("*.html")], "figs:", len(figs))

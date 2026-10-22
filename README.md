@@ -22,4 +22,6 @@ For the private preview artifact, run with `ARTIFACT_PREVIEW=1 SITE_OUT=<dir>` a
 - **Project names are proper nouns.** Capitalize every word: Assistant Dashboard, Job Radar, Concert Radar,
   Purchase Advisor, What's for Dinner. New projects follow the same rule. The build fails if a name in
   `PROJECTS` isn't title case or if a project name appears in lowercase anywhere on the site.
+- **No em dashes (—) anywhere on the site.** Use a comma, colon, period or parentheses instead. The build fails
+  if one appears in any published page.
 - Links in body text are underlined; nav, contact row and book titles underline on hover.
