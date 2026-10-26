@@ -325,7 +325,7 @@ project_page_v2("assistant-dashboard", "Assistant Dashboard", "September 30, 202
 
 # ---------- Project: Concert Radar ----------
 project_page_v2("concert-radar", "Concert Radar", "October 9, 2026",
-  lede="Every Denver concert venue sends a newsletter, mostly with shows I'm not interested in. By the time I notice a band I like, I've missed the presale and resale tickets are 3x face value. Concert Radar reads the newsletters for me, flags the artists I like while the presale is still open, and even introduces me to a few similar artists I don't yet know.",
+  lede="Every Denver concert venue sends a newsletter, mostly with shows I'm not interested in. By the time I notice a band I like, I've missed the presale and resale tickets are 3x face value. Concert Radar reads the newsletters for me, flags the artists I like while the presale is still open, and even introduces me to a few related artists coming to town.",
   hero=pithy(figs[3][2], "Newsletters in, matched shows out, with the presale window attached."), hero_class="hero",
   tldr="""<li><b>I never read a venue newsletter.</b> Venue and promoter emails get filtered in Gmail (keeping my inbox clean) and two weekly runs tell me about shows I'd go to.</li>
 <li><b>Face value, not resale.</b> Each matching artist comes with the presale window, the code and the ticket link on one row.</li>
@@ -333,22 +333,21 @@ project_page_v2("concert-radar", "Concert Radar", "October 9, 2026",
 <li><b>It learns from me.</b> Tier 2 picks are Claude's guesses. Moving an artist to Tier 1 or Skip is the whole training interface.</li>
 <li><b>It never buys.</b> Alerts and links only. I buy every ticket myself.</li>""",
   learned="""<li><b>Registration is the real deadline.</b> For the biggest shows the presale needs a registration that closes days earlier, and the code arrives the day before. So the alert that matters is the one on announcement day, which no venue roundup gives you. That reframed the project from \"watch presales\" to \"watch announcements\" and pushed me towards artist-level feeds.</li>
-<li><b>Twice a week is a real trade-off.</b> I moved from a daily update to twice a week to save on token costs, but a presale announced late Thursday and closed by Tuesday gets missed. If this happens again, I'll likely revert back to a daily check.</li>
-<li><b>A seed list is a guess.</b> Spotify's connector only returns 20 artists per query, so the Taste List was limited from the start. It gets better every time I move an artist between tiers, not from any clever matching.</li>""",
+<li><b>Twice a week is a real trade-off.</b> I moved from a daily update to twice a week to save on token costs, but a presale announced late Thursday and closed by Tuesday gets missed. If this happens again, I'll likely revert back to a daily check.</li>""",
   iterations=[
+    ("20 artists is not my taste",
+     "The Taste List was seeded through Spotify's connector, which only returns ~20 artists per query and no listening history. \"My top artists\" came back with bands I'd see tomorrow next to a Broadway recording I play for our daughter. The connector sees what's popular in my library, not what I've actually listened to for years.",
+     "I requested Spotify's full data export, which has every stream since the account began with play time. The new seed ranks artists by hours listened and by recency, which separates an artist I played once in 2019 from one I've played every month since. It's a significantly stronger quality signal than the Spotify connector."),
     ("\"Tonight\" means nothing on Monday",
      "Leon Bridges at Red Rocks showed up in the Thursday digest as \"presale now through Thursday 10pm.\" By the time I read it on Monday, I'd missed the presale. The weekly venue email turned out to be the <i>last</i> presale window, not the first.",
      "Every digest line now carries an absolute date and time. And I started adding artist-level feeds (Bandsintown is in; Seated and the Tier 1 artists' own mailing lists are next) so presale alerts land on announcement day instead of the venue's weekly roundup."),
     ("The code arrived the day before",
      "Hans Zimmer at Ball Arena needed a registration a week before the presale in order to receive the code. By the time the show hit the Thursday list, the registration window had closed.",
      "Registration windows now get their own alert with their own deadline separate from the presale. That's also what pushed me toward artist-level feeds, which announce shows, registrations and presales earlier than the venue's weekly roundup."),
-    ("Twenty artists is not my taste",
-     "The Taste List was seeded through Spotify's connector, which returns at most 20 artists per query and no listening history. A \"my top artists\" query came back mixing bands I'd see tomorrow with a cast recording that plays in our house. The connector sees what's popular in my library, not what I've actually listened to for years.",
-     "I requested Spotify's full data export, which has every stream since the account began with play time. The next seed ranks artists by hours listened and by recency, which separates an artist I played once in 2019 from one I've played every month since. Until it lands, the tier moves are doing the teaching."),
   ],
   under_hood="""
 <ul class="plain">
-<li><b>Taste List.</b> A Notion table of artists with a tier (Tier 1, Tier 2 or Skip), the evidence for the tier, and notes. Seeded from Spotify's most-played and saved lists, two years of ticket orders in Gmail, and Spotify's own concert recommendations. The runs read it fresh every time.</li>
+<li><b>Taste List.</b> A Notion table of artists with a tier (Tier 1, Tier 2 or Skip), the evidence for the tier, and notes. Seeded from Spotify's full data export (every stream since the account began, ranked by hours listened and by recency), two years of ticket orders in Gmail, and Spotify's own concert recommendations. The runs read it fresh every time.</li>
 <li><b>Two Claude scheduled tasks</b> (Tuesday and Thursday mornings) that share one instruction set and re-read a \"Run rules\" section of the project's Notion book every run, so changing the behavior means editing a paragraph, not a prompt in code. The rules cover radius (Fort Collins to Colorado Springs plus the mountain venues for Tier 1, metro Denver for Tier 2), an eight-pick weekly cap on Tier 2, support acts counting as Tier 2, and absolute times only.</li>
 <li><b>Sources.</b> AEG's Thursday \"New Shows\" list, Live Nation venues, the Paramount, the Botanic Gardens, Seated, Spotify's concert emails and Bandsintown, all read from Gmail. A filter archives the newsletters so they skip my inbox; the Radar's push becomes the signal.</li>
 <li><b>Connectors.</b> Gmail for the newsletters, Spotify for taste and links, Google Calendar for conflict checks and holds, Notion for the record. Matches become rows with the presale window, the type (artist, venue, registration, card), the password if there is one, the ticket link, and any calendar conflict on the show date.</li>
