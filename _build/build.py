@@ -221,7 +221,7 @@ def project_page_v2(slug, name, live_since, lede, hero, tldr, learned, iteration
 JR_REPO = "https://github.com/chez-san-cmd/job-radar"
 project_page_v2("job-radar", "Job Radar", "October 5, 2026",
   lede="LinkedIn has hundreds of PM postings and no idea what I want. Job Radar pulls PM roles straight from the career pages of a few dozen companies I'm interested in, scores each one against a rubric of what I'm seeking next, and sends me only the strongest fits. I spend my time on the five roles worth a look, not the five hundred that aren't.",
-  hero="""<figure><img src="../img/job-radar-tile.jpg" alt="The Job Radar tile on my Assistant Dashboard, listing three roles rated Strong: a Staff Product Manager at Coursera, a Product Manager for Claude Marketplace at Anthropic, and a Product Manager at ElevenLabs." width="1280" height="512" loading="lazy">
+  hero="""<figure><img src="../img/job-radar-tile.png" alt="The Job Radar tile on my Assistant Dashboard, listing three roles rated Strong: a Staff Product Manager at Coursera, a Product Manager for Claude Marketplace at Anthropic, and a Product Manager at ElevenLabs." width="1280" height="512" loading="lazy">
 <figcaption>Only the best fitting jobs surface on my dashboard each day.</figcaption></figure>""",
   tldr="""<li><b>Saves me an hour a week.</b> I'm in no hurry to find the next role, but the rare ideal one can show up any day, and I didn't want to spend an hour a week scanning career pages to catch it.</li>
 <li><b>Straight from the source.</b> Every morning it pulls new postings from each company's own career page, so nothing is days old or buried under hundreds of listings that aren't for me.</li>
