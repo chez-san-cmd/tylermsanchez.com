@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Purchase Advisor · Tyler Sanchez</title><meta name="description" content="A Claude skill that pressure-tests whether to buy at all, then finds the best real value and recommends. Advisory only: it never buys. I make every purchase myself."><link rel="canonical" href="https://tylermsanchez.com/projects/purchase-advisor.html"><meta property="og:type" content="website"><meta property="og:title" content="Purchase Advisor · Tyler Sanchez"><meta property="og:description" content="A Claude skill that pressure-tests whether to buy at all, then finds the best real value and recommends. Advisory only: it never buys. I make every purchase myself."><meta property="og:url" content="https://tylermsanchez.com/projects/purchase-advisor.html"><meta property="og:image" content="https://tylermsanchez.com/tyler.jpg"><meta property="og:site_name" content="Tyler Sanchez"><meta name="twitter:card" content="summary"><meta name="claude:viewport-fit-sides" content="cover"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png"><link rel="icon" type="image/png" sizes="512x512" href="../icon-512.png"><link rel="apple-touch-icon" href="../apple-touch-icon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap"><style>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Purchase Advisor · Tyler Sanchez</title><meta name="description" content="Most of the work of a good purchase is deciding whether to make it at all, and that's the step I skip when I'm the only one in the conversation. Purchase Advisor is a Claude skill that pressure-tests the premise first, then finds the best real value and recommends. It never buys. The card stays in my wallet."><link rel="canonical" href="https://tylermsanchez.com/projects/purchase-advisor.html"><meta property="og:type" content="website"><meta property="og:title" content="Purchase Advisor · Tyler Sanchez"><meta property="og:description" content="Most of the work of a good purchase is deciding whether to make it at all, and that's the step I skip when I'm the only one in the conversation. Purchase Advisor is a Claude skill that pressure-tests the premise first, then finds the best real value and recommends. It never buys. The card stays in my wallet."><meta property="og:url" content="https://tylermsanchez.com/projects/purchase-advisor.html"><meta property="og:image" content="https://tylermsanchez.com/tyler.jpg"><meta property="og:site_name" content="Tyler Sanchez"><meta name="twitter:card" content="summary"><meta name="claude:viewport-fit-sides" content="cover"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png"><link rel="icon" type="image/png" sizes="512x512" href="../icon-512.png"><link rel="apple-touch-icon" href="../apple-touch-icon.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap"><style>
 /* Layout: one 640px column, left-aligned, nav as a single line of text. Quiet enough that the writing is the design. */
 :root{--tldr-bg:#FFFFFF;--tldr-rule:#D9DEDB;--bg:#F6F7F5;--fg:#15201E;--muted:#5F6E6A;--accent:#0F6E63;--ul:#8FC9BC;--rule:#D9DEDB;--soft:#ECF0EE;--you:#B8336A;
   --f-body:"Newsreader","Iowan Old Style",Georgia,serif;--f-ui:"IBM Plex Sans",system-ui,-apple-system,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
@@ -56,24 +56,10 @@ dialog.lb{border:0;padding:16px;background:var(--bg);color:var(--fg);border-radi
 hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
 @media (max-width:480px){nav.top{flex-wrap:nowrap;white-space:nowrap;gap:0 12px;font-size:15px}nav.top .me{margin-right:auto}body{font-size:19px}h1{font-size:30px}.sub{font-size:23px}ul.list li{grid-template-columns:1fr}ul.list .d{order:2}}
 </style></head><body><div class="col"><nav class="top"><a class="me" href="../index.html">Tyler Sanchez</a><a href="../writing/chat-box.html">Writing</a><a href="../projects.html" aria-current="page">Projects</a><a href="../ai-system.html">AI System</a></nav>
-<p class="meta" style="margin-bottom:6px"><a href="../projects.html">Projects</a> · live</p>
-<h1>Purchase Advisor</h1>
-<p class="lede">A Claude skill that pressure-tests whether to buy at all, then finds the best real value and recommends. Advisory only: it never buys. I make every purchase myself.</p>
-
-<aside class="example"><p class="k">What happened → what I changed</p><p><b>What happened.</b> I asked it to compare rotating car seats and it dutifully compared rotating car seats. Good brief, wrong question: whether we needed one at all before the second baby was the real decision, and nobody had asked it.</p>
-<p><b>What I changed.</b> Anything over $250 now starts with a premise check (needed? why now? what if I wait?) before any research, and the skill is told to raise those questions again whenever the conversation builds momentum toward a specific model. Sometimes the right output is "wait."</p></aside>
-<nav class="toc" aria-label="On this page"><a href="#what">What it does</a><a href="#why">Why I built it</a><a href="#how">How it's built</a><a href="#learned">What I learned</a><a href="#status">Status</a></nav>
-<h2 id="what">What it does</h2>
-
-<p>It's a skill rather than a scheduled agent, so it applies anywhere in Claude the moment I'm considering a purchase. For anything over $250 it starts with a premise check: is this needed, why now, and what happens if I wait or do nothing. It revisits those questions when the conversation starts building momentum toward a specific option, and says plainly if the path no longer makes sense. Under $250 it's a one-line sanity check.</p>
-<p>If the premise holds, it defines value as lifetime usefulness divided by total cost of ownership (price, consumables, maintenance, time, resale), researches three tiers (a value pick, a sweet spot, and a buy-it-once option) from independent long-term testing and owner reports, checks price history, refurbished and used options, model cycles and warranty, and then recommends. The recommendation leads with the verdict: buy, wait, or don't. Then the top pick and runner-up, a target price, what would change the call, and any rationalizations it caught me making. It gives me links. I click buy, or I don't.</p>
-
-<h2 id="why">Why I built it</h2>
-
-<p>Purchases come up ad hoc, and most of the work of a good one is deciding whether to make it at all. I wanted the research without the momentum: a second opinion that's allowed to say "wait," built into the tool I was already going to ask. And it had to be unable to spend money, because the useful version of an assistant is one I can trust with more each month, and that trust starts with the card staying in my wallet. (Unable by instruction and by design, not by a technical lock: the skill stops at a recommendation and gives links, and no payment details are stored where it could use them.)</p>
-
-<h2 id="how">How it's built</h2>
-<figure>
+<p class="meta" style="margin-bottom:6px"><a href="../projects.html">Projects</a> · live since October 6, 2026</p>
+<h1 style="margin-top:14px">Purchase Advisor</h1>
+<p class="lede">Most of the work of a good purchase is deciding whether to make it at all, and that's the step I skip when I'm the only one in the conversation. Purchase Advisor is a Claude skill that pressure-tests the premise first, then finds the best real value and recommends. It never buys. The card stays in my wallet.</p>
+<div class="hero"><figure>
 <svg viewBox="0 0 900 320" role="img" aria-label="Flow: Tyler asks about a purchase. For anything over $250 a premise check asks whether it is needed, why now, and what happens if he waits; it can end in 'wait' or 'don't buy'. Otherwise the skill defines value as lifetime usefulness over total cost of ownership, researches three tiers from independent long-term testing and owner reports, and recommends: verdict first, top pick and runner-up, target price, what would change the call, and rationalization flags. Tyler buys.">
 <defs>
 <marker id="ar7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
@@ -118,26 +104,33 @@ hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
 <path class="edge y" d="M830 210 L830 270 L130 270" marker-end="url(#ary7)"/>
 <text class="lab" x="440" y="290">I click buy, or I don't · the skill never touches a cart</text>
 </svg>
-<figcaption>Four steps, and the first one can end the conversation. The output is a verdict and links; the card stays in my wallet.</figcaption>
-</figure>
+<figcaption>Four steps, and the first one can end the conversation.</figcaption>
+</figure></div>
+<div class="tldr" id="tldr"><h2>TL;DR</h2>
+<ul class="plain">
+<li><b>It's allowed to say "wait."</b> Anything over $250 starts with three questions: is this needed, why now, and what happens if I do nothing. Sometimes that's the whole answer.</li>
+<li><b>Value, not price.</b> Lifetime usefulness divided by total cost of ownership: price, upkeep, time, resale. It researches three tiers, a value pick, a sweet spot and a buy-it-once option, from independent long-term testing and owner reports.</li>
+<li><b>Verdict first.</b> Buy, wait or don't, then the pick and runner-up, a target price, what would change the call, and the rationalizations it caught me making.</li>
+<li><b>Never touches a cart.</b> It gives me links. I click buy, or I don't.</li>
+</ul></div>
+<h2 id="iterations">Early iterations</h2>
+<div class="iter"><h3>Right brief, wrong question</h3><p><b>What happened.</b> I asked it to compare rotating car seats and it dutifully compared rotating car seats. Whether we needed one at all before the second baby was the real decision, and nobody had asked it.</p><p><b>What I changed.</b> Anything over $250 now starts with a premise check before any research, and the skill is told to raise those questions again whenever the conversation builds momentum toward a specific model. Sometimes the right output is "wait."</p></div>
+<h2 id="learned">What I learned</h2>
+<ul class="plain">
+<li><b>"Wait" is a legitimate answer, and it's the one I'm worst at reaching alone.</b> The LinkedIn Premium brief didn't pick a plan; it laid out what I'd lose by cancelling and whether that mattered this month. That framing, the cost of waiting against the cost of acting now, is the one I skip when nobody else is in the conversation.</li>
+<li><b>Rules you write for an agent are rules for yourself.</b> Writing down where I'll happily overspend and where I refuse to turned out to be the hard part, and it's still open. The skill can't be more honest about value than I am.</li>
+</ul>
+<h2 id="hood">Under the hood</h2>
+
 
 <ul class="plain">
-<li><b>One skill file.</b> The whole thing is a written procedure Claude loads when a purchase comes up: the four steps above, the $250 threshold, and the output format. There is no code, no schedule, and no database. The decision log for it lives in a Notion Project Book like every other project.</li>
+<li><b>One skill file.</b> The whole thing is a written procedure Claude loads when a purchase comes up: the four steps above, the $250 threshold, and the output format. No code, no schedule, no database. The decision log lives in a Notion Project Book like every other project.</li>
 <li><b>A written point of view on value.</b> Worth paying more for: durability and repairability, things used daily, kid safety, and anything that saves future decisions. Not worth paying for: brand premium, features I won't use, newest-model status. These are first guesses; the skill is told to tune them from my calls.</li>
-<li><b>The format is the product.</b> Verdict first, evidence underneath, which is the same pyramid-principle rule every recommendation in my system follows. A brief I can act on in thirty seconds beats a comparison table I have to read.</li>
+<li><b>The format is the product.</b> Verdict first, evidence underneath, the same pyramid-principle rule every recommendation in my system follows. A brief I can act on in thirty seconds beats a comparison table I have to read.</li>
+<li><b>Advisory by design, not by lock.</b> The skill stops at a recommendation and gives links, and no payment details are stored anywhere it could reach them.</li>
 </ul>
-<p class="meta">Skill files are plain Markdown. If I publish mine, it'll be on <a href="https://github.com/chez-san-cmd" target="_blank" rel="noopener">GitHub</a>.</p>
 
-
-<h2 id="learned">What I learned</h2>
-
-<p><b>"Wait" is a legitimate answer, and it's the one I'm worst at reaching alone.</b> The LinkedIn Premium brief didn't pick a plan; it laid out what I'd lose by cancelling and whether that mattered this month. That framing, cost of waiting versus cost of acting now, is the one I skip when I'm the only person in the conversation.</p>
-<p><b>Rules you write for an agent are rules for yourself.</b> Writing down where I'll happily overspend and where I refuse to turned out to be the hard part, and it's still open. The skill can't be more honest about value than I am.</p>
-
-<h2 id="status">Status <span class="count">· October 2026</span></h2>
-
-<p>In use since October 6, 2026. Open questions I owe it: where I'm happy to overspend (running, skiing, scuba, kitchen gear?), where I refuse to pay for the top end, and whether used and refurbished should be the default or only for some categories. A related question in the Concert Radar book: whether a pair of tickets over $250 should trigger the same premise check.</p>
-
+<p class="meta">The skill is one Markdown file. Happy to share it.</p>
 <p class="meta"><a href="../projects.html">← All projects</a></p>
 <footer>© 2026 Tyler Sanchez · Denver · tylersanchez@gmail.com</footer></div><dialog class="lb" id="lb"><div id="lb-body"></div><p>Click anywhere or press Esc to close.</p></dialog>
 <script>
