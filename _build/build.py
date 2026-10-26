@@ -335,7 +335,7 @@ project_page_v2("concert-radar", "Concert Radar", "October 9, 2026",
   learned="""<li><b>Registration is the real deadline.</b> For the biggest shows the presale needs a registration that closes days earlier, and the code arrives the day before. So the alert that matters is the one on announcement day, which no venue roundup gives you. That reframed the project from \"watch presales\" to \"watch announcements\" and pushed me towards artist-level feeds.</li>
 <li><b>Twice a week is a real trade-off.</b> I moved from a daily update to twice a week to save on token costs, but a presale announced late Thursday and closed by Tuesday gets missed. If this happens again, I'll likely revert back to a daily check.</li>""",
   iterations=[
-    ("20 artists is not my taste",
+    ("Twenty artists is not my taste",
      "The Taste List was seeded through Spotify's connector, which only returns ~20 artists per query and no listening history. \"My top artists\" came back with bands I'd see tomorrow next to a Broadway recording I play for our daughter. The connector sees what's popular in my library, not what I've actually listened to for years.",
      "I requested Spotify's full data export, which has every stream since the account began with play time. The new seed ranks artists by hours listened and by recency, which separates an artist I played once in 2019 from one I've played every month since. It's a significantly stronger quality signal than the Spotify connector."),
     ("\"Tonight\" means nothing on Monday",
@@ -351,7 +351,7 @@ project_page_v2("concert-radar", "Concert Radar", "October 9, 2026",
 <li><b>Two Claude scheduled tasks</b> (Tuesday and Thursday mornings) that share one instruction set and re-read a \"Run rules\" section of the project's Notion book every run, so changing the behavior means editing a paragraph, not a prompt in code. The rules cover radius (Fort Collins to Colorado Springs plus the mountain venues for Tier 1, metro Denver for Tier 2), an eight-pick weekly cap on Tier 2, support acts counting as Tier 2, and absolute times only.</li>
 <li><b>Sources.</b> AEG's Thursday \"New Shows\" list, Live Nation venues, the Paramount, the Botanic Gardens, Seated, Spotify's concert emails and Bandsintown, all read from Gmail. A filter archives the newsletters so they skip my inbox; the Radar's push becomes the signal.</li>
 <li><b>Connectors.</b> Gmail for the newsletters, Spotify for taste and links, Google Calendar for conflict checks and holds, Notion for the record. Matches become rows with the presale window, the type (artist, venue, registration, card), the password if there is one, the ticket link, and any calendar conflict on the show date.</li>
-<li><b>Boundaries.</b> The runs never buy, register or join a queue. This is the one fun project allowed to send phone alerts directly, because presale windows last hours.</li>
+<li><b>Boundaries.</b> The runs never buy, register or join a queue, but it is allowed to send phone alerts directly, because presale windows last hours.</li>
 </ul>
 """,
   repo_note="The code is the two task prompts plus the Notion schemas. Happy to walk through them.")
