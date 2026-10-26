@@ -125,7 +125,7 @@ home = """
 <p>I’ve spent 14 years in technology across Google, Tripadvisor, Brightwheel, and Meta, most recently as a Staff Product Manager at Instagram. For five years, I helped shape Instagram’s evolution into a place where people connect through what they share. I set direction and led growth across group chats, sharing, and new connections, helping turn the things people watch into conversations and the people they follow into friends.</p>
 <p>I love learning a new space (the data, the users, the market), forming a point of view about what should exist, and turning that conviction into something people can use.</p>
 <p>Now I’m building a proactive AI personal assistant, with a dashboard where I delegate work, follow progress, and make decisions. Behind it, agents read my inbox, draft replies, research jobs, watch for concert presales, and manage our home renovation paperwork. I’m pushing the limits of what it can take on and refining how we work together. This site documents what I build and learn along the way.</p>
-<p>Outside of work: 🍽️ cooking, 📚 <a href="reading.html">reading</a>, ⚽ soccer, 🤖 ai, 🥾 hiking, 🎸 live music, 👨‍👧 dad things.</p>
+<p>Outside of work: 🍽️ cooking, 📚 <a href="reading.html">reading</a>, ⚽ soccer, 🤖 ai, 🥾 hiking, 👨‍👧 dad things.</p>
 
 <h2>Now <span style="text-transform:none;letter-spacing:0;font-weight:400">· October 2026</span></h2>
 <p>Building a proactive personal assistant and sharing the product decisions behind it. Next up: publishing the Job Radar's code, scoring rubric and evals.</p>
