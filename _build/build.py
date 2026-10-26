@@ -358,7 +358,7 @@ project_page_v2("concert-radar", "Concert Radar", "October 9, 2026",
 
 # ---------- Project: Purchase Advisor ----------
 PA_FIG = """<figure>
-<svg viewBox="0 0 900 320" role="img" aria-label="Flow: Tyler asks about a purchase. For anything over $250 a premise check asks whether it is needed, why now, and what happens if he waits; it can end in 'wait' or 'don't buy'. Otherwise the skill defines value as lifetime usefulness over total cost of ownership, researches three tiers from independent long-term testing and owner reports, and recommends: verdict first, top pick and runner-up, target price, what would change the call, and rationalization flags. Tyler buys.">
+<svg viewBox="0 0 900 320" role="img" aria-label="Flow: Tyler asks about a purchase. For anything over $100 a premise check asks whether it is needed, why now, and what happens if he waits; it can end in 'wait' or 'don't buy'. Otherwise the skill defines value as lifetime usefulness over total cost of ownership, researches three tiers from independent long-term testing and owner reports, and recommends: verdict first, top pick and runner-up, target price, what would change the call, and rationalization flags. Tyler buys.">
 <defs>
 <marker id="ar7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
 <marker id="ary7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--you)"/></marker>
@@ -371,7 +371,7 @@ PA_FIG = """<figure>
 <text class="s" x="75" y="154" text-anchor="middle">"should I buy…"</text>
 <rect class="agent" x="160" y="90" width="190" height="100" rx="8"/>
 <text class="t" x="255" y="114" text-anchor="middle">1 Premise check</text>
-<text class="s" x="255" y="132" text-anchor="middle">anything over $250</text>
+<text class="s" x="255" y="132" text-anchor="middle">anything over $100</text>
 <text class="s" x="255" y="150" text-anchor="middle">needed? why now?</text>
 <text class="s" x="255" y="166" text-anchor="middle">what if I wait or do nothing?</text>
 <rect class="agent" x="380" y="90" width="170" height="100" rx="8"/>
@@ -407,7 +407,7 @@ PA_FIG = """<figure>
 project_page_v2("purchase-advisor", "Purchase Advisor", "October 6, 2026",
   lede="Most of the work of a good purchase is deciding whether to make it at all, and that's the step I skip when I'm the only one in the conversation. Purchase Advisor is a Claude skill that pressure-tests the premise first, then finds the best real value and recommends. It never buys. The card stays in my wallet.",
   hero=pithy(PA_FIG, "Four steps, and the first one can end the conversation."), hero_class="hero",
-  tldr="""<li><b>It's allowed to say \"wait.\"</b> Anything over $250 starts with three questions: is this needed, why now, and what happens if I do nothing. Sometimes that's the whole answer.</li>
+  tldr="""<li><b>It's allowed to say \"wait.\"</b> Anything over $100 starts with three questions: is this needed, why now, and what happens if I do nothing. Sometimes that's the whole answer.</li>
 <li><b>Value, not price.</b> Lifetime usefulness divided by total cost of ownership: price, upkeep, time, resale. It researches three tiers, a value pick, a sweet spot and a buy-it-once option, from independent long-term testing and owner reports.</li>
 <li><b>Verdict first.</b> Buy, wait or don't, then the pick and runner-up, a target price, what would change the call, and the rationalizations it caught me making.</li>
 <li><b>Never touches a cart.</b> It gives me links. I click buy, or I don't.</li>""",
@@ -416,11 +416,11 @@ project_page_v2("purchase-advisor", "Purchase Advisor", "October 6, 2026",
   iterations=[
     ("Right brief, wrong question",
      "I asked it to compare rotating car seats and it dutifully compared rotating car seats. Whether we needed one at all before the second baby was the real decision, and nobody had asked it.",
-     "Anything over $250 now starts with a premise check before any research, and the skill is told to raise those questions again whenever the conversation builds momentum toward a specific model. Sometimes the right output is \"wait.\""),
+     "Anything over $100 now starts with a premise check before any research, and the skill is told to raise those questions again whenever the conversation builds momentum toward a specific model. Sometimes the right output is \"wait.\""),
   ],
   under_hood="""
 <ul class="plain">
-<li><b>One skill file.</b> The whole thing is a written procedure Claude loads when a purchase comes up: the four steps above, the $250 threshold, and the output format. No code, no schedule, no database. The decision log lives in a Notion Project Book like every other project.</li>
+<li><b>One skill file.</b> The whole thing is a written procedure Claude loads when a purchase comes up: the four steps above, the $100 threshold, and the output format. No code, no schedule, no database. The decision log lives in a Notion Project Book like every other project.</li>
 <li><b>A written point of view on value.</b> Worth paying more for: durability and repairability, things used daily, kid safety, and anything that saves future decisions. Not worth paying for: brand premium, features I won't use, newest-model status. These are first guesses; the skill is told to tune them from my calls.</li>
 <li><b>The format is the product.</b> Verdict first, evidence underneath, the same pyramid-principle rule every recommendation in my system follows. A brief I can act on in thirty seconds beats a comparison table I have to read.</li>
 <li><b>Advisory by design, not by lock.</b> The skill stops at a recommendation and gives links, and no payment details are stored anywhere it could reach them.</li>
