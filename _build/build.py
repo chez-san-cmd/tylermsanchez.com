@@ -421,7 +421,7 @@ project_page_v2("purchase-advisor", "Purchase Advisor", "October 6, 2026",
   under_hood="""
 <ul class="plain">
 <li><b>One skill file.</b> The whole thing is a written procedure Claude loads when a purchase comes up: the four steps above, the $100 threshold, and the output format. No code, no schedule, no database. The decision log lives in a Notion Project Book like every other project.</li>
-<li><b>A written point of view on value.</b> Worth paying more for: durability and repairability, things used daily, kid safety, and anything that saves future decisions. Not worth paying for: brand premium, features I won't use, newest-model status. These are first guesses; the skill is told to tune them from my calls.</li>
+<li><b>A written point of view on value.</b> Worth paying more for: durability and repairability, things used daily, kid safety, and anything that saves future decisions. Not worth paying for: brand premium, features I won't use, newest-model status. This is the most important part of the skill, and it's still evolving: every call I make that disagrees with it becomes a new example.</li>
 <li><b>The format is the product.</b> Verdict first, evidence underneath, the same pyramid-principle rule every recommendation in my system follows. A brief I can act on in thirty seconds beats a comparison table I have to read.</li>
 <li><b>Advisory by design, not by lock.</b> The skill stops at a recommendation and gives links, and no payment details are stored anywhere it could reach them.</li>
 </ul>
