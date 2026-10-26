@@ -162,7 +162,7 @@ svg .gate{fill:none;stroke:var(--you);stroke-width:1.2;stroke-dasharray:3 3}
 </figure>
 
 <h2>3. Job Radar: fetch, score against a written point of view, bring only the decisions</h2>
-<p>Two jobs a day. GitHub Actions fetches every PM posting from about twenty company boards and commits the day's new ones. A Claude run then scores each posting against a rubric I wrote about what I actually want (latitude to make bets first, level second, problem space third), writes the ones worth a look to a Notion table with a one-line "why", and sends only 4s and 5s to the attention queue. My Interested / Not for me calls and notes feed the next revision of the rubric.</p>
+<p>Two jobs a day. GitHub Actions fetches every PM posting from a few dozen company boards and commits the day's new ones. A Claude run then scores each posting against a rubric I wrote about what I actually want (company momentum and work-life balance as gates, then latitude to make bets, closeness to AI, and level), writes the ones worth a look to a Notion table with a one-line "why", and sends only 4s and 5s to the attention queue. My Interested / Not for me calls and notes feed the next revision of the rubric.</p>
 <figure>
 <svg viewBox="0 0 900 360" role="img" aria-label="At 5:17am a GitHub Actions job fetches postings from Greenhouse, Lever, Ashby, Workday, Eightfold, Rippling and Shopify boards and commits a JSON file. At 6:52am a Claude run reads the rubric and Tyler's past calls, scores each posting one to five, writes scores of three and up to the Notion Job Radar table and scores of four and five to the attention queue, which the Dashboard tile shows. Tyler marks Interested or Not for me, and those calls revise the rubric.">
 <defs><marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
@@ -174,7 +174,7 @@ svg .gate{fill:none;stroke:var(--you);stroke-width:1.2;stroke-dasharray:3 3}
 <text class="s" x="95" y="80" text-anchor="middle">Greenhouse · Lever · Ashby</text>
 <text class="s" x="95" y="96" text-anchor="middle">Workday · Eightfold</text>
 <text class="s" x="95" y="112" text-anchor="middle">Rippling · Shopify</text>
-<text class="s" x="95" y="134" text-anchor="middle">~20 companies, one adapter each</text>
+<text class="s" x="95" y="134" text-anchor="middle">dozens of boards, one adapter each</text>
 <!-- GH Actions -->
 <rect class="box" x="230" y="50" width="170" height="90" rx="8"/>
 <text class="t" x="315" y="74" text-anchor="middle">GitHub Actions</text>
@@ -187,9 +187,9 @@ svg .gate{fill:none;stroke:var(--you);stroke-width:1.2;stroke-dasharray:3 3}
 <rect class="agent" x="460" y="40" width="200" height="110" rx="8"/>
 <text class="t" x="560" y="64" text-anchor="middle">Claude scoring run</text>
 <text class="s" x="560" y="82" text-anchor="middle">6:52am, reads RUBRIC.md</text>
-<text class="s" x="560" y="98" text-anchor="middle">latitude &gt; level &gt; problem space</text>
-<text class="s" x="560" y="114" text-anchor="middle">score 1-5 + one-line why</text>
-<text class="s" x="560" y="130" text-anchor="middle">level signal, workplace, pay band</text>
+<text class="s" x="560" y="98" text-anchor="middle">gates: momentum, work-life balance</text>
+<text class="s" x="560" y="114" text-anchor="middle">then latitude &gt; AI centrality &gt; level</text>
+<text class="s" x="560" y="130" text-anchor="middle">score 1-5 + one-line why</text>
 <path class="edge a d" d="M400 95 L460 95" marker-end="url(#ara3)"/>
 <text class="lab" x="404" y="86">reads</text>
 <!-- rubric -->
