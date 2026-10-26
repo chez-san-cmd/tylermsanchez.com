@@ -97,7 +97,7 @@ PROJECTS = [
   dict(slug="assistant-dashboard", name="Assistant Dashboard", status="live",
        blurb="One page for every open project in my life, with a strict attention hierarchy and a reply box that starts an agent run."),
   dict(slug="job-radar", name="Job Radar", status="live",
-       blurb="Daily fetch of PM postings from 23 companies, scored against a written rubric of what I'm looking to do next."),
+       blurb="Daily fetch of PM postings from a few dozen companies, scored against a written rubric of what I'm looking to do next."),
   dict(slug="concert-radar", name="Concert Radar", status="live",
        blurb="Weekly alerts for artists that match my musical taste, sent early enough to snag a presale ticket and beat the resale market."),
   dict(slug="purchase-advisor", name="Purchase Advisor", status="live",
@@ -157,7 +157,7 @@ def project_page(slug, name, status, lede, what, why, how_built, learned, status
     """Shared template: What · Why · How it's built · What I learned · Status."""
     toc = '<nav class="toc" aria-label="On this page"><a href="#what">What it does</a><a href="#why">Why I built it</a><a href="#how">How it\'s built</a><a href="#learned">What I learned</a><a href="#status">Status</a></nav>'
     repo_line = (f'<p class="meta">The code, prompts and evals are on GitHub: <a href="{repo}" target="_blank" rel="noopener">{repo.replace("https://","")}</a>. The README has the implementation details this page leaves out.</p>' if repo and not repo_private
-                 else f'<p class="meta">A public repo with the fetch adapters, the rubric template and the scoring evals goes up on GitHub in mid-November, at <code>{repo.replace("https://","")}</code>. The README there will carry the implementation details this page leaves out.</p>' if repo else '')
+                 else '<p class="meta">The repo is private for now. Happy to walk through it.</p>' if repo else '')
     ex = f'<aside class="example"><p class="k">What happened → what I changed</p>{example}</aside>' if example else ''
     body = f"""
 <p class="meta" style="margin-bottom:6px"><a href="../projects.html">Projects</a> · {status}</p>
@@ -185,38 +185,81 @@ def project_page(slug, name, status, lede, what, why, how_built, learned, status
 src = (pathlib.Path(__file__).resolve().parent/"how-i-work-diagrams.html").read_text()
 figs = re.findall(r"<h2>\d\. (.*?)</h2>\s*<p>(.*?)</p>\s*(<figure>.*?</figure>)", src, re.S)
 
+def project_page_v2(slug, name, live_since, lede, hero, tldr, learned, lessons, what, why, how_built, fig=None, repo=None, repo_private=False, desc=""):
+    """v2 template (Oct 26, 2026): pitch first, visual second, lessons before plumbing.
+    Lede · hero visual · TL;DR · toc · What I learned · Early lessons · What it does · Why I built it · How it's built."""
+    toc = '<nav class="toc" aria-label="On this page"><a href="#learned">What I learned</a><a href="#lessons">Early lessons</a><a href="#what">What it does</a><a href="#why">Why I built it</a><a href="#how">How it\'s built</a></nav>'
+    repo_line = (f'<p class="meta">The code, prompts and evals are on GitHub: <a href="{repo}" target="_blank" rel="noopener">{repo.replace("https://","")}</a>.</p>' if repo and not repo_private
+                 else '<p class="meta">The repo is private for now. Happy to walk through it.</p>' if repo else '')
+    lessons_html = "".join(f'<aside class="example"><p class="k">{t}</p><p><b>What happened.</b> {h}</p><p><b>What I changed.</b> {c}</p></aside>' for t,h,c in lessons)
+    body = f"""
+<p class="meta" style="margin-bottom:6px"><a href="../projects.html">Projects</a> · live since {live_since}</p>
+<h1>{name}</h1>
+<p class="lede">{lede}</p>
+<div class="shots">{hero}</div>
+<h2 id="tldr">TL;DR</h2>
+<ul class="plain tldr">
+{tldr}
+</ul>
+{toc}
+<h2 id="learned">What I learned</h2>
+<ul class="plain tldr">
+{learned}
+</ul>
+<h2 id="lessons">Early lessons</h2>
+{lessons_html}
+<h2 id="what">What it does</h2>
+{what}
+<h2 id="why">Why I built it</h2>
+{why}
+<h2 id="how">How it's built</h2>
+{fig or ''}
+{how_built}
+{repo_line}
+<p class="meta"><a href="../projects.html">← All projects</a></p>
+"""
+    (S/"projects"/f"{slug}.html").write_text(page(f"projects/{slug}.html", f"{name} · Tyler Sanchez", body, desc=desc or lede))
+
 # ---------- Project: Job Radar ----------
 JR_REPO = "https://github.com/chez-san-cmd/job-radar"
-project_page("job-radar", "Job Radar", "live",
-  example="""<p><b>What happened.</b> The first rubric described the jobs I'd <i>like</i>. The first sweep read 75 open roles and flagged 8 as Strong, and when I read those eight, several were strong on paper and wrong for me: big shared surfaces where the PM is a traffic cop, titles that sounded senior but owned no strategy.</p>
-<p><b>What I changed.</b> The same day I rewrote the rubric around what I was actually optimizing for, in weight order: latitude to originate product bets, then level, then problem space, plus the uncomfortable constraints (pay floor, hours, how AI-native the team is). Re-scoring the same roles gave 5 Strong, 14 Maybe, 52 Pass, and the Strong list was one I'd act on. The model was never the problem; my clarity was.</p>""",
-  lede="Every morning a script pulls every product-management posting from 23 companies I'd consider working for, and a Claude run scores each one against a rubric I wrote about what I actually want. I see only the ones worth a look.",
+project_page_v2("job-radar", "Job Radar", "October 5, 2026",
+  lede="LinkedIn has hundreds of product postings and a search that has no idea what I want. Job Radar pulls PM roles straight from the career pages of a few dozen companies I'd want to work for, scores each one against a rubric I wrote about what I'm looking to do next, and sends me only the strongest fits. I don't go looking for jobs. The right ones find me.",
+  hero="""<figure><img src="../img/job-radar-dublin.jpg" alt="The Job Radar tile on my Assistant Dashboard: six roles to review, three Strong and three Maybe. The top Strong role is a Staff Product Manager at Coursera, based in Dublin, Ireland, with no remote noted." width="1600" height="369" loading="lazy">
+<figcaption>The Job Radar tile on my dashboard, and a miss. v1 rated a Coursera role in Dublin as Strong with no remote option mentioned. A role based in Europe is never a Strong for someone living in Denver. I told Claude, the rubric changed that afternoon, and roles like that no longer reach my must-see list. Click to enlarge.</figcaption></figure>""",
+  tldr="""<li><b>Freshest source.</b> It pulls from each company's own career page every morning, not from an aggregator that is a few days behind.</li>
+<li><b>Scored against my point of view.</b> A written rubric scores each role 1 to 5, weighing the latitude to set product direction first, then level, then problem space.</li>
+<li><b>Proactive, not a search.</b> Only the strongest fits reach my dashboard, the same day they're posted. Everything else waits for a Sunday summary.</li>
+<li><b>It learns from me.</b> Every time I mark a role Interested or Not for me, my note gets folded back into the rubric, so the scoring drifts toward my actual judgment over time.</li>
+<li><b>Running since early October.</b> It reads about a hundred postings a week so I don't have to.</li>""",
+  learned="""<li><b>Writing the rubric was writing the job search.</b> Deciding how to weigh latitude against level, or whether in-office days in another city are a flag or a filter, forced decisions I'd been carrying around as vague preferences. The rubric is now the clearest statement I have of what I want next, and it gets revised every time I disagree with a score.</li>
+<li><b>The loop is the product.</b> The scoring was mediocre on day one and is good now, and nothing about the model changed. What changed is that every time I disagreed with a score, that disagreement became a rule. An agent that can't take my feedback is a report. One that can is an assistant.</li>
+<li><b>Flags beat filters.</b> My first instinct was to filter out roles in other cities. Keeping them visible with a capped score leaves room for the conversation I actually want to have, which is whether the role could be rescoped to remote.</li>
+<li><b>Using it is how you find out what you wanted.</b> I couldn't have written the current rubric on day one. The rules that matter most came from reacting to real postings, not from thinking hard in advance.</li>""",
+  lessons=[
+    ("Strong on paper, wrong for me",
+     "The first rubric described the jobs I'd <i>like</i>. The first sweep read 75 open roles and flagged 8 as Strong, and when I read those eight, several were strong on paper and wrong for me: big shared surfaces where the PM is a traffic cop, titles that sounded senior but owned no strategy.",
+     "The same day I rewrote the rubric around what I was actually optimizing for, in weight order: latitude to originate product bets, then level, then problem space, plus the uncomfortable constraints (pay floor, hours, how AI-native the team is). Re-scoring the same roles gave 5 Strong, 14 Maybe, 52 Pass, and the Strong list was one I'd act on. The model was never the problem; my clarity was."),
+    ("The Dublin problem",
+     "A Staff PM role at Coursera showed up as Strong on my dashboard (the screenshot above). It was based in Dublin, Ireland, with no mention of remote. The role itself was a great fit, which is exactly why the rubric liked it, but there is a near-zero chance of doing that job from Denver.",
+     "Location went from a soft signal to a hard rule: a role based outside the US with no remote option can't score Strong, no matter how good the work is. It still lands in the weekly table, in case the company turns out to be flexible, but it never reaches the must-see tile. The fix took one conversation and about ten minutes."),
+  ],
   what="""
-<p>Two jobs a day. Around 5am Denver time a GitHub Action fetches the PM postings from each company's own job board and commits the day's new ones to a repo. At 6:52am a scheduled Claude task reads each new posting in full, scores it 1 to 5 against the rubric, and writes anything scoring 3 or above to a Notion table with a one-line "why" a recruiter could read. Anything that scores a 4 or 5 also lands in my attention queue the same day; everything else waits for a Sunday review item that lists the week.</p>
-<p>I mark each row <i>Interested</i> or <i>Not for me</i>, sometimes with a note. The notes get folded back into the rubric, so the scoring drifts toward my actual judgment rather than my first description of it. It has been running since October 5 and reads about a hundred postings a week so I don't have to.</p>
+<p>Every morning a few new roles show up in a table in Notion, and the best ones show up on a tile on my <a href="assistant-dashboard.html">Assistant Dashboard</a>. Each row has the role, the company, a score from 1 to 5, and one line on why it would be a good fit for me. Anything that gets a 3 or higher is added to the table. Anything that gets a 4 or 5 lands on my dashboard the same day. The rest waits for a Sunday summary that lists the week.</p>
+<p>I mark each row <i>Interested</i> or <i>Not for me</i>, sometimes with a note. That's the loop: my notes get folded back into the rubric, so the scoring drifts toward my judgment over time instead of staying stuck on my first description of what I wanted.</p>
 """,
   why="""
-<p>I'm between roles and in no hurry, and the plan assumes the main levers for the next job are people and stories, not applications. But a rare ideal role can appear at any time, and I didn't want to spend an hour a week scanning career pages to catch it. The Radar is a passive net: it watches, I decide. It also turned out to be the cleanest small example of the shape I think most useful agents will take: fetch on a schedule, score against a written point of view, bring only the decisions to a human.</p>
+<p>I'm between roles and in no hurry, and my plan assumes the main levers for the next job are people and stories, not applications. But a rare ideal role can appear at any time, and I didn't want to spend an hour a week scanning career pages to catch it. The Radar is a passive net: it watches, I decide. It also turned out to be the cleanest small example of the shape I think most useful agents will take: fetch on a schedule, score against a written point of view, bring only the decisions to a human.</p>
 """,
   fig=figs[2][2],
   how_built="""
 <ul class="plain">
-<li><b>Fetch.</b> A private repo with one adapter per job-board platform: Greenhouse, Lever, Ashby, Rippling, Workday (Zillow), Eightfold (Netflix), and a scraper for Shopify, which publishes no feed. A GitHub Action runs the fetch daily and commits new postings as plain JSON, so the history is a git log. Why GitHub Actions: scheduled Claude runs can't open arbitrary websites without a per-URL approval nobody is there to give. Splitting deterministic fetching from judgment-heavy scoring solved that and made each half easier to test.</li>
-<li><b>Score.</b> A Claude scheduled task reads the day's file and <code>RUBRIC.md</code>. The rubric scores first on latitude to originate product bets, then level, then problem space. Later rules came straight from my notes on real postings: AI-native teams weigh heavily, "traffic cop" seats on shared surfaces cap at 3, fixed in-office days outside Denver cap at 3 but are still shown, and location is a flag rather than a filter. Director and head-of-product titles are scored on strategy ownership instead of being passed on title.</li>
-<li><b>Store and show.</b> One Notion database: role, company, fit, score, why, status, my notes, level signal, location, link. A saved view feeds a tile on my Assistant Dashboard map and the Sunday review. Everything reads through saved views because Notion's row-query API has a workspace quota and views don't.</li>
-<li><b>Learn.</b> Daily runs also read the <i>Maybe</i> rows and my notes. A full re-score in the first week moved a few roles between Strong and Maybe; it checks that the rubric is applied consistently, not that nothing was missed. Checking the passes against my own judgment is a standing item in the Sunday review, and the sample so far is small.</li>
+<li><b>Fetch.</b> A private repo with one adapter per job-board platform: Greenhouse, Lever, Ashby, Rippling, Workday, Eightfold, and a scraper for the one company that publishes no feed. A GitHub Action runs the fetch daily and commits new postings as plain JSON, so the history is a git log. Why GitHub Actions: scheduled Claude runs can't open arbitrary websites without a per-URL approval nobody is there to give. Splitting deterministic fetching from judgment-heavy scoring solved that and made each half easier to test.</li>
+<li><b>Score.</b> A Claude scheduled task reads the day's file and <code>RUBRIC.md</code>. The rubric scores first on latitude to originate product bets, then level, then problem space. Later rules came straight from my notes on real postings: AI-native teams weigh heavily, "traffic cop" seats on shared surfaces cap at 3, roles outside the US with no remote option can't score Strong, fixed in-office days outside Denver cap at 3 but are still shown. Director and head-of-product titles are scored on strategy ownership instead of being passed on title.</li>
+<li><b>Store and show.</b> One Notion database: role, company, fit, score, why, status, my notes, level signal, location, link. A saved view feeds the tile on my Assistant Dashboard and the Sunday review. Everything reads through saved views because Notion's row-query API has a workspace quota and views don't.</li>
+<li><b>Learn.</b> Daily runs also read the <i>Maybe</i> rows and my notes, and a Sunday item asks whether any pass was wrong. A full re-score in the first week moved a few roles between Strong and Maybe; it checks that the rubric is applied consistently, not that nothing was missed.</li>
 </ul>
 """,
-  repo=JR_REPO, repo_private=True,
-  learned="""
-<p><b>Writing the rubric was writing the job search.</b> Deciding how to weigh latitude against level, or whether in-office days in another city are a flag or a filter, forced decisions I'd been carrying around as vague preferences. The rubric file is now the clearest statement I have of what I want next, and it gets revised every time I disagree with a score.</p>
-<p><b>Flags beat filters.</b> My first instinct was to filter out roles in other cities. Keeping them visible as a capped score instead leaves room for the conversation I actually want to have, which is whether the role could be rescoped to remote.</p>
-<p><b>Some boards don't move.</b> Shopify's careers page is one evergreen posting, so the Radar will almost never show anything new there. For companies like that, a person on the inside matters more than a feed.</p>
-<p><b>Scheduling is the flaky part.</b> GitHub's cron has run hours late, so scoring has sometimes run before the day's fetch landed and picked the roles up a day later. The fix is to start scoring when the fetch finishes instead of at a fixed time; it's proposed, not built yet, and it's the kind of plumbing that takes more of the week than any prompt.</p>
-""",
-  status_text=f"""
-<p>Live since October 5, 2026. Watching 23 companies. A cleaned-up public version, with the fetch adapters, a <code>RUBRIC.md</code> template and the evals I use to check the scoring, goes up on GitHub in mid-November with a Show HN post.</p>
-""")
+  repo=JR_REPO, repo_private=True)
 
 
 # ---------- Project: Assistant Dashboard ----------
@@ -450,7 +493,7 @@ essay = """
 <p><b>The Assistant Dashboard.</b> A single page that shows every open project in my life as a tile in a fixed place, like a site plan, with one marker per item that needs something. The rule for the visual hierarchy is strict: a hard deadline, like a payment due, inside three days is the loudest thing on the page; things waiting on me glow softly; items the agents are working on recede; soft deadlines never turn red; fun projects, like the Purchase Advisor I'm building, live in their own quiet corner. If I only look at it for five seconds I should know whether anything is on fire and whether anything is mine.</p>
 <p><b>The attention queue behind it.</b> Every item on the page answers two questions: is this on me or on the agent, and if it's on me, what kind of answer does it need. The agent can move an item into my column with a recommendation at the top and whatever it already prepared underneath. I can reply to any item right from the page, so the loop is: it prepares, I decide in one line, it carries on.</p>
 <p><b>Project Books.</b> Every project, from a kitchen renovation to the job search to a dinner planner, gets one Notion page with the same four parts: a brief, a decision log, open questions, and a session log. An agent reads the book before it does anything and writes a line in the log when it finishes. This is also how I talk to it. Instead of returning to one ever-growing chat thread that eventually forgets its own beginning, I open a fresh conversation, point it at the book, and it has the latest context in a few seconds. Memory as a page you can read beats memory as a transcript you have to scroll.</p>
-<p><b>Job Radar.</b> A script pulls every product management posting from 23 companies I think are doing interesting work, every morning. A second job reads each posting against a rubric I wrote about what I actually want from the next role (room to originate bets weighs most, then level, then problem space), scores it 1 to 5, and writes anything worth a look into a table with a one-line "why" a recruiter could read. Anything that scores a 4 or 5 lands in my attention queue. I mark each one Interested or Not for me, sometimes with a note, and the rubric gets revised from my calls. It has been running since early October and reads about a hundred postings a week so I don't have to. In the first week I had it re-score the full set to look for false negatives; that pass moved a few roles between Strong and Maybe and found nothing it had wrongly passed on. I'll keep checking.</p>
+<p><b>Job Radar.</b> A script pulls every product management posting from a few dozen companies I think are doing interesting work, every morning. A second job reads each posting against a rubric I wrote about what I actually want from the next role (room to originate bets weighs most, then level, then problem space), scores it 1 to 5, and writes anything worth a look into a table with a one-line "why" a recruiter could read. Anything that scores a 4 or 5 lands in my attention queue. I mark each one Interested or Not for me, sometimes with a note, and the rubric gets revised from my calls. It has been running since early October and reads about a hundred postings a week so I don't have to. In the first week I had it re-score the full set to look for false negatives; that pass moved a few roles between Strong and Maybe and found nothing it had wrongly passed on. I'll keep checking.</p>
 <p><b>Smaller ones.</b> A morning brief. A weekly sweep of what fell through the cracks. The renovation paperwork: proposals, permit timelines, the vendor email that needs a reply. Concert presales for artists I'd buy tickets for, with the presale code sitting right on the tile. Not everything has to be useful.</p>
 
 <h3>The rules it runs under</h3>
