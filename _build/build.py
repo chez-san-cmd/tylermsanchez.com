@@ -97,13 +97,13 @@ PROJECTS = [
   dict(slug="assistant-dashboard", name="Assistant Dashboard", status="live",
        blurb="One page for every open project in my life, with a strict attention hierarchy and a reply box that starts an agent run."),
   dict(slug="job-radar", name="Job Radar", status="live",
-       blurb="Daily fetch of PM postings from 23 companies, scored against a written rubric of what I'm looking for next."),
+       blurb="Daily fetch of PM postings from 23 companies, scored against a written rubric of what I'm looking to do next."),
   dict(slug="concert-radar", name="Concert Radar", status="live",
-       blurb="Presale alerts for the artists I'd actually buy tickets for, early enough to beat the resale market."),
+       blurb="Weekly alerts for artists that match my musical taste, sent early enough to snag a presale ticket and beat the resale market."),
   dict(slug="purchase-advisor", name="Purchase Advisor", status="live",
        blurb="Pressure-tests whether to buy at all, then finds the best real value. Never buys."),
   dict(slug=None, name="What's for Dinner", status="building",
-       blurb="Easy weeknight dinners, planned around what's already in the fridge and designed to meet our health goals."),
+       blurb="Easy weeknight dinners, planned around what's already in the fridge and designed to meet our family's health goals."),
 ]
 def project_list(cur):
     pre = "" if cur in ("index.html","projects.html") else "../"
