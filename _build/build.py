@@ -196,7 +196,7 @@ def project_page_v2(slug, name, live_since, lede, hero, tldr, learned, iteration
     iter_html = "".join(f'<h3>{i}. {t}</h3><p><b>What happened.</b> {h}</p><p><b>What I changed.</b> {c}</p>' for i,(t,h,c) in enumerate(iterations, 1))
     body = f"""
 <p class="meta" style="margin-bottom:6px"><a href="../projects.html">Projects</a> · live since {live_since}</p>
-<h1>{name}</h1>
+<h1 style="margin-top:14px">{name}</h1>
 <p class="lede">{lede}</p>
 <div class="shots">{hero}</div>
 <div class="tldr" id="tldr"><h2>TL;DR</h2>
