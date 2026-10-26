@@ -57,11 +57,11 @@ hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
 @media (max-width:480px){nav.top{flex-wrap:nowrap;white-space:nowrap;gap:0 12px;font-size:15px}nav.top .me{margin-right:auto}body{font-size:19px}h1{font-size:30px}.sub{font-size:23px}ul.list li{grid-template-columns:1fr}ul.list .d{order:2}}
 </style></head><body><div class="col"><nav class="top"><a class="me" href="index.html">Tyler Sanchez</a><a href="writing/chat-box.html">Writing</a><a href="projects.html">Projects</a><a href="ai-system.html" aria-current="page">AI System</a></nav>
 <h1>AI System</h1>
-<p class="lede">An assistant that runs in the background is only as trustworthy as the rules it runs under. Here are the rules, then the system that carries them out, then the tools.</p>
+<p class="lede">An assistant that runs in the background is only as trustworthy as the rules that underpin it. Here are the guiding principles, system, and tools that make the assistant work.</p>
 <nav class="toc" aria-label="On this page"><a href="#principles">Principles</a><a href="#system">The System</a><a href="#tools">Tools</a></nav>
 
 <h2 id="principles">Principles</h2>
-<p>One honest note before the list. These are instructions, not technical locks. The agents run with connectors that could send an email or drive a browser; what stops them is a written rule every run reads before it starts, a design that routes output to places I review (Gmail drafts, Notion pages, a queue item with a recommendation), and a session log I read after the fact. No card or password is stored anywhere an agent can reach, which is the closest thing to a hard limit in the system. I'd like real permission boundaries, and I'll say so when I have them.</p>
+<p>Today, agents can make decisions, send emails, and buy things. I don't have that level of trust yet. I'm still a "human in the loop" operator. What stops these agents are a set of written rules that agents read at the start of every new session and it's the closest thing to a hard limit in the system. These real permission boundaries include:</p>
 <ol>
 <li><b>It never sends anything to another person.</b> Drafts stay drafts until I send them.</li>
 <li><b>It never closes my decisions for me.</b> It recommends; I mark done, decline, approve.</li>
@@ -77,7 +77,7 @@ hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
   <span><i style="border-color:var(--accent)"></i> Notion, the system of record</span>
   <span><i style="border-color:var(--rule);background:var(--soft)"></i> Outside service</span>
 </div>
-<h3>The loop</h3><p>Everything runs on one loop. Scheduled runs read the outside world and the Notion record, do the work an agent is allowed to do, and leave decisions in an attention queue. I read the queue from one page, answer in a line, and that answer starts the next run. Nothing leaves the system to another person unless I send it myself.</p><figure>
+<h3>The loop</h3><p>Everything runs on loops. Scheduled runs read the outside world and the Notion record, do the work an agent is allowed to do, and leave decisions in an attention queue. I read the queue from one page, answer in a line, and that answer starts the next run. Nothing leaves the system or is sent another person unless I send it myself.</p><figure>
 <svg viewBox="0 0 900 400" role="img" aria-label="Tyler reads the Assistant Dashboard, which reads the Notion attention queue; his replies start a scheduled Claude run, which reads Gmail, Calendar, Drive, Spotify and GitHub and writes queue items, project books and radar tables back into Notion. Sending, buying and closing decisions stay with Tyler.">
 <defs>
 <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
@@ -138,7 +138,7 @@ hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
 <text class="s" x="100" y="288" text-anchor="middle">decisions never closed for me</text>
 </svg>
 <figcaption>One loop: runs read outside services and the Notion record, write back into Notion, and surface decisions on one page. Replies from that page start the next run.</figcaption>
-</figure><h3>Project Books: how it remembers</h3><p>Every project, from a renovation to a job search to a dinner planner, gets one Notion page with the same four parts. A run reads the book before it does anything and appends a session log line when it is done. That is the whole memory model: no hidden state, and I can read the book instead of the transcript.</p><figure>
+</figure><h3>Project Books: how it remembers</h3><p>Every project, from a home renovation to a job search to a dinner planner, gets one Notion page with the same four parts. A run reads the book before it does anything and appends a session log line when it is done. That is the whole memory model: no hidden state, and I can read the book instead of the transcript.</p><figure>
 <svg viewBox="0 0 900 330" role="img" aria-label="A Project Book page holds a brief, a decision log, open questions and a session log, with subpages for prep docs and story banks. A scheduled run reads the book at the start, works, and appends to the decision log and session log at the end; Tyler approves changes to the brief and closes open questions.">
 <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
 <marker id="ara2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--agent)"/></marker>
@@ -176,7 +176,7 @@ hr{border:0;border-top:1px solid var(--rule);margin:36px 0}
 <path class="edge d" d="M230 258 L300 258" marker-end="url(#ar2)"/>
 </svg>
 <figcaption>Memory is a page, not a transcript: a run reads the book before it acts and appends to it when it finishes. Changes to the brief and answers to open questions are mine.</figcaption>
-</figure><h3>The learning loop: the delta between the draft and what I sent</h3><p>The agent never sends mail. It writes a draft in my voice and leaves it in Gmail; I edit and send. On the next run it compares what it drafted to what actually went out, and folds the difference into a writing-style file that every future draft reads. The same shape runs everywhere: Job Radar notes revise the rubric, project books carry decisions forward, and the Assistant Dashboard queue records which recommendations I took.</p><figure>
+</figure><h3>The learning loop: the delta between the draft and what I sent</h3><p>The agent never sends mail. It writes a draft in my voice and leaves it in Gmail; I edit and send. On the next run it compares what it drafted to what actually went out, and folds the difference into a writing-style file that every future draft reads. The same shape runs everywhere: Job Radar notes revise the rubric, project books carry decisions forward, and the Assistant Dashboard queue records which recommendations I took. This might be the biggest long-term ROI unlock.</p><figure>
 <svg viewBox="0 0 900 300" role="img" aria-label="A run drafts an email from the writing-style profile and saves it as a Gmail draft. Tyler edits and sends. The next run compares the sent message to the draft and updates the writing-style profile, which the next draft reads. The same correction loop runs from Tyler's Job Radar calls into the rubric and from his queue answers into project books.">
 <defs><marker id="ar5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
 <marker id="ara5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--agent)"/></marker>

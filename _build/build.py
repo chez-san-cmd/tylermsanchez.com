@@ -475,11 +475,11 @@ essay = """
 # ---------- How I work ----------
 how = """
 <h1>AI System</h1>
-<p class="lede">An assistant that runs in the background is only as trustworthy as the rules it runs under. Here are the rules, then the system that carries them out, then the tools.</p>
+<p class="lede">An assistant that runs in the background is only as trustworthy as the rules that underpin it. Here are the guiding principles, system, and tools that make the assistant work.</p>
 <nav class="toc" aria-label="On this page"><a href="#principles">Principles</a><a href="#system">The System</a><a href="#tools">Tools</a></nav>
 
 <h2 id="principles">Principles</h2>
-<p>One honest note before the list. These are instructions, not technical locks. The agents run with connectors that could send an email or drive a browser; what stops them is a written rule every run reads before it starts, a design that routes output to places I review (Gmail drafts, Notion pages, a queue item with a recommendation), and a session log I read after the fact. No card or password is stored anywhere an agent can reach, which is the closest thing to a hard limit in the system. I'd like real permission boundaries, and I'll say so when I have them.</p>
+<p>Today, agents can make decisions, send emails, and buy things. I don't have that level of trust yet. I'm still a "human in the loop" operator. What stops these agents are a set of written rules that agents read at the start of every new session and it's the closest thing to a hard limit in the system. These real permission boundaries include:</p>
 <ol>
 <li><b>It never sends anything to another person.</b> Drafts stay drafts until I send them.</li>
 <li><b>It never closes my decisions for me.</b> It recommends; I mark done, decline, approve.</li>

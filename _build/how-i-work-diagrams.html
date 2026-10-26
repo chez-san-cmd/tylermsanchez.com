@@ -55,7 +55,7 @@ svg .gate{fill:none;stroke:var(--you);stroke-width:1.2;stroke-dasharray:3 3}
 </div>
 
 <h2>1. The loop</h2>
-<p>Everything runs on one loop. Scheduled runs read the outside world and the Notion record, do the work an agent is allowed to do, and leave decisions in an attention queue. I read the queue from one page, answer in a line, and that answer starts the next run. Nothing leaves the system to another person unless I send it myself.</p>
+<p>Everything runs on loops. Scheduled runs read the outside world and the Notion record, do the work an agent is allowed to do, and leave decisions in an attention queue. I read the queue from one page, answer in a line, and that answer starts the next run. Nothing leaves the system or is sent another person unless I send it myself.</p>
 <figure>
 <svg viewBox="0 0 900 400" role="img" aria-label="Tyler reads the Assistant Dashboard, which reads the Notion attention queue; his replies start a scheduled Claude run, which reads Gmail, Calendar, Drive, Spotify and GitHub and writes queue items, project books and radar tables back into Notion. Sending, buying and closing decisions stay with Tyler.">
 <defs>
@@ -120,7 +120,7 @@ svg .gate{fill:none;stroke:var(--you);stroke-width:1.2;stroke-dasharray:3 3}
 </figure>
 
 <h2>2. Project Books: how it remembers</h2>
-<p>Every project, from a renovation to a job search to a dinner planner, gets one Notion page with the same four parts. A run reads the book before it does anything and appends a session log line when it is done. That is the whole memory model: no hidden state, and I can read the book instead of the transcript.</p>
+<p>Every project, from a home renovation to a job search to a dinner planner, gets one Notion page with the same four parts. A run reads the book before it does anything and appends a session log line when it is done. That is the whole memory model: no hidden state, and I can read the book instead of the transcript.</p>
 <figure>
 <svg viewBox="0 0 900 330" role="img" aria-label="A Project Book page holds a brief, a decision log, open questions and a session log, with subpages for prep docs and story banks. A scheduled run reads the book at the start, works, and appends to the decision log and session log at the end; Tyler approves changes to the brief and closes open questions.">
 <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
@@ -285,7 +285,7 @@ svg .gate{fill:none;stroke:var(--you);stroke-width:1.2;stroke-dasharray:3 3}
 </figure>
 
 <h2>5. The learning loop: the delta between the draft and what I sent</h2>
-<p>The agent never sends mail. It writes a draft in my voice and leaves it in Gmail; I edit and send. On the next run it compares what it drafted to what actually went out, and folds the difference into a writing-style file that every future draft reads. The same shape runs everywhere: Job Radar notes revise the rubric, project books carry decisions forward, and the Assistant Dashboard queue records which recommendations I took.</p>
+<p>The agent never sends mail. It writes a draft in my voice and leaves it in Gmail; I edit and send. On the next run it compares what it drafted to what actually went out, and folds the difference into a writing-style file that every future draft reads. The same shape runs everywhere: Job Radar notes revise the rubric, project books carry decisions forward, and the Assistant Dashboard queue records which recommendations I took. This might be the biggest long-term ROI unlock.</p>
 <figure>
 <svg viewBox="0 0 900 300" role="img" aria-label="A run drafts an email from the writing-style profile and saves it as a Gmail draft. Tyler edits and sends. The next run compares the sent message to the draft and updates the writing-style profile, which the next draft reads. The same correction loop runs from Tyler's Job Radar calls into the rubric and from his queue answers into project books.">
 <defs><marker id="ar5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
