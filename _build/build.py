@@ -325,10 +325,11 @@ project_page_v2("assistant-dashboard", "Assistant Dashboard", "September 30, 202
 
 # ---------- Project: Concert Radar ----------
 project_page_v2("concert-radar", "Concert Radar", "October 9, 2026",
-  lede="Presale windows for good shows close in hours, and the venue newsletters that announce them arrive mixed in with everything else. Concert Radar reads those newsletters for me, matches shows against artists I like, and alerts me while the presale is still open. I pay face value instead of resale.",
+  lede="Every Denver venue sends a newsletter, most of it shows I'd never go to, and by the time I notice the one I would, the good seats are on StubHub at three times face value. Concert Radar reads the newsletters for me, flags the artists I like while the presale is still open, and introduces me to a few I don't know yet.",
   hero=pithy(figs[3][2], "Newsletters in, matched shows out, with the presale window attached."), hero_class="hero",
-  tldr="""<li><b>I stop missing presales.</b> Two scheduled runs a week read the venue and promoter emails already landing in my Gmail and flag shows while the presale is still ahead, with the window, the code and the ticket link on one row.</li>
-<li><b>Two tiers of taste.</b> Tier 1 is artists I know I like: an immediate push to my phone and a calendar hold at presale start. Tier 2 is discovery: a Thursday digest of artists Claude thinks I'd like, with one sentence on the sound and a Spotify link, because my knowledge of newer artists has lapsed.</li>
+  tldr="""<li><b>I never read a venue newsletter.</b> Two scheduled runs a week read the venue and promoter emails already landing in my Gmail, so I only hear about shows I'd go to.</li>
+<li><b>Face value, not resale.</b> Each match comes with the presale window, the code and the ticket link on one row, while the presale is still ahead of me.</li>
+<li><b>It finds artists I don't know yet.</b> Tier 1 is artists I know I like: an immediate push to my phone and a calendar hold at presale start. Tier 2 is discovery: a Thursday digest of artists Claude thinks I'd like based on what I already listen to, with one sentence on the sound and a Spotify link.</li>
 <li><b>It learns from me.</b> Tier 2 picks are Claude's guesses. Moving an artist to Tier 1 or Skip is the whole training interface, and it's enough.</li>
 <li><b>It never buys.</b> Alerts and links only. I buy every ticket myself.</li>""",
   learned="""<li><b>Registration is the real deadline.</b> For the biggest shows the presale needs a registration that closes days earlier, and the code arrives the day before. So the alert that matters is the one on announcement day, which no venue roundup gives you. That reframed the project from \"watch presales\" to \"watch announcements.\"</li>
