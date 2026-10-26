@@ -411,12 +411,12 @@ project_page_v2("purchase-advisor", "Purchase Advisor", "October 6, 2026",
 <li><b>Value, not price.</b> Lifetime usefulness divided by total cost of ownership: price, upkeep, time, resale. It researches three tiers, a value pick, a sweet spot and a buy-it-once option, from independent long-term testing and owner reports.</li>
 <li><b>Verdict first.</b> Buy, wait or don't, then the pick and runner-up, a target price, what would change the call, and the rationalizations it caught me making.</li>
 <li><b>Never touches a cart.</b> It gives me links. I click buy, or I don't.</li>""",
-  learned="""<li><b>\"Wait\" is a legitimate answer.</b> I like forward momentum, and research feels like progress: compare the models, read the reviews, narrow it to two. I went deep on car research before the skill asked why now, and the honest answer was that the car doesn't need replacing until next summer. The research wasn't progress on the decision. It was a way of not making it yet. Having something in the conversation whose job is to ask \"what happens if you wait\" catches the pattern I don't catch in myself.</li>
-<li><b>Rules you write for an agent are rules for yourself.</b> Writing down where I'll happily overspend and where I refuse to turned out to be the hard part, and it's still open. The skill can't be more honest about value than I am.</li>""",
+  learned="""<li><b>\"Wait\" is a legitimate answer.</b> I like forward momentum, and research often feels like progress: compare the models, read the reviews, narrow it down. I went deep on car research before the skill asked why now, and the honest answer was that the car didn't need replacing until next summer. The research gave me the illusion of progress. What I really needed was something whose job it was to ask what waiting would cost, because that's a pattern I find hard to catch in myself.</li>
+<li><b>Rules you write for an agent are rules for yourself.</b> Writing down where I'll happily overspend (e.g. kid safety, things used daily, quality) and where I refuse to (e.g. brand premium, newest-model status) turned out to be both the most important and hardest part. Value is personally defined and the skill can only be as accurate as the examples I give it.</li>""",
   iterations=[
-    ("Right brief, wrong question",
-     "I asked it to compare rotating car seats and it dutifully compared rotating car seats. Whether we needed one at all before the second baby was the real decision, and nobody had asked it.",
-     "Anything over $100 now starts with a premise check before any research, and the skill is told to raise those questions again whenever the conversation builds momentum toward a specific model. Sometimes the right output is \"wait.\""),
+    ("Great research, wrong question",
+     "I asked it to compare rotating car seats and it gave me a well-researched, articulate breakdown of the different brands. Whether we even needed one was the real question and the one I'd skipped in my desire to make progress.",
+     "Anything over $100 now starts with a premise check before doing any research, and the skill is told to raise those questions again if the conversation builds momentum toward a specific model. Sometimes the right decision is not to buy the thing at all."),
   ],
   under_hood="""
 <ul class="plain">
