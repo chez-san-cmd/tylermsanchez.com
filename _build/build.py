@@ -2,10 +2,10 @@ import re, pathlib
 import os; S = pathlib.Path(os.environ.get("SITE_OUT", pathlib.Path(__file__).resolve().parent.parent)); S.mkdir(parents=True, exist_ok=True); (S/"writing").mkdir(exist_ok=True); (S/"projects").mkdir(exist_ok=True)
 CSS = r"""
 /* Layout: one 640px column, left-aligned, nav as a single line of text. Quiet enough that the writing is the design. */
-:root{--tldr-bg:#FFF8DC;--tldr-rule:#F0E2A8;--bg:#F6F7F5;--fg:#15201E;--muted:#5F6E6A;--accent:#0F6E63;--ul:#8FC9BC;--rule:#D9DEDB;--soft:#ECF0EE;--you:#B8336A;
+:root{--tldr-bg:#FFFFFF;--tldr-rule:#D9DEDB;--bg:#F6F7F5;--fg:#15201E;--muted:#5F6E6A;--accent:#0F6E63;--ul:#8FC9BC;--rule:#D9DEDB;--soft:#ECF0EE;--you:#B8336A;
   --f-body:"Newsreader","Iowan Old Style",Georgia,serif;--f-ui:"IBM Plex Sans",system-ui,-apple-system,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--ul:#2F6B5E;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;--tldr-bg:#2A2614;--tldr-rule:#5A4F22;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--ul:#2F6B5E;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;--tldr-bg:#2A2614;--tldr-rule:#5A4F22;color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--ul:#2F6B5E;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;--tldr-bg:#1B2422;--tldr-rule:#2B3532;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121716;--fg:#E6ECE9;--muted:#99A8A3;--accent:#5CC4A8;--ul:#2F6B5E;--rule:#2B3532;--soft:#1B2422;--you:#F07AA6;--tldr-bg:#1B2422;--tldr-rule:#2B3532;color-scheme:dark}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:20px;line-height:1.55;padding-block:0 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .col{max-width:640px;margin:0 auto}
@@ -33,7 +33,7 @@ ol{padding-left:22px}ol li{margin-bottom:10px}
 .toc{font-family:var(--f-ui);font-size:15px;display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 8px}.toc a::before{content:"↓ ";color:var(--muted)}
 .books{list-style:none;margin:0 0 28px;padding:0}.books li{margin:0 0 6px;font-size:18px}.books .au{color:var(--muted)}.books .star{font-size:14px;margin-left:4px}.count{font-weight:400;letter-spacing:0;text-transform:none}
 .example{background:var(--soft);border-left:3px solid var(--accent);border-radius:8px;padding:14px 18px;margin:0 0 22px}.example .k{font-family:var(--f-ui);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}.example p{margin:0 0 10px;font-size:18px}.example p:last-child{margin:0}
-.tldr{background:var(--tldr-bg);border:1px solid var(--tldr-rule);border-radius:10px;padding:16px 20px 16px 38px;margin:0 0 28px}.tldr li{margin-bottom:10px}.tldr li:last-child{margin-bottom:0}
+.tldr{background:var(--tldr-bg);border:1px solid var(--tldr-rule);border-radius:10px;padding:18px 22px 18px;margin:28px 0 28px}.tldr h2{margin:0 0 12px}.tldr ul{margin:0;padding-left:20px}.tldr li{margin-bottom:10px}.tldr li:last-child{margin-bottom:0}
 .iter h3{font-size:19px;font-weight:600;margin:26px 0 6px}.iter p{margin:0 0 10px}
 .shots{margin:0 0 22px}.shots figure{cursor:zoom-in;padding:0;border:0;background:none}.shots figcaption{margin-top:8px}.shots img{display:block;width:100%;height:auto;border-radius:6px}
 .meta{font-family:var(--f-ui);font-size:14px;color:var(--muted);margin:0 0 28px}
@@ -188,28 +188,26 @@ src = (pathlib.Path(__file__).resolve().parent/"how-i-work-diagrams.html").read_
 figs = re.findall(r"<h2>\d\. (.*?)</h2>\s*<p>(.*?)</p>\s*(<figure>.*?</figure>)", src, re.S)
 
 def project_page_v2(slug, name, live_since, lede, hero, tldr, learned, iterations, under_hood, fig=None, repo=None, repo_private=False, desc=""):
-    """v2 template (Oct 26, 2026): pitch, visual, TL;DR, then lessons, iterations, and the technical breakdown last.
-    Lede · hero visual · toc · TL;DR · What I learned · Early iterations · Under the hood."""
-    toc = '<nav class="toc" aria-label="On this page"><a href="#tldr">TL;DR</a><a href="#learned">What I learned</a><a href="#iterations">Early iterations</a><a href="#hood">Under the hood</a></nav>'
+    """v2 template (Oct 26, 2026): pitch, visual, TL;DR, then iterations, lessons, and the technical breakdown last.
+    Lede · hero visual · TL;DR · Early iterations · What I learned · Under the hood."""
     repo_line = (f'<p class="meta">The code, prompts and evals are on GitHub: <a href="{repo}" target="_blank" rel="noopener">{repo.replace("https://","")}</a>.</p>' if repo and not repo_private
                  else '<p class="meta">The repo is private for now. Happy to walk through it.</p>' if repo else '')
-    iter_html = "".join(f'<h3>{t}</h3><p><b>What happened.</b> {h}</p><p><b>What I changed.</b> {c}</p>' for t,h,c in iterations)
+    iter_html = "".join(f'<h3>{i}. {t}</h3><p><b>What happened.</b> {h}</p><p><b>What I changed.</b> {c}</p>' for i,(t,h,c) in enumerate(iterations, 1))
     body = f"""
 <p class="meta" style="margin-bottom:6px"><a href="../projects.html">Projects</a> · live since {live_since}</p>
 <h1>{name}</h1>
 <p class="lede">{lede}</p>
 <div class="shots">{hero}</div>
-{toc}
-<h2 id="tldr">TL;DR</h2>
-<ul class="plain tldr">
+<div class="tldr" id="tldr"><h2>TL;DR</h2>
+<ul class="plain">
 {tldr}
-</ul>
+</ul></div>
+<h2 id="iterations">Early iterations</h2>
+<div class="iter">{iter_html}</div>
 <h2 id="learned">What I learned</h2>
 <ul class="plain">
 {learned}
 </ul>
-<h2 id="iterations">Early iterations</h2>
-<div class="iter">{iter_html}</div>
 <h2 id="hood">Under the hood</h2>
 {fig or ''}
 {under_hood}
@@ -221,29 +219,29 @@ def project_page_v2(slug, name, live_since, lede, hero, tldr, learned, iteration
 # ---------- Project: Job Radar ----------
 JR_REPO = "https://github.com/chez-san-cmd/job-radar"
 project_page_v2("job-radar", "Job Radar", "October 5, 2026",
-  lede="LinkedIn has hundreds of PM postings and no idea what I want. Job Radar pulls PM roles straight from the career pages of a few dozen companies I'm interested in, scores each one against a rubric of what I'm looking to do next, and sends me only the strongest fits. It's the job board I'd have built for myself, so I did.",
+  lede="LinkedIn has hundreds of PM postings and no idea what I want. Job Radar pulls PM roles straight from the career pages of a few dozen companies I'm interested in, scores each one against a rubric of what I'm seeking next, and sends me only the strongest fits. I spend my time on the five roles worth a look, not the five hundred that aren't.",
   hero="""<figure><img src="../img/job-radar-dublin.jpg" alt="The Job Radar tile on my Assistant Dashboard, listing three roles rated Strong: a Staff Product Manager at Coursera, a Product Manager for Claude Marketplace at Anthropic, and a Product Manager at ElevenLabs." width="1485" height="392" loading="lazy">
 <figcaption>Only the best fitting jobs surface on my dashboard each day.</figcaption></figure>""",
   tldr="""<li><b>Why it exists.</b> I'm in no hurry to find the next role, but the rare ideal one can show up any day, and I didn't want to spend an hour a week scanning career pages to catch it.</li>
 <li><b>Straight from the source.</b> Every morning it pulls new postings from each company's own career page, so nothing is days old or buried under hundreds of listings that aren't for me.</li>
-<li><b>Scored against what I want.</b> A rubric I wrote scores each role 1 to 5: how much latitude to set product direction, then level, then problem space. Only the 4s and 5s reach my dashboard. The rest wait for a Sunday summary.</li>
+<li><b>Scored against what I want.</b> A rubric I wrote scores each role 1 to 5. Company momentum and work-life balance are gates: fail either and the role can't score above a 3. Among the rest, the room to originate product bets weighs most, then how central AI is to the team, then level. Only the 4s and 5s reach my dashboard. The rest wait for a Sunday summary.</li>
 <li><b>It learns from me.</b> I mark each role Interested or Not for me, sometimes with a note, and those notes get folded back into the rubric. Over time the scoring drifts toward my judgment.</li>""",
-  learned="""<li><b>Writing the rubric was writing the job search.</b> Deciding how to weigh latitude against level, or whether in-office days in another city are a flag or a filter, forced decisions I'd been carrying around as vague preferences. The rubric is now the clearest statement I have of what I want next.</li>
+  learned="""<li><b>Writing the rubric was writing the job search.</b> Deciding whether in-office days in another city are a flag or a filter, or whether I'd rather set my own strategy at a struggling company or execute a good one at a growing company, forced decisions I'd been carrying around as vague preferences. The rubric is now the clearest statement I have of what I want next.</li>
 <li><b>The loop matters more than the model.</b> The scoring was mediocre on day one and is good now, and the model didn't change. What changed is that every time I disagreed with a score, I turned the disagreement into a rule.</li>
 <li><b>Flags beat filters.</b> My first instinct was to hide roles in other cities. Keeping them visible with a capped score leaves room for the conversation I actually want to have, which is whether the role could be done remotely.</li>""",
   iterations=[
     ("Strong on paper, wrong for me",
      "The first rubric described the jobs I'd <i>like</i>. The first sweep read 75 open roles and flagged 8 as Strong, and when I read those eight, several were wrong for me: big shared surfaces where the PM is a traffic cop, titles that sounded senior but owned no strategy.",
-     "I rewrote the rubric around what I was actually optimizing for, in order: latitude to originate product bets, then level, then problem space, plus the constraints I'd been avoiding writing down (pay floor, hours, how AI-native the team is). Re-scoring the same roles gave 5 Strong, 14 Maybe and 52 Pass, and the Strong list was one I'd act on."),
+     "I rewrote the rubric around what I was actually optimizing for: space to originate product bets, AI centrality, momentum, plus the constraints I'd been avoiding writing down (pay floor, hours, work-life balance). Re-scoring the same roles gave 5 Strong, 14 Maybe and 52 Pass, and the Strong list was one I'd act on."),
     ("The Dublin problem",
      "A Staff PM role at Coursera showed up as Strong on my dashboard (the screenshot above). It was based in Dublin, with no mention of remote. The work was a great fit, which is why the rubric liked it, but there's almost no chance of doing that job from Denver.",
-     "Location went from a soft signal to a hard rule: a role based outside the US with no remote option can't score Strong, no matter how good the work is. It still lands in the weekly table in case the company turns out to be flexible, but it never reaches the dashboard."),
+     "Location went from a soft signal to a hard rule: a role that isn't remote from Denver can't score Strong, no matter how good the work is. It still lands in the weekly table in case the company turns out to be flexible, but it never reaches the dashboard."),
   ],
   fig=figs[2][2],
   under_hood="""
 <ul class="plain">
 <li><b>Fetch.</b> A private repo with one adapter per job-board platform (Greenhouse, Lever, Ashby, Rippling, Workday, Eightfold) and a scraper for the one company that publishes no feed. A GitHub Action runs the fetch daily and commits new postings as plain JSON, so the history is a git log. Fetching is split from scoring because scheduled Claude runs can't open arbitrary websites without an approval nobody is there to give, and because each half is easier to test on its own.</li>
-<li><b>Score.</b> A scheduled Claude task reads the day's file and <code>RUBRIC.md</code>, scores each role 1 to 5, and adds anything 3 or higher to a Notion table with one line on why it would be a good fit for me. The later rules came from my notes on real postings: AI-native teams weigh heavily, "traffic cop" seats on shared surfaces cap at 3, roles outside the US with no remote option can't score Strong, and director titles are scored on strategy ownership rather than passed on title.</li>
+<li><b>Score.</b> A scheduled Claude task reads the day's file and <code>RUBRIC.md</code>, scores each role 1 to 5, and adds anything 3 or higher to a Notion table with one line on why it would be a good fit for me. The rubric checks two gates first, company trajectory and work-life balance, then ranks what's left on room to originate product bets, closeness to AI, level and problem space. Most of the specific rules came from my notes on real postings: "traffic cop" seats on shared surfaces cap at 3, roles that aren't remote from Denver can't score Strong, and director titles are scored on strategy ownership rather than passed on title.</li>
 <li><b>Show.</b> One Notion database: role, company, score, why, status, my notes, location, link. A saved view feeds the tile on my <a href="assistant-dashboard.html">Assistant Dashboard</a> and the Sunday review. Everything reads through saved views because Notion's row-query API has a workspace quota and views don't.</li>
 <li><b>Learn.</b> Daily runs read my Interested / Not for me calls and notes, and a Sunday item asks whether any pass was wrong. A full re-score in the first week moved a few roles between Strong and Maybe and found nothing it had wrongly passed on.</li>
 </ul>
