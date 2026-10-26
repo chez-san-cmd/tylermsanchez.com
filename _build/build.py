@@ -405,7 +405,7 @@ PA_FIG = """<figure>
 <figcaption>Four steps, and the first one can end the conversation. The output is a verdict and links; the card stays in my wallet.</figcaption>
 </figure>"""
 project_page_v2("purchase-advisor", "Purchase Advisor", "October 6, 2026",
-  lede="Most of the work of a good purchase is deciding whether to make it at all, and that's the step I skip when I'm the only one in the conversation. Purchase Advisor is a Claude skill that pressure-tests the premise first, then finds the best real value and recommends. It never buys. The card stays in my wallet.",
+  lede="Most of the work of a good purchase is deciding whether to make it at all. Purchase Advisor is a Claude skill that pressure-tests the premise first, then finds the best real value and recommends. It never buys. The card stays in my wallet.",
   hero=pithy(PA_FIG, "Four steps, and the first one can end the conversation."), hero_class="hero",
   tldr="""<li><b>It's allowed to say \"wait.\"</b> Anything over $100 starts with three questions: is this needed, why now, and what happens if I do nothing. Sometimes that's the whole answer.</li>
 <li><b>Value, not price.</b> Lifetime usefulness divided by total cost of ownership: price, upkeep, time, resale. It researches three tiers, a value pick, a sweet spot and a buy-it-once option, from independent long-term testing and owner reports.</li>
