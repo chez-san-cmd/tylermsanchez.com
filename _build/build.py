@@ -163,7 +163,7 @@ def pithy(fig, cap):
 src = (pathlib.Path(__file__).resolve().parent/"how-i-work-diagrams.html").read_text()
 figs = re.findall(r"<h2>\d\. (.*?)</h2>\s*<p>(.*?)</p>\s*(<figure>.*?</figure>)", src, re.S)
 
-def project_page_v2(slug, name, live_since, lede, hero, tldr, learned, iterations, under_hood, fig=None, repo=None, repo_private=False, desc="", hero_class="shots", repo_note=None):
+def project_page_v2(slug, name, live_since, lede, hero, tldr, learned, iterations, under_hood, fig=None, repo=None, repo_private=False, desc="", hero_class="shots", repo_note=None, mid=""):
     """v2 template (Oct 26, 2026): pitch, visual, TL;DR, then iterations, lessons, and the technical breakdown last.
     Lede · hero visual · TL;DR · Early iterations · What I learned · Under the hood."""
     repo_line = (f'<p class="meta">The code, prompts and evals are on GitHub: <a href="{repo}" target="_blank" rel="noopener">{repo.replace("https://","")}</a>.</p>' if repo and not repo_private
@@ -181,6 +181,7 @@ def project_page_v2(slug, name, live_since, lede, hero, tldr, learned, iteration
 </ul></div>
 <h2 id="iterations">Early iterations</h2>
 <div class="iter">{iter_html}</div>
+{mid}
 <h2 id="learned">What I learned</h2>
 <ul class="plain">
 {learned}
@@ -289,7 +290,7 @@ CC_FIG = """<figure>
 <figcaption>A site plan, not a feed: fixed tiles, one marker per open item, and a reply box that starts the next run. The queue is a Notion table; the page is one HTML file that reads it.</figcaption>
 </figure>"""
 project_page_v2("assistant-dashboard", "Assistant Dashboard", "September 30, 2026",
-  lede="Every AI assistant I'd used waited for me to start, then buried whatever I asked under whatever I asked next. The Assistant Dashboard is one page where agents bring me decisions they've already prepped, every project in a fixed place, nothing scrolling away. It's my first attempt at an assistant that lives outside the chat box.",
+  lede="Every AI assistant I'd used waited for me to start a chat, then buried whatever I asked under layers of conversations. The Assistant Dashboard is one page where agents bring me decisions they've already prepped, every project in a fixed place, nothing scrolling away. It's my first attempt at an assistant that lives outside the chat box.",
   hero="""<figure><img src="../img/dashboard-overview.jpg" alt="The Assistant Dashboard: filters for this week / next week / all, a status row, a box to send a new request to Claude, the Job Radar tile with three strong-fit roles, and a row of project tiles (Albion, Return to Work, Raja trip, Estate Planning) each showing what is waiting on me." width="1600" height="865" loading="lazy">
 <figcaption>Every new project gets its own tile. There's still a lot of cleanup before I'd call this a finished v1.</figcaption></figure>""",
   tldr="""<li><b>Agents do the work, I make the calls.</b> Twice a day a scheduled Claude run checks my inbox, reads each project's notes, and takes my to-dos as far as an agent is allowed to. Then it brings me the one thing only I can do: a decision, an approval, or a task that unblocks it.</li>
@@ -304,9 +305,11 @@ project_page_v2("assistant-dashboard", "Assistant Dashboard", "September 30, 202
      "Every item on the page turned red the moment it was overdue, including self-imposed targets like \"pick an estate attorney.\" After a week I'd learned to ignore red, which defeats the point of red.",
      "Every deadline is now typed Hard or Soft. Only Hard ones get urgency colors, and they escalate on a schedule: orange two weeks out, red inside a week, a pulsing alarm inside three days. Soft ones never turn red; past due they show as \"slipped\" and the next run proposes a new date. Red means something again."),
     ("Replying meant opening a chat",
-     "The first version was a static HTML page with zero interactivity. To act on anything I had to open Claude on my desktop, say which project I meant, and give it the context before the actual instruction. Setting up the request took longer than making the decision.",
+     "The first version was a static HTML page with zero interactivity. To act on anything I had to open Claude on my desktop, reference a specific project, and give it the context before the actual instruction. Setting up the request took longer than making the decision.",
      "Every item now has its own reply bar. One line typed on the card saves as a comment on the item and starts a run with the project's context already attached, and a Mark done checkbox writes back to Notion. The page went from a report I read to the place I work."),
   ],
+  mid="""<div class="shots"><figure><img src="../img/dashboard-item-open.png" alt="One queue item opened on the Assistant Dashboard: book a Tokyo restaurant when reservations open, with the recommendation first, what was already prepared underneath, links to Notion and the work, and a Tell Claude reply box. Below it, the Waiting on you list with a hard-deadline item in red." width="2000" height="1140" loading="lazy">
+<figcaption>One item, opened: recommendation first and a reply bar to keep moving. Below: hard deadlines are visually distinct and louder.</figcaption></figure></div>""",
   fig=CC_FIG,
   under_hood="""
 <ul class="plain">
@@ -316,8 +319,6 @@ project_page_v2("assistant-dashboard", "Assistant Dashboard", "September 30, 202
 <li><b>Runs follow a written protocol.</b> Inbox before queue. Read the book before acting. Stop at the human-only step: deciding, signing, sending in my name, moving money, conversations with family. Drafts are written in my voice from a saved style profile, and when I edit a draft before sending, the run compares the two and offers to update the profile. Every run ends by logging what it learned to the book.</li>
 <li><b>Two rules I'd keep if I threw everything else out.</b> The one-minute rule: if an item takes me longer than a minute to act on, the agent didn't finish its prep, and it goes back. And batching: a few items per project per day, never a stream of pings.</li>
 </ul>
-<div class="shots"><figure><img src="../img/dashboard-item.jpg" alt="One item opened: book a Tokyo restaurant when reservations open. The agent's recommendation, what it already prepared, links to the Notion page and the work, and a reply box labeled Tell Claude." width="1200" height="1158" loading="lazy">
-<figcaption>One item, opened: recommendation first, prep underneath, a reply box that starts the next run.</figcaption></figure></div>
 """,
   repo_note='There\'s no public repo because the page is wired to my own Notion workspace and holds personal data. The pieces that generalize, the loop and the Project Books memory model, are on <a href="../ai-system.html">AI System</a>.')
 
