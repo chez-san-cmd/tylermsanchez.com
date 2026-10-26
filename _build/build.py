@@ -411,7 +411,7 @@ project_page_v2("purchase-advisor", "Purchase Advisor", "October 6, 2026",
 <li><b>Value, not price.</b> Lifetime usefulness divided by total cost of ownership: price, upkeep, time, resale. It researches three tiers, a value pick, a sweet spot and a buy-it-once option, from independent long-term testing and owner reports.</li>
 <li><b>Verdict first.</b> Buy, wait or don't, then the pick and runner-up, a target price, what would change the call, and the rationalizations it caught me making.</li>
 <li><b>Never touches a cart.</b> It gives me links. I click buy, or I don't.</li>""",
-  learned="""<li><b>\"Wait\" is a legitimate answer, and it's the one I'm worst at reaching alone.</b> The LinkedIn Premium brief didn't pick a plan; it laid out what I'd lose by cancelling and whether that mattered this month. That framing, the cost of waiting against the cost of acting now, is the one I skip when nobody else is in the conversation.</li>
+  learned="""<li><b>\"Wait\" is a legitimate answer.</b> I like forward momentum, and research feels like progress: compare the models, read the reviews, narrow it to two. I went deep on car research before the skill asked why now, and the honest answer was that the car doesn't need replacing until next summer. The research wasn't progress on the decision. It was a way of not making it yet. Having something in the conversation whose job is to ask \"what happens if you wait\" catches the pattern I don't catch in myself.</li>
 <li><b>Rules you write for an agent are rules for yourself.</b> Writing down where I'll happily overspend and where I refuse to turned out to be the hard part, and it's still open. The skill can't be more honest about value than I am.</li>""",
   iterations=[
     ("Right brief, wrong question",
