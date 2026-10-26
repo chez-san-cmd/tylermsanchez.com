@@ -149,7 +149,7 @@ home = """
 # ---------- Projects index ----------
 projects_index = """
 <h1>Projects</h1>
-<p class="lede">The agents that run my life in the background, one page each: what it does, why it exists, how it's built, and what I learned. The rules they all run under are on <a href="ai-system.html">AI System</a>.</p>
+<p class="lede">The agents that run my life in the background: what they do, why they exist, how they're built, and what I learned. The rules they all run under are on <a href="ai-system.html">AI System</a>.</p>
 """ + project_list("projects.html")
 (S/"projects.html").write_text(page("projects.html","Projects",projects_index, desc="The agents that run my life in the background: an Assistant Dashboard, a Job Radar, a Concert Radar and a Purchase Advisor. What each does, why, how it's built, what I learned."))
 
