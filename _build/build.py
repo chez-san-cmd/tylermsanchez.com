@@ -477,9 +477,11 @@ essay = """
 <p>The same principle runs through the rest of the system. It drafts messages; I review and send them. It researches purchases; I decide whether to spend. It prepares recommendations; I make the calls. These are written instructions, not technical locks, and trust grows as I watch how reliably they're followed. The full set is on <a href="../ai-system.html">AI System</a>.</p>
 
 <h3>A personal board of directors</h3>
-<p>The larger vision goes well beyond what I've built, and the shape of it comes from business school.</p>
-<p>At Kellogg there was a program called PBOD, for Personal Board of Directors. You were matched with three other students and met every other week for the year as a sounding board for whatever you wanted. For most of us that meant careers: which internship to take, which offer to accept. But as the group got closer, people started bringing the harder things. A family situation that wasn't getting better. A health scare. A relationship that was ending. A decade later I still think about that room as the safest place I've had to get perspective from people who had come to care about how my life went, not just how my career went.</p>
-<p>That's the assistant I want: a board, not a chat. I've already had one-off conversations with AI about my bloodwork, our spending, retirement savings and the range of financial futures in front of us. I want each of those to become a seat at the table.</p>
+<p>At Kellogg, I joined a program called PBOD: Personal Board of Directors. I was matched with three other students, and we met biweekly for a year to be sounding boards for one another.</p>
+<p>We could bring whatever was on our minds. For most of us, that meant careers: which internship to take, which job to pursue, what we wanted to do after business school. As we got closer, the conversations widened. People shared personal struggles, challenging family dynamics, financial concerns. We learned more about the lives those career decisions had to fit into.</p>
+<p>It's been about a decade since my MBA, and I still think about that group. There was something valuable about having a regular, safe place to get perspective from people who had come to know me and care about how things turned out.</p>
+<p>Over time, you didn't have to explain everything from the beginning. The people around the table knew some of your history. They understood what mattered to you. They could bring a different perspective to a decision while keeping your well-being at the center of it.</p>
+<p>That experience has stayed with me as I think about what I want from an AI assistant. The relationships were what made it special, but the structure is the model: a board, not a chat. I've already had one-off conversations with AI about my bloodwork, our spending, retirement savings and the range of financial futures in front of us. I want each of those to become a seat at the table.</p>
 <ul class="plain">
 <li><b>A health seat</b> that follows my bloodwork and wearable data over time, notices changes, and prepares the questions before a doctor's appointment instead of after.</li>
 <li><b>A finance seat</b> that keeps spending and savings connected to our goals, updates the retirement projections as circumstances change, and shows how a single decision shifts the range of outcomes.</li>
@@ -495,7 +497,7 @@ essay = """
 <p>If you're building something in this shape, or run a team that should be, I'd like to compare notes: <a href="mailto:tylersanchez@gmail.com">tylersanchez@gmail.com</a>.</p>
 </article>
 """
-(S/"writing/chat-box.html").write_text(page("writing/chat-box.html","The assistant I want isn't a chat box",essay, desc="Why a chat box is a fine way to talk to an assistant but a poor place for the relationship to live, what I want instead, the pieces I've built, and the council of agents I'm building toward."))
+(S/"writing/chat-box.html").write_text(page("writing/chat-box.html","The assistant I want isn't a chat box",essay, desc="Why a chat box is a fine way to talk to an assistant but a poor place for the relationship to live, what I want instead, the pieces I've built, and the personal board of directors I'm building toward."))
 
 # ---------- How I work ----------
 how = """
