@@ -105,7 +105,7 @@ PROJECTS = [
        blurb="Weekly alerts for artists that match my musical taste, sent early enough to snag a presale ticket and beat the resale market."),
   dict(slug="purchase-advisor", name="Purchase Advisor", status="live",
        blurb="Pressure-tests whether to buy at all, then finds the best real value. Never buys."),
-  dict(slug=None, name="What's for Dinner", status="building",
+  dict(slug=None, name="What's for Dinner", status="on deck",
        blurb="Easy weeknight dinners, planned around what's already in the fridge and designed to meet our family's health goals."),
 ]
 def project_list(cur):
